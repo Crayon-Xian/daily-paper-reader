@@ -1,0 +1,602 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-07T06:54:32.023371+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 7,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 9,
+    "quick_skim_target": 11,
+    "quick_selected": 9
+  },
+  "deep_dive": [
+    {
+      "id": "2608.29927v1",
+      "source": "arxiv",
+      "title": "Everybody Tracking Every Body",
+      "abstract": "We address the problem of 3D body pose estimation of multiple interacting people from their egocentric views with centralized coordination. Each individual wears a camera recording egocentric video and IMU data. Processing this video with VIO SLAM provides high-quality tracking of each egocentric camera through space. The first-person view from one individual provides third-person observations of other people, although these exocentric observations are sparse, intermittent, and of highly variable reliability as both cameras and subjects move. To integrate these synchronized data streams, we propose a diffusion-based approach that fuses estimates of pose based on head motion derived from egocentric camera motion with exocentric pose observations, conditioning on both observation content and reliability. Our model is trained on a mixture of single-person motion-capture data and multi-person video in order to learn rich priors for body motion trajectories and video observation reliability. Evaluation on challenging multi-person datasets suggests our fusion approach improves over motion-only and vision-only baselines in terms of both absolute and relative pose accuracy.",
+      "authors": [
+        "Daeyun Shin",
+        "Yunhan Zhao",
+        "Shu Kong",
+        "Alexander C. Berg",
+        "Charless Fowlkes"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-30T17:42:15+00:00",
+      "link": "https://arxiv.org/pdf/2608.29927v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Uses egocentric wearable videos with IMU for 3D body pose estimation of multiple interacting people",
+      "llm_evidence_cn": "利用第一视角相机与IMU进行多交互人体的三维姿态估计，属自我中心视觉研究",
+      "llm_evidence": "利用第一视角相机与IMU进行多交互人体的三维姿态估计，属自我中心视觉研究",
+      "canonical_evidence": "利用第一视角相机与IMU进行多交互人体的三维姿态估计，属自我中心视觉研究",
+      "llm_tldr_en": "Proposes a diffusion-based approach for centralized 3D body pose estimation of multiple interacting people from synchronized egocentric wearable cameras and IMUs, fusing ego-motion-based head pose estimates with sparse and intermittent third-person observations.",
+      "llm_tldr_cn": "针对多人在自我中心视角下的三维姿态估计困难，论文提出一种集中协调的扩散式融合方法。每位佩戴者通过相机和IMU采集第一视角数据，并用VIO SLAM追踪相机轨迹；模型将基于头部运动的自中心姿态估计与偶发的第三人称观测相融合，解决观测稀疏且可靠性不一的问题。实验在多种同步数据流上验证了该方法的有效性，为多交互个体的全局身体跟踪提供了新的技术路径。",
+      "llm_tldr": "针对多人在自我中心视角下的三维姿态估计困难，论文提出一种集中协调的扩散式融合方法。每位佩戴者通过相机和IMU采集第一视角数据，并用VIO SLAM追踪相机轨迹；模型将基于头部运动的自中心姿态估计与偶发的第三人称观测相融合，解决观测稀疏且可靠性不一的问题。实验在多种同步数据流上验证了该方法的有效性，为多交互个体的全局身体跟踪提供了新的技术路径。",
+      "llm_tags": [
+        "query:egocentric:composite"
+      ],
+      "matched_query_tag": "query:egocentric:composite",
+      "matched_query_text": "Papers central to 查找Egocentric相关的论文, especially work that connects or combines: E; Egocentric vision first-person perception in computer vision; Egocentric action recognition from first-person perspective; Egocentric hand pose estimation and tracking; self-centered perception and cognitive processing; Egocentric vision understanding methods and applications; Egocentric object interaction analysis.",
+      "matched_requirement_id": "req-composite-egocentric",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.01908v1",
+      "source": "arxiv",
+      "title": "CRB-Guided Sensing and Resource Allocation for Human Pose Prediction in Integrated Sensing, Communication, and Computation Systems",
+      "abstract": "Integrated sensing, communication, and computation (ISCC) provides a promising framework for indoor human-centric applications. In these applications, short-term human pose prediction facilitates continuous human pose tracking and proactive resource allocation. This paper proposes a Cramer-Rao bound (CRB)-guided sensing framework and investigates a problem of minimizing prediction error in resource-constrained ISCC systems. Specifically, a pose prediction model (ET-Mamba) is first developed to predict human joint positions for continuous tracking. To account for computation-resource limitations, lightweight prediction heads are attached to different inference layers, enabling adaptive-depth pose prediction. A CRB-guided perturbation strategy is then introduced to translate sensing uncertainty at different sensing SNR levels into point-cloud perturbations. Based on that, an empirical relationship among pose prediction error, sensing SNR, and model inference depth is established. Furthermore, to improve prediction accuracy under limited resources, this paper formulates a resource allocation optimization problem that minimizes the pose prediction error by jointly optimizing the beamforming matrix, model inference depth, and computation frequency. To solve this mixed-integer non-convex optimization problem, we propose an alternating optimization (AO)-based algorithm, where closed-form updates and semidefinite programming (SDP) are integrated into the iterative solution process. Simulation results show that the proposed method effectively improves pose prediction performance by up to 35 percent under resource constraints, verifying the effectiveness of conducting joint sensing, communication, and computation design in ISCC systems.",
+      "authors": [
+        "Zhonghao Liu",
+        "Yahao Ding",
+        "Jiaxiang Wang",
+        "Zhaohui Yang",
+        "Abdol Hamid Aghvami",
+        "Mohammad Shikh-Bahaei"
+      ],
+      "primary_category": "cs.IT",
+      "categories": [
+        "cs.IT",
+        "cs.NI"
+      ],
+      "published": "2026-09-01T22:12:19+00:00",
+      "link": "https://arxiv.org/pdf/2609.01908v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Predicts human joint positions from RF sensing in an ISCC framework, directly matching radio-based human pose and body geometry prediction.",
+      "llm_evidence_cn": "在通感算融合系统中基于射频感知预测人体关节点位置，直接对应无线电信号进行人体几何感知的需求。",
+      "llm_evidence": "在通感算融合系统中基于射频感知预测人体关节点位置，直接对应无线电信号进行人体几何感知的需求。",
+      "canonical_evidence": "在通感算融合系统中基于射频感知预测人体关节点位置，直接对应无线电信号进行人体几何感知的需求。",
+      "llm_tldr_en": "Proposes CRB-guided sensing and resource allocation for human pose prediction in integrated sensing, communication and computation; ET-Mamba predicts human joint positions with adaptive-depth lightweight heads for continuous tracking under computation limits.",
+      "llm_tldr_cn": "室内人体中心应用需要连续人体姿态跟踪，但受限的通感算融合系统需要在感知与计算之间权衡。论文提出CRB引导的感知与资源分配问题，开发ET-Mamba模型预测人体关节位置，并通过在多个推理层添加轻量预测头实现自适应深度预测。该方案可在计算资源动态受限时最小化预测误差并支持连续跟踪，为射频信号实现人体几何建模提供了直接且可迁移的方法。",
+      "llm_tldr": "室内人体中心应用需要连续人体姿态跟踪，但受限的通感算融合系统需要在感知与计算之间权衡。论文提出CRB引导的感知与资源分配问题，开发ET-Mamba模型预测人体关节位置，并通过在多个推理层添加轻量预测头实现自适应深度预测。该方案可在计算资源动态受限时最小化预测误差并支持连续跟踪，为射频信号实现人体几何建模提供了直接且可迁移的方法。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "reconstruct human body geometry from radio signals",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.02376v1",
+      "source": "arxiv",
+      "title": "Removing Speech, Keeping Activities: A Privacy Firewall for Acoustic Sensing in Assisted Living",
+      "abstract": "Acoustic sensing offers a promising non-intrusive approach for monitoring daily activities of older adults, yet speech privacy concerns remain a critical barrier to real-world deployment. We present a privacy firewall pipeline based on a U-Net encoder-decoder, trained entirely on synthetic data, that removes speech from ambient audio while preserving environmental sounds indicative of daily activities. Activity recognition is performed using VGGish transfer learning with an SVM classifier. Evaluated on the ESC-50 and SINS datasets across multiple speech content levels, the proposed model reduced residual speech to 0% VAD-detectable speech (Silero Voice Activity Detection) under all tested conditions, outperforming Facebook Denoiser (6.55% residual), SepFormer (36.34%) and ConvTasNet (47.21%) on ESC-50 at the 100\\% speech level. On ESC-50 at 40% speech level, classification performance recovers to 85% precision and 85% recall after speech removal, compared with 81%/75% before removal and an 84%/83% speech-free baseline. Evaluation on real-world participant home recordings collected with the AudioHive app showed 0% VAD-detectable speech after processing while maintaining 76% precision and recall. The pipeline enables privacy-preserving acoustic sensing without sacrificing activity recognition performance, addressing a key obstacle to the adoption of ambient monitoring in elderly care.",
+      "authors": [
+        "Pavlos Nicolaou",
+        "Christos Efstratiou"
+      ],
+      "primary_category": "cs.SD",
+      "categories": [
+        "cs.SD",
+        "cs.CR",
+        "cs.HC"
+      ],
+      "published": "2026-09-02T09:48:26+00:00",
+      "link": "https://arxiv.org/pdf/2609.02376v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Privacy-preserving activity monitoring without cameras, removing speech from ambient audio while retaining activity sounds for assisted living",
+      "llm_evidence_cn": "用声学传感器而非摄像头监测日常活动，并通过去除语音实现隐私保护",
+      "llm_evidence": "用声学传感器而非摄像头监测日常活动，并通过去除语音实现隐私保护",
+      "canonical_evidence": "用声学传感器而非摄像头监测日常活动，并通过去除语音实现隐私保护",
+      "llm_tldr_en": "Presents a synthetic-data-trained U-Net privacy firewall that strips speech from ambient audio but keeps activity-relevant sounds, enabling acoustic activity monitoring in assisted living with zero VAD-detectable residual speech.",
+      "llm_tldr_cn": "针对声学感知在老年辅助生活中因语音隐私顾虑而难以部署的问题，论文提出一种基于U-Net编解码器的隐私防火墙，仅用合成数据训练即可从环境音频中去除语音，同时保留反映日常活动的环境声，并配合VGGish与SVM进行活动识别。在ESC-50和SINS数据集上，该方法在所有测试条件下将残余语音降至Silero VAD检测不到的水平，并优于Facebook Denoiser等对比方法。该工作为无摄像头、隐私友好的日常生活监测提供了可靠技术路线。",
+      "llm_tldr": "针对声学感知在老年辅助生活中因语音隐私顾虑而难以部署的问题，论文提出一种基于U-Net编解码器的隐私防火墙，仅用合成数据训练即可从环境音频中去除语音，同时保留反映日常活动的环境声，并配合VGGish与SVM进行活动识别。在ESC-50和SINS数据集上，该方法在所有测试条件下将残余语音降至Silero VAD检测不到的水平，并优于Facebook Denoiser等对比方法。该工作为无摄像头、隐私友好的日常生活监测提供了可靠技术路线。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "privacy preserving human monitoring without cameras",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.29084v1",
+      "source": "arxiv",
+      "title": "UiAs: User-Independent 3D Facial Anti-Spoofing via Multi-modal Wireless Signals",
+      "abstract": "Face authentication is widely deployed in security-sensitive applications, while increasingly realistic 3D spoofing attacks pose growing threats. High-fidelity 3D masks can reproduce facial appearance and geometry but cannot replicate the intrinsic physical responses of living tissue, which can be actively probed by wireless signals. However, the resulting liveness cues captured by wireless signals are entangled with user-dependent facial geometry, limiting cross-user generalization. We present UiAs, a multimodal user-independent 3D facial anti-spoofing system using electromagnetic (mmWave) and mechanical (acoustic) waves. The two modalities share similar user-dependent geometric variations, allowing UiAs to suppress them through cross-modal subtraction while preserving modality-specific liveness cues. Their complementary physical responses further improve live/spoof discrimination. In practical deployments, multiple materials (e.g., skin, hair, eyeglasses, or face coverings) may also bias liveness representations, while spoofing materials are diverse and open-ended. UiAs addresses both through skin-anchored contrastive learning. We evaluate UiAs with real 3D spoofing attacks, which achieves 93.25\\% accuracy for unseen users without user-specific physical-signal enrollment.",
+      "authors": [
+        "Zhiwei chen",
+        "Lebin Lyu",
+        "Yimo Zhang",
+        "Dingyu Zhong",
+        "Yijie Li",
+        "Yichao Chen",
+        "Dian Ding",
+        "Jiguo Yu",
+        "Xiaosong Zhang",
+        "Yongzhao Zhang"
+      ],
+      "primary_category": "cs.CR",
+      "categories": [
+        "cs.CR"
+      ],
+      "published": "2026-08-29T06:25:40+00:00",
+      "link": "https://arxiv.org/pdf/2608.29084v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "MmWave/acoustic wireless probing of human facial liveness and geometry for 3D anti-spoofing; RF-based human body perception without cameras",
+      "llm_evidence_cn": "利用毫米波与声学无线信号感知活体人脸响应，实现非摄像头射频人脸感知",
+      "llm_evidence": "利用毫米波与声学无线信号感知活体人脸响应，实现非摄像头射频人脸感知",
+      "canonical_evidence": "利用毫米波与声学无线信号感知活体人脸响应，实现非摄像头射频人脸感知",
+      "llm_tldr_en": "UiAs uses mmWave electromagnetic and acoustic mechanical waves to probe live facial tissue and suppress user-dependent geometry via cross-modal learning, yielding user-independent 3D wireless facial anti-spoofing.",
+      "llm_tldr_cn": "针对高仿真3D面具可复制人脸外观几何却无法复现活体组织物理响应的问题，论文提出UiAs，同时使用毫米波电磁波和声学机械波探测面部，通过无线信号提取活体线索。两种模态共享与用户相关的几何变化，系统利用跨模态学习抑制该变化，实现用户无关的3D防欺骗。该方法在不依赖摄像头的情况下完成了人脸活体感知，为毫米波信号感知人体几何与生理特性提供了新的通用框架。",
+      "llm_tldr": "针对高仿真3D面具可复制人脸外观几何却无法复现活体组织物理响应的问题，论文提出UiAs，同时使用毫米波电磁波和声学机械波探测面部，通过无线信号提取活体线索。两种模态共享与用户相关的几何变化，系统利用跨模态学习抑制该变化，实现用户无关的3D防欺骗。该方法在不依赖摄像头的情况下完成了人脸活体感知，为毫米波信号感知人体几何与生理特性提供了新的通用框架。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "radio frequency based human body perception",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.30836v1",
+      "source": "arxiv",
+      "title": "Channel Gains to Captions: Task-Unified Multi-Level RF Sensing with Vision-Language Models",
+      "abstract": "This letter investigates a task-unified multi-level radio-frequency (RF) sensing framework driven by vision-language models (VLMs). Existing RF sensing methods rely on task-specific designs and provide only partial environmental information, limiting their ability to handle emerging 6G applications. To address this, we propose a generative formulation for RF sensing, where millimeter-wave (mmWave)/terahertz (THz) channel gains are mapped to captions describing multi-level environmental semantics. The framework solves this problem through a complementary design for RF-environment semantic bridging, where a VLM is fine-tuned to leverage its multimodal representations and prompt-conditioned semantic generation capabilities. Hence, different sensing tasks are specified through textual prompts, enabling the framework to handle diverse tasks in a unified manner. For fine-tuning, we introduce prompt-routed low-rank adaptation (LoRA) experts to achieve level-aware adaptation. Simulation results show that, compared with baselines, our framework achieves superior performance with a broader semantic scope, and enables task-unified sensing beyond predefined tasks. Under an unseen sensing requirement, it achieves an average F1-score improvement of 0.17 over the most competitive variant.",
+      "authors": [
+        "Tianyu Hu",
+        "Zhiren Gong",
+        "Haowei Cui",
+        "Shuai Wang",
+        "Samson Lasaulce",
+        "Lingxiang Li",
+        "Wassim Hamidouche",
+        "Zhi Chen",
+        "Merouane Debbah"
+      ],
+      "primary_category": "eess.SP",
+      "categories": [
+        "eess.SP"
+      ],
+      "published": "2026-08-31T14:07:27+00:00",
+      "link": "https://arxiv.org/pdf/2608.30836v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Maps mmWave/THz channel gains to captions via fine-tuned VLM, providing task-unified RF sensing that can cover human-centric environmental semantics.",
+      "llm_evidence_cn": "将毫米波/太赫兹信道增益映射为语义描述，提供可覆盖人体活动的任务统一射频感知框架。",
+      "llm_evidence": "将毫米波/太赫兹信道增益映射为语义描述，提供可覆盖人体活动的任务统一射频感知框架。",
+      "canonical_evidence": "将毫米波/太赫兹信道增益映射为语义描述，提供可覆盖人体活动的任务统一射频感知框架。",
+      "llm_tldr_en": "Fine-tunes a vision-language model to map mmWave/THz channel gains into captions of multi-level environmental RF semantics, enabling task-unified RF sensing beyond task-specific designs.",
+      "llm_tldr_cn": "现有射频感知方法多为任务定制，只能输出部分环境信息，难以服务6G新应用。该论文提出任务统一的多层级射频感知框架，将毫米波/太赫兹信道增益作为输入，通过微调视觉语言模型生成描述多层级环境语义的文本。该方法借助多模态表示与提示条件生成能力弥合射频与环境语义之间的鸿沟，从而在同一框架下适配不同感知需求。其对人体动作、场景和交互等语义的建模能力，为射频人体感知提供了新的统一范式。",
+      "llm_tldr": "现有射频感知方法多为任务定制，只能输出部分环境信息，难以服务6G新应用。该论文提出任务统一的多层级射频感知框架，将毫米波/太赫兹信道增益作为输入，通过微调视觉语言模型生成描述多层级环境语义的文本。该方法借助多模态表示与提示条件生成能力弥合射频与环境语义之间的鸿沟，从而在同一框架下适配不同感知需求。其对人体动作、场景和交互等语义的建模能力，为射频人体感知提供了新的统一范式。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "radio frequency based human body perception",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.31034v1",
+      "source": "arxiv",
+      "title": "XAI2CSI: Interpreting CSI with eXplainable AI for Human Activity Recognition",
+      "abstract": "Wi-Fi Channel State Information (CSI) has emerged as a key enabler for device-free Human Activity Recognition (HAR), enabling low-cost, unobtrusive sensing using existing communication infrastructure. However, Deep Learning (DL) models trained on CSI data often struggle to generalize across users, environments, and device setups due to the context sensitivity of wireless propagation. Despite this challenge, limited attention has been devoted to understanding model decisions and generalization failures. This paper introduces XAI2CSI, a framework that leverages eXplainable Artificial Intelligence (XAI) to analyze DL-based CSI sensing systems. XAI2CSI employs SAGE, a model-agnostic explainability method, to quantify temporal, spectral, and spatial CSI contributions to HAR decisions under nominal and cross-context evaluations on IEEE 802.11ax data. Our analysis reveals that the considered DL model exhibits limited robustness to unseen conditions due to an over-reliance on context-specific CSI patterns, causing models to misinterpret the underlying signal dynamics when deployment conditions change. The proposed methodology and findings provide a reference framework to explore alternative solutions and guide the development of robust, transparent Wi-Fi sensing systems.",
+      "authors": [
+        "Idio Guarino",
+        "Alfredo Nascita",
+        "Domenico Ciuonzo",
+        "Damiano Carra",
+        "Antonio Pescapé"
+      ],
+      "primary_category": "eess.SP",
+      "categories": [
+        "eess.SP"
+      ],
+      "published": "2026-08-31T16:14:29+00:00",
+      "link": "https://arxiv.org/pdf/2608.31034v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Interpretable analysis of WiFi CSI human activity recognition",
+      "llm_evidence_cn": "基于Wi-Fi CSI的人体活动识别及可解释性分析",
+      "llm_evidence": "基于Wi-Fi CSI的人体活动识别及可解释性分析",
+      "canonical_evidence": "基于Wi-Fi CSI的人体活动识别及可解释性分析",
+      "llm_tldr_en": "Introduces XAI2CSI, applying SAGE explainability to deep wireless-CSI human activity recognition and quantifying temporal, spectral, and spatial feature importance to explain generalization failures.",
+      "llm_tldr_cn": "基于Wi-Fi CSI的深度学习人体活动识别虽然成本低且无需佩戴设备，但跨用户和环境泛化差，且缺少模型决策解释。文中提出XAI2CSI框架，采用模型无关的SAGE方法量化时间、频谱和空间特征对识别结果的贡献，以剖析泛化失败原因。实验揭示了CSI识别模型依赖的时频空线索。这类可解释性工具可为射频人体感知系统的诊断与鲁棒设计提供重要参考。",
+      "llm_tldr": "基于Wi-Fi CSI的深度学习人体活动识别虽然成本低且无需佩戴设备，但跨用户和环境泛化差，且缺少模型决策解释。文中提出XAI2CSI框架，采用模型无关的SAGE方法量化时间、频谱和空间特征对识别结果的贡献，以剖析泛化失败原因。实验揭示了CSI识别模型依赖的时频空线索。这类可解释性工具可为射频人体感知系统的诊断与鲁棒设计提供重要参考。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "radio frequency based human body perception",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.02452v1",
+      "source": "arxiv",
+      "title": "WiFlow: Estimating Optical Flow using WiFi Channel State Information",
+      "abstract": "Knowing where and how fast objects are moving within a scene is important across various domains. Usually, cameras are used to capture the data necessary for this task, but adding cameras often raises privacy concerns, and the quality of captured frames is heavily influenced by lighting conditions. In this work, we explore using WiFi channel state information (CSI) instead of camera frames for optical flow estimation. We propose WiFlow, a CSI based flow estimator, a preprocessor evaluation for CSI, and three model architectures that offer different trade-offs between accuracy and complexity. Further, we create the first dataset for training and evaluating CSI-based optical flow estimators, and our experiments provide insights into key design elements for this task. Code and data are available at https://visinf.github.io/wiflow.",
+      "authors": [
+        "Thomas Weigel",
+        "Simon Kiefhaber",
+        "Fabian Portner",
+        "Matthias Hollick",
+        "Simone Schaub-Meyer"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-02T11:19:01+00:00",
+      "link": "https://arxiv.org/pdf/2609.02452v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Uses WiFi CSI instead of cameras for optical flow estimation to avoid privacy issues",
+      "llm_evidence_cn": "利用WiFi信道状态信息而非相机估计光流，以避免摄像头带来的隐私担忧",
+      "llm_evidence": "利用WiFi信道状态信息而非相机估计光流，以避免摄像头带来的隐私担忧",
+      "canonical_evidence": "利用WiFi信道状态信息而非相机估计光流，以避免摄像头带来的隐私担忧",
+      "llm_tldr_en": "Uses WiFi CSI instead of cameras for optical flow to avoid privacy and lighting problems; proposes the WiFlow architectures, preprocessing evaluation, and the first dataset for CSI-based optical flow estimation.",
+      "llm_tldr_cn": "针对相机光流估计中的隐私困扰和光照限制，论文提出使用WiFi信道状态信息估计光流的WiFlow框架，设计了三种不同精度与复杂度权衡的模型，并对CSI预处理进行评估。文章还构建了首个用于CSI光流估计的数据集，实验为相关设计提供了经验性见解。这项工作表明无线信号可在不依赖摄像头的前提下完成场景运动感知，为隐私友好的监测技术开辟了途径。",
+      "llm_tldr": "针对相机光流估计中的隐私困扰和光照限制，论文提出使用WiFi信道状态信息估计光流的WiFlow框架，设计了三种不同精度与复杂度权衡的模型，并对CSI预处理进行评估。文章还构建了首个用于CSI光流估计的数据集，实验为相关设计提供了经验性见解。这项工作表明无线信号可在不依赖摄像头的前提下完成场景运动感知，为隐私友好的监测技术开辟了途径。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "privacy preserving human monitoring without cameras",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2609.02289v1",
+      "source": "arxiv",
+      "title": "If It Moves, Radar Knows: A Physics-Aware Radar Transformer for Class-Agnostic Moving-Object Detection",
+      "abstract": "Detectors trained on closed-set annotations can miss rare moving objects outside the training taxonomy. Automotive radar provides category-independent Doppler motion cues and is less affected by adverse illumination and weather, but sparse, noisy returns hinder class-aware 3D box detection. Surface location and velocity remain useful for motion reasoning and collision avoidance when full box geometry is difficult to recover. We present the Physics-Aware Radar Transformer (PART), a fully sparse radar-only detector that predicts existence confidence, a representative surface point, and 2D ground-plane velocity for each moving-object hypothesis. Doppler-Aware Query Initialization (DAQI) replaces scene-independent learned queries with input-dependent proposals by clustering radar returns in position and velocity, easing query-object assignment in sparse scenes. Physics-Guided Cross-Attention (PGCA) incorporates radial-Doppler consistency and radar cross section (RCS) into query-point association. Uncertainty-aware supervision randomly masks ground-truth objects and assigns soft existence targets to ambiguous radar-supported queries, reducing reliance on exhaustive annotations. With only 1.1 million parameters, PART achieves a class-agnostic average precision (CA-AP) of 0.8827, a mean average surface translation error (mASTE) of 0.3188 m, and a mean average velocity error (mAVE) of 0.8084 m/s on nuScenes. It attains 0.9203 recall on rare and safety-relevant categories excluded from the standard evaluation and remains effective at night, in rain, and under severe occlusion. Inspection of apparent false positives shows that some predictions correspond to moving objects absent from the nuScenes annotations. Code and pretrained model weights will be publicly available at https://github.com/sunyinghao-uestc/PART.",
+      "authors": [
+        "Yinghao Sun",
+        "Shuguang Li",
+        "Jinliang Shao",
+        "Tieshan Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-02T08:39:02+00:00",
+      "link": "https://arxiv.org/pdf/2609.02289v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "automotive radar point cloud transformer for class-agnostic moving-object detection supporting radar sensing theme",
+      "llm_evidence_cn": "用于雷达成像点云运动目标检测的物理感知Transformer，支撑毫米波雷达隐私感知主题",
+      "llm_evidence": "用于雷达成像点云运动目标检测的物理感知Transformer，支撑毫米波雷达隐私感知主题",
+      "canonical_evidence": "用于雷达成像点云运动目标检测的物理感知Transformer，支撑毫米波雷达隐私感知主题",
+      "llm_tldr_en": "Presents a physics-aware, radar-only transformer that predicts existence confidence, surface point, and ground-plane velocity for each moving-object hypothesis using Doppler-aware query initialization, targeting class-agnostic detection in sparse automotive radar point clouds.",
+      "llm_tldr_cn": "由于封闭类别检测器容易漏检训练集之外的稀有运动目标，本文利用汽车雷达不受光照天气影响且能提供独立于类别的多普勒运动线索的特点，提出物理感知雷达Transformer（PART）。该雷达专用检测器在稀疏点云上为每个运动目标假设预测存在置信度、代表性表面点与二维地平面速度，并采用多普勒感知的查询初始化提升定位能力。实验表明PART能在无需完整三维框的情况下可靠检测多种运动物体，为雷达点云上的运动感知和后续行为识别奠定了基础。",
+      "llm_tldr": "由于封闭类别检测器容易漏检训练集之外的稀有运动目标，本文利用汽车雷达不受光照天气影响且能提供独立于类别的多普勒运动线索的特点，提出物理感知雷达Transformer（PART）。该雷达专用检测器在稀疏点云上为每个运动目标假设预测存在置信度、代表性表面点与二维地平面速度，并采用多普勒感知的查询初始化提升定位能力。实验表明PART能在无需完整三维框的情况下可靠检测多种运动物体，为雷达点云上的运动感知和后续行为识别奠定了基础。",
+      "llm_tags": [
+        "query:mp:composite"
+      ],
+      "matched_query_tag": "query:mp:composite",
+      "matched_query_text": "Papers central to 毫米波雷达等隐私性方式进行人体重建、动作识别, especially work that connects or combines: millimeter wave radar sensing; radio frequency based human body perception; reconstruct human body geometry from radio signals; recognize human actions using radar point clouds; privacy preserving human monitoring without cameras; Non camera and privacy respectful human sensing techniques using mmWave radar.",
+      "matched_requirement_id": "req-composite-mp",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.29194v1",
+      "source": "arxiv",
+      "title": "RLG-TPV: Radar- and LiDAR-Guided Tri-Perspective View Fusion for Camera-Radar 3D Object Detection",
+      "abstract": "Tri-Perspective View (TPV) representations describe 3D scene structure through top, side, and front feature planes, but existing TPV lifting is primarily camera-based, leaving the depth of sampled image evidence ambiguous along projected camera rays. We propose RLG-TPV, a multimodal TPV framework for camera-radar 3D object detection in which radar and training-time LiDAR provide complementary geometric guidance during representation construction. A ray-guided deformable-attention lift weights sampled image features using LiDAR-supervised camera depth probabilities and radar frustum occupancy, while radar additionally refines the depth distribution before lifting. Because conventional radar provides limited elevation information, LiDAR-derived class-occupancy targets supervise the side and front planes during training; the corresponding heads are removed at inference, so deployment requires only cameras and radar. For temporal aggregation, Doppler-guided temporal fusion aligns past features using a motion field anchored by measured radar radial velocity, with gating that limits warping in regions without supported motion. An RCS-aware radar scatter further allows radar evidence to spread over spatial neighborhoods conditioned on radar cross section. On the nuScenes validation set, RLG-TPV achieves 0.4981 mAP and 0.5959 NDS, reducing orientation and velocity error by 31.9\\% and 30.7\\% relative to the published CRN baseline. Ablation studies show that ray-level geometric guidance is a major contributor to the final performance.",
+      "authors": [
+        "Ahmet Mete Dokgoz",
+        "A. Enes Doruk",
+        "Hasan F. Ates"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-29T11:08:11+00:00",
+      "link": "https://arxiv.org/pdf/2608.29194v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Radar signals used for geometric guidance in multimodal 3D object detection",
+      "llm_evidence_cn": "毫米波雷达用于多模态三维感知中的几何引导",
+      "llm_evidence": "毫米波雷达用于多模态三维感知中的几何引导",
+      "canonical_evidence": "毫米波雷达用于多模态三维感知中的几何引导",
+      "llm_tldr_en": "Proposes RLG-TPV, a fusion framework using radar and LiDAR-derived geometric guidance for camera-radar 3D object detection; radar refines depth distribution during feature lifting.",
+      "llm_tldr_cn": "针对三视角视图表示在图像特征提升时深度模糊的问题，提出了雷达与激光雷达联合引导的多模态框架RLG-TPV。方法利用激光雷达监督的深度概率与雷达截锥占据度对图像特征加权，并在提升前用雷达修正深度分布，使三视角特征具有更强的几何一致性。实验表明该方法可改善相机-雷达三维目标检测精度。该工作展示了毫米波雷达如何为多模态三维感知提供稀疏几何先验，可为非视觉雷达感知方法提供参考。",
+      "llm_tldr": "针对三视角视图表示在图像特征提升时深度模糊的问题，提出了雷达与激光雷达联合引导的多模态框架RLG-TPV。方法利用激光雷达监督的深度概率与雷达截锥占据度对图像特征加权，并在提升前用雷达修正深度分布，使三视角特征具有更强的几何一致性。实验表明该方法可改善相机-雷达三维目标检测精度。该工作展示了毫米波雷达如何为多模态三维感知提供稀疏几何先验，可为非视觉雷达感知方法提供参考。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "millimeter wave radar sensing",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.04848v1",
+      "source": "arxiv",
+      "title": "3D Radar Imaging from the UAV Nadir",
+      "abstract": "Radars improve the sensing robustness of UAVs by operating under poor lighting and weather conditions and seeing through occlusions such as vegetation. However, they suffer from poor angular resolution, which can be addressed using synthetic aperture radar (SAR) algorithms. State-of-the-art UAV SAR methods operate at a depression angle and are not suitable for sensor fusion applications where the data are collected from areas directly below the UAV (i.e., the UAV nadir). In this paper, we present an interferometric SAR (InSAR) framework for reconstructing 3D images from the UAV nadir using a low-cost multi-input-multi-output (MIMO) mm-wave radar. Additionally, an effective method based on the phase gradient autofocus (PGA) is presented for compensating the phase error across the virtual receive antennas. We demonstrate the effectiveness of our 3D imaging algorithm in both simulation and experimental scenarios.",
+      "authors": [
+        "S. Hamed Javadi",
+        "Hichem Sahli",
+        "André Bourdoux"
+      ],
+      "primary_category": "eess.SP",
+      "categories": [
+        "eess.SP"
+      ],
+      "published": "2026-09-04T08:06:57+00:00",
+      "link": "https://arxiv.org/pdf/2609.04848v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Uses low-cost MIMO mmWave radar and interferometric SAR to reconstruct 3D images from UAV nadir, a clear mmWave radar sensing and 3D imaging technique.",
+      "llm_evidence_cn": "利用低成本MIMO毫米波雷达与干涉SAR进行下视三维成像，属于毫米波雷达感知与三维重建技术。",
+      "llm_evidence": "利用低成本MIMO毫米波雷达与干涉SAR进行下视三维成像，属于毫米波雷达感知与三维重建技术。",
+      "canonical_evidence": "利用低成本MIMO毫米波雷达与干涉SAR进行下视三维成像，属于毫米波雷达感知与三维重建技术。",
+      "llm_tldr_en": "Presents an InSAR framework with a low-cost MIMO mm-wave radar to reconstruct 3D images from the UAV nadir, with phase gradient autofocus for virtual-array phase errors, enabling nadir mmWave 3D sensing.",
+      "llm_tldr_cn": "无人机雷达需要全天候稳健感知，但主流SAR方法难以处理机腹正下方的数据。论文提出一种使用低成本MIMO毫米波雷达的干涉SAR框架，从无人机正下方重建三维图像，同时用相位梯度自聚焦补偿虚拟阵列的相位误差。该方法使无人机下视毫米波雷达也能获得三维成像能力，增强对植被等遮挡环境下的感知。其对三维从毫米波信号重建的技术路径，也可迁移到人体几何重建任务。",
+      "llm_tldr": "无人机雷达需要全天候稳健感知，但主流SAR方法难以处理机腹正下方的数据。论文提出一种使用低成本MIMO毫米波雷达的干涉SAR框架，从无人机正下方重建三维图像，同时用相位梯度自聚焦补偿虚拟阵列的相位误差。该方法使无人机下视毫米波雷达也能获得三维成像能力，增强对植被等遮挡环境下的感知。其对三维从毫米波信号重建的技术路径，也可迁移到人体几何重建任务。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "millimeter wave radar sensing",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.30896v1",
+      "source": "arxiv",
+      "title": "Rad-R: A Raw-ADC Radar Dataset and Capture-Invariant SSM for Hardware-Fault Diagnosis",
+      "abstract": "Automotive mmWave radar can develop vibration, antenna misalignment, radome blockage, and receive-channel degradation that corrupt the signal before perception begins. Data for these faults are scarce because each condition must be induced and measured on physical hardware. We introduce Rad-R, a raw-ADC dataset captured with a 4-chip 77GHz TI MMWCAS-RF-EVM cascade (192 virtual channels). Unlike existing raw-radar datasets, Rad-R pairs each recording with a controlled hardware fault at a calibrated severity, an independent physical severity measurement, and frame-synchronised IMU, temperature, GPS, and camera streams. Rad-R is a single-session dataset, so our generalisation claims are confined to a controlled cross-severity protocol in which train and test use physically distinct captures. A reproducible benchmark evaluates seven representative vision backbones and the proposed raw-IQ Mamba SSM (RadrNet) under within-clip, chirp-wise anytime, few-shot cross-capture, and controlled cross-severity protocols. Within-clip performance is near-saturated ($>0.98$ macro-F1), whereas cross-severity generalisation remains difficult: the absolute-phase RadrNet-DS falls to $0.49$ macro-F1. RadrNet-DS-CI replaces absolute phase with per-frame-standardised magnitude and relative chirp-to-chirp phase and ranks first on the controlled benchmark ($0.663$ vs. $0.628$ for the strongest RD-CNN; three seeds); the RadrNet family also leads on the anytime and few-shot budgets. A descriptive cross-modal analysis further finds that radar micro-Doppler covaries with independently measured IMU vibration energy (pooled Spearman $ρ=0.41$ across conditions). The complete dataset and code will be released publicly under permissive licences.",
+      "authors": [
+        "Mainak Mallick",
+        "Junghwan Yim",
+        "Seung-Kyum Choi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-31T14:48:55+00:00",
+      "link": "https://arxiv.org/pdf/2608.30896v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "77GHz automotive mmWave radar raw-ADC dataset and capture-invariant SSM for fault diagnosis, enabling robust mmWave radar sensing.",
+      "llm_evidence_cn": "77GHz车载毫米波雷达原始ADC数据集与捕获不变状态空间模型，可提升雷达感知前的硬件故障鲁棒性。",
+      "llm_evidence": "77GHz车载毫米波雷达原始ADC数据集与捕获不变状态空间模型，可提升雷达感知前的硬件故障鲁棒性。",
+      "canonical_evidence": "77GHz车载毫米波雷达原始ADC数据集与捕获不变状态空间模型，可提升雷达感知前的硬件故障鲁棒性。",
+      "llm_tldr_en": "Introduces Rad-R raw-ADC dataset from a 77GHz 192-channel mmWave radar cascade with calibrated hardware faults and synchronized IMU, temperature, GPS streams, plus a capture-invariant state-space model for cross-severity fault diagnosis.",
+      "llm_tldr_cn": "车载毫米波雷达在感知前可能因振动、天线错位、天线罩堵塞等原因产生信号退化，但物理硬件故障数据很难获取。论文提出Rad-R数据集，使用77GHz多芯片级联毫米波雷达捕获原始ADC数据，并匹配受控硬件故障、物理严重度测量以及IMU、温度、GPS等同步信息。基于该数据集训练捕获不变状态空间模型，可在受控的跨严重度设置下实现硬件故障诊断。该工作提升了毫米波雷达感知的鲁棒性，可为后续雷达点云人体感知提供有效的预处理基础设施。",
+      "llm_tldr": "车载毫米波雷达在感知前可能因振动、天线错位、天线罩堵塞等原因产生信号退化，但物理硬件故障数据很难获取。论文提出Rad-R数据集，使用77GHz多芯片级联毫米波雷达捕获原始ADC数据，并匹配受控硬件故障、物理严重度测量以及IMU、温度、GPS等同步信息。基于该数据集训练捕获不变状态空间模型，可在受控的跨严重度设置下实现硬件故障诊断。该工作提升了毫米波雷达感知的鲁棒性，可为后续雷达点云人体感知提供有效的预处理基础设施。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "millimeter wave radar sensing",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.00390v1",
+      "source": "arxiv",
+      "title": "NeuroPriv: Adversarial Representation Learning for Privacy in Wearable EEG Systems",
+      "abstract": "Wearable EEG systems may expose sensitive information beyond their intended health function, creating substantial risks to neuroprivacy. In this work, we show that commonly used EEG features can reveal participant identity and demographic attributes in addition to supporting the intended cognitive task. Wearable EEG is increasingly being explored for cognitive monitoring, neurological assessment, and longitudinal digital-health applications, yet many systems assume that transmitting compact spectral or spatial features instead of raw EEG provides sufficient privacy protection. Using EEGMAT as a motivating case study, we find that compact EEG features achieve a balanced accuracy of 0.788 for cognitive-state classification while enabling gender, age, and subject-identity inference with balanced accuracies of 0.858, 0.789, and 0.692, respectively. We further show that privacy-aware representation learning preserves task performance at 0.781 while reducing these inference accuracies to 0.563, 0.467, and 0.206. These findings motivate purpose-limited representations and explicit privacy auditing in wearable neurohealth systems.",
+      "authors": [
+        "Sarmistha Sarna Gomasta",
+        "Bhawana Chhaglani",
+        "Prashant Shenoy"
+      ],
+      "primary_category": "cs.CR",
+      "categories": [
+        "cs.CR",
+        "cs.HC",
+        "cs.LG"
+      ],
+      "published": "2026-08-31T21:19:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.00390v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Adversarial representation learning reduces identity and demographic leakage in wearable EEG while keeping intended task; privacy-preserving method for non-camera human monitoring.",
+      "llm_evidence_cn": "通过对抗表示学习抑制可穿戴脑电中的身份和人口属性泄露，属于无摄像头人体监测的隐私保护方法。",
+      "llm_evidence": "通过对抗表示学习抑制可穿戴脑电中的身份和人口属性泄露，属于无摄像头人体监测的隐私保护方法。",
+      "canonical_evidence": "通过对抗表示学习抑制可穿戴脑电中的身份和人口属性泄露，属于无摄像头人体监测的隐私保护方法。",
+      "llm_tldr_en": "Shows compact EEG features still leak identity and demographics and proposes NeuroPriv adversarial representation learning to suppress leakage while retaining cognitive-state classification, achieving 0.788 balanced accuracy on EEGMAT.",
+      "llm_tldr_cn": "可穿戴脑电系统通常认为传输紧凑频域特征即可保护隐私，但论文发现这些特征仍可泄露身份和人口属性。对此提出NeuroPriv对抗表征学习框架，在支持认知状态分类的同时削弱敏感属性对中间表征的编码。在EEGMAT案例中，认知状态分类平衡准确率达到0.788，同时性别等属性泄露得到抑制。该方法对非摄像头、隐私友好的人体生理监测具有通用价值，也可为毫米波人体感知的特征隐私保护提供借鉴。",
+      "llm_tldr": "可穿戴脑电系统通常认为传输紧凑频域特征即可保护隐私，但论文发现这些特征仍可泄露身份和人口属性。对此提出NeuroPriv对抗表征学习框架，在支持认知状态分类的同时削弱敏感属性对中间表征的编码。在EEGMAT案例中，认知状态分类平衡准确率达到0.788，同时性别等属性泄露得到抑制。该方法对非摄像头、隐私友好的人体生理监测具有通用价值，也可为毫米波人体感知的特征隐私保护提供借鉴。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "privacy preserving human monitoring without cameras",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.01036v1",
+      "source": "arxiv",
+      "title": "MultiGait: A Multi-Sensor Multi-Perspective Multi-Session Biometric Inference Benchmark and its Dataset",
+      "abstract": "A lack of suitable datasets has limited the research into the privacy risks of novel smart city sensors, such as thermal cameras, depth cameras, and lidar. Given the number of unsubstantiated privacy claims and their potential widespread deployment into many people's everyday life, understanding the privacy risks of these sensors -- in isolation and in like-for-like comparisons -- is crucial. With MultiGait, we collected the first multi-sensor, multi-perspective, multi-session gait-focused dataset, for the corresponding, and additional more far-reaching investigations. The dataset, validated with multiple state-of-the-art recognition systems, comprises various walking modes and annotated personal attributes for 199 individuals, to ensure the benefit for advanced studies including cross-sensor recognition and anonymization at the edge. MultiGait represents a foundation for rigorous privacy investigations, demonstrated through an extensive identity inference benchmark across eight sensors, four perspectives, and three recording sessions. Our benchmark incidentally reveals that sensors often assumed to be privacy-friendly do still entail considerable identity inference risks, while the poor cross-session generalization of existing methods underscores an important research gap.",
+      "authors": [
+        "Julian Todt",
+        "Felix Morsbach",
+        "Philip Dissert",
+        "Thorsten Strufe"
+      ],
+      "primary_category": "cs.CR",
+      "categories": [
+        "cs.CR",
+        "cs.CV"
+      ],
+      "published": "2026-09-01T10:35:25+00:00",
+      "link": "https://arxiv.org/pdf/2609.01036v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Multi-sensor non-camera gait benchmark for biometric inference and privacy risks, informing privacy-preserving human monitoring without cameras.",
+      "llm_evidence_cn": "多传感器非摄像头步态识别与隐私风险基准，服务于无摄像头模式下人体监控的隐私评估。",
+      "llm_evidence": "多传感器非摄像头步态识别与隐私风险基准，服务于无摄像头模式下人体监控的隐私评估。",
+      "canonical_evidence": "多传感器非摄像头步态识别与隐私风险基准，服务于无摄像头模式下人体监控的隐私评估。",
+      "llm_tldr_en": "Presents the first multi-sensor, multi-perspective, multi-session gait dataset with 199 subjects over thermal, depth, lidar, and more, validated with SOTA recognizers, to quantify privacy risks of non-camera smart-city sensors.",
+      "llm_tldr_cn": "针对热成像、深度相机和激光雷达等新型城市传感器缺少隐私风险数据的问题，MultiGait构建了首个多传感器、多视角、多会话的步态数据集，包含199名受试者的不同行走模式与属性标注。作者结合多种最新识别系统进行验证，系统比较了各类非摄像头感知设备的个体识别与属性泄露风险。该工作为隐私保护型非摄像头人体监控研究提供了重要的基准和评估工具，但其传感器中并未包含毫米波雷达。",
+      "llm_tldr": "针对热成像、深度相机和激光雷达等新型城市传感器缺少隐私风险数据的问题，MultiGait构建了首个多传感器、多视角、多会话的步态数据集，包含199名受试者的不同行走模式与属性标注。作者结合多种最新识别系统进行验证，系统比较了各类非摄像头感知设备的个体识别与属性泄露风险。该工作为隐私保护型非摄像头人体监控研究提供了重要的基准和评估工具，但其传感器中并未包含毫米波雷达。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "privacy preserving human monitoring without cameras",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.02560v1",
+      "source": "arxiv",
+      "title": "Stereo 4D Radar for 3D Object Detection: Integrating Geometric Alignment and Absolute Velocity Estimation",
+      "abstract": "Four-dimensional (4D) Radar is a powerful sensing modality capable of detecting surrounding three-dimensional (3D) objects under diverse weather conditions and providing Doppler-based motion information. However, raw 4D Radar signals contain significant clutter from road surfaces, guardrails, and surrounding vehicles, along with multipath-induced ghost reflections and the receiver's inherent noise floor. Consequently, preprocessing algorithms designed to remove such invalid measurements often make the Radar data excessively sparse. Moreover, the Doppler measurements provided by 4D Radar describe only the radial component of an object's velocity, limiting their ability to recover the full motion state. In this paper, we introduce a stereo 4D Radar-based 3D object detection framework that exploits the geometric disparity between left and right Radars to estimate the absolute velocity of objects and achieve more robust perception through the fusion of their complementary features. The effectiveness of the proposed framework is validated on our in-house stereo 4D Radar dataset, demonstrating performance gains of 8.82 points in AP 3D and 9.0 points in AP BEV over state-of-the-art mono 4D Radar baselines. These results demonstrate that absolute velocity estimation combined with stereo geometry-aware feature fusion leads to substantial improvements in 3D object detection.",
+      "authors": [
+        "Seung-Hyun Song",
+        "Dong-Hee Paek",
+        "Woong-Chan Byun",
+        "Seung-Hyun Kong"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-02T13:13:08+00:00",
+      "link": "https://arxiv.org/pdf/2609.02560v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Uses stereo 4D mmWave radar point clouds with geometric alignment and full velocity estimation; techniques applicable to radar point cloud based human analysis",
+      "llm_evidence_cn": "处理4D雷达点云的杂波稀疏与径向速度模糊问题，可为基于点云的人体动作识别提供高质量表述",
+      "llm_evidence": "处理4D雷达点云的杂波稀疏与径向速度模糊问题，可为基于点云的人体动作识别提供高质量表述",
+      "canonical_evidence": "处理4D雷达点云的杂波稀疏与径向速度模糊问题，可为基于点云的人体动作识别提供高质量表述",
+      "llm_tldr_en": "Tackles clutter, multipath ghosts, and sparsity in stereo 4D radar point clouds and the radial-only Doppler limitation by aligning geometry and estimating absolute velocity, resulting in better 3D object detection and motion state recovery.",
+      "llm_tldr_cn": "针对4D雷达点云受杂波和多径鬼影影响、预处理后过稀疏，且多普勒只给出径向速度的问题，论文提出立体4D雷达几何对齐与绝对速度估计方法，使两个视角的点云在几何上对齐并融合约束获得完整三维速度，从而提升目标检测的稳健性。该方法在自动驾驶相关场景中验证有效，其点云质量改进与速度估计策略同样可迁移到毫米波雷达点云的人体检测与动作识别任务。",
+      "llm_tldr": "针对4D雷达点云受杂波和多径鬼影影响、预处理后过稀疏，且多普勒只给出径向速度的问题，论文提出立体4D雷达几何对齐与绝对速度估计方法，使两个视角的点云在几何上对齐并融合约束获得完整三维速度，从而提升目标检测的稳健性。该方法在自动驾驶相关场景中验证有效，其点云质量改进与速度估计策略同样可迁移到毫米波雷达点云的人体检测与动作识别任务。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "recognize human actions using radar point clouds",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.05325v1",
+      "source": "arxiv",
+      "title": "FIRE-LIVWO: Robust LiDAR-Inertial-Visual-Wheel Odometry via Failure-Immune mmWave Radar Enhancement",
+      "abstract": "Achieving robust SLAM in large-scale underground coal mines with complex structures and severe degeneracies remains highly challenging. Dense smoke and dust cause substantial loss of visual information and degrade LiDAR point-cloud features, while long, self-similar corridors induce geometric degeneration, leading to pronounced odometry drift. To address these issues, we propose FIRE-LIVWO: Failure-Immune mmWave Radar-Enhanced LiDAR-Inertial-Visual-Wheel Odometry, a tightly coupled multi-modal odometry framework based on an iterated error-state Kalman filter (IESKF). The framework fuses 4D mmWave radar, LiDAR, and visual features within a unified VoxelMap and jointly constructs LiDAR-radar point-to-plane residuals and sparse visual photometric residuals. In smoke-filled environments, we exploit the strong penetration of 4D mmWave radar and introduce pointwise Doppler velocity constraints to preserve state observability. In geometrically degenerate corridors, we tightly couple wheel odometry using non-holonomic constraints (NHC) and online lever-arm compensation to reduce drift. Our central contribution is a degeneration detection and adaptive fusion model switching strategy grounded in geometric and visual observability analysis, which quantifies observability online and dynamically adjusts modality weights. Real-world experiments in underground coal mines demonstrate that FIRE-LIVWO accurately identifies failure boundaries, enabling reliable modality switching under extreme conditions. Compared with baselines, it achieves superior accuracy and robustness (average localization error of 5.677m). We open source our code on Github to benefit the robotics community.",
+      "authors": [
+        "Kun Hu",
+        "Menggang Li",
+        "Kaidi Wu",
+        "Zhiwen Jin",
+        "Yingjie Zhao",
+        "Chaoquan Tang",
+        "Eryi Hu",
+        "Gongbo Zhou"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-04T16:19:58+00:00",
+      "link": "https://arxiv.org/pdf/2609.05325v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Uses 4D mmWave radar point clouds to enhance multi-modal odometry",
+      "llm_evidence_cn": "利用4D毫米波雷达增强多模态里程计感知",
+      "llm_evidence": "利用4D毫米波雷达增强多模态里程计感知",
+      "canonical_evidence": "利用4D毫米波雷达增强多模态里程计感知",
+      "llm_tldr_en": "Fuses 4D mmWave radar, LiDAR, inertial, visual and wheel data in an iterated error-state Kalman filter to keep SLAM odometry robust under dust, smoke and geometric degeneration in mines.",
+      "llm_tldr_cn": "地下煤矿等场景烟雾粉尘会遮挡视觉并退化激光点云，长直巷道还会导致几何退化，使里程计漂移。本文提出FIRE-LIVWO，以迭代误差状态卡尔曼滤波紧耦合4D毫米波雷达、激光雷达、惯性与车轮信息，在统一体素地图中构建激光-雷达点到面残差。该框架显著增强了系统在退化与恶劣环境下的定位鲁棒性。结果表明毫米波雷达点云能补充视觉和激光失效时的几何信息，适合复杂环境下的鲁棒感知。",
+      "llm_tldr": "地下煤矿等场景烟雾粉尘会遮挡视觉并退化激光点云，长直巷道还会导致几何退化，使里程计漂移。本文提出FIRE-LIVWO，以迭代误差状态卡尔曼滤波紧耦合4D毫米波雷达、激光雷达、惯性与车轮信息，在统一体素地图中构建激光-雷达点到面残差。该框架显著增强了系统在退化与恶劣环境下的定位鲁棒性。结果表明毫米波雷达点云能补充视觉和激光失效时的几何信息，适合复杂环境下的鲁棒感知。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "millimeter wave radar sensing",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}

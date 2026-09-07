@@ -1,0 +1,307 @@
+Title: Channel Gains to Captions: Task-Unified Multi-Level RF Sensing with Vision-Language Models
+
+URL Source: https://arxiv.org/pdf/2608.30836v1
+
+Published Time: Tue, 01 Sep 2026 02:45:48 GMT
+
+Number of Pages: 5
+
+Markdown Content:
+> 1
+
+# Channel Gains to Captions: Task-Unified Multi-Level RF Sensing with Vision-Language Models 
+
+Tianyu Hu, Student Member, IEEE, Zhiren Gong, Student Member, IEEE, Haowei Cui, Shuai Wang, Member, IEEE, Samson Lasaulce, Member, IEEE, Lingxiang Li, Member, IEEE, 
+
+Wassim Hamidouche, Senior Member, IEEE, Zhi Chen, Senior Member, IEEE, M´ erouane Debbah, Fellow, IEEE 
+
+Abstract —This letter investigates a task-unified multi-level radio-frequency (RF) sensing framework driven by vi-sion–language models (VLMs). Existing RF sensing methods rely on task-specific designs and provide only partial environmental information, limiting their ability to handle emerging 6G appli-cations. To address this, we propose a generative formulation for RF sensing, where millimeter-wave (mmWave)/terahertz (THz) channel gains are mapped to captions describing multi-level environmental semantics. The framework solves this problem through a complementary design for RF-environment semantic bridging, where a VLM is fine-tuned to leverage its multimodal representations and prompt-conditioned semantic generation ca-pabilities. Hence, different sensing tasks are specified through textual prompts, enabling the framework to handle diverse tasks in a unified manner. For fine-tuning, we introduce prompt-routed low-rank adaptation (LoRA) experts to achieve level-aware adaptation. Simulation results show that, compared with baselines, our framework achieves superior performance with a broader semantic scope, and enables task-unified sensing beyond predefined tasks. Under an unseen sensing requirement, it achieves an average F1-score improvement of 0.17 over the most competitive variant. 
+
+Index Terms —RF sensing, multi-level environmental semantics, task-unified model, VLMs, mmWave/THz channel gains. 
+
+I. I NTRODUCTION 
+
+Integrated sensing and communication (ISAC) in millimeter-wave (mmWave)/terahertz (THz) bands is akey paradigm for sixth-generation (6G) wireless networks [1]. Within ISAC, radio-frequency (RF) sensing [2] aims to leverage RF observations to capture environmental information involved in signal propagation. Existing studies mainly focus on estimating obstacle attributes [3], [4] or reconstructing physical environments [3], [5]. For instance, WirelessGPT [3] constructed a generative foundation model based on channel state information, with task-specific heads for predefined sensing tasks. Despite their effectiveness, these methods may struggle to meet the sensing demands of emerging 6G           
+
+> This work is supported in part by Mobile Information Networks-National Science and Technology Major Project under Grant No. 2025ZD1305200, and by the National Key R&D Program of China under Grant 2024YFE0200400. (Corresponding authors: Lingxiang Li and Shuai Wang) Tianyu Hu, Haowei Cui, Shuai Wang, Lingxiang Li, and Zhi Chen are with the National Key Laboratory of Wireless Communications, University of Electronic Science and Technology of China (UESTC), Chengdu 611731, China (e-mail: {huty, cchw }@std.uestc.edu.cn; {shuaiwang, lingxiang.li, chenzhi }@uestc.edu.cn;). Zhiren Gong is with the Interdisciplinary Graduate Programme, Nanyang Technological University, Singapore (e-mail: zhiren001@e.ntu.edu.sg). Tianyu Hu, Samson Lasaulce, Wassim Hamidouche, and M´ erouane Debbah are with the Research Institute for Digital Future, Khalifa University, 127788 Abu Dhabi, UAE (e-mail: huty@std.uestc.edu.cn, samson.lasaulce@univ-lorraine.fr, wassim.hamidouche@insa-rennes.fr, merouane.debbah@ku.ac.ae).
+
+applications (e.g., extended reality and digital twins [1]), which demand comprehensive environmental semantics and a unified paradigm capable of handling diverse sensing tasks, including unseen ones. This limitation stems from the reliance of existing methods on task-specific formulations and the resulting partial environmental information, leading to redesign or retraining when encountering unseen tasks. Recently, vision–language models (VLMs) [6] have shown strong potential for communication tasks [7], [8] due to their knowledge-enriched multimodal representations and prompt-conditioned semantic generation capabilities. Motivated by this, we leverage VLMs to develop a framework capable of comprehensively describing environmental semantics from RF-domain observations, guided by textual prompts that spec-ify sensing requirements. The framework is expected to pos-sess sufficient RF-related knowledge, enabling it to exploit the VLM to generate task-specific environmental semantics, thereby operating as a unified sensing paradigm. Notably, pre-trained VLMs derive their priors from natural images and text, which are fundamentally different from RF propagation pat-terns, thereby lacking such knowledge and leading to an RF– VLM prior mismatch [9]. To better meet the aforementioned sensing demands, the framework aligns RF observations with the semantic space through effective adaptation. In this letter, we introduce a task-unified multi-level RF sensing framework driven by VLMs, where we characterize the environmental semantics as multi-level semantics spanning the layout, obstacle, and communication-related levels. Within the framework, RF sensing is cast as a generative captioning problem, where mmWave/THz channel gains are mapped to textual captions of the environment. To mitigate the prior mismatch, the framework introduces prompt-routed low-rank adaptation (LoRA) experts to fine-tune the pre-trained VLM. These experts learn RF sensing knowledge and aggregate it using level information from the prompt, enabling level-aware adaptation while preserving the pre-trained priors. Simulation results show that, compared with baselines (e.g., [5]), the proposed framework achieves superior multi-level RF sensing performance with an expanded semantic scope, and enables task-unified sensing beyond predefined tasks. Under an unseen sensing requirement, it achieves an average F1-score improve-ment of 0.17 over the most competitive variant. II. P RELIMINARIES AND SYSTEM MODEL 
+
+A. Multi-Level Environmental Semantics 
+
+We consider a two-dimensional (2D) square area with side length W . The area contains multiple obstacles with varying arXiv:2608.30836v1 [eess.SP] 31 Aug 2026 2𝑊     
+
+> 𝑊
+> (a) A section of Oklahoma .BS at grid
+> (𝑝, 𝑞)
+> 𝑊 𝑁 W
+> 𝑊
+> 𝑁 W
+> User
+> 1
+> 2
+> 3
+> 4
+> 5
+> 6
+> 78(b) The schematic diagram.
+
+Fig. 1: An example scenario for the considered 2D area. shapes, sizes, and locations, leading to diverse environmental configurations. Fig. 1(a) depicts an example scenario for the considered area, which is a satellite image of a section of 
+
+Oklahoma [10]. For each scenario under this setting, we define I = {IL, IO, IC} to characterize the environment at multiple semantic levels, where IL ∈ {0, 1}N1×N2 , IO ∈{0, 1}N1×N2×N3 , and IC ∈ {0, 1}N1×N2 represent layout, obstacle, and communication-related semantics, respectively. For all three representations, the first two dimensions index environmental attributes and their values, respectively. In ad-dition, the third dimension in IO indexes individual obstacles. All attributes are discretized into a finite set of categories and represented by their corresponding class labels. 
+
+Layout-level semantics ( IL): this level characterizes large-scale spatial properties, including the total obstacle area, as well as the spatial spread and mean of obstacle centroids. It can support communication functions involving large-scale propagation characterization. 
+
+Obstacle-level semantics ( IO): this level describes indi-vidual obstacles and their attributes, including the number of obstacles and class labels of their geometric attributes (e.g. centroid, shape, and area). It enables channel modeling and analysis for wireless links. 
+
+Communication-related-level semantics ( IC): this level comprises communication-related, environment-dependent in-formation that can be directly used for transmission configu-ration, including a communication-scenario label (e.g., rural, suburban, or urban) and candidate beam-direction classes with low blockage for different base-station (BS) locations. 
+
+B. System Model 
+
+We partition the considered 2D area into NW × NW grids. A mmWave/THz BS is located at the center of the area, and K
+
+users are randomly distributed at the centers of K grids, where these grid centers are not occupied by obstacles, as shown in Fig. 1(b). To obtain the RF observations, we assume that the BS is equipped with a directional antenna and performs beam scanning over ND evenly spaced beams, while each user employs an omnidirectional antenna for reception. For a given environment I, the channel impulse re-sponse (CIR) is capable of representing key characteristics of mmWave/THz channels, such as non-negligible molecular absorption and channel sparsity [11]. Let hp,q,n, I (t) denote the CIR to a user located at the center of grid (p, q ) under the n-th beam direction, where t denotes the time index. The average channel power gain ¯hp,q,n, I can be expressed as 
+
+¯hp,q,n, I = 1
+
+T
+
+Z T
+
+> 0
+
+|hp,q,n, I (t)|2dt, (1) where T represents the total observation time. By averaging the received signal power measured at different times within 
+
+T , we can empirically obtain the average channel power gain 
+
+¯hp,q,n, I . As such, channel gains collected from K sparsely distributed users can be obtained. To provide a spatial structure, we represent the K channel gains as a sparse tensor HI ∈ RNW ×NW ×ND , whose (p, q, n )-th entry equals ¯hp,q,n, I if a user is located in grid (p, q ),and 0 otherwise. Since the channel gains are governed by the underlying propagation environment, HI can be exploited to infer IL and IO, thereby enabling the further inference of IC.As a result, the channel gains can be regarded as a natural basis for multi-level RF sensing. III. VLM-D RIVEN RF S ENSING FRAMEWORK 
+
+In this section, we propose a task-unified multi-level RF sensing framework driven by VLMs, which captures the en-vironmental semantics I from channel gains HI conditioned on sensing task requirements, as illustrated in Fig. 2. 
+
+A. Problem Formulation 
+
+Motivated by the prompt-conditioned semantic generation capability of VLMs, the proposed framework casts the RF sensing problem as a captioning task, thereby enabling a unified paradigm for diverse sensing tasks. Specifically, the captioning task introduces textual prompts to specify sens-ing requirements, and generates corresponding environmental captions from RF-domain channel gains. Such a generative formulation not only allows sensing requirements to vary flex-ibly, but also renders the output space compositional, enabling captions with flexible length, content richness, and semantic levels. In contrast, discriminative formulations adopted by existing methods are restricted to specific sensing requirements and impose a fixed output space. Given a pre-defined token vocabulary V and a textual prompt represented as a token sequence x ∈ VNx , we define a probability generation function f : RNW ×NW ×ND ×VNx →
+
+[0 , 1] N ′  
+
+> y×| V|
+
+that outputs a probability matrix bPI = f (HI , x)
+
+for the environment with I. Each row of bPI corresponds to a token position and forms a probability distribution over V.By maximum-probability decoding from bPI , we can obtain a token sequence by ∈ VN ′ 
+
+> y
+
+, i.e., the generated environmental caption. In other words, the proposed framework generates captions via a probability distribution over V, where the j-th row [ bPI ]j, : corresponds to the token [by]j .Assuming a ground-truth caption y ∈ VNy of environ-mental semantics I1, with a corresponding row-wise one-hot              
+
+> 1For example, an instance of Ican be described as “this scene contains seven obstacles, each of which is rectangular,” and then tokenized into y.3VLM -Driven RF Sensing Framework
+> Frozen
+> Fine -tuning
+> Channel Gains
+> Measured at
+> Different Locations
+> Input
+> Textual Prompt:
+> Sensing
+> Requirement
+> 𝐱
+> Estimated Channel Gains in Visual Form
+> Prompt -Routed LoRA Experts (for ∆𝚯 )
+> 𝐱
+> 𝒘 𝐓
+> 𝑀
+> Prompt -Routed Experts
+> ∆𝚯 L
+> ∆𝚯 𝐎
+> ∆𝚯 𝐂
+> 𝐁 𝐋 𝐀 𝐋
+> 𝐁 𝐎 𝐀 𝐎
+> 𝐁 𝐂 𝐀 𝐂
+> Pre -trained
+> VLM
+> (with 𝚯 P)
+> Reconstruction Module
+> 𝐺
+> Output
+> Textual Caption ෝ𝒚
+> of Multi -Level
+> Environmental
+> Semantics xxx
+> 𝐱
+> Probability
+> Matrix
+> Fine -Tuned VLM
+> 𝚯 = 𝚯 P+∝r∆𝚯
+> Textual
+> Caption
+> ෝ𝒚
+
+Fig. 2: The proposed VLM-driven RF sensing framework. matrix PI ∈ { 0, 1}Ny ×| V|, the captioning problem for RF sensing is formulated as follows: 
+
+minimize  
+
+> f
+
+EI
+
+h
+
+L
+
+ bPI , PI
+
+i 
+
+, (2a) s.t. bPI = f (HI , x), (2b) 
+
+bPI 1 = 1, (2c) 
+
+PI = g(I). (2d) The cross-entropy loss L( bPI , PI ) is employed, as it corre-sponds to maximum likelihood estimation of the token distri-bution and effectively penalizes deviations from the ground-truth one-hot targets. The mapping g(I) = g1(g2(I)) consists of: g2(I) verbalizing I into a narrative token sequence y,and g1(y) converting y into PI by assigning each token in y to a one-hot vector over V. Accordingly, RF sensing is formulated as an ontology-grounded, prompt-conditioned RF caption generation problem, where more diverse semantic representations and more flexible linguistic descriptions can be incorporated by modifying I and g2(I).At the same time, solving problem (2) remains challeng-ing due to the following issues. First, the limited RF prior information, together with the high dimensionality of the obstacle attribute space, may result in an excessively large feasible solution space. Second, a substantial level-dependent gap exists between RF representations and the multi-level linguistic semantics of the environment. Different semantic levels rely on distinct aspects of prior RF knowledge, making a single adaptation path prone to suboptimal alignment for some levels. To mitigate the above challenges and solve problem (2), we carefully design the framework architecture and fine-tuning strategy, as detailed in the following subsections. 
+
+B. Framework Architecture 
+
+The proposed framework consists of a pre-trained VLM, a reconstruction module, and three prompt-routed LoRA experts corresponding to the layout, obstacle, and communication-related levels. The framework takes the channel gains HI and textual prompt x as input, and first implements the function 
+
+f to produce bPI . Then, by maximum-probability decoding, we obtain the textual caption by, which is embedded with the sensed multi-level environmental semantics bI = {bIL, bIO, bIC}.By leveraging the VLM’s embedding matrix to compute semantic similarity, bI can be parsed from by.Pre-trained VLM learns powerful visual and textual repre-sentations enriched with extensive semantic knowledge. Such properties make VLM well-suited as the backbone of the proposed framework for alleviating the aforementioned chal-lenges in problem (2). Specifically, their implicit knowledge of real-world spatial structures can be leveraged to constrain the feasible solution space. Meanwhile, the RF-domain channel gains HI can be represented as images and fed into the VLM, thereby enabling the extraction of informative features. The reconstruction module serves to enhance RF priors and further reduce the feasible solution space under sparse observations HI . This module employs a pre-trained network 
+
+G with parameters θG [5] to transform HI into a complete ten-sor, i.e., bHI = G(HI ; θG), which provides auxiliary channel gain estimates over unmeasured grids. Then, we concatenate the ND slices of bHI and transform them into an image, yielding the estimated channel gains in visual form, denoted by 
+
+HInput  
+
+> I
+
+= [ bHI ]:,:,1, . . . , [ bHI ]:,:,N D
+
+ ∈ RNW ×NDNW , which is used as the visual input to the VLM. To address the level-dependent RF–VLM prior mismatch in a pre-trained VLM, we propose prompt-routed LoRA ex-perts within the framework. This module leverages the level information contained in the prompt x to perform a weighted combination of RF sensing knowledge from three LoRA ex-perts at their respective semantic levels. Specifically, the LoRA experts are parameterized by ∆Θ′ = [∆ ΘL, ∆ΘO, ∆ΘC]T,where RF sensing knowledge is learned via LoRA-based fine-tuning (see the following subsection) and implicitly encoded in these parameters. A weight vector w is generated by a two-layer neural network M with parameters θM [12], taking the embedding xe of the prompt x as input 2. As a result, the parameter update ∆Θ = M (xe; θM)T∆Θ′ = wT∆Θ′.    
+
+> 2The embedding xeis obtained by mapping the prompt xthrough a pre-trained embedding matrix [6]. 4
+
+With the parameter update ∆Θ and the pre-trained VLM parameters ΘP, the parameters of the fine-tuned VLM are given by Θ = ΘP + αr ∆Θ, where α and r are the scaling factor and rank used in LoRA-based fine-tuning, respectively. 
+
+C. LoRA-based Fine-Tuning 
+
+LoRA-based fine-tuning exploits the low “intrinsic rank” [13] of weight updates to enable parameter-efficient adaptation, which helps bridge the level-dependent gap. For each LoRA expert, ∆Θi∈{ L,O,C} is realized by introducing a low-rank update BiAi, which is zero-padded into the full parameter space of the VLM. Here, Bi ∈ Ra× r 
+
+> 3
+
+, Ai ∈ R r 
+
+> 3×b
+
+,and r ≪ min( a, b ). The optimization of Bi and Ai, i.e., the LoRA-based fine-tuning of the pre-trained VLM, is carried out using the following empirical objective, which is a reformulation of problem (2): 
+
+minimize 
+
+> B′,A′,θ M
+
+1
+
+NS
+
+> NS
+
+X
+
+> s=1
+
+L
+
+ bPs, I , Ps, I
+
+
+
+(3a) s.t. [ bPs]j, : = fΘ
+
+
+
+[bys]j | [bys]<j , HInput  
+
+> s, I
+
+, x
+
+
+
+, (3b) 
+
+Θ = ΘP + αr M (xe; θM)Td(B′, A′), (3c) where B′ = [ BL, BO, BC]T, A′ = [ AL, AO, AC]T, j ∈{1, . . . , N ′
+
+> y
+
+}, and d(B′, A′) maps the low-rank matrices in 
+
+B′ and A′ to the parameter updates ∆Θ′. NS is the number of fine-tuning samples. Notably, constraint (3b) reflects the autoregressive mechanism of the VLM [6]. IV. E XPERIMENTAL RESULTS 
+
+Datasets and Model Hyperparameters. We consider three types of 2D scenarios [5], which include fine-tuning and validation scenarios with simulated environment, as well as validation scenarios based on the real-world city section shown in Fig. 1(b). These scenarios are labeled as S1, S2, and S3,respectively. When a model is fine-tuned on S1, scenarios S2
+
+and S3 are unseen with respect to that model. Specifically, 
+
+S1 contains 250 scenarios, each generating 7 samples with prompts specifying all combinations of semantic levels. The number of obstacles in S1 ranges from 1, 2, 3, 4, 5, with 50 
+
+scenarios for each case. S2 contains 50 scenarios, each with 6
+
+obstacles. S3 contains 8 scenarios, constructed by sequentially removing obstacles according to their indices in Fig. 1(b). Each scenario in S1 and S2 contains obstacles with randomly generated quadrilateral shapes and positions. We perform ray tracing to obtain mmWave/THz channel gain observations. For the communication-related-level information IC, we consider 
+
+4 predefined BS locations at the centers of the four quadrants. Note that we use Qwen2.5-VL [6] as the pre-trained VLM. 
+
+Baseline Models and Evaluation Metrics. Existing meth-ods are typically tailored to specific sensing tasks and there-fore cannot support task-unified and multi-level RF sens-ing. As a compromise, we include U-NetGAN [5], ResNet-18 [14], and ablated variants of the proposed framework as baselines. U-NetGAN is task-specific and can only infer bIL
+
+and bIO via post-processing of segmented instances within Layout Level Obstacle Level Communication-Related Level 0.0 0.2 0.4 0.6 0.8 1.0 Averaged Macro-F1 Score  
+
+> 0.99 0.50 0.95 0.98 0.99 0.98 0.60 0.28 0.44 0.54 0.52 0.42 0.46 0.22 0.43 0.43 0.46
+> Proposed U-NetGAN ResNet-18 Ablated: single LoRA Ablated: w/o routing Ablated: w/o reconstruction
+
+Fig. 3: Averaged macro-F1 scores for multi-level environmen-tal semantics sensed by different methods in S2.sensed environmental maps, but cannot infer bIC. ResNet-18 enables multi-level RF sensing via classification, but its fixed output space prevents task-unified capability. We adopt the averaged macro-F1 score [15] to evaluate the sensed information bI = {bIL, bIO, bIC}, where a higher F1 score indicates better sensing performance in terms of precision and recall. For bIL and bIO, whose attributes are represented in a one-hot manner, the F1 score reduces to the inner product, i.e., 1 
+
+> N1NS
+
+⟨vec( IL), vec( bIL)⟩ and 1 
+
+> N1N3NS
+
+⟨vec( IO), vec( bIO)⟩,where vec( ·) denotes the vectorization operation. For bIC, the F1 score is given by 1
+
+> N1NS
+
+PNS
+
+> s
+
+PN1
+
+> c
+> 2⟨[bIC]c, :,[IC]c, :⟩
+
+∥[bIC]c, :∥1+∥[IC]c, :∥1
+
+. All reported results are averaged over five independent runs, each using an independently trained reconstruction module and a different user-location configuration. TABLE I: Scenario Details and Model Hyperparameters.                          
+
+> Description Value
+> Area size W×W= 100 m ×100 m
+> Grid division NW×NW= 64 ×64
+> Carrier frequency 300 GHz
+> Number of beams and users ND= 18 and K= 150
+> Learning rate 0.0001
+> Scaling factor and rank α= 48 and r= 24
+
+Fig. 3 reports the averaged macro-F1 scores for multi-level environmental semantics sensed by different methods in S2. The proposed framework generally achieves superior performance over all baselines across the layout, obstacle, and communication-related levels. Nevertheless, it achieves only moderate sensing capability for obstacle attributes and communication-related semantics. Moreover, the ablation stud-ies in Fig. 3 demonstrate that the effectiveness of the frame-work is attributed not only to the RF sensing knowledge enabled by fine-tuning, but also to the prompt routing and the reconstruction module, which respectively enable adaptive knowledge fusion and provide enhanced RF priors. Under the scenarios S3, we investigate the impact of the number NI of obstacles on the proposed framework and the baselines, as shown in Fig. 4. The proposed framework achieves higher F1 scores than the baselines in more complex scenarios, i.e., when NI > 2. This is likely because more obstacles introduce richer signal-environment interactions and provide more sensing cues, allowing the proposed framework to better exploit its learned semantic understanding and rea-5Proposed U-NetGAN ResNet-18 Ablated: single LoRA Ablated: w/o routing Ablated: w/o reconstruction 1 2 3 4 5 6 7 8Number of Obstacles 0.00 0.25 0.50 0.75 1.00 Averaged Macro-F1 Score 
+
+(a) Layout Level 1 2 3 4 5 6 7 8Number of Obstacles 0.1 0.2 0.3 0.4 0.5 Averaged Macro-F1 Score (b) Obstacle Level 1 2 3 4 5 6 7 8Number of Obstacles 0.00 0.25 0.50 0.75 1.00 Averaged Macro-F1 Score (c) Communication-Related Level 
+
+Fig. 4: Averaged macro-F1 scores versus the number of obstacles for different methods in S3.soning capability. The proposed framework and its ablated variants generally exhibit an increasing-then-decreasing trend as the number of obstacles grows, indicating that the benefits brought by additional cues gradually saturate, while overly complex environments make RF sensing more challenging. In Table II, we compare the F1 scores of different methods in S3 on an unseen sensing requirement not involved during fine-tuning, where the VLM is prompted to infer possible beam directions for a BS at the scenario center. As shown in Table II, the proposed framework consistently outperforms the ablated variants across different obstacle numbers, with an average improvement of 0.17 in F1 score over the most competitive variant (i.e., “Ablated: w/o routing”). In Table II, the proposed framework achieves an average relative improve-ment of 64% over the ablated variants, substantially exceeding the corresponding 8% and 13% improvements observed in Fig. 3 and Fig. 4, respectively. This result further highlights the importance of our complementary design for addressing unseen sensing requirements. It should be noted that the proposed framework achieves an F1 score of only 0.09 in the eight-obstacle case, indicating its limited sensing capability under unseen and highly complex conditions. TABLE II: F1 Score Comparison on an Unseen Task. 
+
+Method Number of obstacles in S3
+
+1 2 3 4 5 6 7 8Proposed 0.68 0.38 0.38 0.34 0.38 0.23 0.22 0.09 
+
+Ablated: single LoRA 0.25 0.17 0.13 0.13 0.10 0.06 0.04 0.08 
+
+Ablated: w/o routing 0.40 0.23 0.12 0.15 0.15 0.11 0.13 0.05 
+
+Ablated: w/o reconstruction 0.12 0.13 0.09 0.07 0.06 0.03 0.02 0.03 
+
+V. C ONCLUSION 
+
+In this letter, we have proposed a novel framework that adapts VLMs for task-unified multi-level RF sensing. The framework has been designed to process mmWave/THz chan-nel gains and diverse sensing requirements, generating envi-ronmental semantic captions across the layout, obstacle, and communication-related levels. Simulation results show that, compared with baselines, the proposed framework achieves superior RF sensing performance and can generalize to diverse sensing requirements. REFERENCES [1] W. Jiang, Q. Zhou, J. He, M. A. Habibi, S. Melnyk, M. El-Absi, B. Han, M. D. Renzo, H. D. Schotten, F.-L. Luo, T. S. El-Bawab, M. Juntti, M. Debbah, and V. C. M. Leung, “Terahertz Communications and Sensing for 6G and Beyond: A Comprehensive Review,” IEEE Commun. Surv. Tutor. , vol. 26, no. 4, pp. 2326–2381, 2024. [2] L. Wang, C. Zhang, Q. Zhao, H. Zou, S. Lasaulce, G. Valenzise, Z. He, and M. Debbah, “Generative AI for RF Sensing in IoT Systems,” IEEE Internet Things Mag. , vol. 8, no. 2, pp. 112–120, 2025. [3] T. Yang, P. Zhang, M. Zheng, Y. Shi, L. Jing, J. Huang, and N. Li, “WirelessGPT: A Generative Foundation Model for Multi-Task Inte-grated Sensing and Communication,” IEEE J. Sel. Areas Commun. , pp. 1–1, 2025. [4] Y. Wu, F. Lemic, C. Han, and Z. Chen, “A Sensing Integrated DFT-Spread OFDM System for Terahertz Communications,” in 2021 IEEE Veh. Technol. Conf. (VTC2021-Spring) , 2021, pp. 1–5. [5] T. Hu, S. Wang, Y. Xie, L. Li, Z. Chen, B. Ning, W. Hamidouche, L. Bariah, S. Lasaulce, and M. Debbah, “Advancing THz Radio Map Construction and Obstacle Sensing: An Integrated Generative Frame-work in ISAC,” arXiv preprint arXiv:2503.23055 , 2025. [6] S. Bai, K. Chen, X. Liu, J. Wang, W. Ge, S. Song, K. Dang, P. Wang, S. Wang, J. Tang et al. , “Qwen2. 5-vl technical report,” arXiv preprint arXiv:2502.13923 , 2025. [7] W. Wu, M. Ye, F. Zhou, and Q. Wu, “SpecPredVLM: A Vision-Language Model for Multimodal Spectrum Occupancy Prediction,” IEEE Trans. Veh. Technol , pp. 1–5, 2026. [8] S.-Y. Huang and V. W. Wong, “Generalized User-Oriented Image Semantic Coding Empowered by Large Vision-Language Model,” in 
+
+2025 IEEE Glob. Commun. Conf. (GLOBECOM) , 2025, pp. 6346–6351. [9] Y. Sheng, K. Huang, L. Liang, P. Liu, S. Jin, and G. Ye Li, “Beam prediction based on large language models,” IEEE Wireless Commun. Lett. , vol. 14, no. 5, pp. 1406–1410, 2025. [10] A. Alkhateeb, “DeepMIMO: A generic deep learning dataset for mil-limeter wave and massive MIMO applications,” in Proc. Inf. Theory Appl. Workshop (ITA) , San Diego, CA, Feb 2019, pp. 1–8. [11] B. Ning, Z. Tian, W. Mei, Z. Chen, C. Han, S. Li, J. Yuan, and R. Zhang, “Beamforming technologies for ultra-massive MIMO in terahertz communications,” IEEE Open. J. Comm Soc. , vol. 4, pp. 614– 658, 2023. [12] Q. Liu, X. Wu, X. Zhao, Y. Zhu, D. Xu, F. Tian, and Y. Zheng, “When MoE Meets LLMs: Parameter-Efficient Fine-Tuning for Multi-Task Medical Applications,” in Proc. 47th Int. ACM SIGIR Conf. Res. Dev. Inf. Retrieval (SIGIR) , 2024, pp. 1104–1114. [13] E. J. Hu, Y. Shen, P. Wallis, Z. Allen-Zhu, Y. Li, S. Wang, L. Wang, and W. Chen, “LoRA: Low-rank adaptation of large language models,” in Proc. Int. Conf. Learn. Representations , 2022. [14] K. He, X. Zhang, S. Ren, and J. Sun, “Deep Residual Learning for Image Recognition,” in Proc. IEEE Conf. Comput. Vis. Pattern Recognit. (CVPR) , 2016, pp. 770–778. [15] S. Simhadri, M. Ponnam, R. Rajitha, and R. Balamurugan, “Enhanced Multi-Class Model Evaluation: Analyzing BERT, GPT-2, and LLaMA with Precision, Recall, and F1-Score Metrics,” in Proc. Int. Conf. Innov. Mech. Ind. Appl. (ICIMIA) , 2025, pp. 984–989.

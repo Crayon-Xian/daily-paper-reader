@@ -1,0 +1,535 @@
+Title: 3D Radar Imaging from the UAV Nadir
+
+URL Source: https://arxiv.org/pdf/2609.04848v1
+
+Published Time: Mon, 07 Sep 2026 00:48:18 GMT
+
+Number of Pages: 10
+
+Markdown Content:
+> ACCEPTED MANUSCRIPT, IEEE TRANSACTIONS ON RADAR SYSTEMS 1
+
+# 3D Radar Imaging from the UAV Nadir 
+
+S. Hamed Javadi, Hichem Sahli and Andr´ e Bourdoux, Senior Member, IEEE 
+
+Abstract —Radars improve the sensing robustness of UAVs by operating under poor lighting and weather conditions and seeing through occlusions such as vegetation. However, they suffer from poor angular resolution, which can be addressed using synthetic aperture radar (SAR) algorithms. State-of-the-art UAV SAR methods operate at a depression angle and are not suitable for sensor fusion applications where the data are collected from areas directly below the UAV (i.e., the UAV nadir). In this paper, we present an interferometric SAR (InSAR) framework for reconstructing 3D images from the UAV nadir using a low-cost multi-input-multi-output (MIMO) mm-wave radar. Additionally, an effective method based on the phase gradient autofocus (PGA) is presented for compensating the phase error across the virtual receive antennas. We demonstrate the effectiveness of our 3D imaging algorithm in both simulation and experimental scenarios. 
+
+Index Terms —Frequency modulated continuous wave (FMCW), interferometric synthetic aperture radar (InSAR), multiple-input-multiple-output (MIMO), phase gradient autofocus (PGA), polar format algorithm (PFA), radar imaging, synthetic aperture radar (SAR), unmanned aerial vehicle (UAV). 
+
+I. I NTRODUCTION 
+
+# UNMANNED aerial vehicles (UAVs), or drones, have become pervasive across diverse applications thanks to their easy deployment and low cost. Each application is enabled by employing a proper set of sensors on board. Radar is a powerful sensor that enhances the sensing robustness of drones by functioning in poor light and adverse weather conditions and seeing through occlusions such as fog and vegetation. Accordingly, there is a growing tendency to adopt it in civilian and military applications of UAVs. The radars bottleneck is their requirement of a large antenna aperture size for achieving high angular resolution, which is either impractical or costly. Alternatively, the required aperture can be synthesized by leveraging the radar motion, giving rise to synthetic aperture radar (SAR) algorithms [1], [2]. The first practical SAR implementation dates back to 1978 for oceanographic observations [3], [4]. Since then, numerous SAR processing algorithms—including range-Doppler (RD), polar format algorithm (PFA), and backprojection algorithm (BPA)—have been developed, each optimized for different trade-offs between computational complexity and image qual-ity. These algorithms have primarily been deployed in airborne and spaceborne platforms. These systems typically operate at depression angles between approximately 20 ◦ and 70 ◦,          
+
+> Accepted for publication in IEEE Transactions on Radar Systems. DOI: 10.1109/TRS.2026.3731078. The authors are with Interuniversity Micro-Electronics Center (IMEC), Kapeldreef 75, B-3001 Leuven, Belgium. H. Sahli is also with Infor-matics Dept., Vrije Universiteit Brussel (VUB), Pleinlaan 2, 1050 Brus-sels, Belgium. (email: hamed.javadi@imec.be; hichem.sahli@imec.be; an-dre.bourdoux@imec.be).
+
+depending on the required swath width and imaging resolution [5], [6]. Subsequently, either multiple receive antennas (along the across-track direction) or multiple radar passes are used for 3D imaging by interferometric SAR (InSAR) [7]–[9]. Recent advances in GPU acceleration have enabled real-time onboard SAR processing for UAVs during flight rather than post-processing on the ground. Using a frequency mod-ulated continuous wave (FMCW) radar in the mm-wave fre-quency range, Bekar et al. [10] presented a drone-borne SAR system for short range imaging. The impact of the attitude angles (i.e., roll, pitch, and yaw) of the UAV on the SAR image quality was shown in [11]. The concept of InSAR has been adopted in [12] for to-mography purposes, where the authors address shadowing and layover by combining 3D structures captured from different perspectives and evaluate their algorithm in simulation. In [13], two UAVs send their radar observation data to a ground processing unit for 3D imaging via InSAR. Mustieles-Perez et al. [14] outline the detailed steps of drone-borne InSAR. Current UAV SAR approaches are designed primarily based on airborne SAR configurations, producing imagery in down-range and azimuth dimensions at a given depression angle. Thus, the state-of-the-art methods are unable to reconstruct imagery of the region directly beneath the UAV (its nadir). In contrast, UAV platforms typically carry downward-looking sensors such as RGB, multispectral, thermal, and LiDAR to capture data from the ground area directly below [15]–[17]. To leverage radar imagery for sensor fusion, it is essential that radar systems also observe this nadir region. Furthermore, performing SAR at a depression angle demands a larger max-imum unambiguous range compared to nadir SAR imaging, which limits the maximum UAV altitude. Leveraging the SAR geometry presented in [18], [19], we propose a framework for 3D imaging from the UAV nadir, paving the way toward utilizing lightweight compact radars on drones. This enables applications including vegetation detection, digital elevation mapping (DEM), search and rescue operations, and archaeology, among many others. Specifically, in this paper, we present (to the best of our knowledge) the first InSAR framework for 3D radar imaging from the area directly below a UAV using a low-cost mm-wave radar. We extend the framework to account for the UAV attitude angles and propose an effective yet efficient method of phase error compensation across the virtual receive antennas of a multiple-input-multiple-output (MIMO) radar. Finally, the effectiveness of the proposed framework is evaluated through both simulation and experiment. The remainder of this manuscript is organized as follows. Sec. II presents the system model of imaging with an FMCW radar. Our proposed InSAR framework for generating 3D point clouds from a UAV nadir is described in Sec. III with arXiv:2609.04848v1 [eess.SP] 4 Sep 2026 ACCEPTED MANUSCRIPT, IEEE TRANSACTIONS ON RADAR SYSTEMS 2
+
+evaluation results presented in Sec. IV. Finally, the paper is concluded in Sec. V along with future directions. II. S YSTEM MODEL 
+
+A. FMCW radars 
+
+In FMCW radars, each Coherent Processing Interval (CPI) consists of transmitting Nc chirps with pulse repetition interval (PRI) Tc. Each chirp is a continuous wave whose frequency starts at fc and increases linearly to fc + B where B denotes the radar bandwidth. The transmitted chirp is modeled by: 
+
+sT (t) = ac exp 
+
+h
+
+j
+
+
+
+ωc + γ
+
+2 t
+
+
+
+t
+
+i
+
+, 0 ≤ t ≤ Tc, (1) where ac denotes the chirp amplitude, ωc ≜ 2πf c is its starting angular frequency, and γ is its slope. The received echo signal from a specific scatterer s with round-trip time τs is given by: 
+
+sR(t) = σ(s) exp 
+
+h
+
+j
+
+
+
+ωc + γ
+
+2 (t − τs)
+
+
+
+(t − τs)
+
+i
+
+, (2) for 0 ≤ t − τs ≤ Tc, wherein the scatterer reflectivity, the system gains, and the propagation effects are included in σ(s)
+
+for convenience. The received signal is demodulated to give the beat signal as follows: 
+
+s(t) = s∗ 
+
+> T
+
+(t)sR(t)= σ(s) exp 
+
+h
+
+−jτ s
+
+
+
+ωc + γt − γ
+
+2 τs
+
+i 
+
+, (3) where s∗ 
+
+> T
+
+(t) is the complex conjugate of sT (t). The maximum unambiguous range of an FMCW radar (with I/Q receivers) is given by rmax = πcF s 
+
+> γ
+
+where Fs and c denote the sampling rate and speed of light, respectively. This leads to  
+
+> γ
+> 2
+
+τs = πcF s 
+
+> rmax
+
+× 2rs(t) 
+
+> c
+
+= rs(t) 
+
+> rmax
+
+2πF s where rs(t) is the slant range to the scatterer s. This implies that the term γτ s/2
+
+is negligible compared to ωc, especially since Fs is at most several MHz 1.Therefore, by collecting the beat signal of each received chirp in both fast-time and slow-time domains, the signal is approximated by: 
+
+s(i, n ) ≈ σ(s) exp 
+
+
+
+−j 2
+
+c (ωc + γT si) rs(n)
+
+
+
+, (4) where Ts ≜ 1 
+
+> Fs
+
+denotes the receiver sampling period and the model has been discretized in fast time index i ∈{0, 1, . . . , T cFs − 1} and slow time index (viz. chirp number) 
+
+n ∈ { 0, 1, . . . , N c − 1}.
+
+B. SAR imaging with FMCW radar 
+
+Diverse SAR algorithms offer different compromises be-tween image quality and computational complexity. While the RD algorithm is limiting from the angular coverage aspect and BPA is computationally intensive, PFA strikes a balance by enhancing image quality through wavenumber distortion corrections while maintaining manageable complexity [2], [20].  
+
+> 1This term results in the residual video phase error (RVPE) which is negligible in the current technology of mm-wave FMCW radars.
+> Fig. 1. (a) The SAR 2D geometry. SRP indicates the SAR origin and stands for the SAR reference point. (b) The nadir plane of the UAV.
+
+Fig. 1 shows the PFA geometry. Here, the radar is mounted below the UAV looking downward (along the y-axis) while the UAV flies along the x-axis. The slant range to a scatterer, 
+
+rs(n), in (4), can be approximated by projecting the scatterer’s position onto the radar line of sight (RLOS) to the SAR reference point (SRP). This projection is expressed as: 
+
+rs(n) = rc(n) + ys cos ( α) + xs sin ( α) , (5) with rc(n) and α being the radar range to the SRP and its squint angle, respectively. Then, compensating the beat signal with respect to (w.r.t.) rc(n) gives 
+
+sC (i, n ) ≜ s(i, n ) exp [ jk (i)rc(n)] = 
+
+Z
+
+> xs
+
+Z
+
+> ys
+
+σ(xs, y s) exp [ −j (kx(i, n )xs + ky (i, n )ys)] dx sdy s,
+
+(6) wherein the integration is taken over all scatterers in the radar FoV. In (6), k(i) ≜ 2 
+
+> c
+
+(ωc + γT si) is the wavenumber (i.e., the spatial phase rate [2]), with components 
+
+kx(i, n ) ≜ k(i) sin ( αn) , ky (i, n ) ≜ k(i) cos ( αn) ,
+
+where the dependence of the squint angle α on the chirp number n is emphasized. The signal model (6) has the form of a 2D Fourier transform (FT) but with co-dependent spatial frequencies (wavenum-bers). Specifically, kx(i, n ) and ky (i, n ) form a polar format, where the amplitude is given by k(i), and the phase varies with 
+
+n. To enable fast Fourier transform (FFT), indices i and n are redefined into i′ and n′, respectively. This allows the range-compensated signal sC (i, n ) to be interpolated onto a grid of wavenumbers, kx[n′] and ky [i′]2. Consequently, an image of the target scene is reconstructed by performing a 2D inverse FFT (IFT) from the interpolated signal sC (i′, n ′).
+
+σ(xs, y s) = 2 D-IFT {sC (i′, n ′)} . (7)  
+
+> 2Further details can be found in [2]. ACCEPTED MANUSCRIPT, IEEE TRANSACTIONS ON RADAR SYSTEMS 3
+
+III. I NSAR FROM THE UAV NADIR REGION 
+
+A. Configuration 
+
+We adopt the SAR geometry of Fig. 1(a) for imaging in the UAV nadir plane, as depicted in Fig. 1(b). In this geometry, the down-range lies in the imaging plane. This is equivalent to a zero grazing angle (or, equivalently, an incidence angle of 90 ◦), which minimizes layover and foreshortening [21]. It also facilitates SAR imaging from the UAV nadir [18]. Placing two receive antennas in the across-track dimension (i.e., along the z-axis) 3 enables 3D imaging based on InSAR. Specifically, we place two receive antennas R1 and R2
+
+with baseline distance B and a transmitter T (or equiva-lently, the zero-phase point) located at their midpoint. The baseline should be in the across-track direction, as shown in Fig. 2. While large baselines improve robustness in across-track estimations [7], a small baseline is preferred to avoid the decorrelation of the phases at receive antennas [22]. We assume that the target scene is in the far-field of the antenna array so that wavefronts can be considered planar. A second pair of receive antennas R′ 
+
+> 1
+
+and R′ 
+
+> 2
+
+with a different baseline B′ is leveraged in phase unwrapping, as explained in Sec. III-B4. The two baselines are chosen so that their ratio is a rational number with coprime integers. We consider B = b λn 
+
+> 2
+
+and B′ = b′ λn 
+
+> 2
+
+, where λn is the radar nominal wavelength, and b and b′ are coprime integers. Assuming that the baseline B is negligible compared to the slant range to the SRP, it is straightforward to show that the beat signals of R1 and R2 corresponding to a scatterer 
+
+s = ( xs, y s, z s) are related by 
+
+s(R1)(i, n ) = s(R2)(i, n ) exp 
+
+
+
+−j 2πB λ sin θs
+
+
+
+, (8) where λ ≜ cfc is the wavelength of the starting frequency and 
+
+θs denotes the elevation angle of the scatterer s. Using the geometry of Fig. 2, we have 
+
+s(R1)(i, n ) = s(R2)(i, n ) exp 
+
+
+
+−j 2πB λzs
+
+Ryz 
+
+> s
+
+
+
+, (9) wherein Ryz  
+
+> s
+
+≜
+
+q
+
+z2 
+
+> s
+
++ ( ys − yT )2 with yT denoting the y coordinate of the radar transmitter (or, equivalently, the zero-phase point) on the UAV. Since the SRP is located beneath the zero-phase point, its z-coordinate is zero, i.e., zT = 0 . Given the phase difference of the scatterer s as ψ ≜ 2πB λzs 
+
+> Rys
+> s
+
+and defining κ ≜ λψ  
+
+> 2πB
+
+, the z-coordinate of s is given by 
+
+zs = ± Ry
+
+q 1 
+
+> κ2
+
+− 1
+
+, (10) wherein Ry ≜ ys − yT under the condition κ2 < 1.While the y-coordinates of scatterers are obtained from the SAR image, Eq. (10) calculates their z-coordinates. The following subsection outlines the essential steps for 3D radar imaging from the UAV nadir region.      
+
+> 3In conventional InSAR configurations, the along-zdimension is typically referred to as elevation . However, in this paper, the z-axis does not represent the elevation of scatterers. Therefore, we refer to this dimension as across-track , but we note that they are equivalent in InSAR terminology.
+> Fig. 2. The InSAR geometry.
+
+B. Pipeline 
+
+Our proposed pipeline of 3D radar imaging is presented in Fig. 3. Each step is described below. 
+
+1) Phase error compensation: In airborne SAR, phase errors are primarily caused by positioning inaccuracies [23], [24] and significantly affect the accuracy of across-track estimation [7], [22]. We denote the measured radar position by [xr , y r , z r ]T and assume it is subject to a positioning error 
+
+ϵ along the along-track dimension x4. The true slant range to a scatterer located at [xs, y s, 0] T is given by: 
+
+r⋆s ≜
+
+q
+
+(xr + ϵ − xs)2 + ( yr − ys)2 + z2
+
+> r
+
+≈ rs + xr − xs
+
+rs
+
+ϵ
+
+(11) where rs ≜
+
+q
+
+(xr − xs)2 + ( yr − ys)2 + z2 
+
+> r
+
+represents the slant range computed using the erroneous radar position. For notational simplicity, the dependence of both the position and the associated error on the slow-time index n is omit-ted. Substituting (5) into (11) and using the approximation   
+
+> xr(n)−xs
+> rs(n)
+
+≈ sin( αn) gives the compensated beat signal as [20]: 
+
+s⋆C (i, n ) = exp [ jk x(i, n )ϵ(n)] sC (i, n ), (12) which shows that the positioning error ϵ(n) manifests as a phase error in the compensated beat signal with respect to the range to the SRP, when using the measured platform positions. This result is consistent with the phase error model adopted in the phase gradient autofocus (PGA) algorithm [24]. The PGA algorithm assumes that each range bin in the SAR image is dominated by at most one strong scatterer and demonstrates that the phase error spectrum is modulated by this dominant scatterer. It then estimates the phase error gradient by exploiting redundancy across multiple dominant scatterers within the image. The phase error itself is subse-quently recovered by integrating the estimated gradient. We adopt PGA for phase compensation because it does not involve     
+
+> 4Only the along-track positioning error is considered since the UAV has negligible motions in other directions during the SAR CPI. ACCEPTED MANUSCRIPT, IEEE TRANSACTIONS ON RADAR SYSTEMS 4
+> Fig. 3. The InSAR framework for 3D imaging from the UAV nadir. ϵ(n)denotes the phase error.
+
+intensive optimization, making it a preferred algorithm for resource-constrained UAVs. However, PGA implicitly assumes that the phase error depends solely on the slow-time index. When the target scene is extensive or the SAR aperture is large enough to violate this assumption, PGA can be replaced with a more appropriate phase compensation algorithm that is better suited to the specific SAR imaging scenario [25], [26]. To mitigate phase errors in UAV-borne SAR, we adopt a MIMO-SAR processing strategy. First, beamforming (BF) across antenna elements is performed with respect to the SRP at the UAV nadir, using inertial measurement unit (IMU) data, as detailed in [18]. BF coherently integrates the signals received by the antenna elements to improve signal-to-noise ratio (SNR), thereby enabling more accurate phase error esti-mation. Next, SAR imaging is performed using PFA. Finally, PGA estimates the residual phase error, which is then used to correct the phase of SAR images reconstructed at each receive antenna. Accordingly, as shown in Fig. 3, the phase error for each receive antenna is compensated by multiplying the range profile by exp [ −jϵ (n)] with ϵ(n).
+
+2) SAR per receive antenna: After the phase error is compensated for in the range profiles of the receive antennas, SAR images are given by applying a second IFT in slow-time, as depicted in Fig. 3. It is worth mentioning that other SAR algorithms may be adopted depending on the scenario. We resort to PFA since it provides an appropriate compromise between performance and complexity [20]. 
+
+3) Segmentation: To determine dominant scatterers, we employ the Rayleigh-based Segmentation (RaySe) method in-troduced in [27]. RaySe leverages the fact that the background noise amplitude in a SAR image follows a Rayleigh-based distribution. It estimates the Rayleigh distribution parameter from the variance of the SAR image amplitude and sets a detection threshold in the upper tail of the distribution, thereby isolating dominant scatterers. The SAR images of the receive antennas are thresholded using RaySe. The bins detected in all images are intersected, giving the (x, y ) coordinates of the major scatterers. The goal is to obtain their z-coordinates through interferometric processing. We denote the thresholded SAR images of the receive antennas R1, R2, R′
+
+> 1
+
+, and R′ 
+
+> 2
+
+by SR1 , SR2 , SR′ 
+
+> 1
+
+, and 
+
+SR′ 
+
+> 2
+
+, respectively. 
+
+4) Interferometric processing: Interferometric processing consists of the following steps. 1) Registration of SAR images: The across-track esti-mation depends on comparing phase differences from matching pixels in two apertures. To avoid any dis-tortions due to misalignment of the SAR images, it is essential to ensure that the images are accurately registered. The across-track coordinate of a detected scatterer is derived from (8) under the assumption that θs remains invariant throughout the SAR CPI. This assumption, however, does not hold if the UAV experiences roll variations during the CPI, in which case θs becomes time-varying and the interferometric phase becomes a function of the pulse index n. Such dependency can cause geometric distortions between the images, render-ing pixel-wise phase differences unsuitable for accurate across-track estimation. Specifically, if the roll varies with rate θ′, θs in Eq. (7) can be replaced with θs,0 + θ′Tcn, giving: 
+
+s(R1)(i, n ) = s(R2)(i, n ) exp 
+
+
+
+−j 2πB λ sin ( θs,0 + θ′Tcn)
+
+
+
+≈ s(R2)(i, n ) exp( jζn ) exp 
+
+
+
+−j 2πB λ sin θs,0
+
+
+
+,
+
+(13) where ζ ≜ 2πB λ cos ( θs,0) θ′Tc and θs,0 is the initial value of θs. The above equation implies that the roll variation induces a shift of the SAR image of R2 relative to R1 along the cross-range dimension. To demonstrate the impact, assume αn = α′Tcn
+
+and multiply the compensated beat signal in (6) by 
+
+exp( jζn ). For i = 0 and a single scatterer, this gives 
+
+sC (0 , n ) = σ (xs, y s) ×
+
+exp 
+
+
+
+−j
+
+ 2πT c
+
+λ (2 α′xs − B cos ( θs,0) θ′) n + 4πλ ys
+
+ 
+
+.
+
+(14) Hence, the cross-range dimension is shifted by   
+
+> Bcos( θs,0)2α′
+
+θ′. If this shift is less than the cross-range ACCEPTED MANUSCRIPT, IEEE TRANSACTIONS ON RADAR SYSTEMS 5
+
+resolution, misregistration is negligible, meaning that the two images are registered. At a UAV height of approx-imately rc, the cross-range resolution is approximately  
+
+> λ
+> 2α′NcTc
+
+. Therefore, the condition for no misregistration is: 
+
+θ′ < λB (NcTc) (15) wherein cos ( θs,0) is replaced with its maximum value, 
+
+1. The misregistration criterion (15) indicates that the roll variation rate limit is inversely proportional to both baseline and the SAR CPI. This means that for a small CPI and a short baseline, the SAR images are well registered with each other and hence, no registration step is required. However, if the roll variation rate exceeds this limit, the resulting misregistration must be compensated prior to the interferometric processing using appropriate methods, such as the cross-correlation-based approach in [7] or the rotation-estimation-based method in [28]. In the experimental setup used in this paper (Table I), the limit is very high, implying no misregistration. 2) Interferometry: The pixel-wise phase difference be-tween each pair of images is calculated by 
+
+ϕ = ∠SR1 ⊙ S∗ 
+
+> R2
+
+,ϕ′ = ∠SR′ 
+
+> 1
+
+⊙ S∗ 
+
+> R′
+> 2
+
+, (16) where (·)∗ denotes complex conjugation and ⊙ denotes element-wise multiplication. 3) Phase unwrapping: The phases given by (16) are wrapped in (−2π, 2π] and need to be unwrapped to recover the actual phase differences. To this end, we resort to the multi-baseline phase unwrapping (MBPU) method in [29], where two pairs of receive antennas with relatively prime baselines are used, as illustrated in Fig. 2. From (9), the unwrapped phases ψ = ϕ + 2 πk 
+
+and ψ′ = ϕ′ + 2 πk ′ (k and k′ are integer ambiguity numbers) are related by 
+
+k = BB′ k′ + 12π
+
+ BB′ ϕ′ − ϕ
+
+
+
+. (17) Then, the ambiguity numbers are calculated by 
+
+k, k ′ = arg min 
+
+> k,k ′∈Z
+
+BB′ k′ − k + 12π
+
+ BB′ ϕ′ − ϕ
+
+
+
+.
+
+(18) The MBPU algorithm in [29] includes an extra clustering step of the phase differences of the pixels based on the intercept terms of (17) to reduce the impact of additive and phase noises. We omit the clustering step because of its considerable complexity. Furthermore, the noise impact is reduced significantly by the compensation procedure explained earlier. 4) Across-track estimation: After the unambiguous val-ues are estimated, the unwrapped phase difference is calculated using ψ = ϕ + 2 πk . Since the UAV moves along the x-axis, yT has limited variations; therefore, we use the average of its values in slow time, ¯yT .Furthermore, during the SAR CPI, we have zT ≈ 0                     
+
+> TABLE I RADAR PARAMETERS USED IN BOTH SIMULATION AND EXPERIMENTAL SCENARIOS .
+> fcBandwidth PRI 1(Tc)NcTf2S3Fs4
+> (GHz) (GHz) (μs) (ms) (MHz) 60 1.442 102.88 255 100 400 8
+> 1Pulse repetition interval.
+> 2Radar frame period.
+> 3Number of samples per chirp.
+> 4Receiver sampling frequency.
+
+since the target scene is located beneath the zero-phase point T . Then, the z-coordinate is estimated by (10). The positive sign is chosen when ψ ≥ 0; otherwise, the negative sign applies. 
+
+Accounting for UAV attitude: To derive (10), we implicitly assumed that the UAV moves along the x-axis with no changes in attitude. In practice, the UAV attitude may vary during flight to maintain a pre-planned trajectory. To account for these attitude changes, we define the SAR coordinate system based on the UAV flight path and analyze the impact on the InSAR measurement. Specifically, the UAV flies from the start point to the end point of the aperture with specific yaw and pitch angles. Over the duration of the CPI (e.g., a fraction of a second, such as about 27 ms in our experiment), variations in yaw and pitch are negligible. The yaw defines the UAV heading, which determines the x-axis, while the pitch determines the 
+
+y-axis. Consequently, the directions of x- and y-axes adapt with variations in yaw and pitch and hence, they do not affect the InSAR geometry. However, the UAV roll impacts the configuration in Fig. 2. With a roll ρ, the across-track equation evolves to: 
+
+zs = Ry
+
+sin ρ cos ρ ± pκ2 sin 2 ρ + cos 2 ρκ2 − cos 2 ρ . (19) IV. E VALUATION RESULTS 
+
+In this section, we present the evaluation results of our proposed framework for 3D imaging from a UAV nadir in both simulated and experimental scenarios. 
+
+A. Simulation results 
+
+The simulation scenario uses a MIMO radar comprising two transmitters and four receivers, forming a linear virtual array of eight receive antennas with inter-antenna spacing λ 
+
+> 2
+
+= 2 .5 mm. We use the two receive antennas at the two ends of the virtual array as the primary pair (i.e., R1 and R2) for InSAR and another pair with spacing 5 λ 
+
+> 2
+
+in the middle as the secondary pair (i.e., R′ 
+
+> 1
+
+and R′
+
+> 2
+
+) for phase unwrapping. This is equivalent to the configuration depicted in the bottom linear array of Fig. 9(c). Table I lists the radar parameters. The antenna array is oriented along the z-axis, points downward, and flies at a constant velocity of 7 m/s at an altitude of 25 m above ground level. Several scatterers are randomly deployed within the area below the radar. The positioning error due to an along-track velocity pertur-bation ve is given by ϵ(n) = veTcn resulting in the phase ACCEPTED MANUSCRIPT, IEEE TRANSACTIONS ON RADAR SYSTEMS 6
+
+error kx(i, n )ϵ(n) = k(i) sin( αn)veTcn. By neglecting the variation of k(i) over a PRI and approximating sin( αn) ≈ α′n,the phase error becomes quadratic in n, i.e., kx(i, n )ϵ(n) ≈
+
+kα ′veTcn2. This constitutes the dominant phase error in SAR imaging [24], [30] and means that inaccuracies in velocity measurements are the primary source of phase errors in SAR imagery [20], [31]. Accordingly, to emulate a condition with significant phase distortions, we introduce a velocity perturbation of 2.5 m/s along the x-axis and 0.1 m/s along the remaining axes 5. Fig. 4 depicts the simulated phase error and the quadratic part of the phase error estimated by PGA. As shown, PGA significantly compensates for the phase error. The slight discrepancy be-tween the phase error and the PGA estimate is primarily due to the large spatial extent of the scatterers along the z-axis compared to the UAV altitude, as well as the extended SAR aperture caused by the relatively large velocity error. These factors render the phase error range-variant [25], [26], which deviates from the PGA assumption and leads to imperfect phase error compensation. This limitation can be mitigated by employing algorithms such as minimum entropy autofocus (MEA) [25] or geometry-based methods [26], [33], albeit at the cost of increased computational complexity.  
+
+> Fig. 4. The quadratic phase error and its estimation by PGA.
+
+The impact of phase-error compensation on SAR imaging at 
+
+R1 is illustrated in Fig. 5. As shown, the SAR image becomes better focused. Fig. 6 presents the simulation outcomes for two scenarios with and without phase-error compensation. Here, the y-axis has been reversed to depict range from the radar, which was flying 25 m above the ground surface. As shown, the proposed pipeline in Fig. 3 effectively mitigates phase errors, resulting in more focused point clouds per point scatterer. Notably, the compensation improves not only the range-azimuth ( x–y)resolution but also enhances resolution along the across-track dimension. Additionally, Fig. 7 highlights the significance of phase un-wrapping, particularly for correctly estimating larger z values. Three points are marked in the bottom plots of Fig. 6 and 7. Their phase differences are wrapped since their values lie outside the range (−2π, 2π].The accuracy of the proposed 3D SAR processing pipeline is assessed by imaging scenes with varying numbers of point scatterers randomly distributed within a cubic region of size      
+
+> 5Commercial UAV IMU/GPS systems typically achieve a velocity accuracy below 0.5m/s (e.g., [32]).
+> Fig. 5. SAR image reconstructed at receiver R1without (top) and with (bottom) phase-error compensation.
+
+10 m centered around the SRP. For each scatterer count, the experiment is repeated for 10 independent trials. The root mean square error (RMSE) is computed across both the 10 
+
+iterations and all scatterers, based on the minimum Euclidean distance between each ground-truth scatterer location and its closest point in the reconstructed point cloud. In each trial, a random along-track velocity error uniformly distributed between −2 m/s and 2 m/s, as well as a random roll perturbation between −5◦ and 5◦, is injected to evaluate robustness against motion and attitude uncertainties. Fig. 8 presents the resulting RMSE performance for different target scene configurations. As the number of scatterers increases, the RMSE remains consistently bounded within a sub-meter range. The stable and bounded RMSE across diverse scene configurations confirms the robustness of the proposed 3D SAR imaging pipeline under motion and attitude perturbations. It is worth mentioning that the simulation results provided here are primarily intended to validate the proposed 3D InSAR pipeline under representative conditions, rather than to exhaus-tively explore all system parameters. In particular, our current simulations do not separately quantify the effects of varying ACCEPTED MANUSCRIPT, IEEE TRANSACTIONS ON RADAR SYSTEMS 7   
+
+> Fig. 6. Simulation results of 3D imaging. Left: Point clouds given by the InSAR pipeline. Right: Point clouds projected onto the y–zplane. (a) Without phase-error compensation. (b) With phase-error compensation, as in the pipeline of Fig. 3.
+
+factors such as SNR, the magnitude of residual phase errors, reduced range or cross-range resolution, or potential phase-unwrapping errors. These parameters can influence scatterer detection, image focusing, interferometric phase estimation, and ultimately the accuracy of the reconstructed point cloud in practice. For example, lower SNR or severe residual phase errors could degrade SAR image focus and interferometric measurement accuracy, while significantly reduced resolution might increase scatterer mis-association or bias the across-track estimates. Likewise, unaddressed phase unwrapping er-rors may produce large outliers in the across-track domain. A full parametric sensitivity analysis of these factors is beyond the scope of the present work, but it represents an important avenue for future research. 
+
+B. Experimental results 
+
+In this section, we present a qualitative evaluation of the proposed pipeline in practical scenarios. To that end, we use data from a MIMO FMCW radar (IWR6843ISK of Texas In-struments) installed on the underside of a drone (DJI Matrice-300), pointing downward, with the configuration shown in Fig. 9. The radar features three transmit (Tx) and four receive (Rx) antennas, forming 12 virtual channels arranged in two rows aligned with the cross-track direction. It operates in the 60 GHz band, with the parameters summarized in Table I. In addition to the radar, the UAV carried a Zenmuse H20 camera to provide optical imagery for visual validation. The UAV flew at a nominal speed of 7 m/s and an altitude of approximately 
+
+25 m during data collection.        
+
+> Fig. 7. Pixel-wise phase difference between SAR images of R1and R2
+> before (top) and after (bottom) phase unwrapping. The marked points indicate corrected phases for higher zvalues, consistent with Fig. 6.
+> Fig. 8. RMSE of the proposed 3D imaging framework for different number of scatterers randomly deployed around the SRP.
+
+The experimental scenario, as shown in the bird’s-eye view (BEV) image in Fig. 10(a), involves flying the UAV over a pond divided into two sections. The UAV heading defines the x-axis, the y-axis points downward, and the z-axis corresponds to the across-track direction. The UAV flies at a nominal velocity of 7 m/s and is equipped with GPS that reported the UAV position at a rate of 10 Hz. This update rate is significantly smaller than the radar pulse repetition frequency (about 3.42 KHz). This necessitates the interpolation of the UAV position for each chirp, which introduces phase errors due to positioning inaccuracies. Fig. 11 depicts the 2D SAR images reconstructed at a selected virtual antenna at three time instances, with and without compensating the phase errors. The three instants, ACCEPTED MANUSCRIPT, IEEE TRANSACTIONS ON RADAR SYSTEMS 8   
+
+> Fig. 9. Experiment setup. (a) Radar mounted beneath the UAV. (b) MIMO FMCW radar board. (c) Virtual receive array and its placement with regard to the x- and z-axes. The two pairs of antennas used for InSAR processing are highlighted in red and light blue.
+
+indicated in Fig. 10(a) correspond to moments when the UAV approaches the pond end edge. The SAR images were recon-structed along the depth dimension and capture the progressive scene evolution: the emergence of the pond edge at instance 1, followed by the gradual appearance of tree foliage at instances 2 and 3. As can be seen, phase error compensation improves the image focus, as confirmed by the enhancement of the image contrast (IC) defined as the normalized image variance [34]: 
+
+IC (σ(x, y )) ≜
+
+r
+
+mean 
+
+n
+
+(I − mean (I)) 2o
+
+mean (I) , (20) with I ≜ |σ(x, y )|2 being the image intensity. Considering the interferometric setup shown in Fig. 10(b) and the radar parameters in Table I, the misregistration thresh-old is approximately 624 deg/s, whereas the maximum roll variation rate of the UAV during its flight is 8 deg/s. Therefore, according to criterion (15), no image registration step is required. Interferometric processing at the end of each CPI yields point clouds in the coordinate system corresponding to that CPI. We aggregate the point clouds of all CPIs by transforming them into the coordinate system of the first CPI. Fig. 10(b) illustrates the point clouds from the UAV nadir, captured and aggregated over the flight duration. In the left part of Fig. 10(b), the point clouds indicate two trees (in cyan tones) at both ends of the divider. Additionally, several tall trees are visible on the right side of the pond. The edges of the pond are also well reconstructed. Note that the water surface behaves like a specular reflector, scattering the radar signals away rather than reflecting them back to the radar. Therefore, it is barely detected by the radar. Finally, Fig. 12 shows the point clouds overlaid on the BEV image. To this end, radar–camera extrinsic calibration was performed by placing multiple corner reflectors on large checkerboards at different ground locations. The reflectors were detected by the radar, and the checkerboards were observed by the camera. The calibration transformation ma-trix was then estimated using at least four corresponding radar–camera detection pairs. A video corresponding to the experimental result is available in the Multimedia Material associated with this paper. V. C ONCLUSION 
+
+In this paper, we proposed a framework for capturing 3D point clouds from the region directly beneath a UAV using a MIMO FMCW radar. Unlike common UAV SAR configurations, we placed the antenna array on the underside of the UAV oriented downward, with the antenna array aligned along the across-track dimension. SAR imaging is then per-formed in the UAV nadir plane. Consequently, the 3D point clouds are obtained by interferometric processing across two pairs of receive antennas. Additionally, our proposed pipeline incorporates a method for compensating radar phase errors, whose effectiveness was confirmed through simulation. The framework was evaluated in practice by conducting a flight over a pond where it successfully reconstructed the pond boundaries as well as the surrounding trees and vegetation. The point clouds can serve as inputs to rescue operation models, support 3D scene reconstruction applications, and enable high-resolution multimodal fusion for object detection purposes. VI. A CKNOWLEDGEMENT 
+
+The research leading to these results received funding from the Horizon Europe project Edge AI Technologies for Opti-mised Performance Embedded Processing (Grant agreement ID: 101097300). REFERENCES [1] M. A. Richards, Fundamentals of Radar Signal Processing , 2nd ed. McGraw-Hill Education, 2014. [2] A. W. Doerry, “Basics of Polar-Format Algorithm for Processing Syn-thetic Aperture Radar Images,” Sandia National Laboratories, Tech. Rep. SAND2012-3369, May 2012. [3] D. A. Ausherman, A. Kozma, J. L. Walker, H. M. Jones, and E. C. Pog-gio, “Developments in radar imaging,” IEEE Transactions on Aerospace and Electronic Systems , vol. AES-20, no. 4, pp. 363–400, 1984. [4] G. Franceschetti and R. Lanari, Synthetic Aperture Radar Processing .CRC Press, 1999. [5] M. Simard et al. , “SAR Methods for Mapping and Monitoring Forest Degradation and Deforestation,” in SAR Handbook: Comprehensive Methodologies for Forest Monitoring and Biomass Estimation . NASA, 2019. [6] M. Simard, B. V. Riel, M. Denbina, and S. Hensley, “Radiometric cor-rection of airborne radar images over forested terrain with topography,”               
+
+> IEEE Transactions on Geoscience and Remote Sensing , vol. 54, no. 8, pp. 4488–4500, 2016. [7] M. A. Richards, “A Beginner’s Guide to Interferometric SAR Concepts and Signal Processing [AESS Tutorial IV],” IEEE Aerospace and Electronic Systems Magazine , vol. 22, no. 9, pp. 5–29, 2007. [8] A. R. Brenner and L. Roessing, “Radar Imaging of Urban Areas by Means of Very High-Resolution SAR and Interferometric SAR,” IEEE Transactions on Geoscience and Remote Sensing , vol. 46, no. 10, pp. 2971–2982, 2008. [9] M. Eineder, N. Adam, R. Bamler, N. Yague-Martinez, and H. Breit, “Spaceborne Spotlight SAR Interferometry With TerraSAR-X,” IEEE Transactions on Geoscience and Remote Sensing , vol. 47, no. 5, pp. 1524–1535, 2009. ACCEPTED MANUSCRIPT, IEEE TRANSACTIONS ON RADAR SYSTEMS 9
+
+Fig. 10. Example of 3D radar imaging from above a pond. (a) UAV flight over the pond surrounded by trees and vegetation. The x-axis is along the flight direction while the y-axis points downward. Instances 1, 2, and 3 are specified for demonstrating the impact of phase error compensation in Fig. 11. (b) Point clouds given by the proposed 3D InSAR framework. 
+
+Fig. 11. The impact of phase error compensation on the SAR images of a channel at three instances specified in Fig. 10. The images qualities have been quantified in terms of image contrast (IC). [10] A. Bekar, M. Antoniou, and C. J. Baker, “Low-Cost, High-Resolution, Drone-Borne SAR Imaging,” IEEE Transactions on Geoscience and Remote Sensing , vol. 60, pp. 1–11, 2022. [11] J. Svedin, A. Bernland, A. Gustafsson, E. Claar, and J. Luong, “Small UAV-based SAR system using low-cost radar, position, and attitude sensors with onboard imaging capability,” International Journal of Microwave and Wireless Technologies , vol. 13, no. 6, p. 602–613, 2021. [12] Y. Wang, J. Zhao, Z. Wang, K. Zhu, Z. Dong, and Z. Ding, “UAV-SAR Panoramic 3D Imaging for Urban Area: A Multi-angle Tomography Ap-proach,” in 2024 IEEE International Conference on Signal, Information and Data Processing (ICSIDP) , 2024, pp. 1–5. [13] M.-A. Lahmeri, V. Mustieles-P´ erez, M. Vossiek, G. Krieger, and R. Schober, “UAV Formation and Resource Allocation Optimization for Communication-Assisted 3D InSAR Sensing,” IEEE Transactions on Communications , vol. 73, no. 8, pp. 5788–5804, 2025. [14] V. Mustieles-Perez, S. Kim, J. Kanz, C. Bonfert, A. Grathwohl, G. Krieger, and M. Villano, “Generation of Accurate, High-Resolution Digital Elevation Models From Ultrawideband, Drone-Borne, Repeat-Pass Interferometric SAR,” IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing , vol. 18, pp. 28 375–28 392, 2025. [15] J. Kellner, J. Armston, M. Birrer, K. Cushman, L. Duncanson, C. Eck, C. Falleger, B. Imbach, K. Kr´ al, M. Kr˚ uˇ cek, J. Trochta, T. Vrˇ ska, and C. Zgraggen, “New opportunities for forest remote sensing through ultra-high-density drone lidar,” Surv Geophys. , vol. 40, no. 4, pp. 959–077, 2019. [16] B. Gano, S. Bhadra, J. M. Vilbig, N. Ahmed, V. Sagan, and N. Shakoor, “Drone-based imaging sensors, techniques, and applications in plant phenotyping for crop breeding: A comprehensive review,” The Plant Phenome Journal , vol. 7, no. 1, p. e20100, 2024. [17] V. V. Klemas, “Coastal and Environmental Remote Sensing from Unmanned Aerial Vehicles: An Overview,” Journal of Coastal ACCEPTED MANUSCRIPT, IEEE TRANSACTIONS ON RADAR SYSTEMS 10 
+
+Fig. 12. Point clouds of Fig. 10(b) overlaid on the pond image. 
+
+Research , vol. 31, no. 5, pp. 1260 – 1267, 2015. [Online]. Available: https://doi.org/10.2112/JCOASTRES-D-15-00005.1 [18] S. H. Javadi, A. Bourdoux, and H. Sahli, “Depth map reconstruction from low-altitude UAV,” in 2025 22nd European Radar Conference (EuRAD) , 2025, pp. 75–78. [19] S. H. Javadi, A. Bourdoux, H. Cappelle, and H. Sahli, “Radar-Based Altimetry and Nadir Depth Profile Estimation for UAVs,” in 2025 IEEE Radar Conference (RadarConf25) , 2025, pp. 1439–1444. [20] S. H. Javadi, A. Bourdoux, A. Albaba, and H. Sahli, “A Low-Complexity PFA-Based Autofocus Algorithm for Automotive SAR,” IEEE Transac-tions on Radar Systems , vol. 3, pp. 799–810, 2025. [21] A. W. Doerry and D. L. Bickel, “Notes on Synthetic Aperture Radar Image Quality,” Sandia National Laboratories, Tech. Rep. SAND2024-16813, December 2024. [22] R. Bamlery and P. Hartl, “Synthetic aperture radar interferometry,” 
+
+Inverse Problems , vol. 14, p. R1—R54, 1998. [23] J. A. M. Armin W. Doerry, Edward E. Bishop, “Basics of Backprojection Algorithm for Processing Synthetic Aperture Radar Images,” Sandia National Laboratories, Tech. Rep. SAND2012-3369, Feb. 2016. [24] D. Wahl, P. Eichel, D. Ghiglia, and C. Jakowatz, “Phase gradient autofocus-a robust tool for high resolution SAR phase correction,” IEEE Transactions on Aerospace and Electronic Systems , vol. 30, no. 3, pp. 827–835, 1994. [25] T. Xiong, M. Xing, Y. Wang, S. Wang, J. Sheng, and L. Guo, “Minimum-Entropy-Based Autofocus Algorithm for SAR Data Using Chebyshev Approximation and Method of Series Reversion, and Its Implementation in a Data Processor,” IEEE Transactions on Geoscience and Remote Sensing , vol. 52, no. 3, pp. 1719–1728, 2014. [26] M. Xing, X. Jiang, R. Wu, F. Zhou, and Z. Bao, “Motion Compensation for UAV SAR Based on Raw Radar Data,” IEEE Transactions on Geoscience and Remote Sensing , vol. 47, no. 8, pp. 2870–2883, 2009. [27] S. H. Javadi, H. Sahli, and A. Bourdoux, “Rayleigh-based segmentation of ISAR images,” Appl. Opt. , vol. 62, no. 17, pp. F1–F7, Jun 2023. [28] Q. Zhang, T. S. Yeo, G. Du, and S. Zhang, “Estimation of three-dimensional motion parameters in interferometric ISAR imaging,” IEEE Transactions on Geoscience and Remote Sensing , vol. 42, no. 2, pp. 292–300, 2004. [29] Z. Lin, Y. Duan, Y. Deng, W. Tian, and Z. Zhao, “An Improved Multi-Baseline Phase Unwrapping Method for GB-InSAR,” Remote Sensing ,vol. 14, no. 11, 2022. [30] D. C. Ghiglia and M. D. Pritt, Two-Dimensional Phase Unwrapping: Theory, Algorithms, and Software . New York: Wiley, 1998. [31] M. Manzoni, D. Tagliaferri, M. Rizzi, S. Tebaldini, A. V. M. Guarnieri, C. M. Prati, M. Nicoli, I. Russo, S. Duque, C. Mazzucco, and U. Spag-nolini, “Motion Estimation and Compensation in Automotive MIMO SAR,” IEEE Transactions on Intelligent Transportation Systems , vol. 24, no. 2, pp. 1756–1772, 2023. [32] u-blox AG, “NEO-M8 u-blox M8 concurrent GNSS modules,” https://content.u-blox.com/sites/default/files/NEO-M8-FW3 DataSheet UBX-15031086.pdf, 2025. [33] P. Grassi, M. Manzoni, S. Tebaldini, and C. Maria Prati, “A Geomet-rical Autofocus Method for UAV-Based SAR,” IEEE Transactions on Geoscience and Remote Sensing , vol. 64, pp. 1–17, 2026. [34] M. Martorella, F. Berizzi, and B. Haywood, “Contrast maximisation based technique for 2-D ISAR autofocusing,” IEE Proceedings - Radar, Sonar and Navigation , vol. 152, pp. 253–262(9), August 2005.

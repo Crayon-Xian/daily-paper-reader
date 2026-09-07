@@ -1,0 +1,494 @@
+Title: XAI2CSI: Interpreting CSI with eXplainable AI for Human Activity Recognition
+
+URL Source: https://arxiv.org/pdf/2608.31034v1
+
+Published Time: Tue, 01 Sep 2026 03:02:11 GMT
+
+Number of Pages: 6
+
+Markdown Content:
+# XAI2CSI: Interpreting CSI with eXplainable AI for Human Activity Recognition 
+
+Idio Guarino ∗, Alfredo Nascita †, Domenico Ciuonzo †, Damiano Carra ‡, Antonio Pescapé †∗University of Bologna, Italy , †University of Napoli Federico II, Italy , ‡University of Verona, Italy ,idio.guarino@unibo.it, damiano.carra@univr.it, {alfredo.nascita, domenico.ciuonzo, pescape}@unina.it, 
+
+Abstract —Wi-Fi Channel State Information (CSI) has emerged as a key enabler for device-free Human Activity Recognition (HAR), enabling low-cost, unobtrusive sensing using existing communication infrastructure. However, Deep Learning (DL) models trained on CSI data often struggle to generalize across users, environments, and device setups due to the context sen-sitivity of wireless propagation. Despite this challenge, limited attention has been devoted to understanding model decisions and generalization failures. This paper introduces XAI2CSI, a frame-work that leverages eXplainable Artificial Intelligence (XAI) to analyze DL-based CSI sensing systems. XAI2CSI employs SAGE, a model-agnostic explainability method, to quantify temporal, spectral, and spatial CSI contributions to HAR decisions under nominal and cross-context evaluations on IEEE 802.11ax data. Our analysis reveals that the considered DL model exhibits limited robustness to unseen conditions due to an over-reliance on context-specific CSI patterns, causing models to misinterpret the underlying signal dynamics when deployment conditions change. The proposed methodology and findings provide areference framework to explore alternative solutions and guide the development of robust, transparent Wi-Fi sensing systems. 
+
+I. I NTRODUCTION 
+
+In recent years, Deep Learning (DL) has been increasingly adopted to leverage wireless signals for environmental sens-ing [1]. A rich source of information is the Channel State Infor-mation (CSI) from Wi-Fi signals, which has become a key en-abler for device-free Human Activity Recognition (HAR) [2]. By exploiting subtle disturbances induced by human move-ment on radio-frequency propagation, CSI enables low-cost and non-intrusive sensing using existing commercial-off-the-shelf communication hardware, thus avoiding wearable-device limitations such as limited battery life, user discomfort, and complex deployment. Despite its promise, the main obstacle 
+
+to widespread adoption is generalizability : DL models trained on the CSI data may struggle when deployed across different users, environments, or device setups due to wireless prop-agation’s high sensitivity to context [3]. Multipath effects, where signals reflect off walls, furniture, and people, create a unique CSI “fingerprint” for each specific setting. Conse-quently, even minor changes to the physical environment alter this fingerprint, degrading model performance and preventing the development of a universal, “one-size-fits-all” model that can be trained once and deployed anywhere without extensive retraining. Although numerous studies have documented these performance degradations, they largely treat generalization as a performance problem, leaving open a key question: why do CSI-based HAR models fail under unseen conditions ?Answering this question is challenging because DL models operate as black boxes , making it unclear which CSI compo-nents drive successful predictions and how their contribution changes across deployment contexts. eXplainable Artificial Intelligence (XAI) provides tools to interpret complex models by identifying the features that most influence their decisions. However, despite the acknowledged challenges in CSI-based sensing, the systematic application of XAI to understand model behavior and generalization remains largely unexplored .This paper bridges this gap through XAI2CSI , a framework that applies XAI to analyze CSI-based HAR under nominal and cross-context conditions. Specifically, XAI2CSI leverages SAGE [4], a novel model-agnostic explainability method, to quantify temporal, spectral, and spatial CSI contributions to HAR decisions. Through rigorous evaluations on IEEE 802.11ax data [5], we investigate the models’ failures in cross-user scenarios by analyzing feature importance across the spatial, temporal, and spectral dimensions of the CSI input. Our analysis reveals limited robustness to unseen conditions due to an over-reliance on context-specific CSI patterns, causing models to misinterpret the underlying signal dynamics when deployment conditions change. These findings provide actionable insights toward robust, transparent, and interpretable Wi-Fi sensing systems. Our contributions are: (i) we evaluate DL-based HAR models under standalone and combined CSI representations (amplitude, phase difference, and their combination) using 802.11ax hardware; (ii ) we perform systematic cross-domain evaluations across users, environments, and receiver node positions to assess model generalization; ( iii ) we apply SAGE to provide a compre-hensive XAI analysis, characterizing temporal, spectral, and spatial CSI contributions under distribution shifts. The paper is organized as follows: Sec. II reviews related works. Sec. III details our XAI methodology. Secs. IV and V present the setup and results, while Sec. VI concludes it. II. R ELATED WORKS 
+
+Research on leveraging CSI for human sensing has grown rapidly, evolving from coarse metrics to fine-grained subcarrier-level data. By capturing multipath propagation, CSI has enabled tasks ranging from presence detection to HAR and vital signs monitoring [1]. DL has further advanced 
+
+> © 2026 IEEE. Personal use of this material is permitted. Permission from IEEE must be obtained for all other uses, in any current or future media, including reprinting/republishing this material for advertising or promotional purposes, creating new collective works, for resale or redistribution to servers or lists, or reuse of any copyrighted component of this work in other works. arXiv:2608.31034v1 [eess.SP] 31 Aug 2026
+
+Table I: Related CSI-based HAR works and positioning of this work.                                                                                
+
+> Paper 802.11 CSI data Cross Eval. XAI
+> Ñn
+> Yousefi et al. [6] nAMP ####
+> Zou et al. [7] nAMP ####
+> Wang et al. [8] nSTFT #
+> Yang et al. [9] nPHD ##
+> Chen et al. [10] nAMP ###
+> Yang et al. [11] nAMP ####
+> Zhang et al. [12] nAMP #
+> Yang et al. [13] nAMP ####
+> Yang et al. [14] nBV ##
+> Zhang and Jiao [15] nAMP ####
+> Meneghello et al. [16] ac DS #
+> Cominelli et al. [5] ax DS ##
+> Chen et al. [17] nPHD ##
+> Hussain et al. [18] nAMP ####
+> This work ax AMP, PHD AMP&PHD
+> CSI Data : Amplitude ( AMP ), Phase Difference ( PHD ), Doppler Shift ( DS ), Body Velocity ( BV ), Short-Time Fourier Transform ( STFT ). Cross-Evaluation
+> scenarios: Environments ( Ñ), Users ( ), Receiver Node Location ( n), present ( ), absent ( #). XAI Analysis: present ( ), absent ( #).
+
+these capabilities, yet several key challenges remain. Table I summarizes representative HAR works by Wi-Fi version, signal representation, cross-evaluation scenarios, and whether explainability was considered. A key limitation is the lack of native CSI extraction on com-modity devices [19]. Early works relied on specialized tools such as the Linux 802.11n CSI Tool , thus constraining research to outdated 802.11n hardware. Although newer frameworks— e.g., Nexmon for 802.11ac and AX-CSI for 802.11ax—enable richer data collection, many recent works still rely on legacy tools, thereby limiting their relevance to modern Wi-Fi deploy-ment [19]. Only a few studies leverage the wider bandwidths supported by modern Wi-Fi standards [5, 16]. Most HAR approaches rely on CSI amplitude for its simplicity and real-time suitability [1]. Alternatives such as phase differences, Doppler spectrum, short-time Fourier transform, or body ve-locity estimates capture richer motion information but increase computational cost, require calibration, and may be affected by orientation and multipath distortions [1]. A major challenge across these works is generalization: CSI strongly depends on users, environments, and hardware, often causing severe performance drops when models are tested across different settings [2]. Although this problem is acknowledged, several studies still evaluate their models in the same context in which they were trained [6, 7, 11, 13, 15, 18]. In contrast, other works explicitly assess generalization by testing models on users, environments, or device placements that are not seen during training [5, 8, 9, 10, 12, 14, 16, 17]. To address these challenges, prior works have explored two main strategies. The first involves signal preprocessing to isolate motion-related components and filter out environment-dependent multipath effects [14, 16]. While improving stability, these methods may also discard valuable cues together with noise. The second uses learning-based adaptation strategies, e.g., transfer-learning and few-shot learning [9, 17], which improve cross-domain performance but require additional data collection in each new context, limiting real-world deployability. Recent evaluations further show that, despite these efforts, generaliza-tion across unseen domains remains limited [5]. Finally, while DL-based approaches become the dominant paradigm, they typically behave as black boxes, offering little insight into their decision-making process. To the best of our knowledge, no prior works have explored explainability beyond performance metrics. Our work fills this gap by leveraging SAGE to systematically analyze model behavior, thus uncovering the intrinsic mechanisms that govern decision-making and paving the way for more transparent Wi-Fi sensing systems. 
+
+Positioning. Our work advances prior research in three directions : (i) evaluating HAR models under standalone and combined CSI representations (amplitude, phase differ-ence, and their integration via “early" fusion) using modern Wi-Fi 802.11ax hardware; ( ii ) performing systematic cross-do-main evaluations across users, environments, and receiver node locations to assess model generalization; and ( iii ) applying SAGE (the core of XAI2CSI) for a comprehensive XAI anal-ysis, providing a global view of model decision mechanisms. III. M ETHODOLOGY 
+
+CSI background. CSI characterizes the signal propagation be-tween transmitter and receiver, encapsulating reflection, scat-tering, diffraction, and multipath effects. It supports commu-nication optimization by enabling tasks such as beamforming and rate adaptation [1]. In an Orthogonal Frequency Division Multiplexing (OFDM) system such as Wi-Fi, CSI provides a detailed estimate of the wireless channel in the frequency domain. Thanks to the wide bandwidth of Wi-Fi signals and the fine granularity of OFDM subcarriers, this information is valuable for both communication optimization and device-free sensing applications, e.g., indoor localization, and human activity monitoring. Formally, in an OFDM system with F
+
+subcarriers and a single spatial stream, the channel can be modeled in the frequency domain as r = h ⊗ s + n, where 
+
+r ∈ CF is the received OFDM symbol, h ∈ CF is the channel frequency response (i.e., the CSI), s ∈ CF is the transmitted OFDM symbol, n ∈ CF is the noise vector, and ⊗ denotes the Hadamard product. The channel response h captures the amplitude attenuation and phase shift of each subcarrier. The receiver can estimate the channel ( c ≃ h) by computing the ratio between the received r and transmitted s signals. In Multiple-Input Multiple-Output (MIMO) systems with 
+
+Ntx transmit antennas and Nrx receive antennas, the CSI at time t can be represented as a tensor H(t) ∈ CNtx ×Nrx ×F,which captures the channel response for every transmit–receive antenna pair across all subcarriers. Specifically, its amplitude and phase components are defined as: A(t) = || H(t)|| and 
+
+ϕ(t) = ̸ H(t), respectively, where A(t), ϕ(t) ∈ RNtx ×Nrx ×F.CSI is collected by capturing Wi-Fi packets, reflecting both static factors (e.g., room layout) and dynamic ones (e.g., human presence and movement). While primarily used in transceivers for tasks like equalization and beamforming, CSI can also be extracted via dedicated tools. These tools—for each Tx-Rx antenna pair—record the channel estimate across all available subcarriers at a given sampling rate Sx, producing a CSI time series that reflects wireless channel evolution. 
+
+DL-based HAR. We use CSI measurements across a 1 × Nrx 
+
+MIMO setup to detect human activities, since different actions uniquely perturb wireless propagation [7]. We compare three 
+
+input configurations: ( i) amplitude ( A) only, ( ii ) phase dif-ference ( ∆ϕ) only, and ( iii ) their combination ( A&∆ϕ) via 
+
+early-fusion , where both are concatenated as input features. To mitigate hardware impairments (e.g., CFO or SFO ) [6], phase differences ∆ϕj−r = ϕj − ϕr are computed across receiving antenna pairs relative to a reference ( Rx,r : j̸ = r)and over time via complex conjugate products of raw CSI samples, preserving relative phase shifts and signal integrity. The resulting time series is segmented into overlapping frames 
+
+X = { ¯Xi}Ni=1 , where ¯Xi ∈ RD×F×W captures dynamics over a window W.1 The spatial dimension D is Nrx for A,
+
+Nrx -1 for ∆ϕ, and 2Nrx -1 for A&∆ϕ. Each frame ¯Xi is fed into a DL model Mθ : ¯Xi → [0 , 1] |C| that outputs activity class probabilities over C. The predicted label is obtained as ˆy = arg max c∈C Mθ,c ( ¯Xi), where Mθ,c ( ¯Xi)
+
+is the probability assigned to class c. Model training opti-mizes θ using the Categorical Cross-Entropy loss L(y, ˆy) = 
+
+− P|C|  
+
+> j=1
+
+1[y=j] ln ( Mθ,j ( ¯Xi)) , where y ∈ C is the true label. 
+
+Interpreting CSI-based Human Sensing via SAGE. We evaluate the importance of CSI components using SAGE [4], a model-agnostic approach that, unlike local methods (e.g., LIME, SHAP), quantifies global loss degradation across entire distributions. SAGE quantifies the (global) contribution of each feature by comparing the model’s loss L(·, ·) with and without the feature, thereby measuring its impact on predictive performance. Formally, for a model M(·) predicting label 
+
+y from features x (the vectorized frame ¯Xi in our case), SAGE evaluates performance on different feature subsets xS
+
+for S ⊆ D , where D is the set of all feature indices. The predictive power M(·) derives from a subset xS is defined by the function vM : P(D) → R:
+
+vM(S) = E[L(M∅(x∅), Y )] − E[L(MS (xS ), Y )] (1) Here, MS (xS ) = E[M(X) | XS = xS ] is the conditional expectation denoting the model’s prediction when only fea-tures in S are known, marginalizing over the rest. Conversely, 
+
+M∅(X∅) = E[M(X)] is the mean prediction across all fea-tures. The SAGE value ϕi(vM) is the Shapley value of the pre-dictive power function vM, attributing a contribution to each feature xi to the overall model predictive performance. SAGE values represent the expected per-instance SHAP values com-puted w.r.t. the loss L. For a specific sample (x, y ), this is expressed as v(x,y ) 
+
+> M
+
+(S) = L(M∅(x∅), y ) − L (MS (xS ), y )
+
+which quantifies how the prediction loss changes when con-ditioning on the subset of features S compared to using no    
+
+> 1With A&∆ϕ, the first amplitude sample is discarded to ensure temporal alignment with the ∆ϕseries.
+
+features at all. Finally, the global importance of each feature is then obtained by averaging these per-instance contributions across the entire dataset ϕi(vM) = EXY [ϕi(v(X,Y ) 
+
+> M
+
+)] .IV. E XPERIMENTAL SETUP 
+
+This section details the experimental setup: the dataset, pre-processing, the DL model, and the evaluation procedure. 
+
+Dataset. We use the dataset from [5], collected with the 
+
+AX-CSI tool supporting the IEEE 802.11ax standard. Each trace records a specific user performing a given activity for 80s in a particular environment on a given day. We restrict our analysis to 5 activities (Empty Room, Jumping, Running, Sitting, Walking) covering static, repetitive, and dynamic Doppler profiles. The collection was performed over two consecutive days in three furniture-rich environments (Lab , Office , and Hall ) involving three users U ≡ { Uk}3
+
+> k=1
+
+,enabling evaluation across different settings. CSI was captured in the 5GHz band at Sx = 150Hz via a 1 × 4 Single-Input Multiple-Output (SIMO) setup ( {Rx,j }4
+
+> j=1
+
+) across three receiver nodes N ≡ { Ni}3 
+
+> i=1
+
+(≤ 160MHz bandwidth, ≤ 2048 
+
+subcarriers/antenna). 
+
+Pre-processing. Following [5], we apply a series of trace-level processing steps, before feeding the CSI data into the DL model: ( i) CSI data is downsampled to 80MHz channels with F = 1024 subcarriers by selecting central frequency bins, exploiting the redundancy in high-resolution CSI and reducing computational load, and non-informative subcarri-ers are discarded using a predefined filter ( F: 1024 →994). (ii ) Values are normalized per receiver antenna by their mean amplitude. ( iii ) For amplitude features, a Hampel filter [19] is applied along the time dimension to mitigate outliers. ( iv ) The time series is segmented into overlapping windows of W = 50 packets ( ∆ ≈ 333ms ) with a stride of 25 (i.e., 50% overlap). Finally, Min–Max scaling is applied to the receiver antenna, with parameters computed solely from the training set. 
+
+Model Considered. We employ a 2D-CNN consisting of three 2D convolutional layers with kernel sizes 7, (5 , 3) , and (3 , 3) 
+
+and strides (3 , 1) , (2 , 2) , and 1, respectively. Each layer has ReLU activation and is followed by a 2×2 max-pooling layer. The output of the convolutional block is flattened and passed through a dense layer with 128 units and ReLU activation, followed by a softmax-activated dense layer for classification with C units. To regularize training and reduce overfitting, a dropout (rate of 0.3) is applied after both the last pooling and the first dense layer. The frame ¯Xi is structured as a 
+
+(D, F, W) tensor, treating D as the spatial-feature dimension. This arrangement enables the 2D-CNN to capture joint correla-tions across antennas, subcarriers, and time, while facilitating the interpretability of individual components. Following [13], we adopt this architecture for its optimal accuracy-complexity trade-off compared to more complex models (e.g., ResNets, ViT), ensuring real-time execution on edge devices. 
+
+Evaluation Procedure. To ensure reproducible evaluation while preserving causal relationships, each trace is split along the time axis into training and test with an 80 /20% ratio. We further reversed 20% of the training set for validation. Model training was performed for up to 200 epochs using the SGD optimizer. To compute SAGE values, each frame is flattened (D = {1, . . . , D × F × W}) and conditional expectations are approximated using a background of 40 training samples/class with a convergence threshold of 0.05 . This preserves the orig-inal frame structure, enabling the grouping of features by sub-carrier, antenna, or time index for interpretable analysis. We release our code at https://github.com/IdioGuarino/XAI2CSI. V. E XPERIMENTAL EVALUATION 
+
+In this section, we first evaluate model performance and generalization under contextual changes. Then, we employ SAGE to investigate how input features influence decisions. 
+
+Assessing Model Performance under Context-Shifts. We evaluate our CSI-based sensing under three context shifts: (i) unseen users (cross-user ), (ii ) unseen environments (cross-env ), and ( iii ) changes in node position ( cross-node ). In each case, we adopt a leave-one-out cross-validation scheme, where a model trained on all but one setting (viz. M∗ 
+
+> X
+
+) is tested on the unseen one and compared to a model trained on all settings (viz. Mall ), serving as an upper bound. Fig. 1 compares the accuracy of M∗ 
+
+> X
+
+and Mall across the above conditions based on input type: amplitude (A), phase difference (∆ϕ), and their early-fusion combination (A&∆ ϕ). 
+
+Cross-user (resp. cross-env ) results are obtained by focusing on the Lab environment (resp. user U1) while including all nodes. In cross-node , two nodes are used for training and the remaining one for testing, using data from user U1 in the Lab ,thus emulating an unseen node location. As expected, Mall models consistently achieve high accu-racy ( 88 -98% ), with amplitude-based inputs ( A and A&∆ ϕ)outperforming the phase-only counterpart ( ∆ϕ). Conversely, for M∗ 
+
+> X
+
+models, performance degradation heavily depends on both the context shift and the input type. Under cross-user conditions, despite the same environment, the accuracy of 
+
+M∗ 
+
+> X
+
+drops to at most 65% (U2), with amplitude-based models (A and A&∆ ϕ) yielding the highest robustness. However, this trend inverts under cross-env and cross-node conditions, where phase-based models ( ∆ϕ and A&∆ ϕ) achieve slightly better performance, despite not exceeding 28% in cross-env 
+
+(Office ). This underscores that amplitude is more sensitive to environmental changes and transmitter-receiver geometry, whereas phase difference offers greater cross-domain stability. Focusing on cross-user settings, Fig. 2 shows the confusion matrices for Mall and MU \{ U2} 
+
+> X
+
+models on the unseen user 
+
+U2, highlighting misclassification patterns across the different input types. For Mall , Empty and Sitting activities are con-sistently recognized, while more dynamic activities such as 
+
+Run and Walk are often misclassified as each other, especially when leveraging only phase difference (Fig. 2b). Conversely, 
+
+M∗ 
+
+> X
+
+performance highly depends on the input type. When considering A or ∆ϕ standalone, Run and Sitting prove to be the most challenging classes (confused with Walk and Jump ,respectively), with the latter never correctly classified. No-tably, with the same inputs, the model frequently misclassifies 
+
+Empty , which is particularly critical as it implies mistaking an absent user for one performing an activity. Interestingly, this misclassification pattern is resolved for Empty , which the model with A&∆ ϕ recognizes with near-perfect accuracy. Conversely, for Run and Sitting , early fusion only partially mitigates the issue, as their classification remains challenging. 
+
+Take-Away : Cross-domain generalizability heavily depends on the input representation. While standalone features suffer severe degradation under context shifts, their early fusion only partially mitigates the issue, resolving macroscopic errors (e.g., empty environments) while leaving dynamic and complex static activities an open challenge. 
+
+Analyzing feature effects on models’ behavior with SAGE. 
+
+To gain insight into the behavior of the models and understand the reasons behind their failures in cross-user scenarios, we analyze the feature importance for each target user Uk, con-sidering two subsets: Ts containing samples correctly classified by both Mall and M∗ 
+
+> X
+
+, and Tu containing samples correctly classified by Mall but misclassified by M∗ 
+
+> X
+
+. This separation allows us to distinguish features that consistently support correct predictions from those associated with failures of 
+
+M∗ 
+
+> X
+
+. Then, we analyze how the different dimensions of the input frame, i.e., receiving antennas, packet arrival order, and subcarriers, affect the models’ decisions. Fig. 3 compares the relative importance of the receiving antennas {Rx,j }4 
+
+> j=1
+
+(normalized by the sum of their absolute values) for the combined-input ( A&∆ ϕ) variants of Mall and 
+
+MU \{ Uk } 
+
+> X
+
+. Results are broken down by the target user Uk,isolating the individual contributions of amplitude {RAx,j }4
+
+> j=1
+
+and phase difference {R∆ϕx,j −1}4
+
+> j=2
+
+.Specifically, Mall (viz., hatched bars) exhibits a consis-tent behavior across users and sample sets. Specifically, the model maintains a stable feature hierarchy in which amplitude components are most important, while phase differences are negligible, with values remaining close to zero. Among the amplitudes, RAx, 1 and RAx, 2 stand out as the most important, while RAx, 4 consistently emerges as the least influential. This overall trend reveals that the model exploits amplitudes as a leaky shortcut, leading to cross-domain overfitting. In fact, while amplitude provides more stable patterns than volatile phase difference, it remains strictly dependent on the specific user and environment. Consequently, for MX , the antennas show a highly unstable behavior depending on the unseen user. For instance, for U1, MX over-relies on RAx, 1, driving the misclassifications on Tu, while underweighting RAx, 2, i.e., the most relevant feature for Mall . Similarly, for U3, while RAx, 1
+
+and RAx, 4 support correct predictions in MX , RAx, 4 mainly drives its misclassifications, despite consistently representing the least influential structural component for Mall .Focusing on U1 for brevity, as other users yield similar results, Fig. 4 shows feature importance along the time-axis for 
+
+Mall and MU \{ U1} 
+
+> X
+
+on Ts and Tu, computed over consecutive packet pairs within a frame duration W. In Ts, both models mainly rely on earlier (i.e., left-handed) or central packets, U1 U2 U3
+
+Test User 
+
+020 40 60 80 100    
+
+> Accuracy (%)
+> all
+> U{U1}
+> X
+> U{U2}
+> X
+> U{U3}
+> X
+
+A A&(a) Cross-user Lab Office Hall 
+
+Test Environment 
+
+020 40 60 80 100    
+
+> Accuracy (%)
+> all
+> E{Lab }
+> X
+> E{Office }
+> X
+> E{Hall }
+> X
+
+A A& (b) Cross-env N1 N2 N3
+
+Test Receiver 
+
+020 40 60 80 100    
+
+> Accuracy (%)
+> all
+> N{N1}
+> X
+> N{N2}
+> X
+> N{N3}
+> X
+
+A A& (c) Cross-node 
+
+Fig. 1. M∗
+
+X vs. Mall under (a) cross-user , (b) cross-env and, (c) cross-node shifts based on input type: amplitude (A), phase difference 
+
+(∆ϕ), and their combination (A&∆ϕ). Superscript in M∗
+
+X denotes training set composition. x-axis : tested user, environment, or node. Empty Jump Run Sitting Walk                     
+
+> Predicted Label
+> Empty Jump Run Sitting Walk
+> Actual Label
+> 100.0 0.0 0.0 0.0 0.0 0.0 98.6 0.0 0.0 1.4 0.0 0.7 92.0 0.0 7.3 0.0 0.0 0.0 100.0 0.0 0.0 0.7 12.8 0.0 86.5
+
+(a) AEmpty Jump Run Sitting Walk                      
+
+> Predicted Label
+> Empty Jump Run Sitting Walk
+> Actual Label
+> 99.3 0.7 0.0 0.0 0.0 0.3 99.0 0.0 0.0 0.7 0.0 1.4 58.3 0.0 40.3 0.0 0.0 0.0 100.0 0.0 1.7 19.1 4.5 0.3 74.3
+
+(b) ∆ϕEmpty Jump Run Sitting Walk                      
+
+> Predicted Label
+> Empty Jump Run Sitting Walk
+> Actual Label
+> 100.0 0.0 0.0 0.0 0.0 0.0 97.6 2.4 0.0 0.0 0.0 0.0 88.2 0.0 11.8 0.0 0.0 0.0 100.0 0.0 0.0 0.3 13.9 0.0 85.8
+
+(c) A&∆ ϕEmpty Jump Run Sitting Walk                     
+
+> Predicted Label
+> Empty Jump Run Sitting Walk
+> Actual Label
+> 85.1 0.0 0.0 0.0 14.9 0.0 66.7 0.0 0.0 33.3 0.0 8.3 21.9 0.0 69.8 31.6 66.7 0.0 0.0 1.7 0.0 7.6 9.0 0.7 82.6
+
+(d) AEmpty Jump Run Sitting Walk                      
+
+> Predicted Label
+> Empty Jump Run Sitting Walk
+> Actual Label
+> 66.7 8.3 0.0 0.0 25.0 6.6 69.4 0.7 1.7 21.5 0.0 5.9 31.9 0.3 61.8 57.3 33.3 0.0 0.0 9.4 7.3 25.0 5.6 1.4 60.8
+
+(e) ∆ϕEmpty Jump Run Sitting Walk                      
+
+> Predicted Label
+> Empty Jump Run Sitting Walk
+> Actual Label
+> 99.7 0.0 0.0 0.0 0.3 0.0 81.6 3.8 0.0 14.6 0.0 12.8 37.8 0.0 49.3 0.0 33.3 0.0 33.3 33.3 0.3 9.4 18.4 1.0 70.8
+
+(f) A&∆ ϕ
+
+Fig. 2. Misclassification errors of Mall (top ) and MU \{ U2}
+
+X ▷ U 2
+
+(bottom ) when testing on U2 based on input type. 
+
+indicating that HAR is driven by stable motion patterns rather than recent observations, which do not aid accurate predic-tions. Conversely, in Tu, packets that previously contributed positively now negatively impact MU \{ U1}
+
+X . This indicates that 
+
+MU \{ U1}
+
+X misinterprets temporal patterns that Mall correctly utilizes, showing its difficulty in generalizing to unseen users. Lastly, Fig. 5 shows subcarrier importance for Mall and 
+
+MU \{ Uk }
+
+X on Ts and Tu, computed by grouping left and right subcarriers of the central DC carrier into 15 bins each. Specifically, on Ts, importance values are broadly distributed across bins with most subcarriers contributing positively in both models and ranging in 0-15% . This indicates that success-ful classifications rely on information extracted from a wide spectral range. Moreover, for U3, importance is more dispersed across subcarriers, revealing greater disagreement between models even on correctly classified samples. In contrast, the analysis on Tu shows that, while Mall maintains positive, distributed importance, M∗
+
+X assigns predominantly negative importance to nearly all subcarriers. This indicates that M∗
+
+X
+
+misinterprets frequency-domain information, perceiving spec-U1 U2 U3
+
+> 010 20 30 40 50
+> Importance (%)
+
+RAx, 1 
+
+RAx, 2 
+
+RAx, 3 
+
+RAx, 4 
+
+Rx, 2 1
+
+Rx, 3 1
+
+Rx, 4 1
+
+> all
+> X
+
+U1 U2 U3
+
+> 60
+> 40
+> 20
+> 020 40 60
+> Importance (%)
+
+RAx, 1 
+
+RAx, 2 
+
+RAx, 3 
+
+RAx, 4 
+
+Rx, 2 1
+
+Rx, 3 1
+
+Rx, 4 1
+
+> all
+> X
+
+Fig. 3. Importance of receiving antenna Rx,j (A&∆ ϕ input) for 
+
+Mall and MU \{ Uk }
+
+X on Ts (top ) and Tu (bottom ) samples across target users Uk . RAx,j : amplitude . R∆ϕx,j −1: phase difference w.r.t Rx, 1.
+
+tral features as misleading and thus driving misclassifications. Across all users and sample sets, the DC subcarrier has no effect on the decisions of both models. 
+
+Take-Away : The analysis indicates that M∗
+
+X struggles to generalize to unseen users by over-relying on the most domain-dependent amplitudes while ignoring the potentially more generalizable, yet volatile, phase differences. Con-versely, Mall effectively utilizes information across anten-nas, packets, and subcarriers, whereas M∗
+
+X misinterprets these structural signals, leading to severe misclassifications. 
+
+VI. D ISCUSSION AND CONCLUSIONS 
+
+This paper presented XAI2CSI, a framework embedding SAGE as its core to systematically apply XAI to CSI-based HAR and investigate the behavior of DL models under realistic conditions. Using different CSI input representations (amplitude, phase difference, and their combination) collected from modern IEEE 802.11ax hardware, we first evaluated model generalization to unseen users, environments, and re-ceiver positions, showing that performance drops significantly when the deployment context changes. This highlights that cross-domain robustness in Wi-Fi sensing remains an open t    
+
+> t 45
+> t 35
+> t 25
+> t 15
+> t
+> 0510
+> Importance (%)  all UU1
+> Xt
+> t 45
+> t 35
+> t 25
+> t 15
+> t
+> 10
+> 5
+> 0510
+> Importance (%)  all UU1
+> X
+
+Fig. 4. Packet arrival order importance ( A&∆ ϕ input) for Mall 
+
+and MU \{ U1} 
+
+> X
+
+on Ts (top ) and Tu (bottom ) samples of user U1. x-axis: chronologically sorted packet indices (2 packets/bin; t is most recent). Mall (areas) vs. MU \{ Uk } 
+
+> X
+
+(lines). 
+
+challenge. Focusing on the cross-user scenario, we applied SAGE to analyze the contribution of temporal, spectral, and spatial CSI components to model decisions. Our analysis revealed that generalization failures stem from over-reliance on user-specific patterns, which are misinterpreted when the model encounters a new user. Overall, this study showed how explainability can provide a principled understanding of DL behavior in Wi-Fi sensing, paving the way toward transparent, interpretable, and robust CSI-based systems. Future works will include diverse XAI methods and DL models, mitigating CSI artifacts via domain adaptation, and enhancing multimodal fusion for cross-domain robustness. REFERENCES [1] S. Tan, Y. Ren, J. Yang, and Y. Chen, “Commodity WiFi Sensing in Ten Years: Status, Challenges, and Opportunities,” IEEE Internet Things J. ,vol. 9, no. 18, pp. 17 832–17 843, 2022. [2] I. Nirmal, A. Khamis, M. Hassan, W. Hu, and X. Zhu, “Deep Learning for Radio-Based Human Sensing: Recent Advances and Future Direc-tions,” IEEE Commun. Surveys Tuts. , vol. 23, no. 2, pp. 995–1019, 2021. [3] I. Guarino, D. Carra, M. Cominelli, F. Gringoli, and R. Lo Cigno, “A survey on CSI-based Wi-Fi sensing datasets and models with a focus on reproducibility,” Elsevier Comput. Commun. , vol. 249, p. 108431, 2026. [4] I. Covert, S. M. Lundberg, and S.-I. Lee, “Understanding global feature contributions with additive importance measures,” NeurIPS’20 .[5] M. Cominelli, F. Gringoli, and F. Restuccia, “Exposing the CSI: A Systematic Investigation of CSI-based Wi-Fi Sensing Capabilities and Limitations,” in IEEE PerCom’23 , pp. 81–90. [6] S. Yousefi, H. Narui, S. Dayal, S. Ermon, and S. Valaee, “A Survey on Behavior Recognition Using WiFi Channel State Information,” IEEE Commun. Mag. , vol. 55, no. 10, pp. 98–104, 2017. [7] H. Zou, Y. Zhou, J. Yang, H. Jiang, L. Xie, and C. J. Spanos, “DeepSense: Device-Free Human Activity Recognition via Autoencoder Long-Term Recurrent Convolutional Network,” in IEEE ICC’18 , 2018. [8] F. Wang, W. Gong, and J. Liu, “On Spatial Diversity in WiFi-Based Human Activity Recognition: A Deep Learning-Based Approach,” IEEE Internet Things J. , vol. 6, no. 2, pp. 2035–2047, 2019. [9] J. Yang, H. Zou, Y. Zhou, and L. Xie, “Learning Gestures From WiFi: A Siamese Recurrent Convolutional Architecture,” IEEE Internet Things J. , vol. 6, no. 6, pp. 10 763–10 772, 2019. [10] Z. Chen, L. Zhang, C. Jiang, Z. Cao, and W. Cui, “WiFi CSI Based Passive Human Activity Recognition Using Attention Based BLSTM,” 
+
+IEEE Trans. Mobile Comput. , vol. 18, no. 11, pp. 2714–2724, 2019. [11] J. Yang, X. Chen, H. Zou, D. Wang, Q. Xu, and L. Xie, “EfficientFi: Toward Large-Scale Lightweight WiFi Sensing via CSI Compression,” 
+
+IEEE Internet Things J. , vol. 9, no. 15, pp. 13 086–13 095, 2022. [12] Y. Zhang, Y. Chen, Y. Wang, Q. Liu, and A. Cheng, “CSI-Based Human Activity Recognition With Graph Few-Shot Learning,” IEEE Internet Things J. , vol. 9, no. 6, pp. 4139–4151, 2022. 5
+
+> 0510 15
+> Importance (%)
+> 5
+> 0510 15
+> Importance (%)
+> L15 L14 L13 L12 L11 L10 L9 L8 L7 L6 L5 L4 L3 L2 L1 DC R1 R2 R3 R4 R5 R6 R7 R8 R9 R10 R11 R12 R13 R14 R15 5
+> 0510 15
+> Importance (%)
+> U1
+> all
+> U2
+> X
+> U3
+
+(a) Ts10 
+
+> 010
+> Importance (%)
+> 10
+> 010
+> Importance (%)
+> L15 L14 L13 L12 L11 L10 L9 L8 L7 L6 L5 L4 L3 L2 L1 DC R1 R2 R3 R4 R5 R6 R7 R8 R9 R10 R11 R12 R13 R14 R15
+> 10
+> 010
+> Importance (%)
+> U1
+> all
+> U2
+> X
+> U3
+
+(b) Tu
+
+Fig. 5. Subcarrier importance (A&∆ ϕ input) for Mall and 
+
+MU \{ Uk } 
+
+> X
+
+on (a) Ts and (b) Tu samples across target users Uk
+
+(marked differently). Left/right subcarriers are grouped into 15 bins ({Ls}15  
+
+> s=1
+
+and {Rs}15 
+
+> s=1
+
+) around the DC carrier ( dotted red line ). 
+
+[13] J. Yang, X. Chen, H. Zou, C. X. Lu, D. Wang, S. Sun, and L. Xie, “SenseFi: A library and benchmark on deep-learning-empowered WiFi human sensing,” Cell Press Patterns , vol. 4, no. 3, p. 100703, 2023. [14] Z. Yang, Y. Zhang, and Q. Zhang, “Rethinking Fall Detection With Wi-Fi,” IEEE Trans. Mob. Comput. , vol. 22, no. 10, pp. 6126–6143, 2023. [15] C. Zhang and W. Jiao, “ImgFi: A High Accuracy and Lightweight Human Activity Recognition Framework Using CSI Image,” IEEE Sensors J. , vol. 23, no. 18, pp. 21 966–21 977, 2023. [16] F. Meneghello, D. Garlisi, N. D. Fabbro, I. Tinnirello, and M. Rossi, “SHARP: Environment and Person Independent Activity Recognition With Commodity IEEE 802.11 Access Points,” IEEE Trans. Mobile Comput. , vol. 22, no. 10, pp. 6160–6175, 2023. [17] X. Chen, Y. Zou, C. Li, and W. Xiao, “A Deep Learning Based Lightweight HAR System Using Reconstructed WiFi CSI,” IEEE Trans. Human-Mach. Syst. , vol. 54, no. 1, pp. 68–78, 2024. [18] A. Hussain, Y. Chen, A. Ullah, and S. Zhang, “WiSigPro: Transformer for elevating CSI-based human activity recognition through attention mechanisms,” Expert Systems with Apps. , vol. 258, p. 124976, 2024. [19] J. A. Armenta-Garcia, F. F. Gonzalez-Navarro, and J. Caro-Gutierrez, “Wireless sensing applications with Wi-Fi Channel State Information, preprocessing techniques, and detection algorithms: A survey,” Elsevier Comput. Commun. , 2024.

@@ -1,0 +1,249 @@
+{
+  "date": "20260829-20260907",
+  "date_label": "2026-08-29 ~ 2026-09-07",
+  "generated_at": "2026-09-07 07:02:36 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2608.29927v1",
+      "route": "20260829-20260907/2608.29927v1-everybody-tracking-every-body",
+      "title": "Everybody Tracking Every Body",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 10.0,
+      "evidence": "利用第一视角相机与IMU进行多交互人体的三维姿态估计，属自我中心视觉研究",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2609.01908v1",
+      "route": "20260829-20260907/2609.01908v1-crb-guided-sensing-and-resource-allocation-for-human-pose-prediction-in-integrated-sensing-communication-and-computation-systems",
+      "title": "CRB-Guided Sensing and Resource Allocation for Human Pose Prediction in Integrated Sensing, Communication, and Computation Systems",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "在通感算融合系统中基于射频感知预测人体关节点位置，直接对应无线电信号进行人体几何感知的需求。",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2609.02376v1",
+      "route": "20260829-20260907/2609.02376v1-removing-speech-keeping-activities-a-privacy-firewall-for-acoustic-sensing-in-assisted-living",
+      "title": "Removing Speech, Keeping Activities: A Privacy Firewall for Acoustic Sensing in Assisted Living",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "用声学传感器而非摄像头监测日常活动，并通过去除语音实现隐私保护",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2608.29084v1",
+      "route": "20260829-20260907/2608.29084v1-uias-user-independent-3d-facial-anti-spoofing-via-multi-modal-wireless-signals",
+      "title": "UiAs: User-Independent 3D Facial Anti-Spoofing via Multi-modal Wireless Signals",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "利用毫米波与声学无线信号感知活体人脸响应，实现非摄像头射频人脸感知",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2608.30836v1",
+      "route": "20260829-20260907/2608.30836v1-channel-gains-to-captions-task-unified-multi-level-rf-sensing-with-vision-language-models",
+      "title": "Channel Gains to Captions: Task-Unified Multi-Level RF Sensing with Vision-Language Models",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "将毫米波/太赫兹信道增益映射为语义描述，提供可覆盖人体活动的任务统一射频感知框架。",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2608.31034v1",
+      "route": "20260829-20260907/2608.31034v1-xai2csi-interpreting-csi-with-explainable-ai-for-human-activity-recognition",
+      "title": "XAI2CSI: Interpreting CSI with eXplainable AI for Human Activity Recognition",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于Wi-Fi CSI的人体活动识别及可解释性分析",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2609.02452v1",
+      "route": "20260829-20260907/2609.02452v1-wiflow-estimating-optical-flow-using-wifi-channel-state-information",
+      "title": "WiFlow: Estimating Optical Flow using WiFi Channel State Information",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "利用WiFi信道状态信息而非相机估计光流，以避免摄像头带来的隐私担忧",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2609.02289v1",
+      "route": "20260829-20260907/2609.02289v1-if-it-moves-radar-knows-a-physics-aware-radar-transformer-for-class-agnostic-moving-object-detection",
+      "title": "If It Moves, Radar Knows: A Physics-Aware Radar Transformer for Class-Agnostic Moving-Object Detection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "用于雷达成像点云运动目标检测的物理感知Transformer，支撑毫米波雷达隐私感知主题",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2609.04848v1",
+      "route": "20260829-20260907/2609.04848v1-3d-radar-imaging-from-the-uav-nadir",
+      "title": "3D Radar Imaging from the UAV Nadir",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "利用低成本MIMO毫米波雷达与干涉SAR进行下视三维成像，属于毫米波雷达感知与三维重建技术。",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2608.29194v1",
+      "route": "20260829-20260907/2608.29194v1-rlg-tpv-radar--and-lidar-guided-tri-perspective-view-fusion-for-camera-radar-3d-object-detection",
+      "title": "RLG-TPV: Radar- and LiDAR-Guided Tri-Perspective View Fusion for Camera-Radar 3D Object Detection",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "毫米波雷达用于多模态三维感知中的几何引导",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2608.30896v1",
+      "route": "20260829-20260907/2608.30896v1-rad-r-a-raw-adc-radar-dataset-and-capture-invariant-ssm-for-hardware-fault-diagnosis",
+      "title": "Rad-R: A Raw-ADC Radar Dataset and Capture-Invariant SSM for Hardware-Fault Diagnosis",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "77GHz车载毫米波雷达原始ADC数据集与捕获不变状态空间模型，可提升雷达感知前的硬件故障鲁棒性。",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2609.00390v1",
+      "route": "20260829-20260907/2609.00390v1-neuropriv-adversarial-representation-learning-for-privacy-in-wearable-eeg-systems",
+      "title": "NeuroPriv: Adversarial Representation Learning for Privacy in Wearable EEG Systems",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过对抗表示学习抑制可穿戴脑电中的身份和人口属性泄露，属于无摄像头人体监测的隐私保护方法。",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2609.01036v1",
+      "route": "20260829-20260907/2609.01036v1-multigait-a-multi-sensor-multi-perspective-multi-session-biometric-inference-benchmark-and-its-dataset",
+      "title": "MultiGait: A Multi-Sensor Multi-Perspective Multi-Session Biometric Inference Benchmark and its Dataset",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "多传感器非摄像头步态识别与隐私风险基准，服务于无摄像头模式下人体监控的隐私评估。",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2609.02560v1",
+      "route": "20260829-20260907/2609.02560v1-stereo-4d-radar-for-3d-object-detection-integrating-geometric-alignment-and-absolute-velocity-estimation",
+      "title": "Stereo 4D Radar for 3D Object Detection: Integrating Geometric Alignment and Absolute Velocity Estimation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "处理4D雷达点云的杂波稀疏与径向速度模糊问题，可为基于点云的人体动作识别提供高质量表述",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    },
+    {
+      "paper_id": "2609.05325v1",
+      "route": "20260829-20260907/2609.05325v1-fire-livwo-robust-lidar-inertial-visual-wheel-odometry-via-failure-immune-mmwave-radar-enhancement",
+      "title": "FIRE-LIVWO: Robust LiDAR-Inertial-Visual-Wheel Odometry via Failure-Immune mmWave Radar Enhancement",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "利用4D毫米波雷达增强多模态里程计感知",
+      "first_seen_at": "2026-09-07 07:02:36 UTC",
+      "updated_at": "2026-09-07 07:02:36 UTC"
+    }
+  ]
+}
