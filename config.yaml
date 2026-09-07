@@ -59,6 +59,34 @@ subscriptions:
           source: manual
           note: ''
       updated_at: '2026-07-28T06:25:46.947Z'
+    - tag: mp
+      description: 毫米波雷达等隐私性方式进行人体重建、动作识别
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: millimeter wave radar
+          keyword_cn: 毫米波雷达
+          query: millimeter wave radar sensing
+        - keyword: RF-based human sensing
+          keyword_cn: 射频人体感知
+          query: radio frequency based human body perception
+        - keyword: human body reconstruction
+          keyword_cn: 人体重建
+          query: reconstruct human body geometry from radio signals
+        - keyword: human action recognition
+          keyword_cn: 人体动作识别
+          query: recognize human actions using radar point clouds
+        - keyword: privacy-preserving sensing
+          keyword_cn: 隐私保护感知
+          query: privacy preserving human monitoring without cameras
+      intent_queries:
+        - query: Non camera and privacy respectful human sensing techniques using mmWave radar
+          query_cn: 使用毫米波雷达的非摄像隐私友好人体感知技术
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-09-07T06:34:54.654Z'
 source_backends:
   arxiv:
     papers_table: arxiv_papers
