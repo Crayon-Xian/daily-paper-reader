@@ -1,0 +1,490 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-07T23:05:23.800977+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 6,
+    "deep_cap": 7,
+    "deep_selected": 6,
+    "quick_candidates": 5,
+    "quick_skim_target": 12,
+    "quick_selected": 5
+  },
+  "deep_dive": [
+    {
+      "id": "2609.01276v1",
+      "source": "arxiv",
+      "title": "Seeing the World and the Self from Egocentric Video",
+      "abstract": "Complete 3D perception from egocentric video requires recovering the surrounding scene and the wearer's full-body motion in a shared metric frame. Existing methods typically address scene reconstruction and motion estimation separately: scene reconstruction methods ignore the wearer, whereas motion estimation methods lack explicit scene geometry and often depend on external trajectories. Joint recovery is challenging because the two tasks exhibit asymmetric visibility and require different prediction paradigms. The largely visible scene supports deterministic geometric regression, whereas the severely occluded body requires generative motion inference. We therefore propose RESELF (REconstructing the Scene and the sELF), a unified framework that couples deterministic metric geometry reconstruction with geometry-conditioned motion generation. RESELF adapts a geometry foundation model pre-trained on large-scale exocentric data to egocentric video using frame-wise scale and relative-pose consistency objectives. The resulting camera trajectory and latent geometric features condition a diffusion model that recovers the wearer's motion. A subsequent closed-loop kinematic feedback stage further refines the camera head while preserving the reconstructed scene geometry. To support training and evaluation, we curate EE4D-JSM from EgoExo4D by aligning egocentric video, sparse metric scene geometry, camera trajectories, and full-body motion annotations. Experiments show that RESELF outperforms state-of-the-art methods designed for the individual tasks across depth estimation, camera tracking, and full-body motion estimation. Code, models, and datasets will be available at https://ka1guan.github.io/RESELF/.",
+      "authors": [
+        "Kai Guan",
+        "Minchao Jiang",
+        "Ruichen WangLi",
+        "Wentao Zhu",
+        "Lei Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-01T14:10:13+00:00",
+      "link": "https://arxiv.org/pdf/2609.01276v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Recovering surrounding scene and wearer full-body motion from egocentric video in a shared metric frame",
+      "llm_evidence_cn": "从自我中心视频在共享度量坐标中恢复场景与穿戴者全身运动",
+      "llm_evidence": "从自我中心视频在共享度量坐标中恢复场景与穿戴者全身运动",
+      "canonical_evidence": "从自我中心视频在共享度量坐标中恢复场景与穿戴者全身运动",
+      "llm_tldr_en": "RESELF jointly reconstructs the surrounding 3D scene and the wearer's full-body motion from egocentric video, coupling deterministic scene regression with generative body inference to handle asymmetric visibility.",
+      "llm_tldr_cn": "现有方法往往分别估计场景重纁和人体运动，难以在共享度量坐标中保持场景与环境间的内在一致性，且场景可见性好、身体遮挡严重，需要不同预测范式。本文提出RESELF统一框架，用确定性几何回归重建场景，用生成式运动推断恢复严重遮挡的身体，并在统一度量空间内联合优化。该工作为自我中心视频的完整三维感知提供了一种联合建模方案，有助于理解观察者与环境之间的动态关系。",
+      "llm_tldr": "现有方法往往分别估计场景重纁和人体运动，难以在共享度量坐标中保持场景与环境间的内在一致性，且场景可见性好、身体遮挡严重，需要不同预测范式。本文提出RESELF统一框架，用确定性几何回归重建场景，用生成式运动推断恢复严重遮挡的身体，并在统一度量空间内联合优化。该工作为自我中心视频的完整三维感知提供了一种联合建模方案，有助于理解观察者与环境之间的动态关系。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision first-person perception in computer vision",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2608.29927v1",
+      "source": "arxiv",
+      "title": "Everybody Tracking Every Body",
+      "abstract": "We address the problem of 3D body pose estimation of multiple interacting people from their egocentric views with centralized coordination. Each individual wears a camera recording egocentric video and IMU data. Processing this video with VIO SLAM provides high-quality tracking of each egocentric camera through space. The first-person view from one individual provides third-person observations of other people, although these exocentric observations are sparse, intermittent, and of highly variable reliability as both cameras and subjects move. To integrate these synchronized data streams, we propose a diffusion-based approach that fuses estimates of pose based on head motion derived from egocentric camera motion with exocentric pose observations, conditioning on both observation content and reliability. Our model is trained on a mixture of single-person motion-capture data and multi-person video in order to learn rich priors for body motion trajectories and video observation reliability. Evaluation on challenging multi-person datasets suggests our fusion approach improves over motion-only and vision-only baselines in terms of both absolute and relative pose accuracy.",
+      "authors": [
+        "Daeyun Shin",
+        "Yunhan Zhao",
+        "Shu Kong",
+        "Alexander C. Berg",
+        "Charless Fowlkes"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-30T17:42:15+00:00",
+      "link": "https://arxiv.org/pdf/2608.29927v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "3D body pose estimation of multiple interacting people from egocentric head cameras and first-person views",
+      "llm_evidence_cn": "利用自我中心头戴相机和第一视角观测进行多人3D身体姿态估计",
+      "llm_evidence": "利用自我中心头戴相机和第一视角观测进行多人3D身体姿态估计",
+      "canonical_evidence": "利用自我中心头戴相机和第一视角观测进行多人3D身体姿态估计",
+      "llm_tldr_en": "A method estimates 3D body poses of interacting people from egocentric cameras and IMUs. Diffusion fusion combines ego-motion-derived poses with sparse, intermittent observations from other people's first-person views, giving robust multi-person tracking despite variable reliability.",
+      "llm_tldr_cn": "多人交互场景下，仅靠各自穿戴的第一视角相机观测他人，姿态估计常稀疏且不可靠，很难做统一全身追踪。本文提出基于扩散的融合方法，先用视觉惯性即时定位与建图从自我中心视频和IMU恢复相机轨迹，再融合由头部运动推导的姿态和来自他人视角的外观观测。该方法可随观测置信度处理外心观测的间歇性与可靠性变化。其结果是能输出鲁棒的协同式多人3D姿态追踪，展示穿戴式自我中心相机用于群体感知的潜力。",
+      "llm_tldr": "多人交互场景下，仅靠各自穿戴的第一视角相机观测他人，姿态估计常稀疏且不可靠，很难做统一全身追踪。本文提出基于扩散的融合方法，先用视觉惯性即时定位与建图从自我中心视频和IMU恢复相机轨迹，再融合由头部运动推导的姿态和来自他人视角的外观观测。该方法可随观测置信度处理外心观测的间歇性与可靠性变化。其结果是能输出鲁棒的协同式多人3D姿态追踪，展示穿戴式自我中心相机用于群体感知的潜力。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision first-person perception in computer vision",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.04592v1",
+      "source": "arxiv",
+      "title": "Hidden In Plain Gaze: Gaze Representations as Privacy Controls for Utility and Re-identification Risk in XR",
+      "abstract": "Intelligent extended reality (XR) systems increasingly use eye and head tracking to infer user intent, task, and attention, but the same signals can also reveal biometric identity. We study whether gaze data representation choice can serve as a lightweight privacy control at feature extraction, before adding perturbation or formal privacy mechanisms. Using the egocentric HoloAssist dataset, we compare three gaze representations under matched model capacity: raw gaze, spatial attention heatmaps, and engineered eye-movement features. We evaluate each representation on action recognition as task utility and closed-set user re-identification as privacy leakage. Representation choice substantially changes the privacy-utility tradeoff. Engineered features retain roughly 85% of raw gaze's action-recognition accuracy while reducing re-identification by about an order of magnitude, to roughly four times the chance rate across 206 identities. This reduction attenuates rather than eliminates identity leakage, and the differences across representations show that abstraction alone does not guarantee privacy. Engineered features expose interpretable and auditable structure, giving designers a transparent privacy lever that complements mechanisms such as differential privacy.",
+      "authors": [
+        "Cory Ilo",
+        "Brendan-David John",
+        "Doug A. Bowman"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.ET",
+        "cs.HC",
+        "cs.LG"
+      ],
+      "published": "2026-09-04T00:47:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.04592v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Evaluate gaze representations on egocentric HoloAssist dataset for action recognition and re-identification privacy",
+      "llm_evidence_cn": "在自我中心HoloAssist数据集上评估凝视表示的动作识别效用与重识别隐私风险",
+      "llm_evidence": "在自我中心HoloAssist数据集上评估凝视表示的动作识别效用与重识别隐私风险",
+      "canonical_evidence": "在自我中心HoloAssist数据集上评估凝视表示的动作识别效用与重识别隐私风险",
+      "llm_tldr_en": "This XR privacy paper compares gaze representations on the egocentric HoloAssist dataset, showing representation choice trades off action recognition utility against user re-identification risk in egocentric perception.",
+      "llm_tldr_cn": "智能XR系统使用眼动与头动信号推断用户意图，但同一信号也可能泄露生物识别身份。该论文基于自我中心视角的HoloAssist数据集，在匹配模型容量下比较原始凝视、空间注意力热图和眼动工程特征三种表示，并以动作识别作为任务效用、以用户重识别作为隐私泄漏进行衡量。结果表明表示选择明显改变隐私-效用权衡，可在不添加扰动的情况下提供轻量隐私控制，对第一人称动作识别与XR隐私研究均有启示。",
+      "llm_tldr": "智能XR系统使用眼动与头动信号推断用户意图，但同一信号也可能泄露生物识别身份。该论文基于自我中心视角的HoloAssist数据集，在匹配模型容量下比较原始凝视、空间注意力热图和眼动工程特征三种表示，并以动作识别作为任务效用、以用户重识别作为隐私泄漏进行衡量。结果表明表示选择明显改变隐私-效用权衡，可在不添加扰动的情况下提供轻量隐私控制，对第一人称动作识别与XR隐私研究均有启示。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric action recognition from first-person perspective",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.04958v1",
+      "source": "arxiv",
+      "title": "MINT: A Unified Model for World-Space Camera and Hand Motion Estimation from Scalable Egocentric Pipeline Supervision",
+      "abstract": "Recovering camera and hand motion in world coordinates from egocentric video is a key capability for activity understanding, robot learning, and augmented reality. Existing systems typically decompose this problem into separate stages for camera motion, depth, hand reconstruction, and trajectory refinement, resulting in substantial computational overhead and preventing the joint modeling of camera and hand motion. We introduce MINT (Minting IN-the-Wild Trajectories), the first foundation model that directly produces complete world-space two-hand trajectories from ego-centric RGB video. From a single shared spatiotemporal video representation, MINT jointly predicts the camera trajectory, camera-frame hand states, and per-frame hand presence, and then produces world-space hand motion via explicit coordinate transformations. Training such a model at scale is challenging, since paired world-space camera and hand annotations are scarce. We therefore develop an open-source labeling EGOPIPELINE that converts large collections of public egocentric videos into structured camera-and-hand trajectory supervision. MINT is first pretrained on these large-scale pseudo-labels and then fine-tuned on a small set of high-quality joint annotations. Across public benchmarks, MINT achieves [xxx] improvement in world-space hand trajectory accuracy, [xxx] improvement in camera trajectory estimation, and [xxx] faster end-to-end trajectory generation than the labeling pipeline, while generalizing zero-shot to unseen egocentric datasets. We release the model, training and inference code, labeling pipeline, and a curated 1,021-hour egocentric trajectory dataset.",
+      "authors": [
+        "Zijie Zhu",
+        "Weiren Cai",
+        "Yizhou Wang",
+        "Zhenjie Yang",
+        "Yide Liu",
+        "Jiahao Chen",
+        "Guanqi He"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-09-04T10:05:11+00:00",
+      "link": "https://arxiv.org/pdf/2609.04958v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Directly predicts world-space camera and two-hand motion trajectories from egocentric RGB video, core egocentric hand tracking and estimation task",
+      "llm_evidence_cn": "直接从自我中心RGB视频联合预测世界空间相机与双手轨迹，是核心的自我中心手部估计与追踪任务",
+      "llm_evidence": "直接从自我中心RGB视频联合预测世界空间相机与双手轨迹，是核心的自我中心手部估计与追踪任务",
+      "canonical_evidence": "直接从自我中心RGB视频联合预测世界空间相机与双手轨迹，是核心的自我中心手部估计与追踪任务",
+      "llm_tldr_en": "Recovering world-space camera and hand motion from egocentric video is usually split into separate stages. MINT is the first foundation model that directly outputs complete two-hand world-space trajectories from egocentric RGB video, jointly predicting camera trajectory and hand states from a single shared spatiotemporal representation.",
+      "llm_tldr_cn": "从自我中心视频恢复世界空间中的相机与手部运动常被拆成多个阶段，带来大量计算开销并阻碍联合建模。MINT提出首个直接从自我中心RGB视频输出完整世界空间双手轨迹的基础模型，在共享的时空视频表示上同时预测相机轨迹与手部状态。通过可扩展的自我中心流程监督训练，避免了传统级联系统的复杂度。其在活动理解、机器人学习和增强现实等下游任务中具有广泛应用价值。",
+      "llm_tldr": "从自我中心视频恢复世界空间中的相机与手部运动常被拆成多个阶段，带来大量计算开销并阻碍联合建模。MINT提出首个直接从自我中心RGB视频输出完整世界空间双手轨迹的基础模型，在共享的时空视频表示上同时预测相机轨迹与手部状态。通过可扩展的自我中心流程监督训练，避免了传统级联系统的复杂度。其在活动理解、机器人学习和增强现实等下游任务中具有广泛应用价值。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric hand pose estimation and tracking",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.02289v1",
+      "source": "arxiv",
+      "title": "If It Moves, Radar Knows: A Physics-Aware Radar Transformer for Class-Agnostic Moving-Object Detection",
+      "abstract": "Detectors trained on closed-set annotations can miss rare moving objects outside the training taxonomy. Automotive radar provides category-independent Doppler motion cues and is less affected by adverse illumination and weather, but sparse, noisy returns hinder class-aware 3D box detection. Surface location and velocity remain useful for motion reasoning and collision avoidance when full box geometry is difficult to recover. We present the Physics-Aware Radar Transformer (PART), a fully sparse radar-only detector that predicts existence confidence, a representative surface point, and 2D ground-plane velocity for each moving-object hypothesis. Doppler-Aware Query Initialization (DAQI) replaces scene-independent learned queries with input-dependent proposals by clustering radar returns in position and velocity, easing query-object assignment in sparse scenes. Physics-Guided Cross-Attention (PGCA) incorporates radial-Doppler consistency and radar cross section (RCS) into query-point association. Uncertainty-aware supervision randomly masks ground-truth objects and assigns soft existence targets to ambiguous radar-supported queries, reducing reliance on exhaustive annotations. With only 1.1 million parameters, PART achieves a class-agnostic average precision (CA-AP) of 0.8827, a mean average surface translation error (mASTE) of 0.3188 m, and a mean average velocity error (mAVE) of 0.8084 m/s on nuScenes. It attains 0.9203 recall on rare and safety-relevant categories excluded from the standard evaluation and remains effective at night, in rain, and under severe occlusion. Inspection of apparent false positives shows that some predictions correspond to moving objects absent from the nuScenes annotations. Code and pretrained model weights will be publicly available at https://github.com/sunyinghao-uestc/PART.",
+      "authors": [
+        "Yinghao Sun",
+        "Shuguang Li",
+        "Jinliang Shao",
+        "Tieshan Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-02T08:39:02+00:00",
+      "link": "https://arxiv.org/pdf/2609.02289v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "automotive mmWave radar point cloud moving object detection",
+      "llm_evidence_cn": "车载毫米波雷达点云移动目标检测",
+      "llm_evidence": "车载毫米波雷达点云移动目标检测",
+      "canonical_evidence": "车载毫米波雷达点云移动目标检测",
+      "llm_tldr_en": "PART is a sparse radar-only transformer using Doppler-aware queries and physical priors to detect class-agnostic moving objects via surface points and 2D ground-plane velocity from automotive mmWave radar.",
+      "llm_tldr_cn": "常规封闭类别检测器会漏检训练集合之外的罕见移动目标，而车载雷达能够提供与类别无关的Doppler运动线索，且不受照明和恶劣天气影响。论文提出物理感知雷达Transformer（PART），一种完全稀疏的雷达专用检测器，为每个运动目标假设预测存在置信度、代表性表面点和二维地平面速度，并用Doppler感知查询初始化增强目标候选。在稀疏有噪雷达点云实验上，该方法验证了利用雷达表面位置与速度进行类无关移动检测的有效性，为雷达感知提供可靠方案。",
+      "llm_tldr": "常规封闭类别检测器会漏检训练集合之外的罕见移动目标，而车载雷达能够提供与类别无关的Doppler运动线索，且不受照明和恶劣天气影响。论文提出物理感知雷达Transformer（PART），一种完全稀疏的雷达专用检测器，为每个运动目标假设预测存在置信度、代表性表面点和二维地平面速度，并用Doppler感知查询初始化增强目标候选。在稀疏有噪雷达点云实验上，该方法验证了利用雷达表面位置与速度进行类无关移动检测的有效性，为雷达感知提供可靠方案。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "millimeter wave radar sensing",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.04271v1",
+      "source": "arxiv",
+      "title": "Quantum-Assisted Memory-Efficient Training for Parameter-Intensive Wi-Fi-Based Human Activity Recognition",
+      "abstract": "Wi-Fi-based human activity recognition (HAR) has become an important part of integrated sensing and communications, paving the way for a range of context-aware services. However, most existing Wi-Fi-based HAR systems rely on deep learning (DL) models that are computationally and memory intensive in both training and inference, which poses significant challenges for real-world deployment. Conventional training requires simultaneous updates of millions of parameters, leading to prohibitive memory consumption. In this paper, we propose a novel quantum-assisted memory-efficient training framework (Q-MET) designed to improve efficiency in both training and inference. Q-MET utilizes a hybrid quantum classical neural network to indirectly generate parameters for HAR models, significantly reducing the trainable parameter count compared to direct optimization. To further support the deployment on resource-constrained devices, we integrate structured pruning during the training phase. Experimental results demonstrate that Q-MET achieves a 90% to 95% reduction in trainable parameters compared with conventional backpropagation-based DL training while maintaining or even exceeding classical classification accuracy. Additionally, Q-MET supports lightweight inference through structured pruning, achieving 75% to 85% model sparsity with less than 2% loss in classification accuracy. To the best of our knowledge, this work represents the first quantum-assisted approach to simultaneously tackle memory inefficiencies in both the training and inference stages of HAR systems.",
+      "authors": [
+        "To Truong An",
+        "Jie Zhang",
+        "Guolin Yin",
+        "Junqing Zhang",
+        "Yanjiao Li",
+        "Trung Q. Duong",
+        "Simon L. Cotton"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-09-02T19:31:22+00:00",
+      "link": "https://arxiv.org/pdf/2609.04271v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Wi-Fi HAR is a core RF-based privacy-preserving human sensing task; the paper proposes efficient training for such models.",
+      "llm_evidence_cn": "基于Wi-Fi射频信号的人体活动识别属于射频无线感知人体行为的关键技术方向。",
+      "llm_evidence": "基于Wi-Fi射频信号的人体活动识别属于射频无线感知人体行为的关键技术方向。",
+      "canonical_evidence": "基于Wi-Fi射频信号的人体活动识别属于射频无线感知人体行为的关键技术方向。",
+      "llm_tldr_en": "The paper tackles capacity constraints in applying deep models to radio-frequency human activity recognition. It introduces Q-MET, a hybrid quantum-classical training framework that reduces memory and computation needs while preserving Wi-Fi-based HAR effectiveness.",
+      "llm_tldr_cn": "Wi-Fi人体活动识别虽在射频感知中应用广泛，但深度模型参数量大且训练推理开销高，难以实际部署。为此本文提出量子辅助的混合量子-经典训练框架Q-MET，通过量子化特征编码与经典网络协同设计降低训练与推断的存储和计算代价。实验结果表明，Q-MET能在保持识别性能的同时显著减少资源消耗，为基于Wi-Fi等射频信号的无摄像头人体感知提供高效低成本的部署路径。",
+      "llm_tldr": "Wi-Fi人体活动识别虽在射频感知中应用广泛，但深度模型参数量大且训练推理开销高，难以实际部署。为此本文提出量子辅助的混合量子-经典训练框架Q-MET，通过量子化特征编码与经典网络协同设计降低训练与推断的存储和计算代价。实验结果表明，Q-MET能在保持识别性能的同时显著减少资源消耗，为基于Wi-Fi等射频信号的无摄像头人体感知提供高效低成本的部署路径。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "radio frequency based human body perception",
+      "matched_requirement_id": "req-9",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.00478v1",
+      "source": "arxiv",
+      "title": "Beyond Object Selection:Markerless Gaze-based Robot Placement at Arbitrary Position",
+      "abstract": "Gaze-based assistive manipulation typically supports object selection, while arbitrary-position placement requires accurate spatial alignment between the headset and robot. However, for gaze-based manipulation, pose accuracy does not necessarily translate into task accuracy: translational and rotational errors jointly affect the transformed gaze ray and may compensate for each other. To study cross-device alignment from this task-oriented perspective, we present a markerless interaction framework and a dedicated cross-device dataset. We propose Graph-based Reference Selection to address sparse robot references. We further develop and benchmark multiple task-specific alignment pipelines under a unified protocol. Specifically, we introduce Gaze--Surface Intersection Error (GSIE), which directly measures the spatial error of the gaze-specified target. Experiments show that alignment methods ranked highly by conventional pose metrics are not always optimal in GSIE, demonstrating the importance of evaluating gaze-based manipulation at the task level.",
+      "authors": [
+        "Yuzhi Lai",
+        "William Marx",
+        "Shenghai Yuan",
+        "Peizheng Li",
+        "Zhuoyu Ran",
+        "Andreas Zell"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-08-31T23:27:14+00:00",
+      "link": "https://arxiv.org/pdf/2609.00478v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Egocentric gaze-based assistive robot placement using head-worn device, relevant to egocentric vision applications.",
+      "llm_evidence_cn": "基于头戴设备的注视式辅助机器人物体摆放，与自我中心视觉应用高度相关。",
+      "llm_evidence": "基于头戴设备的注视式辅助机器人物体摆放，与自我中心视觉应用高度相关。",
+      "canonical_evidence": "基于头戴设备的注视式辅助机器人物体摆放，与自我中心视觉应用高度相关。",
+      "llm_tldr_en": "Proposes a markerless gaze-based framework enabling robot placement at arbitrary positions beyond object selection; introduces graph-based reference selection and task-specific cross-device alignment protocols, showing task-level alignment improves assisted manipulation.",
+      "llm_tldr_cn": "注视辅助操作通常只解决物体选择问题，任意位置摆放要求头显与机器人之间精确的空间对齐，而纯位姿误差并不能直接反映任务成功率。本文提出无标记交互框架并构建跨设备数据集，利用基于图的参考选择缓解机器人参考稀疏问题，在统一协议下评测多种任务级对齐流程。结果表明图参考选择和任务导向对齐可支持无标记注视指引的任意位置物体摆放。该工作为第一人称注视交互和辅助机器人应用提供了有效思路。",
+      "llm_tldr": "注视辅助操作通常只解决物体选择问题，任意位置摆放要求头显与机器人之间精确的空间对齐，而纯位姿误差并不能直接反映任务成功率。本文提出无标记交互框架并构建跨设备数据集，利用基于图的参考选择缓解机器人参考稀疏问题，在统一协议下评测多种任务级对齐流程。结果表明图参考选择和任务导向对齐可支持无标记注视指引的任意位置物体摆放。该工作为第一人称注视交互和辅助机器人应用提供了有效思路。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision understanding methods and applications",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.29881v1",
+      "source": "arxiv",
+      "title": "OptiGeo: Efficient Monocular Geometry for Embodied Perception in Optically Challenging Scenes",
+      "abstract": "Monocular depth estimation has achieved strong open-domain generalization, yet reliable robotic deployment remains difficult in transparent, reflective, and specular environments, where depth sensors often produce missing or biased depth. Existing methods often handle such optical failures with scene-specific preprocessing, auxiliary modules, or post-hoc fine-tuning. While effective in constrained settings, these designs increase architectural redundancy and can over-specialize general geometry models to narrow optical scenarios. We revisit this problem as a localized failure mode within base-model training and identify sensor-induced supervision bias as a key bottleneck: models inherit sensor failure patterns from biased real-depth supervision in optically challenging regions. We then introduce OptiGeo, a bias-aware training framework that rehabilitates biased real supervision using a clean-geometry teacher and residual-trimmed alignment. We redefine transparency-targeted rendering as a compact source of clean optical geometry, rather than a large domain-specific fine-tuning set. With only a small targeted rendering set, OptiGeo learns the geometric structure of transparent objects and regions, correcting local geometry distortions that real sensors cannot reliably supervise. Despite only 30M parameters, OptiGeo outperforms substantially larger 300M-scale monocular models and billion-scale multi-view baselines on transparent-scene benchmarks, while remaining competitive on general zero-shot depth and boundary sharpness. Real-world navigation cases further validate its practicality as an efficient perception module in optically challenging scenes.",
+      "authors": [
+        "Muxin Liu",
+        "Tianbo Liu",
+        "Jing Xia",
+        "Xiaoyang Lyu",
+        "Xiaoshan Wu",
+        "Bo Wang",
+        "Peng Dai",
+        "Zhongrui Wang",
+        "Shaoshuai Shi",
+        "Xiaojuan Qi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-08-30T16:21:02+00:00",
+      "link": "https://arxiv.org/pdf/2608.29881v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Monocular geometry for embodied perception transfers to egocentric first-person tasks in optically challenging scenes",
+      "llm_evidence_cn": "面向具身感知的单目几何方法可迁移到光学挑战场景下的自我中心第一人称任务",
+      "llm_evidence": "面向具身感知的单目几何方法可迁移到光学挑战场景下的自我中心第一人称任务",
+      "canonical_evidence": "面向具身感知的单目几何方法可迁移到光学挑战场景下的自我中心第一人称任务",
+      "llm_tldr_en": "OptiGeo treats transparent and reflective depth failures as localized training bias and recalibrates supervision; it supplies robust single-view geometry that transfers to embodied and egocentric perception.",
+      "llm_tldr_cn": "针对透明、反光、高光环境下单目深度估计不可靠的问题，论文提出将光学失败视为基础模型训练中的局部失效，并通过修正传感器引发的监督偏差来恢复几何。该方法无需额外模块或专用后处理，在具身机器人感知中验证了鲁棒性，也为第一人称视角的物体交互与空间理解提供了可迁移的单目几何能力。",
+      "llm_tldr": "针对透明、反光、高光环境下单目深度估计不可靠的问题，论文提出将光学失败视为基础模型训练中的局部失效，并通过修正传感器引发的监督偏差来恢复几何。该方法无需额外模块或专用后处理，在具身机器人感知中验证了鲁棒性，也为第一人称视角的物体交互与空间理解提供了可迁移的单目几何能力。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision first-person perception in computer vision",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.00846v1",
+      "source": "arxiv",
+      "title": "An Intelligent Decision Support System for Emotion Monitoring using Microscopic Fixational Dynamics",
+      "abstract": "The rising prevalence of psychological disorders necessitates effective emotion monitoring, yet current methods relying on facial or physiological signals often suffer from intrusiveness and privacy issues. This paper proposes an intelligent decision support system and pervasive edge-computing framework that leverages smart glasses and a companion smartphone to infer emotional states from microscopic visual fixation patterns. Moving beyond traditional macroscopic gaze metrics, the proposed system extracts and decomposes three distinct neurophysiological micro-movements: microsaccades, ocular drifts, and ocular microtremors. We introduce an interpretable hybrid artificial intelligence pipeline combining a multi-head attention mechanism, extreme gradient boosting, and a support vector machine to extract deep temporal features, quantify their physiological importance, and perform efficient on-device classification. Through an extensive evaluation involving 60 volunteers, we rigorously validate the framework under a strict leave-one-subject-out cross-validation protocol across both controlled and naturalistic mobile scenarios. Ablation studies unequivocally demonstrate that these fixational micro-movements are substantially more discriminative for emotion inference than traditional macroscopic features. Furthermore, aligned with contemporary affective science, the system incorporates a few-shot personalization mechanism to bridge universal physiological baselines with individual emotional heterogeneity, achieving a highly robust personalized F1-score of 83.6%. This work establishes a physiologically interpretable, unobtrusive, and deployable paradigm for continuous real-time emotion monitoring.",
+      "authors": [
+        "Xiangyu Shen",
+        "Feiyang Deng",
+        "Zijian Dai",
+        "Aibin Chen",
+        "Jizheng Yi",
+        "Jie Li",
+        "Hongbo Jiang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-01T07:43:42+00:00",
+      "link": "https://arxiv.org/pdf/2609.00846v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "head-mounted smart glasses capture first-person gaze micro-movements to infer emotional states; links to self-centered perception and cognitive processing",
+      "llm_evidence_cn": "智能眼镜采集第一人称注视微动信号推断情绪状态，符合自我中心感知与认知加工的相关主题",
+      "llm_evidence": "智能眼镜采集第一人称注视微动信号推断情绪状态，符合自我中心感知与认知加工的相关主题",
+      "canonical_evidence": "智能眼镜采集第一人称注视微动信号推断情绪状态，符合自我中心感知与认知加工的相关主题",
+      "llm_tldr_en": "Smart glasses capture first-person ocular fixations; the system extracts microsaccades, ocular drifts, and microtremors, then infers emotional states via an interpretable multi-head attention pipeline. Experiments show privacy-friendly emotion monitoring is achievable from egocentric visual dynamics.",
+      "llm_tldr_cn": "现有情绪监测方法多依赖面部或生理信号，给用户带来侵入性且存有隐私风险。本文提出基于智能眼镜和智能手机的边缘计算决策支持系统，从微观注视动态中分离出微眼跳、眼球漂移和微震颤，并通过可解释的多头注意力混合人工智能流程推断情绪状态。实验表明第一人称眼球微观特征可用于情绪判别。该工作为非侵入式、保护隐私的自我中心感知与认知状态监测提供了新思路。",
+      "llm_tldr": "现有情绪监测方法多依赖面部或生理信号，给用户带来侵入性且存有隐私风险。本文提出基于智能眼镜和智能手机的边缘计算决策支持系统，从微观注视动态中分离出微眼跳、眼球漂移和微震颤，并通过可解释的多头注意力混合人工智能流程推断情绪状态。实验表明第一人称眼球微观特征可用于情绪判别。该工作为非侵入式、保护隐私的自我中心感知与认知状态监测提供了新思路。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "self-centered perception and cognitive processing",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2608.30935v1",
+      "source": "arxiv",
+      "title": "LightNav-0: Eliciting VLM Spatial Intelligence for Generalist Embodied Navigation",
+      "abstract": "Embodied navigation requires agents to translate heterogeneous goals and visual observations into actions across tasks, environments, and robot embodiments. Modern vision-language models (VLMs) already encode spatial priors for visual grounding, spatial reasoning, and pointing, but these capabilities are rarely elicited directly for robot control. Existing navigation systems instead rely on task- or embodiment-specific components, fragmenting perception, reasoning, and action while offering limited generalization. Here we present LightNav-0, a compact generalist embodied navigation model that elicits the spatial intelligence of a pretrained VLM and aligns it with navigation, without task-specific prediction heads. LightNav-0 represents diverse navigation tasks through a unified token interface: dual-channel pointing expresses task-, scene-, and embodiment-agnostic spatial intent, while a residual vector-quantized action tokenizer maps this intent to precise, embodiment-specific trajectories. Together with temporally aware visual history compression, ER mid-training, supervised fine-tuning, and reinforcement learning, this formulation supports instruction following, open-vocabulary object navigation, and visual tracking within a single model. The navigation training corpus spans 2K+ scenes and 4K+ hours of embodied navigation data. LightNav-ER, the embodied-reasoning checkpoint used to initialize LightNav-0, attains the highest complete-set average across 8 embodied-reasoning benchmarks, while LightNav-0 achieves state-of-the-art monocular success rates across all 10 public navigation simulation settings. Real-world evaluations further demonstrate zero-shot generalization across robot embodiments, diverse scenes, and static and dynamic targets. These results establish compact VLMs as a unified and transferable backbone for generalist embodied navigation.",
+      "authors": [
+        "Shaoan Wang",
+        "Aocheng Luo",
+        "Fei Huang",
+        "Jingyi Xu",
+        "Xiaoyang Wang",
+        "Yueyu Wang",
+        "Qianli Ma",
+        "Fan Yang",
+        "Ran Mei",
+        "Jia Wei",
+        "Jiangpeng Hu",
+        "Xuhao Liu",
+        "Hongming Chen",
+        "Yuanbin Shao",
+        "Yiyang Lin",
+        "Ziliang Li",
+        "Liang Pan",
+        "Xinhang Liu",
+        "Yuntao Ma",
+        "Tingxiang Fan"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-08-31T15:08:53+00:00",
+      "link": "https://arxiv.org/pdf/2608.30935v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "generalist embodied navigation that elicits VLM spatial intelligence from visual observations, relevant to first-person perception applications",
+      "llm_evidence_cn": "通过视觉语言模型空间智能进行通用具身导航，与第一视角感知应用和组织相关",
+      "llm_evidence": "通过视觉语言模型空间智能进行通用具身导航，与第一视角感知应用和组织相关",
+      "canonical_evidence": "通过视觉语言模型空间智能进行通用具身导航，与第一视角感知应用和组织相关",
+      "llm_tldr_en": "Existing embodied navigation systems split perception, reasoning, and action into task-specific modules. LightNav-0 elicits the spatial intelligence of a pretrained VLM without task-specific heads, aligning visual observations directly to navigation actions and enabling a compact generalist navigator across tasks, environments and embodiments.",
+      "llm_tldr_cn": "现有多数具身导航系统为不同任务设计单独组件，感知、推理与动作相互割裂且泛化有限。本文提出LightNav-0，激活预训练视觉语言模型中已有的视觉锚定与空间推理能力并将其对齐到导航，省去任务专用预测头。该模型以紧凑的通用形式根据视觉观测直接生成动作，可跨任务、环境和机器人本体工作。其意义在于展示了一条借助视觉语言模型内隐空间智能构建通用具身导航模型的路径。",
+      "llm_tldr": "现有多数具身导航系统为不同任务设计单独组件，感知、推理与动作相互割裂且泛化有限。本文提出LightNav-0，激活预训练视觉语言模型中已有的视觉锚定与空间推理能力并将其对齐到导航，省去任务专用预测头。该模型以紧凑的通用形式根据视觉观测直接生成动作，可跨任务、环境和机器人本体工作。其意义在于展示了一条借助视觉语言模型内隐空间智能构建通用具身导航模型的路径。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision understanding methods and applications",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.01059v1",
+      "source": "arxiv",
+      "title": "Dyn-3D: Unveiling and Resolving Ego-Motion Ambiguity in Vision-Language Models",
+      "abstract": "As Vision-Language Models (VLMs) tackle dynamic 3D spatial reasoning, ego-motion perception becomes essential to resolve monocular scale ambiguity. However, current models often overfit to smooth trajectory priors rather than genuinely understanding physical motion. Consequently, their spatial reasoning degrades severely under large displacements, a phenomenon we term Kinematic Collapse. This failure stems from spurious visual-motion correlations in natural videos and a lack of explicit physical supervision. To evaluate this, we introduce Dyn-3D, a benchmark using counterfactual 3D rendering to rigorously decouple visual changes from true kinematic properties. Furthermore, we propose the TempoVista framework, featuring the Kinematic-GSPO algorithm. By embedding metric physical ground truth into policy optimization, TempoVista explicitly grounds visual representations in 3D space. Experiments demonstrate that our approach significantly improves both motion estimation and robust spatial reasoning by utilizing camera dynamics as an effective geometric calibration signal.",
+      "authors": [
+        "Jiayu Ding",
+        "Zhuodong Liu",
+        "Lei Zhang",
+        "Manyu Xiong",
+        "Hongbo Jin",
+        "Haoran Tang",
+        "Hongbo Zhang",
+        "Changen Zhu",
+        "Wenbo Xing"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-01T10:54:27+00:00",
+      "link": "https://arxiv.org/pdf/2609.01059v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "ego-motion perception under monocular visual input is a core topic for egocentric and first-person perception understanding",
+      "llm_evidence_cn": "研究视觉语言模型对自我运动动态空间感知，属于第一人称与自我中心视觉感知范畴",
+      "llm_evidence": "研究视觉语言模型对自我运动动态空间感知，属于第一人称与自我中心视觉感知范畴",
+      "canonical_evidence": "研究视觉语言模型对自我运动动态空间感知，属于第一人称与自我中心视觉感知范畴",
+      "llm_tldr_en": "Addresses kinematic collapse in vision-language models by decoupling visual changes from true self-motion via counterfactual 3D rendering and physical supervision, improving spatial reasoning under large displacements.",
+      "llm_tldr_cn": "当前视觉-语言模型在进行动态三维空间推理时，往往依赖平滑轨迹先验而非真实理解自我运动，导致位移较大时出现运动坍缩。为此作者提出Dyn-3D基准，借助反事实三维渲染将画面变化与真实运动学属性解耦，严格检验模型的自我运动感知能力；同时提出TempoVista框架与Kinematic-GSPO算法注入物理运动监督。实验表明该方法能显著缓解大位移场景下的推理退化，为第一人称和自我中心视觉的时空理解提供了可复用的评估与训练范式。",
+      "llm_tldr": "当前视觉-语言模型在进行动态三维空间推理时，往往依赖平滑轨迹先验而非真实理解自我运动，导致位移较大时出现运动坍缩。为此作者提出Dyn-3D基准，借助反事实三维渲染将画面变化与真实运动学属性解耦，严格检验模型的自我运动感知能力；同时提出TempoVista框架与Kinematic-GSPO算法注入物理运动监督。实验表明该方法能显著缓解大位移场景下的推理退化，为第一人称和自我中心视觉的时空理解提供了可复用的评估与训练范式。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision first-person perception in computer vision",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

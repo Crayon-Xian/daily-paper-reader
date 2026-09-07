@@ -1,0 +1,442 @@
+Title: If It Moves, Radar Knows: A Physics-Aware Radar Transformer for Class-Agnostic Moving-Object Detection
+
+URL Source: https://arxiv.org/pdf/2609.02289v1
+
+Published Time: Thu, 03 Sep 2026 00:46:54 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# If It Moves, Radar Knows: A Physics-Aware Radar Transformer for Class-Agnostic Moving-Object Detection 
+
+Yinghao Sun, Shuguang Li ∗, Jinliang Shao and Tieshan Li 
+
+Abstract — Detectors trained on closed-set annotations can miss rare moving objects outside the training taxonomy. Automotive radar provides category-independent motion evi-dence through Doppler measurements and is less affected by adverse illumination and weather, but its sparse and noisy returns hinder conventional class-aware 3D box detection. For downstream motion reasoning and collision avoidance, surface location and velocity remain directly useful even when complete box geometry is difficult to recover. We present the Physics-Aware Radar Transformer (PART), a fully sparse radar-only detector that predicts an existence confidence, a representa-tive surface point, and 2D ground-plane velocity for each moving-object hypothesis. Doppler-Aware Query Initialization (DAQI) replaces scene-independent learned queries with input-dependent proposals obtained by clustering radar returns jointly in position and velocity, easing query–object assignment in sparse radar scenes. Physics-Guided Cross-Attention (PGCA) incorporates radial-Doppler consistency and radar cross section (RCS) information into query–point association. Uncertainty-aware supervision randomly masks ground-truth objects and assigns soft existence targets to ambiguous radar-supported queries, reducing reliance on exhaustive annotations. With only 1.1 million parameters, PART achieves a class-agnostic average precision (CA-AP) of 0.8827 , a mean average surface transla-tion error (mASTE) of 0.3188 m, and a mean average velocity error (mAVE) of 0.8084 m/s on nuScenes. It further attains 
+
+0.9203 recall on rare and safety-relevant categories excluded from the standard evaluation and remains effective at night, in rain, and under severe occlusion. Inspection of apparent false positives further shows that some PART predictions correspond to moving objects absent from the nuScenes annotations. Code and pretrained model weights will be publicly available at 
+
+https://github.com/sunyinghao-uestc/PART .
+
+I. I NTRODUCTION 
+
+Reliable environment perception remains essential for robotics and autonomous driving. Even in emerging end-to-end and vision-language-action systems, object detection, semantic segmentation, and occupancy prediction provide interpretable intermediate representations of the surrounding scene [1], [2]. Most existing detectors learn visual appear-ance or lidar geometry from closed-set annotations. Their reliability therefore depends on how well the training data cover the deployment environment. Rare or unseen moving objects may be suppressed as background, while adverse weather and unusual illumination can degrade sensor obser-vations [3], [4]. Additional data collection and simulation can broaden this coverage, but rare events remain costly to              
+
+> The authors are all with School of Automation Engineering of the University of Electronic Science and Technology of China (UESTC), Chengdu, Sichuan, P. R. China
+
+sunyinghao@uestc.edu.cn, lisg@uestc.edu.cn, jinliangshao@uestc.edu.cn, litieshan073@uestc.edu.cn 
+
+acquire and simulated measurements retain a gap from real sensors [5]. Unlike appearance, motion provides physical evidence shared across semantic categories. Radar is well suited to exploiting this cue because it directly measures radial velocity through the Doppler effect and is less sensitive to illumination and adverse weather than cameras and lidar. It can therefore indicate a moving object without first recog-nizing its appearance or semantic category. However, sparse returns, limited angular resolution, sidelobe noise, multi-path reflections, and the lack of direct tangential-velocity measurements make complete 3D box recovery difficult [6]. For downstream motion reasoning and collision avoidance, a representative surface location and object velocity remain directly useful even when complete box geometry cannot be reliably recovered. These outputs also align with radar sens-ing: object returns provide evidence around reflecting sur-faces, while Doppler measurements constrain object motion. This motivates a class-agnostic moving-object formulation tailored to the physical evidence provided by radar. We propose the Physics-Aware Radar Transformer (PART ), a radar-only detector that grounds object hypothe-ses in spatial–kinematic coherence, Doppler consistency, and radar cross section (RCS). For each hypothesis, PART predicts an existence confidence, a representative surface point, and a 2D ground-plane velocity. Its uncertainty-aware supervision reduces reliance on exhaustive annotations by preventing plausible radar-supported queries from being forced into the negative class. Our contributions are fourfold:  
+
+> •
+
+We develop PART, a fully sparse transformer for class-agnostic radar-only moving-object detection. It operates directly on sparse radar points without constructing dense bird’s-eye-view (BEV) features. With only 1.1 million parameters, PART provides a compact alterna-tive to existing camera- and lidar-based detectors.  
+
+> •
+
+We propose Doppler-Aware Query Initialization (DAQI), which forms input-dependent object queries from radar clusters coherent in position and velocity. Unlike scene-independent learned queries, these proposals are grounded in the current observations, reducing the burden of learning query–object correspondence from scratch.  
+
+> •
+
+We introduce Physics-Guided Cross-Attention (PGCA), which constrains each proposed 2D velocity using the measured radial Doppler speeds. Point-level RCS and cluster-level RCS statistics are further incorporated into arXiv:2609.02289v1 [cs.CV] 2 Sep 2026 (a) Powered wheelchair user in profile. (b) Powered wheelchair user, frontal view.       
+
+> (c) Personal-mobility rider behind a guardrail.
+> (d) Dog-walking pedestrian at night.
+> (e) Severely occluded crossing vehicle. (f) Severely occluded moving vehicle. (g) Rainy-night vehicle under head-light glare.
+> (h) Occluded crossing vehicle at night.
+> (i) UNANNOTATED vehicle in rain. (j) UNANNOTATED vehicle under headlight glare.
+> (k) UNANNOTATED oncoming vehi-cle in rain.
+> (l) UNANNOTATED motorcycle un-der headlight glare.
+
+Fig. 1: Qualitative results of PART in rare-object, adverse-condition, and incomplete-annotation cases. Bright-green, yellow, and gray boxes denote special-category moving objects excluded from the standard nuScenes evaluation, moving ground truth used in our evaluation, and other annotated objects, respectively. Teal markers show moving radar returns; blue markers and arrows show PART predicted surface points and ground-plane velocities, respectively. (a)–(d) present rare and safety-relevant objects; (e)–(h) cover occlusion, low illumination, rain, and headlight glare; and (i)–(l) show moving objects unannotated in nuScenes. These examples illustrate PART’s behavior across rare objects, adverse conditions, and incomplete annotations. the attention projections, providing motion and scatter-ing evidence for distinguishing object returns from radar noise and multipath reflections.  
+
+> •
+
+We devise uncertainty-aware supervision to reduce re-liance on exhaustive moving-object annotations. Ran-dom ground-truth masking and graded existence targets prevent plausible radar-supported queries from being treated as hard negatives, encouraging object existence to be inferred from physical radar evidence rather than annotation proximity. Despite its compact design, PART achieves a class-agnostic average precision (CA-AP) of 0.8827 , a mean average surface translation error (mASTE) of 0.3188 m, and a mean average velocity error (mAVE) of 0.8084 m/s on nuScenes [7]. It further attains 0.9203 recall on rare and safety-relevant categories excluded from the standard nuScenes evaluation and remains effective under adverse weather, low illumination, and severe occlusion. Fig. 1presents representative detections, including apparent false positives that correspond to moving objects absent from the nuScenes annotations. II. R ELATED WORK 
+
+A. Radar-Based 3D Object Detection 
+
+Most 3D object detectors use lidar [8]–[10], cameras [11]– [13], or their fusion [14]–[16], owing to their accurate geom-etry, rich appearance, or both. Radar is usually an auxiliary modality that supplies range and Doppler cues [15], [16]. Detection therefore remains dependent on lidar or camera when adverse weather or poor illumination degrades the primary input. Radar-only 3D detection has received less attention be-cause radar returns are sparse, noisy, and susceptible to multipath reflections. Existing methods adapt lidar-oriented designs using graph neural networks [17] or hybrid grid– point backbones [18]. AttentiveGRU [19] instead aggregates temporally correlated radar features, while RadarDistill [20] transfers lidar features to a radar-only student. These methods largely retain closed-set 3D box formula-tions inherited from lidar or depend on lidar supervision, leaving radar’s Doppler geometry and RCS evidence un-derused for target association. More fundamentally, a finite training taxonomy is unlikely to capture the full diversity of moving objects encountered in real-world driving. Long-tail and previously unseen targets can produce coherent radar clusters, while noise and multipath reflections may generate Fig. 2: Overview of the proposed PART. Blue paths encode radar points, while gold paths initialize and refine DAQI queries. similar patterns. Conventional closed-set supervision does not explicitly account for this ambiguity, limiting general-ization beyond the annotated categories. 
+
+B. Transformer-Based 3D Detectors 
+
+DETR formulates detection as set prediction with learned queries and bipartite matching, eliminating non-maximum suppression [21]. DETR3D extends this framework to multi-view 3D detection [22]. However, scene-independent queries provide limited spatial guidance in sparse 3D scenes. Lidar transformers adapt attention to sparse representa-tions. Voxel Transformer models interactions between vox-els [23], while SST avoids repeated downsampling [24]. CT3D refines proposals from local point features [25], whereas CenterFormer uses heatmap-derived center queries for spatial and temporal aggregation, reducing query op-timization difficulty [26]. However, global point attention has quadratic complexity and can be costly for dense lidar inputs [27], [28]. These lidar-oriented designs also omit radar-specific radial-Doppler constraints, while voxelization may fragment the limited returns from one object. III. PART As shown in Fig. 2, PART processes temporally aggre-gated radar points using a fully sparse encoder without voxelization or dense BEV features. DAQI initializes object queries from position–velocity coherent clusters, and stacked decoder layers refine them through query self-attention and PGCA conditioned on radial Doppler and RCS information. The final queries produce class-agnostic existence, surface-point, velocity, and auxiliary center predictions. Training combines point-wise surface supervision with uncertainty-aware existence targets. 
+
+A. Point Embedding and Encoder 
+
+PART aggregates six sweeps from all five nuScenes radars, compensates for ego motion, and transforms the returns to the current RADAR FRONT frame. Returns with a compen-sated Doppler-speed magnitude below 0.5 m/s or outside the 
+
+±54 m sensing region are removed. After motion filtering, the input contains fewer than 300 radar-point tokens in most nuScenes samples and never exceeds 800, making global point-wise attention computationally practical. Each retained point is represented by 16 features: 2D position, radar cross section (RCS), compensated velocity, six sensor-reported uncertainty terms, sweep timestamp, radial speed and direction, and a k-nearest-neighbor density estimate (k = 5 ). Position and velocity support DAQI, while Doppler and RCS provide physical inputs to PGCA. A three-layer MLP maps each vector to a 128-dimensional embedding. The encoder stacks three transformer blocks. Each block applies SE-inspired channel attention (SECA) [29], 2D RoPE multi-head self-attention (MHSA) [30], and a feed-forward network (FFN). SECA uses a shared point-wise gating MLP to produce input-dependent channel weights without sweep-level pooling. RoPE rotates queries and keys using normal-ized 2D coordinates, thereby encoding relative displacement in the attention scores while leaving values unchanged. Residual connections and layer normalization follow MHSA and the FFN. The encoded point features serve as keys and values for the decoder. 
+
+B. Doppler-Aware Query Initialization (DAQI) 
+
+Standard DETR-style detectors use scene-independent learned queries whose correspondence to sparse radar ob-servations must be established entirely during decoding. DAQI instead derives input-dependent queries by applying DBSCAN [31] in the joint [x, y, v x, v y ] space to form clusters of at least three retained radar points with similar positions and ego-compensated velocities. For cluster Ck, its centroid and pooled encoder feature initialize the query position and feature: 
+
+pk = 1
+
+|C k|
+
+X
+
+> i∈C k
+
+[xi, y i]T , qinit  
+
+> k
+
+= 1
+
+|C k|
+
+X
+
+> i∈C k
+
+fi, (1) where [xi, y i]T and fi denote the 2D position and encoded feature of radar point i, respectively. We deliberately zero-initialize the final layers of the offset heads, so that their Fig. 3: Detailed architecture of PGCA. initial position predictions coincide with the cluster centroid 
+
+pk.We use a fixed budget of K = 100 queries. During training, DAQI adds a balanced set of random queries away from DBSCAN proposals and annotated matching regions. At inference, only cluster-derived queries remain. These clus-ters are proposals rather than confirmed objects, since radar noise and multipath returns may also form coherent groups. PGCA (Section III-C) incorporates Doppler consistency and RCS evidence to help distinguish object returns from such interference. 
+
+C. Physics-Guided Cross-Attention (PGCA) 
+
+Each decoder layer first applies 2D RoPE MHSA to the active object queries. Let qk denote the resulting feature of query k. PGCA then associates each query with the encoded radar points using feature, Doppler, and RCS evidence. Its detailed architecture is shown in Fig. 3. Radar measures only the signed component of motion along the sensor line of sight (LOS). As illustrated in Fig. 4, each radar point provides motion evidence only along the radial direction, whereas a query proposes a 2D ground-plane velocity. Let ui denote the unit LOS vector from the source radar to point i at its measurement timestamp, rotated into the reference frame, and let vpt  
+
+> i
+
+denote the ego-compensated ground-plane velocity of the point. For query k, PGCA predicts a ground-plane velocity proposal and computes the discrepancy between their signed radial components: 
+
+vprop  
+
+> k
+
+= gprop (qk), rki =  vprop  
+
+> k
+
+− vpt 
+
+> i
+
+T ui . (2) A large residual rki indicates Doppler-inconsistent motion and reduces the association between query k and radar point 
+
+i.For a cluster-derived query, we retain the cluster-wise RCS mean, standard deviation, minimum, and maximum as 
+
+ρk = [ μk, σ k, c min  
+
+> k
+
+, c max  
+
+> k
+
+]T . The cluster statistics condition the query projection, while the point RCS ci conditions the key and value projections: 
+
+˜qk = WQ[qk; ρk], ˜ki = WK [fi; ci], ˜vi = WV [fi; ci].
+
+(3) This design allows PGCA to learn RCS compatibility from annotated radar returns without imposing a fixed scattering rule. 
+
+Fig. 4: Doppler-consistency geometry in PGCA. The 2D query velocity proposal vprop  
+
+> k
+
+and the ego-compensated point velocity vpt  
+
+> i
+
+are projected onto ui, the unit LOS direction from the source radar to point i at its measurement times-tamp. All vectors are expressed in the reference frame. The absolute difference between their signed LOS projections defines the residual rki used in cross-attention. Let R(p) denote the 2D RoPE transformation at position 
+
+p. For attention head h, the association weights are 
+
+αhki = softmax i
+
+[R(pk)˜ qhk ]T [R(pi)˜khi ]
+
+√dh
+
+− λv rki 
+
+!
+
+, (4) where dh is the head dimension and λv is learnable. RCS enters the feature similarity through the conditioned projec-tions, while the second term explicitly penalizes Doppler inconsistency. The attended radar message is 
+
+ohk =
+
+> N
+
+X
+
+> i=1
+
+αhki ˜vhi , mk = WO
+
+o1
+
+> k
+
+∥ · · · ∥ oHk
+
+ , (5) where N and H are the numbers of radar points and attention heads, respectively, WO is the output projection, and ∥
+
+denotes channel-wise concatenation. Finally, mk updates 
+
+qk through a residual connection and layer normalization, followed by an FFN with a second residual update. The output is passed to the next decoder layer, and the final-layer queries are decoded by the prediction heads. 
+
+D. Prediction Heads and Loss 
+
+After L = 3 decoder layers, four query-wise heads decode an existence confidence, a surface point, a center, and a ground-plane velocity: 
+
+ˆek = σ
+
+
+
+gexist (q(L) 
+
+> k
+
+)
+
+
+
+,
+
+ˆsk = pk + gq-surf 
+
+
+
+[q(L) 
+
+> k
+
+; pk]
+
+
+
+,
+
+ˆck = pk + gcenter 
+
+
+
+[q(L) 
+
+> k
+
+; pk]
+
+
+
+,
+
+ˆvk = vprop ,(L) 
+
+> k
+
++ g∆v
+
+
+
+m(L)
+
+> k
+
+
+
+.
+
+(6) The existence prediction is class-agnostic and indicates whether a query represents a moving object. The surface point is the primary localization output because radar returns commonly originate from object surfaces. The center head is Fig. 5: Surface-point targets are obtained by projecting radar points and query references onto the nearest location on the ground-truth box perimeter. retained for comparison under center-based protocols, while the velocity head refines the final PGCA velocity proposal. We match cluster-derived queries to moving ground-truth boxes using the surface distance 
+
+dkj = ˆsk − ΠBj (ˆ sk) 2 , (7) where ΠBj (·) projects a point onto the nearest location on the ground-plane perimeter of box Bj . As illustrated in Fig. 5, the same geometric construction is used to define both query-wise and point-wise surface targets. Each box supplies multiple matching slots. Hungarian matching followed by a per-box top-K rule yields the positive query–box pairs P;only DBSCAN-initialized queries can become hard positives. For t ∈ { q-surf , center , vel }, the regression losses share the form 
+
+Lt = 1
+
+|P| 
+
+X
+
+> (k,j )∈P
+
+ˆytk − yt∗  
+
+> kj 1
+
+, (8) with targets yq-surf ∗ 
+
+> kj
+
+= Π Bj (ˆ sk), ycenter ∗ 
+
+> kj
+
+= cj , and yvel ∗ 
+
+> kj
+
+=
+
+vj .The final encoder block also includes an auxiliary point-wise surface head. Before embedding, each radar point is associated with the most compatible ground-truth box according to angular, surface, velocity-direction, and radial-speed consistency. Let A denote the set of associated radar-point–box pairs (i, j ). For each (i, j ) ∈ A ,
+
+ˆsp 
+
+> i
+
+= ri + gp-surf (fi),
+
+sp∗ 
+
+> i
+
+= Π Bj (ri),
+
+Lp-surf = 1
+
+|A| 
+
+X
+
+> A
+
+ˆsp 
+
+> i
+
+− sp∗  
+
+> i1
+
+,
+
+(9) where ri is the normalized 2D position of radar point i in the reference radar frame. Its predicted offset is embedded and added to the encoder feature, providing local surface geometry for subsequent query decoding. The complete objective is 
+
+L = λexist Lexist + X
+
+> t
+
+λtLt + λp-surf Lp-surf , (10) where the λ terms are scalar loss weights and the sum-mation covers the three query-wise regression terms. The existence loss is defined by the uncertainty-aware supervision described next. 
+
+E. Uncertainty-Aware Supervision 
+
+The moving-object distribution in open-road driving has a long tail that cannot be exhaustively represented by a fixed taxonomy or a finite training set. Under conventional binary supervision, an unmatched radar-supported query is treated as a hard negative, even when its motion pattern may correspond to a rare or previously unseen object. To reduce this dependence on annotation coverage, we independently mask each ground-truth box with probability rmask = 0 .5
+
+during training. This procedure exposes PART to radar-supported object patterns without hard positive labels and encourages the existence head to rely on physical radar evidence rather than the object distribution covered by the training set. Let Qp contain DBSCAN queries matched to unmasked boxes within the association threshold, and let Qm contain queries matched to masked boxes. We further define Qu as DBSCAN queries containing at least five points that remain unmatched or fall outside the hard-positive threshold. Their existence targets are 
+
+yk =
+
+
+
+1, k ∈ Q p,
+
+0.75 , k ∈ Q m,
+
+0.5, k ∈ Q u,
+
+0, otherwise .
+
+(11) The target 0.75 retains evidence for a deliberately masked object without enabling regression, while 0.5 preserves the ambiguity between an unannotated object and radar clutter. We optimize the existence head using sigmoid focal loss with γ = 2 .0 and α = 0 .25 :
+
+Lexist = 1max( |Q p|, 1) 
+
+X
+
+> k∈Q t
+
+FL γ,α (zk, y k), (12) where zk = gexist (q(L) 
+
+> k
+
+) is the raw existence logit and Qt
+
+is the complete set of supervised queries. Only queries in 
+
+Qp contribute to the query-wise surface, center, and velocity losses. IV. E XPERIMENTS 
+
+A. Experimental Protocol and Setup 
+
+Dataset and protocol. We evaluate all methods on the offi-cial nuScenes validation split under a unified class-agnostic moving-object protocol. The evaluation region is limited to 
+
+±54 m in the RADAR FRONT frame. Eligible ground-truth objects have a ground-plane speed above 0.5 m/s; static targets are excluded. 
+
+Metrics. Since PART is class-agnostic, all methods fol-low a unified class-agnostic protocol. CA-AP is computed from the precision–recall curve. For matched true positives, mASTE evaluates radar-facing surface localization: PART measures the distance from its predicted surface point to the ground-truth box perimeter, whereas box-based baselines measure the distance between the predicted and ground-truth keypoints nearest the radar origin, each selected from four BEV corners and four edge centers. The latter jointly captures errors in box center, dimensions, and yaw. mATE and mAVE measure center and ground-plane velocity errors, respectively. 
+
+Implementation details. PART is trained for 30 epochs with Adam and a one-cycle schedule, using a batch size of eight per GPU, a peak learning rate of 1.2 × 10 −3, and a weight decay of 0.01 . Training uses GT sampling, flipping, rotation, and scaling. Sampled objects are radially perturbed, with up to 50% of their returns dropped, while individual points receive radial Gaussian noise with σ = 0 .5 m. GT sampling and random GT masking are disabled during the final five epochs. 
+
+B. Comparison with Existing 3D Detectors 
+
+Overall comparison. Table I compares PART with repre-sentative detectors under the unified class-agnostic protocol. With only 1.1M parameters, PART achieves a CA-AP of 
+
+0.8827 , within 0.0050 of the best result, and the lowest mASTE of 0.3188 m, outperforming the best fusion result by 0.0406 m. Among radar-input methods, PART improves RadarDistill by 0.1143 CA-AP and reduces mASTE by 
+
+58 .9% , while using approximately 97% fewer parameters and requiring no lidar supervision. PART also achieves a competitive mAVE of 0.8084 m/s, compared with 0.7499 m/s for RadarDistill. Compared with directly using DAQI propos-als, PART improves CA-AP by 0.2051 and reduces mASTE and mAVE by 45 .8% and 48 .7% , respectively. These gains confirm that the learned encoder and physics-guided decoder effectively refine the initial clustering proposals. Center lo-calization remains less accurate, reflecting the limited center evidence available from sparse radar returns. TABLE I: Overall comparison with existing 3D detectors.                                                                                         
+
+> Methods Params. Mod. 1CA-AP ↑mASTE ↓mAVE ↓mATE ↓
+> CenterPoint [9] 23M L0.8746 0.4988 0.7097 0.4542 VoxelNeXT [10] 31M L0.8801 0.4498 0.6166 0.4172 TransFusion-L [32] 32M L0.8865 0.3617 0.8600 0.2790 FCOS3D [11] 55M C0.5254 1.2274 2.6908 1.2818 PGD [12] 56M C0.5423 1.4796 2.7007 1.3143 PETR [13] 83M C0.6553 2.9833 2.3070 0.9340 BEVFusion [14] 157M LC 0.8877 0.3594 0.8138 0.2772
+> LiRaFusion [15] 23M LR 0.8865 0.5282 0.7556 0.4792 CRTFusion [16] 81M RC 0.8612 0.6699 0.7711 0.6206 DAQI Proposals 2N/A R0.6776 0.5884 1.5758 1.7806 PillarNet-R [33] 16M R0.7492 0.9586 0.8702 0.8919 RadarDistill [20] 41M R(L) 30.7684 0.7764 0.7499 0.7587
+> PART 1.1M R0.8827 0.3188 0.8084 1.4846 The best value is shown in bold ; the next two best distinct values are underlined.
+> 1L: lidar; C: camera; R: radar.
+> 2DAQI Proposals denotes the non-learned baseline that directly uses the DBSCAN cluster centroids and mean velocities as predictions.
+> 3RadarDistill uses a lidar teacher during training but requires only radar input at inference.
+
+Robustness under Challenging Conditions. We identify the Night and Rainy subsets from keywords in the official nuScenes scene descriptions; Night+Rainy denotes their in-tersection. As shown in Table II, PART achieves the highest CA-AP in all three subsets, exceeding the strongest competi-tor by 1.14 , 0.52 , and 0.29 percentage points, respectively. Relative to the best radar-input baseline, the margins widen to 7.68 , 9.20 , and 6.26 percentage points, respectively. PART also obtains the lowest mASTE in Rainy and Night+Rainy ,and the lowest mAVE in Night and Night+Rainy ; its night-time mASTE is only 0.0055 m above the best result. In 
+
+Night+Rainy , PART reduces mASTE by 32 .4% relative to the next-best method and mAVE by 55 .1% relative to the best competing radar-only inference method. These results demonstrate robust surface localization and velocity estima-tion under low-light and rainy conditions. 
+
+Rare and safety-relevant object categories. The stan-dard nuScenes benchmark excludes six categories relevant to moving-object detection: animals, wheelchairs, strollers, personal-mobility users, ambulances, and police vehicles. Due to space constraints, Table III reports four representative categories. Because eligible instances are scarce, we pool the official training and validation splits for this diagnostic analysis. For this table only, PART is retrained with the same standard nuScenes taxonomy as the baselines, without using ground-truth annotations from the excluded categories during training. This simulates real-world conditions in which long-tail moving objects lack annotations. Under class-agnostic matching, category-specific false positives are undefined; we therefore report recall and conditional errors. PART achieves recalls of 95 .71% , 95 .77% , 80 .39% , and 
+
+92 .31% for police vehicles, wheelchair users, personal-mobility users, and animals, surpassing the strongest alter-natives by 10 .00 , 7.69 , 33 .33 , and 30 .77 percentage points, respectively. Some lidar- and camera-based detectors retain reasonable recall on geometrically car-like police vehicles, but the gap to PART widens for the other categories, where several learned baselines detect no personal-mobility users or animals. Compared with raw DAQI proposals, PART raises recall from 47 .06% to 80 .39% for personal mobility and from 
+
+61 .54% to 92 .31% for animals. Conditional ASTE and AVE are not ranked because the large recall gaps across methods result in substantially different detected subsets. Neverthe-less, PART attains ASTEs of 0.1142 m and 0.1063 m for wheelchair and personal-mobility users, respectively. 
+
+C. Ablation and Additional Analyses 
+
+Component ablation. Table IV evaluates the main compo-nents of PART. Removing DAQI causes the largest degra-dation: CA-AP decreases by 0.2629 , while mASTE and mAVE increase by 0.3589 m and 0.4964 m/s, respectively, even with the relaxed score threshold. Special-category recall also falls from 0.9203 to 0.6646 . Removing PGCA degrades all metrics, supporting the joint use of radial-Doppler con-sistency and RCS information in cross-attention. Without uncertainty-aware supervision, CA-AP drops to 0.7948 and special-category recall falls sharply to 0.3899 , confirming its importance for generalization beyond the training taxon-omy. Finally, removing PWSH leaves CA-AP unchanged but increases mASTE and mAVE and reduces special-category recall, supporting the benefits of auxiliary point-wise geo-metric supervision. 
+
+Unannotated moving objects. During false-positive analy-sis, we observed that some predictions corresponded to visu-TABLE II: Robustness comparison under challenging conditions. 
+
+Method Mod. Night Rainy Night+Rainy CA-AP ↑ mASTE ↓ mAVE ↓ CA-AP ↑ mASTE ↓ mAVE ↓ CA-AP ↑ mASTE ↓ mAVE ↓
+
+CenterPoint L 0.8297 0.3398 0.7795 0.8528 0.5671 0.6729 0.8107 0.3410 0.7752 VoxelNeXT L 0.8361 0.3602 0.6968 0.8606 0.4503 0.5776 0.7861 0.4930 0.6652 TransFusion-L L 0.8584 0.2530 0.6825 0.8662 0.3699 0.8649 0.8520 0.3122 0.6785 FCOS3D C 0.5197 0.6753 2.0607 0.5203 1.3734 2.6823 0.4973 0.6429 2.3148 PGD C 0.6035 0.6951 2.6314 0.5114 1.2124 2.5529 0.5704 0.5634 1.9414 PETR C 0.6855 1.6695 2.3924 0.6978 3.2089 2.0686 0.7257 1.4301 2.5327 BEVFusion LC 0.8665 0.2533 0.7634 0.8754 0.4137 0.8732 0.8768 0.3278 0.7924 LiRaFusion LR 0.8816 0.3382 0.7499 0.8864 0.5756 0.8066 0.8793 0.3007 0.5332 CRTFusion CR 0.8683 0.4730 0.8821 0.8480 0.7055 1.0037 0.8863 0.3864 1.0296 DAQI Proposals R 0.7026 0.4104 1.2325 0.6789 0.7148 1.6498 0.6889 0.4865 1.2728 PillarNet-R R 0.8084 0.6602 0.9246 0.7711 1.0402 1.0874 0.8266 0.6334 0.6675 RadarDistill R(L) 0.8162 0.3763 0.8175 0.7996 0.8528 0.7877 0.8164 0.4360 2.0693 
+
+PART R 0.8930 0.2585 0.4651 0.8916 0.2811 0.7590 0.8892 0.2034 0.2994 
+
+TABLE III: Comparison on rare and safety-relevant object categories. 
+
+Method Mod. Police Vehicles ( NGT = 70 ) Wheelchair ( NGT = 260 ) Personal Mobility ( NGT = 102 ) Animal ( NGT = 13 )Recall ↑ ASTE ↓ AVE ↓ Recall ↑ ASTE ↓ AVE ↓ Recall ↑ ASTE ↓ AVE ↓ Recall ↑ ASTE ↓ AVE ↓
+
+CenterPoint L 0.8286 0.2633 0.5565 0.0346 0.4032 0.3574 0.1863 0.2331 0.4617 0.1538 0.0979 0.2048 VoxelNeXT L 0.8571 0.2872 0.6912 0.0115 0.3614 0.4953 0.1765 0.1923 0.3328 0.0000 N/A N/A TransFusion-L L 0.5857 0.2038 0.6645 0.0038 0.4830 0.1431 0.0196 0.1621 0.4392 0.0000 N/A N/A FCOS3D C 0.5286 0.5357 3.9904 0.0000 N/A N/A 0.0588 0.2053 3.3621 0.0000 N/A N/A PGD C 0.6143 0.4390 3.8758 0.0038 0.2099 1.5279 0.0392 0.1553 3.1449 0.0000 N/A N/A PETR C 0.0000 N/A N/A 0.0000 N/A N/A 0.0000 N/A N/A 0.0000 N/A N/A BEVFusion LC 0.6000 0.3038 0.6558 0.0000 N/A N/A 0.0000 N/A N/A 0.0000 N/A N/A LiRaFusion LR 0.5143 0.2723 0.7073 0.0077 0.1715 0.2147 0.0000 N/A N/A 0.0000 N/A N/A CRTFusion CR 0.6286 0.5582 0.7085 0.0192 0.2666 0.4843 0.1471 0.1546 1.6308 0.0000 N/A N/A DAQI Proposals R 0.8571 0.5975 2.3529 0.8808 0.3043 0.3735 0.4706 0.1331 1.3884 0.6154 0.1305 0.1662 PillarNet-R R 0.5588 0.4506 0.9424 0.0115 0.1633 0.2811 0.0000 N/A N/A 0.0000 N/A N/A RadarDistill R(L) 0.7647 0.3795 0.7877 0.0154 0.2340 0.4015 0.0000 N/A N/A 0.0000 N/A N/A 
+
+PART R 0.9571 0.2931 1.0003 0.9577 0.1142 0.2161 0.8039 0.1063 0.6048 0.9231 0.2266 0.1838 
+
+NGT denotes the number of eligible ground-truth boxes in each category. Gray cells indicate zero recall despite the presence of ground-truth instances. N/A denotes an undefined error because no true positive is available. 
+
+TABLE IV: Component ablation. 
+
+Exp. CA-AP ↑ mASTE ↓ mAVE ↓ Special Recall ↑4
+
+w/o DAQI 1 0.6198 0.6777 1.3048 0.6646 w/o PGCA 0.8815 0.3300 0.8348 0.8931 w/o UAS 2 0.7948 0.3149 0.8292 0.3899 w/o PWSH 3 0.8827 0.3607 0.8325 0.9182 
+
+FULL 0.8827 0.3188 0.8084 0.9203  
+
+> 1
+
+The w/o DAQI variant produces no valid detections at the standard score threshold 0.5; its fixed-threshold metrics are therefore reported at 0.2. CA-AP is computed over the full confidence sweep.  
+
+> 2
+
+UAS: Uncertainty-Aware Supervision.  
+
+> 3
+
+PWSH: Point-Wise Surface Head.  
+
+> 4
+
+Special recall is evaluated over the rare and safety-relevant object categories. 
+
+ally identifiable moving objects not annotated in nuScenes. Representative examples are shown in Fig. 1(i)–(l). All quan-titative metrics use the unmodified nuScenes annotations; visually apparent but unannotated moving objects therefore remain counted as false positives. Although this observation is qualitative, it suggests that PART can respond to motion-consistent radar evidence beyond the annotated target set, rather than relying solely on the object distribution repre-sented by the training labels. V. C ONCLUSION 
+
+This paper presented PART, a lightweight radar-only transformer for class-agnostic moving-object detection. In-stead of predicting semantic categories or complete 3D boxes, PART estimates an existence confidence, a represen-tative surface point, and ground-plane velocity from sparse radar returns. DAQI grounds object queries in spatially and kinematically coherent clusters, while PGCA incorporates radial-Doppler consistency and RCS information into cross-attention. Uncertainty-aware supervision further reduces de-pendence on exhaustive moving-object annotations. With only 1.1 million parameters, PART achieves a CA-AP of 
+
+0.8827 , an mASTE of 0.3188 m, and an mAVE of 0.8084 m/s on nuScenes. The results also show strong recall for rare and safety-relevant objects and stable performance under nighttime, rain, and severe occlusion. Qualitative analysis further identifies valid detections of moving objects that are unannotated in the dataset. PART currently requires sufficient radar support and mea-surable radial motion. Static objects and objects moving mainly in the tangential direction remain outside its present scope, as do semantic classification and complete 3D box estimation. Future work will extend PART toward temporal tracking and broader integration with general-purpose per-ception systems while retaining radar-only operation. ACKNOWLEDGMENT 
+
+This work was supported in part by the China Postdoc-toral Science Foundation under Grant 2026M791817, by the National Natural Science Foundation of China under Grants 62533006 and 52471376, and by the Center for HPC, University of Electronic Science and Technology of China. REFERENCES [1] J. Mao, S. Shi, X. Wang, and H. Li, “3D Object Detection for Au-tonomous Driving: A Comprehensive Survey,” International Journal of Computer Vision , vol. 131, no. 8, pp. 1909–1963, 2023. [2] L. Chen, P. Wu, K. Chitta, B. Jaeger, A. Geiger, and H. Li, “End-to-End Autonomous Driving: Challenges and Frontiers,” IEEE Transac-tions on Pattern Analysis and Machine Intelligence , vol. 46, no. 12, pp. 10 164–10 183, 2024. [3] L. Kong, Y. Liu, X. Li, R. Chen, W. Zhang, J. Ren, L. Pan, K. Chen, and Z. Liu, “Robo3D: Towards Robust and Reliable 3D Perception against Corruptions,” in 2023 IEEE/CVF International Conference on Computer Vision (ICCV) , October 2023, pp. 19 937–19 949. [4] N. Gray, M. Moraes, J. Bian, A. Wang, A. Tian, K. Wilson, Y. Huang, H. Xiong, and Z. Guo, “GLARE: A Dataset for Traffic Sign Detec-tion in Sun Glare,” IEEE Transactions on Intelligent Transportation Systems , vol. 24, no. 11, pp. 12 323–12 330, 2023. [5] L. Wang, G. Yang, L. Yang, X. Zhang, Z. Song, Y. Chen, L. Liu, J. Gao, Z. Li, Q. Yang, J. Li, L. Wang, W. Yu, C. Yang, B. Xu, W. Wang, and H. Liu, “S2R-Bench: A Sim-to-Real Evaluation Bench-mark for Autonomous Driving,” Scientific Data , vol. 12, no. 2006, 2025. [6] B. Yang, R. Guo, M. Liang, S. Casas, and R. Urtasun, “RadarNet: Exploiting Radar for Robust Perception of Dynamic Objects,” in 
+
+Proceedings of the European Conference on Computer Vision (ECCV) ,August 2020, pp. 496–512. [7] H. Caesar, V. Bankiti, A. H. Lang, S. Vora, V. E. Liong, Q. Xu, A. Krishnan, Y. Pan, G. Baldan, and O. Beijbom, “nuScenes: A Multimodal Dataset for Autonomous Driving,” in 2020 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , June 2020, pp. 11 618–11 628. [8] S. Shi, L. Jiang, J. Deng, Z. Wang, C. Guo, J. Shi, X. Wang, and H. Li, “PV-RCNN++: Point-Voxel Feature Set Abstraction With Local Vector Representation for 3D Object Detection,” International Journal of Computer Vision , vol. 131, no. 2, pp. 531–551, November 2022. [9] T. Yin, X. Zhou, and P. Kr¨ ahenb¨ uhl, “Center-based 3D Object De-tection and Tracking,” in 2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , June 2021, pp. 11 779–11 788. [10] Y. Chen, J. Liu, X. Zhang, X. Qi, and J. Jia, “VoxelNeXt: Fully Sparse VoxelNet for 3D Object Detection and Tracking,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition ,2023. [11] T. Wang, X. Zhu, J. Pang, and D. Lin, “FCOS3D: Fully convolu-tional one-stage monocular 3d object detection,” in Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV) Workshops , October 2021. [12] T. Wang, X. Zhu, J. Pang, and D. Lin, “Probabilistic and Geometric Depth: Detecting objects in perspective,” in Conference on Robot Learning (CoRL) 2021 , November 2021. [13] Y. Liu, T. Wang, X. Zhang, and J. Sun, “PETR: Position Embedding Transformation for Multi-view 3D Object Detection,” in Proceedings of the European Conference on Computer Vision (ECCV) , October 2022, pp. 531–548. [14] Z. Liu, H. Tang, A. Amini, X. Yang, H. Mao, D. L. Rus, and S. Han, “BEVFusion: Multi-Task Multi-Sensor Fusion with Unified Bird’s-Eye View Representation,” in 2023 IEEE International Conference on Robotics and Automation (ICRA) , May 2023, pp. 2774–2781. [15] J. Song, L. Zhao, and K. A. Skinner, “LiRaFusion: Deep Adaptive LiDAR-Radar Fusion for 3D Object Detection,” in 2024 IEEE Inter-national Conference on Robotics and Automation (ICRA) , May 2024, pp. 18 250–18 257. [16] J. Kim, M. Seong, and J. W. Choi, “CRT-Fusion: Camera, Radar, Temporal Fusion Using Motion Information for 3D Object Detection,” in Advances in Neural Information Processing Systems , vol. 37, December 2024, pp. 108 625–108 648. [17] P. Svenningsson, F. Fioranelli, and A. Yarovoy, “Radar-PointGNN: Graph Based Object Recognition for Unstructured Radar Point-cloud Data,” in 2021 IEEE Radar Conference , May 2021, pp. 1–6. [18] M. Ulrich, S. Braun, D. K¨ ohler, D. Niederl¨ ohner, F. Faion, C. Gl¨ aser, and H. Blume, “Improved Orientation Estimation and Detection with Hybrid Object Detection Networks for Automotive Radar,” in 2022 IEEE 25th International Conference on Intelligent Transportation Systems (ITSC) , September 2022, pp. 111–117. [19] L. Saini, M. Meuter, H. Tercan, and T. Meisen, “AttentiveGRU: Recurrent Spatio-Temporal Modeling for Advanced Radar-Based BEV Object Detection,” in 2025 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW) , June 2025, pp. 2406– 2415. [20] G. Bang, K. Choi, J. Kim, D. Kum, and J. W. Choi, “RadarDistill: Boosting Radar-based Object Detection Performance via Knowledge Distillation from LiDAR Features,” in 2024 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , June 2024, pp. 15 491–15 500. [21] N. Carion, F. Massa, G. Synnaeve, N. Usunier, A. Kirillov, and S. Zagoruyko, “End-to-End Object Detection with Transformers,” in 
+
+Proceedings of the European Conference on Computer Vision (ECCV) ,August 2020, pp. 213–229. [22] Y. Wang, V. C. Guizilini, T. Zhang, Y. Wang, H. Zhao, and J. Solomon, “DETR3D: 3D Object Detection from Multi-view Images via 3D-to-2D Queries,” in 5th Conference on Robot Learning (CoRL) , November 2021. [23] J. Mao, Y. Xue, M. Niu, H. Bai, J. Feng, X. Liang, H. Xu, and C. Xu, “Voxel Transformer for 3D Object Detection,” in 2021 IEEE/CVF International Conference on Computer Vision (ICCV) , October 2021, pp. 3144–3153. [24] L. Fan, Z. Pang, T. Zhang, Y.-X. Wang, H. Zhao, F. Wang, N. Wang, and Z. Zhang, “Embracing Single Stride 3D Object Detector with Sparse Transformer,” in 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , June 2022, pp. 8448–8458. [25] H. Sheng, S. Cai, Y. Liu, B. Deng, J. Huang, X.-S. Hua, and M.-J. Zhao, “Improving 3D Object Detection with Channel-wise Trans-former,” in 2021 IEEE/CVF International Conference on Computer Vision (ICCV) , October 2021, pp. 2723–2732. [26] Z. Zhou, X. Zhao, Y. Wang, P. Wang, and H. Foroosh, “CenterFormer: Center-Based Transformer for 3D Object Detection,” in Proceedings of the European Conference on Computer Vision (ECCV) , October 2022, pp. 496–513. [27] X. Wu, L. Jiang, P.-S. Wang, Z. Liu, X. Liu, Y. Qiao, W. Ouyang, T. He, and H. Zhao, “Point Transformer V3: Simpler, Faster, Stronger,” in 2024 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , June 2024. [28] I. Misra, R. Girdhar, and A. Joulin, “An end-to-end transformer model for 3d object detection,” in 2021 IEEE/CVF International Conference on Computer Vision (ICCV) , October 2021, pp. 2886–2897. [29] J. Hu, L. Shen, and G. Sun, “Squeeze-and-Excitation Networks,” in 2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , June 2018, pp. 7132–7141. [30] B. Heo, S. Park, D. Han, and S. Yun, “Rotary Position Embedding for Vision Transformer,” in Proceedings of the European Conference on Computer Vision (ECCV) , September 2024, pp. 289–305. [31] M. Ester, H.-P. Kriegel, J. Sander, and X. Xu, “A Density-based Algorithm for Discovering Clusters in Large Spatial Databases with Noise,” in Proceedings of the Second International Conference on Knowledge Discovery and Data Mining , 1996, pp. 226–231. [32] X. Bai, Z. Hu, X. Zhu, Q. Huang, Y. Chen, H. Fu, and C.-L. Tai, “TransFusion: Robust LiDAR-Camera Fusion for 3D Object Detection with Transformers,” in 2022 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , June 2022, pp. 1080–1089. [33] G. Shi, R. Li, and C. Ma, “Pillarnet: Real-time and high-performance pillar-based 3d object detection,” in Proceedings of the European Conference on Computer Vision (ECCV) , October 2022, p. 35–52.

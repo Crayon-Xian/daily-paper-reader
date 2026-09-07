@@ -1,0 +1,185 @@
+{
+  "date": "20260907",
+  "date_label": "",
+  "generated_at": "2026-09-07 23:14:12 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.01276v1",
+      "route": "202609/07/2609.01276v1-seeing-the-world-and-the-self-from-egocentric-video",
+      "title": "Seeing the World and the Self from Egocentric Video",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 10.0,
+      "evidence": "从自我中心视频在共享度量坐标中恢复场景与穿戴者全身运动",
+      "first_seen_at": "2026-09-07 23:14:12 UTC",
+      "updated_at": "2026-09-07 23:14:12 UTC"
+    },
+    {
+      "paper_id": "2608.29927v1",
+      "route": "202609/07/2608.29927v1-everybody-tracking-every-body",
+      "title": "Everybody Tracking Every Body",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "利用自我中心头戴相机和第一视角观测进行多人3D身体姿态估计",
+      "first_seen_at": "2026-09-07 23:14:12 UTC",
+      "updated_at": "2026-09-07 23:14:12 UTC"
+    },
+    {
+      "paper_id": "2609.04592v1",
+      "route": "202609/07/2609.04592v1-hidden-in-plain-gaze-gaze-representations-as-privacy-controls-for-utility-and-re-identification-risk-in-xr",
+      "title": "Hidden In Plain Gaze: Gaze Representations as Privacy Controls for Utility and Re-identification Risk in XR",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "在自我中心HoloAssist数据集上评估凝视表示的动作识别效用与重识别隐私风险",
+      "first_seen_at": "2026-09-07 23:14:12 UTC",
+      "updated_at": "2026-09-07 23:14:12 UTC"
+    },
+    {
+      "paper_id": "2609.04958v1",
+      "route": "202609/07/2609.04958v1-mint-a-unified-model-for-world-space-camera-and-hand-motion-estimation-from-scalable-egocentric-pipeline-supervision",
+      "title": "MINT: A Unified Model for World-Space Camera and Hand Motion Estimation from Scalable Egocentric Pipeline Supervision",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "直接从自我中心RGB视频联合预测世界空间相机与双手轨迹，是核心的自我中心手部估计与追踪任务",
+      "first_seen_at": "2026-09-07 23:14:12 UTC",
+      "updated_at": "2026-09-07 23:14:12 UTC"
+    },
+    {
+      "paper_id": "2609.02289v1",
+      "route": "202609/07/2609.02289v1-if-it-moves-radar-knows-a-physics-aware-radar-transformer-for-class-agnostic-moving-object-detection",
+      "title": "If It Moves, Radar Knows: A Physics-Aware Radar Transformer for Class-Agnostic Moving-Object Detection",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "车载毫米波雷达点云移动目标检测",
+      "first_seen_at": "2026-09-07 23:14:12 UTC",
+      "updated_at": "2026-09-07 23:14:12 UTC"
+    },
+    {
+      "paper_id": "2609.04271v1",
+      "route": "202609/07/2609.04271v1-quantum-assisted-memory-efficient-training-for-parameter-intensive-wi-fi-based-human-activity-recognition",
+      "title": "Quantum-Assisted Memory-Efficient Training for Parameter-Intensive Wi-Fi-Based Human Activity Recognition",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "基于Wi-Fi射频信号的人体活动识别属于射频无线感知人体行为的关键技术方向。",
+      "first_seen_at": "2026-09-07 23:14:12 UTC",
+      "updated_at": "2026-09-07 23:14:12 UTC"
+    },
+    {
+      "paper_id": "2609.00478v1",
+      "route": "202609/07/2609.00478v1-beyond-object-selectionmarkerless-gaze-based-robot-placement-at-arbitrary-position",
+      "title": "Beyond Object Selection:Markerless Gaze-based Robot Placement at Arbitrary Position",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "基于头戴设备的注视式辅助机器人物体摆放，与自我中心视觉应用高度相关。",
+      "first_seen_at": "2026-09-07 23:14:12 UTC",
+      "updated_at": "2026-09-07 23:14:12 UTC"
+    },
+    {
+      "paper_id": "2609.00846v1",
+      "route": "202609/07/2609.00846v1-an-intelligent-decision-support-system-for-emotion-monitoring-using-microscopic-fixational-dynamics",
+      "title": "An Intelligent Decision Support System for Emotion Monitoring using Microscopic Fixational Dynamics",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "智能眼镜采集第一人称注视微动信号推断情绪状态，符合自我中心感知与认知加工的相关主题",
+      "first_seen_at": "2026-09-07 23:14:12 UTC",
+      "updated_at": "2026-09-07 23:14:12 UTC"
+    },
+    {
+      "paper_id": "2609.01059v1",
+      "route": "202609/07/2609.01059v1-dyn-3d-unveiling-and-resolving-ego-motion-ambiguity-in-vision-language-models",
+      "title": "Dyn-3D: Unveiling and Resolving Ego-Motion Ambiguity in Vision-Language Models",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "研究视觉语言模型对自我运动动态空间感知，属于第一人称与自我中心视觉感知范畴",
+      "first_seen_at": "2026-09-07 23:14:12 UTC",
+      "updated_at": "2026-09-07 23:14:12 UTC"
+    },
+    {
+      "paper_id": "2608.29881v1",
+      "route": "202609/07/2608.29881v1-optigeo-efficient-monocular-geometry-for-embodied-perception-in-optically-challenging-scenes",
+      "title": "OptiGeo: Efficient Monocular Geometry for Embodied Perception in Optically Challenging Scenes",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向具身感知的单目几何方法可迁移到光学挑战场景下的自我中心第一人称任务",
+      "first_seen_at": "2026-09-07 23:14:12 UTC",
+      "updated_at": "2026-09-07 23:14:12 UTC"
+    },
+    {
+      "paper_id": "2608.30935v1",
+      "route": "202609/07/2608.30935v1-lightnav-0-eliciting-vlm-spatial-intelligence-for-generalist-embodied-navigation",
+      "title": "LightNav-0: Eliciting VLM Spatial Intelligence for Generalist Embodied Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "通过视觉语言模型空间智能进行通用具身导航，与第一视角感知应用和组织相关",
+      "first_seen_at": "2026-09-07 23:14:12 UTC",
+      "updated_at": "2026-09-07 23:14:12 UTC"
+    }
+  ]
+}
