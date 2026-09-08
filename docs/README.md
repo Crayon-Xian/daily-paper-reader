@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-07</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-08</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 11 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 5 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>6</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
     <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>5</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-07 23:14:12 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-08 22:20:29 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,7 +62,9 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共读11篇论文，精读6篇，重点聚焦自我中心视觉与多人追踪。最值得关注的是《Seeing the World and the Self from Egocentric Video》（满分）及《Everybody Tracking Every Body》，前者开创第一人称世界与自我联合建模，后者实现全场景目标统一追踪。建议优先精读这两篇高分工作，其余速读方向如注视动力学与3D视觉语言模型可作延伸。</p>
+<p>今日共速读5篇论文，无精读，覆盖ISAC与无线信号生成等方向。</p>
+<p>最值得关注MIMO-OFDM ISAC感知性能分析（7.0/10）与深度生成无线信号标注模型（7.0/10）。</p>
+<p>若时间有限，可优先浏览这两篇高分段速读，把握通信感知一体化与数据生成前沿。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -71,12 +73,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">6 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Seeing the World and the Self from Egocentric Video">Seeing the World and the Self from Egocentric Video</span></li><li><span class="dpr-home-dashboard-paper-title" title="Everybody Tracking Every Body">Everybody Tracking Every Body</span></li><li><span class="dpr-home-dashboard-paper-title" title="Hidden In Plain Gaze: Gaze Representations as Privacy Controls for Utility and Re-identification Risk in XR">Hidden In Plain Gaze: Gaze Representations as Privacy Controls for Utility and Re-identification Risk in XR</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">egocentric <strong>4</strong></span><span class="dpr-home-dashboard-tag">mp <strong>2</strong></span></div>
+
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -87,9 +89,9 @@
     <strong class="dpr-home-dashboard-count">5 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Beyond Object Selection:Markerless Gaze-based Robot Placement at Arbitrary Position">Beyond Object Selection:Markerless Gaze-based Robot Placement at Arbitrary Position</span></li><li><span class="dpr-home-dashboard-paper-title" title="An Intelligent Decision Support System for Emotion Monitoring using Microscopic Fixational Dynamics">An Intelligent Decision Support System for Emotion Monitoring using Microscopic Fixational Dynamics</span></li><li><span class="dpr-home-dashboard-paper-title" title="Dyn-3D: Unveiling and Resolving Ego-Motion Ambiguity in Vision-Language Models">Dyn-3D: Unveiling and Resolving Ego-Motion Ambiguity in Vision-Language Models</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Delay-Doppler Sensing Performance Analysis for MIMO-OFDM ISAC Systems">Delay-Doppler Sensing Performance Analysis for MIMO-OFDM ISAC Systems</span></li><li><span class="dpr-home-dashboard-paper-title" title="A Deep Generative Model for Synthesizing Labeled Wireless Signals">A Deep Generative Model for Synthesizing Labeled Wireless Signals</span></li><li><span class="dpr-home-dashboard-paper-title" title="CQF-HMR: Continuous Quaternion Flows for Probabilistic 3D Human Mesh Recovery from a Single Image">CQF-HMR: Continuous Quaternion Flows for Probabilistic 3D Human Mesh Recovery from a Single Image</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">egocentric <strong>5</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">mp <strong>3</strong></span><span class="dpr-home-dashboard-tag">egocentric <strong>2</strong></span></div>
 </section>
 </div>
 

@@ -1,0 +1,908 @@
+Title: Delay-Doppler Sensing Performance Analysis for MIMO-OFDM ISAC Systems
+
+URL Source: https://arxiv.org/pdf/2609.00559v1
+
+Published Time: Wed, 02 Sep 2026 00:32:22 GMT
+
+Number of Pages: 6
+
+Markdown Content:
+# Delay-Doppler Sensing Performance Analysis for MIMO-OFDM ISAC Systems 
+
+Peishi Li †, Rang Liu ‡, Qian Liu †, and Ming Li † 
+
+> †
+
+Dalian University of Technology, Dalian, Liaoning 116024, China E-mail: lipeishi@mail.dlut.edu.cn, {mli, qianliu }@dlut.edu.cn  
+
+> ‡
+
+Friedrich-Alexander-University Erlangen-Nuremberg (FAU), Erlangen 91058, Germany E-mail: rang.liu@fau.de 
+
+Abstract —In communication-centric integrated sensing and communication (ISAC), delay-Doppler sensing reuses data-bearing orthogonal frequency division multiplexing (OFDM) signals rather than dedicated radar probing waveforms. Conse-quently, the resulting range-Doppler map (RDM) is shaped not only by target parameters, but also by communication-symbol randomness and, in multi-antenna transmissions, by spatial beamforming. While existing analyses have largely focused on single-antenna OFDM-ISAC, the delay-Doppler sensing behavior of multi-antenna OFDM-ISAC remains insufficiently understood. This paper analyzes a multi-input multi-output (MIMO)-OFDM-ISAC system in which multiple data streams jointly illuminate a sensing target. We derive second-order moment expressions for the RDM under matched filtering (MF) and reciprocal filtering (RF), and use them to characterize the dynamic range (DR). The analysis reveals two key multi-stream effects. First, under MF, the random superposition of multiple beamformed streams creates an additional RDM floor beyond the modulation-dependent and receiver-noise terms; therefore, constant-modulus signaling no longer eliminates the data-induced pedestal as in single-antenna OFDM-ISAC. Second, under RF, the matched-angle data-induced floor is removed, but the noise floor is amplified according to the reciprocal-power statistics of the beamformed target illumination. These results show that the user-target angular geometry directly governs the MF/RF tradeoff: MF is more robust under weak illumination, whereas RF can achieve a higher DR when reciprocal-noise amplification is mild. Numerical results validate the analysis and demonstrate the distinct geometry-dependent behaviors of MF and RF. 
+
+Index Terms —Integrated sensing and communication (ISAC), orthogonal frequency division multiplexing (OFDM), range-Doppler map, temporal-frequency filtering, dynamic range. 
+
+I. I NTRODUCTION 
+
+Integrated sensing and communication (ISAC) enables wire-less networks to support data transmission and environmen-tal sensing within a unified platform by sharing spectrum, hardware, and signal processing resources [1], [2]. Among various ISAC architectures, communication-centric signaling is particularly attractive, as it directly reuses data-bearing communication waveforms for sensing and thus preserves compatibility with existing wireless standards. This reuse, however, makes the sensing waveform random rather than deterministic. In orthogonal frequency division multiplexing (OFDM)-based ISAC, the delay-Doppler response, or equiv-alently the range-Doppler map (RDM), is therefore affected not only by target parameters, but also by the statistics of the information-bearing symbols and the adopted temporal-frequency filtering operation [1], [3]. The impact of data randomness has recently been studied for single-antenna OFDM-ISAC, where constellation moments, pulse shaping, and filtering operations have been shown to determine the average sidelobe pedestal and delay-Doppler response [3], [4]. Related studies have further considered more general propagation conditions, such as targets with delays beyond the cyclic prefix (CP) duration [5], [6]. How-ever, these results do not directly characterize multi-antenna communication-centric ISAC. In a multi-input multi-output (MIMO)-OFDM-ISAC system, the sensing target is illumi-nated by a beamformed superposition of multi-user data symbols. Hence, the effective sensing waveform along the target direction is jointly shaped by symbol randomness and spatial beamforming across antennas, users, and subcarriers. Existing multi-antenna ISAC studies mainly focus on joint target-parameter estimation, range-Doppler sidelobe suppres-sion, and spatial-domain designs, such as beampattern shap-ing, transmit covariance optimization, hybrid beamforming, and communication-sensing tradeoff balancing [7]–[11]. How such random beamformed OFDM signals behave after delay-Doppler processing remains insufficiently understood. Motivated by this gap, this paper analyzes the delay-Doppler sensing performance of a MIMO-OFDM ISAC sys-tem. We derive range-Doppler map (RDM) second-order moment expressions under matched filtering (MF) and re-ciprocal filtering (RF), and characterize the dynamic range (DR). The analysis reveals that MF and RF respond to multi-stream random illumination in fundamentally different ways. Under MF, the RDM floor consists of multi-stream-induced, modulation-dependent, and receiver-noise contribu-tions, so constant-modulus signaling no longer removes the data-induced pedestal as in single-antenna OFDM-ISAC. Un-der RF, the matched-angle data-induced floor vanishes, but the receiver noise is amplified by reciprocal-power moments of the beamformed illumination. These results show that the MF/RF tradeoff is strongly geometry-dependent: MF is more robust under weak or cancellation-prone illumination, whereas RF can achieve a higher DR when reciprocal-noise amplification is mild. Numerical results validate the theoretical expressions and demonstrate how user-target angular geometry shapes the distinct robustness behaviors of MF and RF. arXiv:2609.00559v1 [eess.SP] 1 Sep 2026 II. S IGNAL MODEL AND DELAY -D OPPLER PROCESSING 
+
+We consider a downlink monostatic MIMO-OFDM ISAC transceiver, where an Nt-antenna transmit array sends K data-bearing streams over an OFDM frame with N subcarriers and 
+
+M OFDM symbols. The same OFDM frame is reused for both downlink communication and target sensing, and no dedicated sensing signals are inserted. On the (n, m )-th resource element, the frequency-domain transmit vector is modeled as 
+
+xn,m = Wnsn,m , (1) where Wn = [wn, 1, . . . , wn,K ] ∈ CNt×K denotes the transmit beamforming matrix on subcarrier n, and sn,m =[sn,m, 1, . . . , s n,m,K ]T ∈ CK collects the K data symbols transmitted on this resource element. The beamforming ma-trices are treated as deterministic over the considered OFDM frame, while the data symbols are assumed to be indepen-dent across users, subcarriers, and OFDM symbols, with 
+
+E{sn,m } = 0 and E{sn,m sHn,m } = IK . Each symbol is proper, i.e., E{s2
+
+> n,m,k
+
+} = 0, and has a common fourth-order moment E{| sn,m,k |4} = μ4. The parameter μ4 captures modulation-dependent randomness under unit average-power normalization. In particular, constant-modulus constellations satisfy μ4 = 1 , whereas circular Gaussian signaling gives 
+
+μ4 = 2 . These assumptions include standard proper QAM and PSK constellations [3]. Let a(θ) ∈ CNt denote the transmit steering vector toward angle θ. The beamformed illumination along direction θ on the (n, m )-th resource element is defined as 
+
+bn,m (θ) , aH (θ)xn,m . (2) We consider a single point target with angle θ0, delay 
+
+τ0, Doppler frequency fd,0, and reflection coefficient α0 ∼CN (0 , σ 2
+
+> α
+
+). The echo is collected by a co-located single-antenna sensing receiver. This receive configuration is adopted to isolate the transmit-side random illumination effect induced by multi-user beamformed OFDM transmissions, without in-troducing additional receive-array beamforming effects. As-suming that the target round-trip delay does not exceed the CP duration, the received echo after CP removal and fast Fourier transform (FFT) is given by 
+
+yn,m = α0e−2πn ∆f τ0 e2πmf d,0Ts bn,m (θ0) + zn,m , (3) where zn,m ∼ CN (0 , σ 2 
+
+> z
+
+) is the receiver noise, σ2 
+
+> z
+
+= N0∆f ,
+
+N0 denotes the noise power spectral density, and Ts is the OFDM symbol duration including the CP. Thus, although the receiver has a single antenna, the target echo still depends on the target angle through the transmit-side beamformed illumination. Since the target echo in (3) is multiplied by the random factor bn,m (θ0), delay-Doppler processing should account for the data-induced fluctuation of the effective sensing waveform. In a monostatic communication-centric ISAC system, the sens-ing processor has access to the transmitted data symbols and beamforming matrices. However, the target angle is generally unknown a priori. We therefore introduce a general angular hypothesis θ and construct a temporal-frequency filtering 
+
+qn,m (θ) from the hypothesized beamformed illumination. For a given angular hypothesis θ, the RDM obtained with 
+
+qn,m (θ) is 
+
+χθ(l, ν ) = 1
+
+√M N 
+
+> M−1
+
+∑ 
+
+> m=0
+> N−1
+
+∑
+
+> n=0
+
+yn,m qn,m (θ)e 2πN nl e− 2πM mν .
+
+(4) This paper considers two representative filters. The MF 
+
+qMF 
+
+> n,m
+
+(θ) = b∗
+
+> n,m
+
+(θ) matches the received echo to the hypoth-esized beamformed illumination, whereas the RF qRF 
+
+> n,m
+
+(θ) = 1/b n,m (θ) normalizes the received echo by the hypothesized illumination. The difference between MF and RF can be seen by substitut-ing (3) into (4). MF yields the target factor bn,m (θ0)b∗
+
+> n,m
+
+(θ),which reduces to the random illumination power |bn,m (θ0)|2
+
+at the matched angle. Hence, MF preserves illumination fluc-tuations in the RDM and may create a signal-induced floor. By contrast, RF yields the target factor bn,m (θ0)/b n,m (θ), which becomes one at the matched angle and therefore cancels the data-induced target fluctuation. The price is that the receiver noise is scaled by 1/b n,m (θ0) at the matched angle, making RF sensitive to the reciprocal-power statistics of the beamformed illumination. Thus, MF avoids reciprocal noise amplification but retains a residual signal-induced floor, whereas RF re-moves the matched-angle target fluctuation at the cost of possible noise enhancement. The following section quantifies these effects through the RDM second-order moments for a general angular hypothesis θ.III. S ECOND -O RDER RDM M OMENT ANALYSIS 
+
+For a given angular hypothesis θ, the RDM output χθ (l, ν )
+
+is a complex random variable determined by the target coef-ficient, the receiver noise, and the random beamformed data symbols. Since α0 and zn,m are zero mean and independent of the transmitted symbols, both MF and RF yield E{χθ (l, ν )} =0. Hence, the delay-Doppler sensing behavior is characterized through the second-order moments derived below. 
+
+A. MF Processing 
+
+Under MF with angular hypothesis θ, (4) can be decom-posed as 
+
+χMF  
+
+> θ
+
+(l, ν ) = α0ΓMF  
+
+> θ
+
+(l, ν ) + wMF  
+
+> θ
+
+(l, ν ), (5) where 
+
+ΓMF  
+
+> θ
+
+(l, ν ) = 1
+
+√M N 
+
+> M−1
+
+∑ 
+
+> m=0
+> N−1
+
+∑
+
+> n=0
+
+un,m (θ0, θ )eφ n,m , (6a) 
+
+wMF  
+
+> θ
+
+(l, ν ) = 1
+
+√M N 
+
+> M−1
+
+∑ 
+
+> m=0
+> N−1
+
+∑
+
+> n=0
+
+zn,m b∗
+
+> n,m
+
+(θ)e 2πN nl e− 2πM mν , (6b) and φn,m = 2πN n(l − ˜l0) + 2πM m(˜ ν0 − ν), ˜l0 = τ0N ∆f denotes the normalized delay, ˜ν0 , fd,0M T s denotes the normalized Doppler, and un,m (θ0, θ ) = bn,m (θ0)b∗
+
+> n,m
+
+(θ).To make the angular dependence explicit, define βn,k (θ) ,
+
+aH (θ)wn,k so that bn,m (θ) = ∑Kk=1 βn,k (θ)sn,m,k . We fur-ther define 
+
+ρn(θ0, θ ) , E{un,m (θ0, θ )} =
+
+> K
+
+∑
+
+> k=1
+
+βn,k (θ0)β∗
+
+> n,k
+
+(θ), (7a) 
+
+κn(θ0, θ ) ,
+
+> K
+
+∑
+
+> k=1
+
+|βn,k (θ0)|2|βn,k (θ)|2. (7b) For notational simplicity, let ρn(θ) = ρn(θ, θ ), κn(θ) =
+
+κn(θ, θ ). With the aid of these definitions, the following proposition quantifies the MF-based RDM second moment by decomposing it into a coherent delay-Doppler response and three delay-Doppler-independent background contributions in-duced by multi-stream superposition, modulation randomness, and receiver noise, respectively. 
+
+Proposition 1 The MF-based RDM second moment under an arbitrary angular hypothesis θ is 
+
+E{|χMF  
+
+> θ
+
+(l, ν )|2} = σ2
+
+> α
+
+M N 
+
+∣∣∣∣ 
+
+> N−1
+
+∑
+
+> n=0
+
+ρn(θ0,θ )e 2πN n(l−˜l0)
+
+∣∣∣∣
+
+> 2
+
+∣∣DM (˜ ν0 −ν)∣∣2
+
++ P MF stream (θ0, θ ) + P MF mod (θ0, θ ) + P MF noise (θ),
+
+(8) where the three background floor contributions are defined as 
+
+P MF stream (θ0, θ ) , σ2
+
+> α
+
+N 
+
+> N−1
+
+∑
+
+> n=0
+
+(
+
+ρn(θ0)ρn(θ) − κn(θ0, θ )
+
+)
+
+, (9a) 
+
+P MF mod (θ0, θ ) , σ2
+
+> α
+
+(μ4 − 1) 
+
+N 
+
+> N−1
+
+∑
+
+> n=0
+
+κn(θ0, θ ), (9b) 
+
+P MF noise (θ) , σ2
+
+> z
+
+N 
+
+> N−1
+
+∑
+
+> n=0
+
+ρn(θ). (9c) 
+
+Proof: By expanding |ΓMF  
+
+> θ
+
+(l, ν )|2 and separating the diagonal and off-diagonal terms, we obtain 
+
+E{|ΓMF  
+
+> θ
+
+(l, ν )|2} = 1
+
+M N 
+
+∣∣∣∣∑
+
+> m,n
+
+E{un,m (θ0, θ )}eφ n,m 
+
+∣∣∣∣
+
+> 2
+
++ 1
+
+M N 
+
+∑
+
+> m,n
+
+(
+
+E{|un,m (θ0, θ )|2} − | ρn(θ0, θ )|2)
+
+.
+
+(10) The first term represents coherent delay-Doppler accumu-lation, while the second term characterizes the stochastic pedestal induced by the random data symbols. To evaluate the latter, using the fourth-order identity 
+
+E{sis∗ 
+
+> j
+
+sks∗ 
+
+> l
+
+} = δij δkl + δil δjk + ( μ4 − 2) δij δjk δkl , (11) we obtain 
+
+E{|un,m (θ0, θ )|2} = ρn(θ0)ρn(θ) + |ρn(θ0, θ )|2
+
++ ( μ4 − 2) κn(θ0, θ ). (12) Substituting this expression and using the fact that ρn(θ0, θ )
+
+is invariant over the OFDM symbol index m, we obtain 
+
+E{|ΓMF  
+
+> θ
+
+(l,ν )|2} = 1
+
+M N 
+
+∣∣∣∣∑
+
+> n
+
+ρn(θ0,θ )e 2πN n(l−˜l0)
+
+∣∣∣∣
+
+> 2
+
+∣∣DM(˜ ν0 −ν)∣∣2
+
++ 1
+
+N 
+
+> N−1
+
+∑
+
+> n=0
+
+(
+
+ρn(θ0)ρn(θ)−κn(θ0, θ )
+
+)
+
++ μ4 −1
+
+N 
+
+> N−1
+
+∑
+
+> n=0
+
+κn(θ0, θ ),
+
+(13) where DM (x) , ∑M−1 
+
+> m=0
+
+e 2πM mx is the Dirichlet kernel. Com-bining (5) and (13), and using E{| wMF  
+
+> θ
+
+(l, ν )|2} = P MF noise (θ),gives (8) and (9), completing the proof. 
+
+Proposition 1 shows that the MF-based RDM contains a coherent mainlobe and three background contributions. The term P MF stream (θ0, θ ) originates from the random superposition of multiple beamformed streams and remains present even for constant-modulus signaling. The term P MF mod (θ0, θ ) depends on the fourth-order constellation moment and vanishes for constant-modulus constellations. The term P MF noise (θ) is the receiver-noise floor after MF weighting. 
+
+B. RF Processing 
+
+For RF under an angular hypothesis θ, (4) can be written as 
+
+χRF  
+
+> θ
+
+(l, ν ) = α0ΓRF  
+
+> θ
+
+(l, ν ) + wRF  
+
+> θ
+
+(l, ν ), (14) where 
+
+ΓRF  
+
+> θ
+
+(l, ν ) = 1
+
+√M N 
+
+> M−1
+
+∑ 
+
+> m=0
+> N−1
+
+∑
+
+> n=0
+
+bn,m (θ0)
+
+bn,m (θ) eφ n,m , (15a) 
+
+wRF  
+
+> θ
+
+(l, ν ) = 1
+
+√M N 
+
+> M−1
+
+∑ 
+
+> m=0
+> N−1
+
+∑
+
+> n=0
+
+zn,m 
+
+bn,m (θ) e 2πN nl e− 2πM mν . (15b) For unregularized RF, we assume that the reciprocal terms are well defined and have finite second-order moments. Define 
+
+gn(θ) , WHn a(θ), so that bn,m (θ) = gHn (θ)sn,m . Moreover, define 
+
+rn,m (θ0, θ ) , bn,m (θ0)
+
+bn,m (θ) = gHn (θ0)sn,m 
+
+gHn (θ)sn,m 
+
+. (16) To make the RF moments explicit, for discrete constellations let p(s) denote the probability mass function of s ∈ S K . The exact ratio moments are given by 
+
+ζn(θ0, θ ) , E{rn,m (θ0, θ )} = ∑
+
+> s∈S K
+
+p(s) gHn (θ0)sgHn (θ)s , (17a) 
+
+ψn(θ0, θ ) , E{|rn,m (θ0, θ )|2} = ∑
+
+> s∈S K
+
+p(s) |gHn (θ0)s|2
+
+|gHn (θ)s|2 . (17b) Similarly, we define the reciprocal-power moment of the beamformed illumination as 
+
+ξn(θ) , E
+
+{ 1
+
+|bn,m (θ)|2
+
+}
+
+= ∑
+
+> s∈S K
+
+p(s) 1
+
+|gHn (θ)s|2 , (18) provided that ξn(θ) < ∞, this condition ensures that the unregularized reciprocal filter does not encounter zero-illumination events for the considered discrete constellation. Then, the RF-based RDM second moment can be derived in the following proposition. 
+
+Proposition 2 The RF-based RDM second moment under an arbitrary angular hypothesis θ is 
+
+E{|χRF  
+
+> θ
+
+(l, ν )|2} = σ2
+
+> α
+
+M N 
+
+∣∣∣∣ 
+
+> N−1
+
+∑
+
+> n=0
+
+ζn(θ0,θ )e 2πN n(l−˜l0 )
+
+∣∣∣∣
+
+> 2
+
+∣∣DM (˜ ν0 −ν)∣∣2
+
++ P RF var (θ0, θ ) + P RF noise (θ),
+
+(19) where the two background floor contributions are defined as 
+
+P RF var (θ0, θ ) , σ2
+
+> α
+
+N 
+
+> N−1
+
+∑
+
+> n=0
+
+(
+
+ψn(θ0, θ ) − | ζn(θ0, θ )|2)
+
+, (20a) 
+
+P RF noise (θ) , σ2
+
+> z
+
+N 
+
+> N−1
+
+∑
+
+> n=0
+
+ξn(θ). (20b) 
+
+Proof: Since gn(θ) depends only on the subcarrier index and the data symbols are independent over resource elements, the variables {rn,m (θ0, θ )} are independent across (n, m ).Applying the same diagonal/off-diagonal decomposition as in the MF analysis gives 
+
+E{|ΓRF  
+
+> θ
+
+(l, ν )|2} = 1
+
+M N 
+
+∣∣∣∣∑
+
+> m,n
+
+E{rn,m (θ0, θ )}eφ n,m 
+
+∣∣∣∣
+
+> 2
+
++ 1
+
+M N 
+
+∑
+
+> m,n
+
+(
+
+E{|rn,m (θ0, θ )|2}−∣∣E{rn,m (θ0, θ )}∣ ∣2)
+
+.
+
+(21) Substituting (17a) and (17b) into (21), we obtain 
+
+E{|ΓRF  
+
+> θ
+
+(l, ν )|2} = 1
+
+M N 
+
+∣∣∣∣
+
+> M−1
+
+∑ 
+
+> m=0
+> N−1
+
+∑
+
+> n=0
+
+ζn(θ0, θ )eφ n,m 
+
+∣∣∣∣
+
+> 2
+
++ 1
+
+N 
+
+> N−1
+
+∑
+
+> n=0
+
+(
+
+ψn(θ0, θ )−| ζn(θ0, θ )|2)
+
+.
+
+(22) Combining (14) and (22), and using E{| wRF  
+
+> θ
+
+(l, ν )|2} =
+
+P RF noise (θ), gives (19) and (20), completing the proof. 
+
+Compared with MF, RF replaces the beamformed-illumination product un,m (θ0, θ ) by the ratio rn,m (θ0, θ ).Hence, P RF var (θ0, θ ) is a ratio-variance floor, since ψn(θ0, θ ) −|ζn(θ0, θ )|2 is the variance of rn,m (θ0, θ ) on subcarrier n.The term P RF noise (θ) is the reciprocal-filtered noise floor and is governed by the reciprocal-power moment ξn(θ), which becomes large when the hypothesized illumination |bn,m (θ)|
+
+can be close to zero. 
+
+C. Delay-Doppler Sensing Performance Analysis 
+
+We now evaluate the RDM moments at the matched angular hypothesis θ = θ0, which characterizes the delay-Doppler visibility of the target when the correct transmit-side direction is used. The mainlobe level is evaluated at the matched delay-Doppler point (l, ν ) = ( ˜l0, ˜ν0). The background floor refers to the delay-Doppler-independent stochastic floor induced by data randomness and receiver noise, excluding deterministic Dirichlet sidelobes. For MF, the mainlobe level can be expressed as 
+
+P MF ml = σ2
+
+> α
+
+MN
+
+∣∣∣∣ 
+
+> N−1
+
+∑
+
+> n=0
+
+ρn(θ0)
+
+∣∣∣∣
+
+> 2
+
++ P MF floor , (23) and the background floor is 
+
+P MF floor = P MF stream (θ0, θ 0) + P MF mod (θ0, θ 0) + P MF noise (θ0). (24) Accordingly, the MF DR can be written as 
+
+DR MF , P MF ml 
+
+P MF floor 
+
+= 1 + σ2
+
+> α
+
+M ∣∣∑N −1 
+
+> n=0
+
+ρn(θ0)∣∣2
+
+N P MF floor 
+
+. (25) For fixed beamforming and noise power, P MF floor is mono-tonically non-decreasing in μ4 because κn(θ0) ≥ 0. Thus, constant-modulus constellations minimize the modulation-dependent MF floor, whereas constellations with larger fourth-order moments increase it. In particular, among commonly considered PSK/QAM/Gaussian signaling models, PSK yields the smallest modulation-dependent MF contribution, while circular Gaussian signaling yields a larger one. For RF, at the matched angle θ = θ0, one has ζn(θ0, θ 0) = 1 
+
+and ψn(θ0, θ 0) = 1 , so that the ratio-variance contribution vanishes. The RF mainlobe level is given by 
+
+P RF ml = σ2
+
+> α
+
+M N + P RF floor , (26) and the RF background floor is 
+
+P RF floor = σ2
+
+> z
+
+N 
+
+> N−1
+
+∑
+
+> n=0
+
+ξn(θ0). (27) The corresponding RF DR is 
+
+DR RF , P RF ml 
+
+P RF floor 
+
+= 1 + σ2
+
+> α
+
+M N 
+
+> σ2
+> z
+> N
+
+∑N −1 
+
+> n=0
+
+ξn(θ0) . (28) 
+
+Remark 1: Constant-modulus symbols do not imply constant target illumination in MIMO-OFDM ISAC systems. Even when every stream uses a constant-modulus constellation, the effective illumination seen by the target is bn,m (θ0) = 
+
+∑Kk=1 βn,k (θ0)sn,m,k , which is a random beam-domain pha-sor sum. Its magnitude depends not only on the symbol phases, but also on the user-target angular geometry through the beam gains {βn,k (θ0)}. Therefore, constant-modulus sig-naling removes the modulation-dependent MF term P MF mod ,but in general does not remove the multi-stream MF floor 
+
+P MF stream (θ0, θ 0). Meanwhile, RF eliminates the matched-angle ratio-variance floor, but its noise floor is governed by the reciprocal-power moment ξn(θ0) = E{| bn,m (θ0)|−2}, which is dominated by near-zero illumination events. Hence, the decisive quantity is not the modulus of each data symbol, but the distribution of the beamformed illumination at the target. MF is limited by illumination fluctuations, whereas RF is limited by the lower tail of the illumination power. 
+
+For arbitrary subcarrier-dependent beamforming matrices 
+
+{Wn}, (25) and (28) characterize the DRs. Further insight can be obtained in the common-beamforming case, where 
+
+Wn = W for all n. Then ρn(·) = ρ(·), κn(·) = κ(·), and TABLE I SIMULATION PARAMETERS 
+
+Parameter Symbol Value 
+
+Carrier frequency fc 28 GHz Subcarrier spacing ∆f 120 kHz Number of antennas Nt 16 Number of subcarriers N 256 Number of OFDM symbols M 128 Number of communication users K 4Target range R0 200 m Target velocity v0 9.4 m/s Receiver noise PSD N0 -174 dBm/Hz 
+
+ξn(·) = ξ(·) are independent of n. Define the sensing SNR as 
+
+γs , σ2
+
+> α
+
+/σ 2 
+
+> z
+
+and the MF signal-induced floor coefficient as 
+
+SMF (θ0) , ρ2(θ0) − κ(θ0) + ( μ4 − 1) κ(θ0). (29) The DR expressions in (25) and (28) then reduce to 
+
+DR MF = 1 + σ2
+
+> α
+
+M N ρ 2(θ0)
+
+σ2
+
+> α
+
+SMF (θ0) + σ2 
+
+> z
+
+ρ(θ0) , (30a) 
+
+DR RF = 1 + γs
+
+M N ξ(θ0) . (30b) The MF expression depends on both coherent illumination and signal-induced self-interference, whereas the RF expression is governed only by the reciprocal-noise factor at the matched angle. When SMF (θ0) > 0, comparing (30a) and (30b) gives 
+
+DR RF ≥ DR MF ⇐⇒ γs ≥ ρ2(θ0)(ξ(θ0) − 1/ρ (θ0))
+
+SMF (θ0) . (31) The right-hand side is nonnegative because 
+
+ξ(θ0) = E{| bn,m (θ0)|−2} ≥ 1
+
+E{| bn,m (θ0)|2} = 1
+
+ρ(θ0) , (32) where the inequality follows from Jensen’s inequality. If 
+
+SMF (θ0) = 0 , the crossing condition in (31) is not applicable, and the two DRs should be compared directly using (30). The single-effective-stream constant-modulus case is one such degenerate case. The high-SNR behavior follows from (30a). When σ2 
+
+> α
+
+≫
+
+σ2 
+
+> z
+
+, the MF DR approaches the finite ceiling 
+
+DR MF → 1 + M N ρ 2(θ0)
+
+SMF (θ0) . (33) This saturation occurs because both the coherent MF mainlobe and the signal-induced MF floor scale with σ2
+
+> α
+
+. In contrast, the RF floor is noise-driven; hence, as long as ξ(θ0) is finite, 
+
+DR RF continues to increase linearly with γs.In the noise-dominated regime, i.e., σ2 
+
+> α
+
+≪ σ2 
+
+> z
+
+, (30) gives 
+
+DR MF ≈ 1 + γsM N ρ (θ0), DR RF = 1 + γs
+
+M N ξ(θ0) . (34) The corresponding initial slopes are 
+
+∂DR MF 
+
+∂γ s
+
+∣∣∣∣γs =0 
+
+= M N ρ (θ0), ∂DR RF 
+
+∂γ s
+
+= M N ξ(θ0) . (35) Since ξ(θ0) ≥ 1/ρ (θ0), the initial DR slope under MF is no smaller than that under RF. Thus, at low sensing SNR, RF                     
+
+> 050 100 150 200 250 300 350 400
+> Range (m)
+> -140 -130 -120 -110 -100 -90 -80 -70 -60 -50 -40
+> Power (dBm)
+> MF-QPSK, theo. MF-QPSK, sim. MF-16QAM, theo. MF-16QAM, sim. RF-QPSK, theo. RF-QPSK, sim. RF-16QAM, theo. RF-16QAM, sim.
+> -60 -40 -20 020 40 60
+> Velocity (m/s)
+> -140 -130 -120 -110 -100 -90 -80 -70 -60 -50 -40
+> Power (dBm)
+
+Fig. 1. Range and velocity profiles with sensing SNR γs = 20 dB. 
+
+does not yet benefit from eliminating the signal-induced floor but already pays the reciprocal-noise penalty. 
+
+Remark 2: The common-beamforming expressions reveal that the MF/RF tradeoff is governed by three statistics of the same random illumination bn,m (θ0). The average illumination power 
+
+ρ(θ0) determines the coherent MF gain and the low-SNR MF slope. The coefficient SMF (θ0) measures the signal-induced MF floor caused by multi-stream superposition and modulation randomness. The reciprocal-power moment ξ(θ0) measures the sensitivity of RF to the lower tail of the illumination power. Hence, MF is more robust in the noise-dominated regime and under weak or cancellation-prone illumination, whereas RF becomes advantageous only when the target return is suffi-ciently strong and near-zero illumination events are rare. Since user-target angular geometry affects ρ(θ0), SMF (θ0), and ξ(θ0)
+
+in different and generally non-monotonic ways, there is no universal MF/RF ordering over arbitrary geometries. 
+
+IV. N UMERICAL RESULTS 
+
+Table I summarizes the main simulation parameters. Un-less otherwise specified, curves denote theoretical results and markers denote Monte Carlo simulations. The target angle is fixed at θ0 = 10 ◦. The transmit beams are generated by an ISAC-aware maximum-ratio transmission (MRT) rule. Specif-ically, the k-th data-stream beam is obtained by combining the MRT steering direction of the k-th user with the target steering direction. Fig. 1 validates the derived second-order moment ex-pressions by comparing the theoretical and simulated range/velocity profiles. The close agreement between the curves and markers confirms the accuracy of the analytical RDM characterization. The figure also illustrates the multi-stream effect highlighted in Remark 1. In contrast to single-antenna OFDM-ISAC, the MF-based RDM in the multi-antenna setting exhibits an additional pedestal caused by the multi-stream contribution P MF stream . Hence, even with QPSK signaling, the MF sidelobe floor is visibly elevated. For 16QAM, the floor further increases due to the additional modulation-dependent contribution P MF mod . By comparison, at the matched angle, RF removes the data-induced fluctuation, so its background level is mainly governed by the RF noise contribution. -30 -20 -10 0 10 20 30   
+
+> Sensing SNR (dB)
+> 10 20 30 40 50 60 70 80
+> DR (dB)
+> MF-QPSK MF-16QAM RF-QPSK RF-16QAM MF low-SNR slope MF high-SNR ceiling (QPSK) MF high-SNR ceiling (16QAM)
+> -5 0540 45 50
+
+Fig. 2. DR versus sensing SNR under MF and RF for QPSK and 16QAM constellations. The black and red vertical dashed lines mark the MF/RF crossing SNRs obtained by (31) for QPSK and 16QAM, respectively.         
+
+> -80 -60 -40 -20 020 40 60 80
+> Target angle (deg)
+> 510 15 20 25 30 35 40 45 50
+> DR (dB)
+> MF-QPSK MF-16QAM RF-QPSK RF-16QAM User angles
+
+Fig. 3. DR versus target angle under MF and RF for QPSK and 16QAM constellations, where the sensing SNR γs = 0 dB. 
+
+Fig. 2 shows the DR as a function of the sensing SNR. The predicted crossing SNRs are −3.2 dB for QPSK and 1.6 dB for 16QAM, which match the simulated transitions. In the high-SNR regime, the MF curves approach the analytical ceiling because both the coherent mainlobe and the MF floor scale with σ2
+
+> α
+
+. By contrast, the RF curves continue to increase with the sensing SNR, since the matched-angle RF floor remains noise-limited. In the low-SNR regime, the MF curves follow the analytical slope, which confirms that the initial DR growth is controlled by the coherent illumination power ρ(θ0). More importantly, this figure shows a clear departure from single-antenna OFDM-ISAC: even under QPSK, MF and RF no longer yield identical DRs. This is because the multi-stream contribution P MF stream remains nonzero under MF, whereas RF is still shaped by the reciprocal-power moment ξ(θ0) through the RF noise contribution. Fig. 3 illustrates the impact of the user-target angular geom-etry. The K = 4 user angles are fixed at ±60 ◦ and ±20 ◦, while the target angle varies over [−90 ◦, 90 ◦]. The MF curves vary relatively smoothly with the target angle, indicating that MF is comparatively robust to geometry changes. In contrast, the RF curves fluctuate much more strongly, which confirms the pronounced geometry sensitivity induced by ξ(θ0). When the target direction is weakly illuminated by the transmit beams, small values of |bn,m (θ0)| occur more frequently. This sharply increases ξ(θ0) and causes severe DR degradation under RF. An interesting observation is that RF-QPSK can even perform worse than RF-16QAM for some target angles. This does not contradict the MF ordering with respect to μ4, because RF is not determined by μ4 alone. Instead, RF depends on the full distribution of the beamformed illumination. For certain geometries, the superposition of constant-modulus QPSK pha-sors can create more severe near-zero illumination events than 16QAM, resulting in a larger reciprocal-power moment and hence a lower DR. V. C ONCLUSION 
+
+This paper analyzed the delay-Doppler sensing performance of a MIMO-OFDM ISAC system with multi-user beamformed data transmissions. Closed-form RDM second-order moment expressions were derived for MF and RF, and the correspond-ing DRs were characterized. The analysis showed that MF is limited by multi-stream-induced, modulation-dependent, and receiver-noise contributions, whereas RF removes the matched-angle data-induced floor but becomes sensitive to reciprocal-power statistics of illumination. These results re-veal that user-target angular geometry directly shapes delay-Doppler target visibility in MIMO-OFDM ISAC systems. Numerical results validated the analysis and showed that MF is comparatively robust, while RF can be highly sensitive to weak or cancellation-prone target illumination. REFERENCES [1] F. Liu et al. , “Sensing with communication signals: From information theory to signal processing,” IEEE J. Sel. Areas Commun. , vol. 44, pp. 1-30, Jan. 2026. [2] R. Liu, P. Li, M. Li, and A. L. Swindlehurst, “Clutter-aware integrated sensing and communication: Models, methods, and future directions,” 
+
+Proc. IEEE , vol. 114, no. 1, pp. 52-92, Jan. 2026. [3] F. Liu et al. , “CP-OFDM achieves the lowest average ranging sidelobe under QAM/PSK constellations,” IEEE Trans. Inf. Theory , vol. 71, no. 9, pp. 6950-6967, Sep. 2025. [4] Z. Du, J. Xu, Y. Xiong, J. Wang, M. F. Keskin, H. Wymeersch, F. Liu, and S. Jin, “Probabilistic constellation shaping for OFDM ISAC signals under temporal-frequency filtering,” IEEE Trans. Wireless Commun. , vol. 25, pp. 12914-12929, Feb. 2026. [5] P. Li, R. Liu, Q. Liu, and M. Li, “Impact of insufficient CP on sensing performance in OFDM-ISAC systems,” in Proc. IEEE Global Commun. Conf. (GLOBECOM) , Taipei, Taiwan, Dec. 2025. [6] P. Li, M. Li, R. Liu, Q. Liu, and A. L. Swindlehurst, “OFDM-ISAC beyond CP limit: Performance analysis and mitigation algorithms,” IEEE Trans. Signal Process. , vol. 74, pp. 3033-3048, 2026. [7] F. Liu, C. Masouros, A. Li, H. Sun, and L. Hanzo, “MU-MIMO commu-nications with MIMO radar: From co-existence to joint transmission,” 
+
+IEEE Trans. Wireless Commun. , vol. 17, no. 4, pp. 2755-2770, Apr. 2018. [8] X. Liu, T. Huang, N. Shlezinger, Y. Liu, J. Zhou, and Y. C. Eldar, “Joint transmit beamforming for multi-user MIMO communications and MIMO radar,” IEEE Trans. Signal Process. , vol. 68, pp. 3929-3944, 2020. [9] Z. Xiao, R. Liu, M. Li, Q. Liu, and A. L. Swindlehurst, “A novel joint angle-range-velocity estimation method for MIMO-OFDM ISAC systems,” IEEE Trans. Signal Process. , vol. 72, pp. 3805-3818, 2024. [10] P. Li, M. Li, R. Liu, Q. Liu, and A. L. Swindlehurst, “MIMO-OFDM ISAC waveform design for range-Doppler sidelobe suppression,” IEEE Trans. Wireless Commun. , vol. 24, no. 2, pp. 1001-1015, Feb. 2025. [11] M. F. Keskin et al. , “Fundamental trade-offs in monostatic ISAC: A holistic investigation towards 6G,” IEEE Trans. Wireless Commun. , vol. 24, no. 9, pp. 7856-7873, Sep. 2025.

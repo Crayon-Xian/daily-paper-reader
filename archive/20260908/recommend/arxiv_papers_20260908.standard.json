@@ -1,0 +1,223 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-08T22:18:41.018655+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 0,
+    "deep_cap": 7,
+    "deep_selected": 0,
+    "quick_candidates": 5,
+    "quick_skim_target": 12,
+    "quick_selected": 5
+  },
+  "deep_dive": [],
+  "quick_skim": [
+    {
+      "id": "2609.00559v1",
+      "source": "arxiv",
+      "title": "Delay-Doppler Sensing Performance Analysis for MIMO-OFDM ISAC Systems",
+      "abstract": "In communication-centric integrated sensing and communication (ISAC), delay-Doppler sensing reuses data-bearing orthogonal frequency division multiplexing (OFDM) signals rather than dedicated radar probing waveforms. Consequently, the resulting range-Doppler map (RDM) is shaped not only by target parameters, but also by communication-symbol randomness and, in multi-antenna transmissions, by spatial beamforming. While existing analyses have largely focused on single-antenna OFDM-ISAC, the delay-Doppler sensing behavior of multi-antenna OFDM-ISAC remains insufficiently understood. This paper analyzes a multi-input multi-output (MIMO)-OFDM-ISAC system in which multiple data streams jointly illuminate a sensing target. We derive second-order moment expressions for the RDM under matched filtering (MF) and reciprocal filtering (RF), and use them to characterize the dynamic range (DR). The analysis reveals two key multi-stream effects. First, under MF, the random superposition of multiple beamformed streams creates an additional RDM floor beyond the modulation-dependent and receiver-noise terms; therefore, constant-modulus signaling no longer eliminates the data-induced pedestal as in single-antenna OFDM-ISAC. Second, under RF, the matched-angle data-induced floor is removed, but the noise floor is amplified according to the reciprocal-power statistics of the beamformed target illumination. These results show that the user-target angular geometry directly governs the MF/RF tradeoff: MF is more robust under weak illumination, whereas RF can achieve a higher DR when reciprocal-noise amplification is mild. Numerical results validate the analysis and demonstrate the distinct geometry-dependent behaviors of MF and RF.",
+      "authors": [
+        "Peishi Li",
+        "Rang Liu",
+        "Qian Liu",
+        "Ming Li"
+      ],
+      "primary_category": "eess.SP",
+      "categories": [
+        "eess.SP"
+      ],
+      "published": "2026-09-01T01:55:38+00:00",
+      "link": "https://arxiv.org/pdf/2609.00559v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Delay-Doppler sensing analysis for MIMO-OFDM ISAC, a core mmWave/radio sensing technology.",
+      "llm_evidence_cn": "MIMO-OFDM ISAC时延-多普勒感知性能分析，属于毫米波/无线感知核心技术。",
+      "llm_evidence": "MIMO-OFDM ISAC时延-多普勒感知性能分析，属于毫米波/无线感知核心技术。",
+      "canonical_evidence": "MIMO-OFDM ISAC时延-多普勒感知性能分析，属于毫米波/无线感知核心技术。",
+      "llm_tldr_en": "This paper analyzes delay-Doppler sensing in MIMO-OFDM ISAC systems, deriving second-order moment expressions for range-Doppler maps affected by communication randomness and spatial beamforming, filling a gap beyond single-antenna analyses.",
+      "llm_tldr_cn": "针对通信主导的集成感知与通信（ISAC）中多天线OFDM时延-多普勒感知行为理解不足的问题，本文分析了多数据流联合照射目标下的MIMO-OFDM-ISAC系统。作者推导了距离-多普勒图的二阶矩表达式，以刻画通信符号随机性与空间波束成形对感知结果的影响。该分析填补了多天线OFDM-ISAC感知特性研究的空白，为无线通信信号用作感知信号提供了理论支撑。",
+      "llm_tldr": "针对通信主导的集成感知与通信（ISAC）中多天线OFDM时延-多普勒感知行为理解不足的问题，本文分析了多数据流联合照射目标下的MIMO-OFDM-ISAC系统。作者推导了距离-多普勒图的二阶矩表达式，以刻画通信符号随机性与空间波束成形对感知结果的影响。该分析填补了多天线OFDM-ISAC感知特性研究的空白，为无线通信信号用作感知信号提供了理论支撑。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "millimeter wave radar sensing",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.00995v1",
+      "source": "arxiv",
+      "title": "CQF-HMR: Continuous Quaternion Flows for Probabilistic 3D Human Mesh Recovery from a Single Image",
+      "abstract": "Recovering 3D digital humans from a single 2D image is an ill-posed computer vision problem due to the loss of depth information. Probabilistic 3D human pose estimation compensates for this by estimating a set of 3D hypotheses from a prior distribution via generative models. However, most prior work focuses only on 3D keypoints, which often leads to implausible poses that are difficult to apply to downstream tasks, e.g. animation or digital humans. SMPL-based methods are more scalable thanks to the explicit body priors, but it requires more complex modeling of the generation process due to the non-additive nature of the joint rotations. In this work, we propose a novel approach for probabilistic 3D humans using quaternion-constrained continuous normalizing flows conditioned on 2D pose estimations. Our proposed quaternion flows show significant advantages over approaches using other rotation representations. Experiments demonstrate state-of-the-art results of our method on Human3.6M, particularly in ambiguous settings, and comparable pose estimation accuracy on challenging 3DPW and EMDB benchmarks.",
+      "authors": [
+        "Cuong Le",
+        "Bao-Long Tran",
+        "Pavlo Melnyk",
+        "Tahereh Dehdarirad",
+        "Bastian Wandt",
+        "Mårten Wadenbäck"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-01T09:45:38+00:00",
+      "link": "https://arxiv.org/pdf/2609.00995v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Probabilistic 3D human mesh recovery using continuous quaternion flows; transferable generative body prior for reconstructing human geometry from alternative sensing signals",
+      "llm_evidence_cn": "基于连续四元数流的三维人体网格概率恢复；可迁移的生成式人体先验，适用于非视觉类传感信号的人体几何重建",
+      "llm_evidence": "基于连续四元数流的三维人体网格概率恢复；可迁移的生成式人体先验，适用于非视觉类传感信号的人体几何重建",
+      "canonical_evidence": "基于连续四元数流的三维人体网格概率恢复；可迁移的生成式人体先验，适用于非视觉类传感信号的人体几何重建",
+      "llm_tldr_en": "Proposes continuous quaternion flows for probabilistic 3D human mesh recovery from a single image, using SMPL-based body priors. The generative framework addresses depth ambiguity and produces plausible meshes, with potential adaptation as a body prior for geometry-from-RF reconstruction.",
+      "llm_tldr_cn": "针对单张图像深度丢失导致三维人体恢复不适定、且许多概率方法只生成不合理关键点的问题，提出基于连续四元数流的概率三维人体网格恢复方法，在SMPL模型上对关节旋转进行生成式建模，输出多组合理且姿态自然的三维人体网格假设。实验验证了该方法在降低深度不确定性、生成高质量人体网格方面的有效性。由于该框架仅需一个可替换的特征编码器，有望作为人体几何先验迁移至雷达等非视觉信号的三维人体重建任务。",
+      "llm_tldr": "针对单张图像深度丢失导致三维人体恢复不适定、且许多概率方法只生成不合理关键点的问题，提出基于连续四元数流的概率三维人体网格恢复方法，在SMPL模型上对关节旋转进行生成式建模，输出多组合理且姿态自然的三维人体网格假设。实验验证了该方法在降低深度不确定性、生成高质量人体网格方面的有效性。由于该框架仅需一个可替换的特征编码器，有望作为人体几何先验迁移至雷达等非视觉信号的三维人体重建任务。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "reconstruct human body geometry from radio signals",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.05396v1",
+      "source": "arxiv",
+      "title": "A Deep Generative Model for Synthesizing Labeled Wireless Signals",
+      "abstract": "Wireless signals with position-related labels are pivotal for both performance evaluation and model training in the realm of wireless sensing. However, acquiring real-world datasets is often challenged by significant measurement and labeling costs. Traditional methods for synthesizing labeled wireless signals typically rely on environmental models, leading to extensive hyper-parameter tuning and inadequate realism for comprehensive model training purposes. To address these limitations, we introduce a novel deep learning (DL)-based method, namely Inter-Instance Generative Adversarial Networks (IIns-GAN), to generate realistic labeled wireless signals. The generated signals are particularly adaptive to different environment scenarios and well-suited for various model training tasks, including distance estimation and environment identification. We have conducted extensive experiments on public Ultra-Wideband (UWB) datasets to evaluate the realism and utility of the generated signals. The results demonstrate that the signals generated by IIns-GAN mirror the physical characteristics of real-world measurements, and significantly contribute to the improvement of model training in diverse wireless sensing tasks.",
+      "authors": [
+        "Yuxiao Li",
+        "Keke Hu",
+        "Santiago Mazuelas",
+        "Yuan Shen"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-09-04T17:44:54+00:00",
+      "link": "https://arxiv.org/pdf/2609.05396v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Synthesizes labeled wireless signals via a generative adversarial network, providing a data-generation bridge for RF/mmWave sensing",
+      "llm_evidence_cn": "用生成对抗网络合成带标注无线信号，为射频/毫米波感知提供数据生成支撑",
+      "llm_evidence": "用生成对抗网络合成带标注无线信号，为射频/毫米波感知提供数据生成支撑",
+      "canonical_evidence": "用生成对抗网络合成带标注无线信号，为射频/毫米波感知提供数据生成支撑",
+      "llm_tldr_en": "IIns-GAN synthesizes realistic labeled wireless signals for wireless sensing, overcoming high measurement/labeling costs and poor realism of model-based simulators; generated signals adapt to diverse environments, supporting model training and evaluation.",
+      "llm_tldr_cn": "无线感知模型的训练与评估依赖真实带标注无线信号，但实测数据采集和标注成本很高，传统基于环境模型的合成方法调参困难且真实性不足。为此提出一种名为IIns-GAN的深度生成框架，通过跨实例生成对抗网络合成带位置标签、且能适配不同环境场景的无线信号。结果表明该合成信号在真实感和场景适应性上优于传统方法，可有效支撑无线感知模型的训练与性能评估，为射频感知提供了低成本的数据扩充手段。",
+      "llm_tldr": "无线感知模型的训练与评估依赖真实带标注无线信号，但实测数据采集和标注成本很高，传统基于环境模型的合成方法调参困难且真实性不足。为此提出一种名为IIns-GAN的深度生成框架，通过跨实例生成对抗网络合成带位置标签、且能适配不同环境场景的无线信号。结果表明该合成信号在真实感和场景适应性上优于传统方法，可有效支撑无线感知模型的训练与性能评估，为射频感知提供了低成本的数据扩充手段。",
+      "llm_tags": [
+        "query:mp:composite"
+      ],
+      "matched_query_tag": "query:mp:composite",
+      "matched_query_text": "Papers central to 毫米波雷达等隐私性方式进行人体重建、动作识别, especially work that connects or combines: millimeter wave radar sensing; radio frequency based human body perception; reconstruct human body geometry from radio signals; recognize human actions using radar point clouds; privacy preserving human monitoring without cameras; Non camera and privacy respectful human sensing techniques using mmWave radar.",
+      "matched_requirement_id": "req-composite-mp",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.03199v1",
+      "source": "arxiv",
+      "title": "RoboTok: An Internet-Scale Data Engine for Human Demonstration Retrieval and Dexterous Manipulation Learning",
+      "abstract": "Robot learning increasingly depends on broad and diverse demonstrations, yet collecting robot data remains expensive and poorly suited to covering the long tail of real-world tasks. To address this bottleneck, we introduce RoboTok, an internet-scale data engine that, given a query human manipulation video, retrieves manipulation-relevant human demonstrations from web videos for training dexterous robot policies. Specifically, we learn a latent motion space from 3D hand trajectories expressed in estimated actor-centered reference frames. This representation enables manipulation behaviors to be compared across variations in camera viewpoint, scene appearance, and actor occlusions, while remaining compact enough for efficient search and continual indexing over internet-scale video collections. We evaluate RoboTok against existing robot-data retrieval approaches on retrieval benchmarks and downstream robot policy performance. Our results show that RoboTok retrieves more relevant manipulation demonstrations and improves downstream task success, establishing hand-pose trajectory-aware retrieval as a way to make web video a scalable and continuously growing source of supervision for robot learning.",
+      "authors": [
+        "Howard Qian",
+        "Yiting Chen",
+        "Yunfei Xie",
+        "Kejia Ren",
+        "Podshara Chanrungmaneekul",
+        "Gaotian Wang",
+        "Bowen Wen",
+        "Chen Wei",
+        "Kaiyu Hang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-09-02T22:31:43+00:00",
+      "link": "https://arxiv.org/pdf/2609.03199v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Actor-centered 3D hand trajectory representation for web-scale manipulation demonstrations; yields viewpoint/occlusion robust action representation valuable for first-person action and interaction understanding",
+      "llm_evidence_cn": "以行动者为中心的3D手部轨迹表征与大规模示范检索；其视角鲁棒的动作表征可服务于第一人称物体交互与演示学习",
+      "llm_evidence": "以行动者为中心的3D手部轨迹表征与大规模示范检索；其视角鲁棒的动作表征可服务于第一人称物体交互与演示学习",
+      "canonical_evidence": "以行动者为中心的3D手部轨迹表征与大规模示范检索；其视角鲁棒的动作表征可服务于第一人称物体交互与演示学习",
+      "llm_tldr_en": "RoboTok is an internet-scale data engine that retrieves human manipulation videos by learning a compact latent motion space from 3D hand trajectories in actor-centered frames, robust to viewpoint and occlusion. It supports dexterous robot learning and offers transferable, egocentrically meaningful action representations.",
+      "llm_tldr_cn": "针对机器人示范数据采集昂贵、难以覆盖真实世界长尾任务的问题，提出RoboTok互联网规模数据引擎，能根据一段查询操作视频自动检索大规模web人类操作视频用于策略学习。核心是在估计的以行动者为中心的参考系中学习3D手部轨迹的潜在动作空间，使不同视角、外观和遮挡下的操作行为可比较且表征紧凑。跨视角检索与下游灵巧操作实验验证了该表征与数据引擎的有效性。该以身体为中心的动作表示对第一人称物体交互理解具有启发价值。",
+      "llm_tldr": "针对机器人示范数据采集昂贵、难以覆盖真实世界长尾任务的问题，提出RoboTok互联网规模数据引擎，能根据一段查询操作视频自动检索大规模web人类操作视频用于策略学习。核心是在估计的以行动者为中心的参考系中学习3D手部轨迹的潜在动作空间，使不同视角、外观和遮挡下的操作行为可比较且表征紧凑。跨视角检索与下游灵巧操作实验验证了该表征与数据引擎的有效性。该以身体为中心的动作表示对第一人称物体交互理解具有启发价值。",
+      "llm_tags": [
+        "query:egocentric:composite"
+      ],
+      "matched_query_tag": "query:egocentric:composite",
+      "matched_query_text": "Papers central to 查找Egocentric相关的论文, especially work that connects or combines: E; Egocentric vision first-person perception in computer vision; Egocentric action recognition from first-person perspective; Egocentric hand pose estimation and tracking; self-centered perception and cognitive processing; Egocentric vision understanding methods and applications; Egocentric object interaction analysis.",
+      "matched_requirement_id": "req-composite-egocentric",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.03483v2",
+      "source": "arxiv",
+      "title": "Air-Ground Collaborative Vision-and-Language Navigation via Shared Bird's-Eye Maps",
+      "abstract": "Air-ground collaborative Vision-and-Language Navigation (VLN) pairs an unmanned aerial vehicle (UAV) with a global bird's-eye view and an unmanned ground vehicle (UGV) with a local first-person view, yet the setting remains largely unexplored: existing training-free methods solve single-agent tasks but offer no collaboration mechanism, and a recent CARLA-Air evaluation found no stable cooperative behavior across five state-of-the-art VLA models; naive semantic communication or bidirectional coupling even degrades performance. We establish AGC-VLN (Air-Ground Collaborative VLN), the first training-free baseline for air-ground collaborative VLN. The key insight is that training-free methods decompose navigation into VLM-based semantic reasoning and deterministic geometric execution, exposing a collaboration interface: the UAV's global view, over which it renders the UGV's reported pose and the VLM-anchored target as CAR/GOAL markers with distance labels, yielding a shared bird's-eye map. From this map, the UGV acquires global spatial context its first-person view cannot provide, plans a road-following path with a frozen VLM, and executes it under closed-loop control; in parallel, the UAV runs 3D-SPF, a spatial-search upgrade of SPF that localizes the target in the downward view and flies toward it. On 100 closed-loop episodes in CARLA-Air's Town10HD scene, AGC-VLN reaches a 77.0% joint success rate, a collaboration gain of +27.0% over the weaker individual agent (the UAV, 50.0%), and exceeds the strongest published single-agent baseline (Travel UAV, 53.0%) by 24.0 points, stemming from the complementarity of the UAV's global view and the UGV's road-following execution. Project page: https://github.com/ZSN2024/AGC-VLN.",
+      "authors": [
+        "Shuning Zhang",
+        "Liang Li",
+        "Yunheng Wang",
+        "Tao Wang",
+        "Yihang Kang",
+        "Renjing Xu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-09-03T07:38:41+00:00",
+      "link": "https://arxiv.org/pdf/2609.03483v2",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Local first-person view of UGV is a core perception input in cooperative vision-language navigation.",
+      "llm_evidence_cn": "地面车的局部第一视角是协同视觉语言导航中的核心感知输入，属于第一人称感知应用。",
+      "llm_evidence": "地面车的局部第一视角是协同视觉语言导航中的核心感知输入，属于第一人称感知应用。",
+      "canonical_evidence": "地面车的局部第一视角是协同视觉语言导航中的核心感知输入，属于第一人称感知应用。",
+      "llm_tldr_en": "AGC-VLN is the first training-free baseline for air-ground collaborative vision-language navigation that combines UAV global bird's-eye maps and UGV local first-person views through VLM-based semantic reasoning.",
+      "llm_tldr_cn": "针对空地协同视觉语言导航中无人机全局鸟瞰与地面车第一视角难以协作的问题，本文建立了首个无需训练的基准AGC-VLN。其核心思路是让无人机提供全局鸟瞰地图、地面车提供局部第一视角输入，并将导航任务分解为基于视觉语言模型的语义推理与共享鸟瞰图协作。实验表明该训练无关方法能够得到稳定的协同行为，优于现有五类VLA模型与朴素语义通信方案，为第一视角感知在多Agent导航中的应用提供了思路。",
+      "llm_tldr": "针对空地协同视觉语言导航中无人机全局鸟瞰与地面车第一视角难以协作的问题，本文建立了首个无需训练的基准AGC-VLN。其核心思路是让无人机提供全局鸟瞰地图、地面车提供局部第一视角输入，并将导航任务分解为基于视觉语言模型的语义推理与共享鸟瞰图协作。实验表明该训练无关方法能够得到稳定的协同行为，优于现有五类VLA模型与朴素语义通信方案，为第一视角感知在多Agent导航中的应用提供了思路。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision first-person perception in computer vision",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    }
+  ]
+}
