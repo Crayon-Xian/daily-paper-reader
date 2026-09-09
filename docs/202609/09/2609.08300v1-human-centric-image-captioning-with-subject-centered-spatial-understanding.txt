@@ -1,0 +1,492 @@
+Title: Human-Centric Image Captioning with Subject-Centered Spatial Understanding
+
+URL Source: https://arxiv.org/pdf/2609.08300v1
+
+Published Time: Wed, 09 Sep 2026 03:00:58 GMT
+
+Number of Pages: 10
+
+Markdown Content:
+# Human-Centric Image Captioning with Subject-Centered Spatial Understanding 
+
+# Bozhou Li ∗† 
+
+Peking University Beijing, China 2301213084@pku.edu.cn 
+
+# Jiahang Zhang ∗† 
+
+Peking University Beijing, China 1900012780@pku.edu.cn 
+
+# Yue Ding 
+
+Chinese Academy of Sciences Beijing, China yueding1011@gmail.com 
+
+# Yushuo Guan ‡
+
+Kling Team Beijing, China yushuo.guan@gmail.com 
+
+# Bohan Zeng 
+
+Peking University Beijing, China bhzeng25@stu.pku.edu.cn 
+
+# Yiyan Ji 
+
+Nanjing University Nanjing, China jiyiiiyyy@gmail.com 
+
+# Xinlong Chen 
+
+Chinese Academy of Sciences Beijing, China chenxinlong2025@ia.ac.cn 
+
+# Yang Shi 
+
+Peking University Beijing, China frankyang1517@gmail.com 
+
+# Yifan Dai 
+
+Shanghai Jiao Tong University Shanghai, China yfandaii@sjtu.edu.cn 
+
+# Yuran Wang 
+
+Peking University Beijing, China yuranwang25@stu.pku.edu.cn 
+
+# Chengzhuo Tong 
+
+Peking University Beijing, China 22009200626@stu.xidian.edu.cn 
+
+# Pengfei Wan 
+
+Kling Team Beijing, China wpf1987@outlook.com 
+
+# Yuanxing Zhang §
+
+Kling Team Beijing, China longo11070001@gmail.com 
+
+# Wentao Zhang 
+
+Peking University Beijing, China wentao.zhang@pku.edu.cn 
+
+## Abstract 
+
+While multimodal large language models (MLLMs) achieve remark-able performance on generic image captioning, they frequently suffer from structural hallucinations in human-centric scenarios. Accurately modeling human subjects is foundational for critical downstream applications, such as accurate avatar/video/image generation and fine-grained human action understanding. How-ever, these tasks require highly precise subject-centered spatial grounding, such as distinguishing egocentric left/right laterality and maintaining correct anatomical-object bindings. Although cat-astrophic for structural integrity, these localized spatial inversions are often overshadowed by overall descriptive metrics in existing benchmarks. To systematically expose and quantify this bottle-neck, we introduce SPACE (Subject-centric Poses, Appearance, and Characteristics Evaluation), a benchmark designed to evalu-ate subject-centered spatial understanding. On SPACE, we reveal that despite strong generic perception, current MLLMs consis-tently fail to ground descriptions in the subject’s intrinsic frame of reference. To bridge this gap, we propose a specialized data construction and alignment pipeline. We first extract structured spatial hints from fine-grained body-part localization to guide a two-stage caption rewriting process, yielding highly spatially-faithful 
+
+> ∗Equal contribution.
+> †Work done during an internship at the Kling Team.
+> ‡Project leader.
+> §Corresponding author.
+> This work is licensed under a Creative Commons Attribution 4.0 International License.
+> MM ’26, Rio de Janeiro, Brazil.
+> © 2026 Copyright held by the owner/author(s). ACM ISBN 979-8-4007-2213-4/2026/11 https://doi.org/10.1145/3767308.3835525
+
+training data. Furthermore, we design a rubric-based reward for Group Relative Policy Optimization (GRPO) that explicitly penal-izes structurally critical spatial errors during alignment. Extensive experiments on SPACE demonstrate our framework significantly improves human-centric caption quality, particularly in subject-centered spatial reasoning, achieving performance competitive with strong closed-source models. Our benchmark and code are available at https://github.com/JHang2020/SPACE-Eval. 
+
+## CCS Concepts 
+
+• Computing methodologies → Computer vision .
+
+## Keywords 
+
+human-centric image captioning, multimodal large language mod-els, subject-centered spatial understanding, benchmark 
+
+ACM Reference Format: 
+
+Bozhou Li, Jiahang Zhang, Yue Ding, Yushuo Guan, Bohan Zeng, Yiyan Ji, Xinlong Chen, Yang Shi, Yifan Dai, Yuran Wang, Chengzhuo Tong, Pengfei Wan, Yuanxing Zhang, and Wentao Zhang. 2026. Human-Centric Image Captioning with Subject-Centered Spatial Understanding. In Proceedings of the 34th ACM International Conference on Multimedia (MM ’26), November 10–14, 2026, Rio de Janeiro, Brazil. ACM, New York, NY, USA, 10 pages. https://doi.org/10.1145/3767308.3835525 
+
+## 1 Introduction 
+
+Multimodal large language models (MLLMs) have achieved substan-tial progress in general visual understanding and reasoning [2, 3, 10, 15, 17, 22, 25, 29, 44, 63]. While recent advances have extended these capabilities toward detailed human analysis and fine-grained descriptions [31, 48, 56], existing efforts still primarily emphasize broad human activities, coarse spatial relations, or overall caption richness. A central challenge in human-centric captioning remains arXiv:2609.08300v1 [cs.CV] 8 Sep 2026 MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil. Bozhou Li et al. Question : Which hand is holding the blue bubble wand? 
+
+Answer : The woman is holding the blue bubble wand in her right hand. 
+
+Qwen3VL-32B : Her left arm is raised high, holding a blue bubble wand that trails a shimmering cascade of bubbles arcing toward the upper left of the frame. Her right arm is bent and lifted, hand open, as if reaching or balancing. 
+
+H-SPACE : She holds a blue bubble wand in her right hand, releasing a stream of bubbles into the clear blue sky, her left arm bent and raised in excitement. 
+
+Spatial & Orientation 
+
+> SPACE Spatial & Orientation Upper-Limb Side Relations Lower-Limb Side Relations Head Orientation Torso & Wearable Placement Human-Object Spatial Relations Action & Pose Posture Types Action Events Action Roles & Arguments Appearance Face & Head Attributes Clothing Attributes Accessories Salient Visual Details Coarse Overall Appearance
+
+Action & Pose 
+
+Question : What is the woman's primary posture? 
+
+Answer : The woman is sitting on seaside stone steps. 
+
+Qwen3VL-32B : Her posture is casual and at ease, with her legs slightly bent and her body leaning into the railing for support. 
+
+H-SPACE : A single adult Caucasian woman with a medium build sits on a stone ledge by the seaside. 
+
+Appearance 
+
+Question : What is the woman's facial expression? 
+
+Answer : The woman is looking directly at the camera with her lips slightly parted. 
+
+Qwen3VL-32B : The image features a single human facing the camera directly. Her gaze is fixed intently on the viewer, conveying a sense of engagement. 
+
+H-SPACE : Her expression is calm and focused, her gaze directed forward, and her lips parted a little, exuding quiet confidence and grace. 
+
+(a) Three cases from SPACE (b) Question task distribution (c) Performance comparison 
+
+Figure 1: Overview of SPACE. (a) Three representative benchmark cases from the three categories: Spatial & Orientation, Action & Pose, and Appearance dimensions. Compared with Qwen3VL-32B, H-SPACE produces more accurate human-centric descriptions. (b) Question task distribution of SPACE, organized into three top-level dimensions and their fine-grained subcategories. (c) Performance comparison on SPACE using overall Precision. H-SPACE, especially after GRPO, achieves the best performance among representative Gemini, GPT, and Qwen baselines. 
+
+underexamined: coordinate-frame conversion. Models observe an image from an extrinsic, camera-centered frame, whereas correct human descriptions often require an intrinsic, subject-centered frame. For example, accurately describing whether an accessory appears on a person’s left or right side requires the model to convert from camera-centered observation to subject-centered description. This issue is important not only for faithful human-centered under-standing, but also for constructing reliable human-centric caption corpora, whose quality directly affects the training of downstream multimodal and generative models [12, 45, 49]. However, existing caption benchmarks and human-centered evaluations do not explic-itly test this conversion in generated descriptions, leaving a critical blind spot in current assessment. To systematically study this issue, we introduce SPACE (Subject-centric Poses, Appearance, and Characteristics Evaluation), a com-prehensive benchmark for human-centric image captioning. SPACE contains 2,981 images and 19,892 evaluation keypoints, organized into three categories: Spatial & Orientation , Action & Pose , and 
+
+Appearance . Among them, Spatial & Orientation is the core cate-gory and directly evaluates whether a model can translate camera-centered visual observations into accurate subject-centered descrip-tions. The other two categories, Action & Pose and Appearance , pro-vide complementary coverage of broader human-centric captioning ability, allowing us to distinguish failures in coordinate-frame con-version from more general captioning weaknesses. Through a com-prehensive evaluation of mainstream MLLMs on SPACE, we reveal a clear vulnerability: despite strong performance on appearance and coarse actions, contemporary models consistently struggle with directional attribution, especially in distinguishing left and right body parts. To address this limitation, we propose a scalable data construc-tion and training framework for human-centric captioning. We first combine YOLO pose estimation [20] and SAM3-based [5] part seg-mentation to derive structured body-part hints, including verified part-level bounding boxes, which provide explicit spatial evidence for annotation. Based on these hints, we decouple difficult human-centric caption construction into two stages: an initial captioning stage that produces coarse descriptions, and a rewriting stage in which a stronger proprietary MLLM revises the caption conditioned on the spatial hints to obtain subject-centered, spatially corrected supervision. We then distill this rewriting behavior into an open-source rewriter and use it for bootstrapped large-scale data expan-sion. Finally, we train a hint-free deployment model with supervised fine-tuning and Group Relative Policy Optimization (GRPO) [14]. During preference optimization, a fine-grained rubric-based reward judge compares generated captions against rewritten references and assigns stronger penalties to spatially critical errors, enabling the model to better internalize subject-centered spatial constraints during generation. Figure 2 summarizes the overall pipeline of SPACE construction and model training. In summary, our main contributions are as follows: 
+
+• Novel Benchmark and Insight: We introduce SPACE, a com-prehensive human-centric caption benchmark whose core Spatial & Orientation category explicitly targets coordinate-frame con-version (e.g., distinguishing a subject’s left and right limbs), while 
+
+Action & Pose and Appearance provide complementary evaluation Human-Centric Captioning MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil. Initial Caption 
+
+> A young man in a red-and-black plaid shirt is sitting at a keyboard in a music studio.
+
+Gemini Revision 
+
+> Caption Rewriter Base VLM
+
+Keypoint-Guided Segmentation    
+
+> raw images
+> Cross Verification
+> 𝑃 !"#$ &'()
+> 𝑃 !"#$ *++,
+> 𝑃 -./&$ '-0
+> …
+> 𝐵 !"#$ &'()
+> 𝐵 !"#$ #11$
+> 𝐵 -./&$ '-0
+> …
+> 𝑃 ∈ 𝐵 𝑃 ∉ 𝐵
+> …
+
+Textual Spatial Hints 
+
+> Left hand: (x1, y1, x2, y2) Right hand: (x1, y1,x2,y2) annotated images
+> Output Input
+
+Spatial Hints Generation 
+
+> Seed Rewrite Set # 𝑁
+
+Caption Construction Model Training 
+
+Rewritten Corpus (𝑥 .,𝑦 .) 
+
+> 𝑥 .: raw images; 𝑦 .: rewritten caption
+> SFT warm-up
+
+…
+
+𝑜 "
+
+𝑜 #
+
+𝑜 $ 
+
+> 𝑟𝑒𝑓
+> Hierarchical Caption Judge 𝑅 2
+> 𝑅 3
+> 𝑅 3
+> 𝑅 (
+
+…    
+
+> Sampled Completions Judge Rewards
+> Missed Facts (penalty α)Wrong Facts (penalty 𝛽 )
+> Structural Errors (penalty 𝛾 )
+> R = 1 − 𝛼𝑀 + 𝛽𝑊 + 𝛾𝑄 𝛼 < 𝛽 < 𝛾
+> 𝑀 !"#$
+> GRPO
+> 𝑀 %&' 𝑀 ()
+> LLM as a Judge
+> GRPO Details
+> 𝑦 .
+> Prompt: Rewrite the caption using the provided spatial hints.
+
+Rewriter Training  
+
+> Rewritten Corpus (𝑥 .,𝑦 .) # 𝑀 (𝑀 ≫ 𝑁 )
+
+Figure 2: Overview of our data construction and training pipeline. Left: YOLO pose estimation and SAM3-based part segmentation yield reliable body-part bounding boxes that serve as structured spatial hints. Middle: Gemini-3-Pro rewrites initial captions conditioned on these hints, and the rewritten data train an open-source rewriter for large-scale expansion. Right: the caption model is trained with supervised fine-tuning followed by GRPO, whose reward model scores generated captions against references. 
+
+categories. Our extensive evaluation reveals that current main-stream models suffer from substantial deficiencies in accurately grounding directional body-part attributes. 
+
+• Scalable Data Construction Pipeline: We design an automated data synthesis workflow that harnesses expert vision-only models (YOLO and SAM3) for spatial prompt generation. Coupled with a two-stage caption-and-rewrite strategy and bootstrapped data expansion, this pipeline yields a large-scale training corpus with subject-centered spatial awareness. 
+
+• Spatial-Aware Baseline Model: Finally, we present a strong baseline model trained via SFT and standard GRPO with a rubric-based spatial judge reward. Experiments demonstrate that this model achieves state-of-the-art performance on SPACE, validat-ing the efficacy of our automated data construction pipeline in instilling coordinate-frame awareness into MLLMs. 
+
+## 2 Related Work 2.1 Human-Centric Benchmarking in MLLMs 
+
+A large body of work has developed image and video captioning benchmarks to assess multimodal models from different perspec-tives, including descriptiveness, faithfulness, coverage, and human preference [4, 6, 7, 9, 13, 32]. While these benchmarks have substan-tially improved caption evaluation, they are largely generic and are not tailored to human-centered understanding. Recent human-centered benchmarks can be roughly divided into caption-oriented and understanding-oriented evaluations. Caption-oriented benchmarks remain relatively scarce, and existing efforts mainly emphasize human behaviors and human-object relations in generated descriptions [56]. Understanding-oriented benchmarks instead assess human-centered multimodal understanding through question answering, grounding, or other discriminative formats [31, 40]. Human-MME further broadens human-centered evaluation to diverse scenarios [31]. However, these benchmarks still do not explicitly isolate coordinate-frame conversion in generated human descriptions, particularly subject-centered spatial errors such as left-right confusion and incorrect body-part binding. In contrast, SPACE focuses on human-centric evaluation with explicit attention to subject-centered spatial correctness in caption generation. 
+
+## 2.2 Spatial Understanding and Frame of Reference in MLLMs 
+
+A substantial body of literature has shown that, despite strong progress in general visual understanding tasks, current LVLMs still exhibit persistent weaknesses in spatial understanding and reasoning [23, 24, 26, 30, 38, 46, 51, 59]. Existing efforts to improve spatial intelligence in multimodal models mainly follow two di-rections. One line injects explicit 3D or geometric signals, for ex-ample through geometry-aware encoders, reconstruction-oriented tokens, or explicit 3D intermediate supervision [8, 11, 34, 50]. The other line improves spatial capability through targeted data cu-ration and training paradigms, including spatial question-answer data, simulator-based generation, cognitive maps, staged super-vised fine-tuning, reinforcement learning, and progressive curric-ula [27, 35, 39, 50, 54, 57]. Together, these studies have substantially advanced spatial grounding and spatial reasoning under generic visual settings. Distinct from these general spatial modeling efforts, a specialized branch of research has emerged to investigate the psychological MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil. Bozhou Li et al. 
+
+concept of Frame of Reference (FoR) in MLLMs [36, 65, 66]. Cogni-tive science distinguishes between an extrinsic (camera-centered or viewer-centered) reference frame and an intrinsic (subject-centered or object-centered) reference frame. Specific benchmarks, such as COMFORT [66] and FoREST [36], explicitly reveal that while contemporary MLLMs perform reasonably well under extrinsic frames, they exhibit severe directional biases and substantial per-formance drops under intrinsic frames. Other recent efforts, such as InSpire [65], attempt to align Vision-Language-Action models with intrinsic object directionality to assist embodied agents. While these works highlight the FoR-related “spatial blindspot” of MLLMs, they mainly focus on VQA, classification, or embodied settings. In con-trast, our work studies this coordinate-frame conversion problem in dense human-centric caption generation. 
+
+## 2.3 Data Construction and Preference Optimization 
+
+Recent work has increasingly explored automatic construction of richer caption supervision through multi-stage generation, question-guided enrichment, and rewrite-based refinement [62, 67]. Related person-centered studies have further shown that MLLMs can be used to synthesize large-scale human descriptions, improve stylistic diversity, and reorganize person-centric annotations at scale [19, 37, 43]. These efforts demonstrate the usefulness of synthetic super-vision and rewriting pipelines, but they mainly aim to improve de-scriptiveness, diversity, or retrieval-oriented discriminability, rather than correcting subject-centered spatial errors with explicit geo-metric hints. In parallel, recent post-training work has investigated reward-based optimization and preference alignment for captioning and LVLM generation, including metric-aware caption optimization, caption-specific preference learning, task-level preference align-ment, and DPO-based mitigation of multimodal hallucination [16, 42, 53, 55]. More recently, rubric-based LLM and VLM evaluators, as well as rubric-oriented reward models, have highlighted the value of explicit scoring criteria for improving the interpretabil-ity and controllability of reward signals [1, 18, 21, 64]. Benchmark studies on multimodal reward models further suggest that reli-able visual preference signals remain task-sensitive and difficult to obtain [28, 61]. In contrast, our work focuses on human-centric cap-tion generation under a subject-centered frame, and instantiates a task-specific rubric-based reward around spatial omissions, generic factual mistakes, and structurally critical orientation errors, while integrating structured spatial hints into both data construction and reward design. 
+
+## 3 Proposed SPACE Benchmark 3.1 Motivation and Overview 
+
+While recent MLLMs demonstrate impressive capabilities in gen-eral object recognition, they consistently suffer from severe struc-tural hallucinations when describing fine-grained human details. Among these, subject-centered spatial relations —such as correctly distinguishing a subject’s left and right limbs or accurately bind-ing objects to specific body parts—represent a critical yet largely overlooked bottleneck. Although often overshadowed by overall descriptive accuracy in conventional evaluations, such structural 
+
+Table 1: Comparison between SPACE and prior human-centered spatial benchmarks. Cat.: number of categories. Imgs: number of images. Subj.-centered: subject-centered orientation. Non-subj. rel.: camera-centered spatial relations. Body-part orient.: body-part-level orientation.                        
+
+> Benchmark Cat. Imgs Subj.-centered Non-subj. rel. Body-part orient.
+> HC-COCO-test 12.5k ✓✗✗
+> HumaniBench 7∼1.5k ✓✗✗
+> Human-MME 819,945 ✓✗✓
+> SPACE (Ours) 13 2,981 ✓✓✓
+
+inversions undermine the reliability of MLLMs in downstream appli-cations such as human image/video generation, fine-grained action understanding, and embodied agent control. To systematically ex-pose and quantify this vulnerability, we introduce SPACE (Subject-centric Poses, Appearance, and Characteristics Evaluation). SPACE contains 2,981 images and 19,892 evaluation keypoints, organized into three top-level categories: Spatial & Orientation ,
+
+Action & Pose , and Appearance . Among them, Spatial & Orien-tation is the core category and explicitly targets spatial relations involving human subjects. It covers both subject-centered orientation ,where the correct description must be made from the subject’s per-spective, and non-subject-centered spatial relations , where the target relation is defined under a more generic or camera-centered frame. The other two categories, Action & Pose and Appearance , provide complementary coverage of human-centric captioning and help distinguish whether model failures are specific to subject-centered spatial understanding or reflect broader weaknesses in human de-scription generation. Figure 1 provides a high-level overview of the benchmark composition and one representative benchmark instance. Model comparisons on SPACE are reported later in Sec-tion 5.2. Each sample is organized as an image-caption pair together with fine-grained evaluation keypoints and answers, which serve as the atomic evaluation units in SPACE. As shown later in Table 2, current MLLMs exhibit the largest gap on the Spatial & Orientation 
+
+category, especially on subject-centered cases, which motivates the dedicated spatially focused pipeline introduced in Section 4.1. 
+
+## 3.2 Benchmark Construction 
+
+Constructing a benchmark that specifically penalizes subject-cen-tered spatial hallucinations requires a highly rigorous pipeline due to the serious hallucinations of current MLLMs. Automated met-rics and LLM-generated captions frequently overlook or confuse egocentric left-right orientations. Therefore, we design a controlled construction process that relies heavily on manual verification to ex-plicitly disentangle subject-centered semantics from generic visual descriptions. 
+
+1. Data Collection and Filtering: We initiate the process by sam-pling raw images from the CapRL-5M [52] and LAION-400M [41] corpora. To ensure relevance, we apply a YOLO-based detector to filter the collected images, retaining only those containing human subjects. We preserve diverse human-centric scenes during this Human-Centric Captioning MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil. 
+
+stage so that the benchmark covers varied appearances, poses, ac-tions, and human-object configurations. Importantly, the images selected for SPACE are reserved for benchmark construction and are excluded from the training-data generation pipeline, ensuring that the benchmark and training corpus are strictly non-overlapping at the image level. 
+
+2. Caption Generation and Manual Rectification: For each fil-tered image, we prompt Gemini-3-Pro to generate an initial dense caption describing the human subjects and their activities. However, relying solely on automated generation often yields descriptions with subtle errors, particularly regarding spatial orientations and anatomical sides. Therefore, we perform meticulous manual cor-rections on these initial captions. Our annotators are instructed to rectify any descriptive inaccuracies and explicitly enforce a subject-centric coordinate system, ensuring that ambiguous body parts are accurately specified as “left” or “right” based on the subject’s perspective. 
+
+3. Keypoint Generation for Evaluation: Having established the rectified captions as ground-truth descriptions, we further derive fine-grained evaluation keypoints for each top-level category. For 
+
+Spatial & Orientation , we predefine semantic points for both subject-centered orientation and non-subject-centered spatial relations . The former includes side-sensitive body-part cases such as hand/arm, leg/foot, head orientation, and torso-wearable bindings, while the latter covers human-object and local part-object relations under a more generic spatial frame. For Action & Pose , we instantiate keypoints over posture type, event verbs, and action arguments. Specifically, Appearance is organized into Face and Head Cues , Cloth-ing and Style , Accessories and Visible Attributes , Salient Local Details ,and Overall Appearance Cues . Conditioned on the verified captions, Gemini-3-Pro is then used to instantiate these keypoints and their corresponding ground-truth answers for each image. This pipeline yields 2,981 image-caption pairs with 19,892 key-point annotations for human-centric spatial and behavioral evalua-tion. 
+
+## 3.3 Evaluation Protocol and Metrics 
+
+Given a test image, the evaluated MLLM first generates a free-form caption, which is then scored against the predefined evaluation keypoints and their ground-truth answers by a judge model. The protocol follows the benchmark taxonomy introduced above. In par-ticular, within Spatial & Orientation , Categories 1.1–1.4 correspond to subject-centered orientation cases that must be described from the subject’s own frame, whereas Category 1.5 covers non-subject-centered spatial relations under a more generic frame. For each keypoint, the judge assigns one of three labels: correct , meaning that the caption expresses the target semantic point correctly; wrong ,meaning that the caption mentions the target point but describes it incorrectly; and not mentioned , meaning that the caption fails to cover the target point at all. Let K denote a set of evaluation keypoints, which can correspond to the full benchmark or to a specific top-level category. We denote by 𝑁 c (K) , 𝑁 w (K) , and 𝑁 m (K) the numbers of keypoints judged as correct, wrong, and not mentioned, respectively. The total number of keypoints is therefore 
+
+|K | = 𝑁 c (K) + 𝑁 w (K) + 𝑁 m (K) . (1) We report two complementary metrics. Hit measures coverage-quality over all evaluation points: Hit (K) = 𝑁 c (K) |K | . (2) 
+
+Precision evaluates correctness conditioned on the model having mentioned the relevant point: Precision (K) = 𝑁 c (K) 
+
+𝑁 c (K) + 𝑁 w (K) . (3) Intuitively, Hit penalizes both omission and error, while Precision isolates whether the model is correct once it attempts to describe the corresponding semantic point. We report these two metrics for the overall benchmark and for each top-level category separately. 
+
+## 4 The Proposed Method 
+
+Figure 2 provides an overview of our method. As shown by the benchmark results in Table 2 and Figure 3, current MLLMs ex-hibit the largest weakness on the Spatial & Orientation category, especially on subject-centered cases. Motivated by this difficulty, we design a dedicated pipeline that first constructs reliable spatial hints, then produces spatially corrected training captions, and fi-nally optimizes a deployment model with rubric-based preference learning. 
+
+## 4.1 Structured Spatial Hint Generation 
+
+This stage converts each image into conservative structured spatial hints for later caption correction. For each detected person, we first use YOLO11x-Pose to estimate a human skeleton, then use SAM3 to localize body-part candidates inside the person crop, and finally apply a side-aware geometric verification rule to remove unreliable left-right assignments. The output of this stage is a hint-annotated image together with a textual hint list. 
+
+1. Human Pose Estimation (YOLO): Given an input human-centric image I, we apply a pre-trained YOLO-Pose model to detect human subjects and annotate their skeletal structure. Let 𝑓 YOLO 
+
+denote the pose estimation function. For each detected person, YOLO-Pose returns a person box together with a set of 𝑁 anatomical joints J = { 𝑗 𝑖 = (𝑥 𝑖 , 𝑦 𝑖 , 𝑐 𝑖 )} 𝑁 𝑖 =1, where (𝑥 𝑖 , 𝑦 𝑖 ) represents the 2D coordinate of the 𝑖 -th joint (e.g., left wrist) and 𝑐 𝑖 is the confidence score. These outputs tell us where the subject is and provide coarse anatomical anchors for later part-level localization. 
+
+2. Part Candidate Localization (SAM3): For each detected person, we crop the image to the YOLO person box and run SAM3 ( 𝑓 SAM )only inside this localized region. Using body-part-specific textual prompts, SAM3 produces candidate masks and bounding boxes for the queried parts. If SAM3 returns multiple candidates for the same part, we keep the candidate whose box center is closest to the corresponding YOLO keypoint. Therefore, YOLO keypoints are not fed to SAM3 as prompts; instead, they act as anatomical anchors for candidate selection. 
+
+3. Side-Aware Verification and Hint Construction: The last step is to verify whether the SAM3 candidates are geometrically con-sistent with the YOLO skeleton, especially for bilateral parts such as hands, feet, and shoulders. Let 𝑟 ℓ and 𝑟 𝑟 denote the SAM3 candi-dates initially associated with the left and right side of a bilateral part, and let 𝑝 ℓ and 𝑝 𝑟 denote the corresponding YOLO keypoints MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil. Bozhou Li et al. 
+
+Table 2: Main results on SPACE. We report Precision and Hit for the overall benchmark and the three top-level dimensions. Models are grouped into closed-source and open-source MLLMs; within each group, the best value per column is bolded. Parameter counts are given when publicly known; “–” denotes an undisclosed model size.                                                                                                                                          
+
+> Model Params Overall Spatial & Ori. Action & Pose Appearance Prec. Hit Prec. Hit Prec. Hit Prec. Hit Closed-source Models
+> GPT-4.1 –72.4 44.5 67.9 47.7 72.0 56.4 84.4 28.5
+> Gemini-3-Flash [10] –81.8 62.1 80.1 67.0 83.5 70.3 82.1 47.8
+> Gemini-3.1-Pro [10] –82.5 67.6 81.1 74.5 83.1 75.6 84.0 51.3 Open-source Models
+> MiMo-VL-7B-SFT [60] 7B 70.2 40.8 68.4 42.7 68.5 49.6 76.6 29.3
+> MiniCPM-V-4.5 [58] 9B 67.5 43.7 63.4 45.4 68.1 51.8 73.9 33.5
+> Ovis2.5-9B [33] 9B 72.6 47.1 68.2 47.5 72.9 56.0 79.6 37.6
+> InternVL3.5-8B [47] 8B 64.3 35.5 60.5 35.1 63.7 43.9 72.1 27.3
+> InternVL3.5-14B [47] 14B 63.9 32.4 60.9 32.1 64.3 42.7 68.9 22.0
+> Qwen3-VL-8B-Instruct [2] 8B 70.6 56.7 66.6 59.1 72.8 63.2 73.9 47.0
+> Qwen3-VL-8B-Thinking [2] 8B 73.3 51.8 70.4 56.7 72.9 60.5 79.6 37.3
+> Qwen3-VL-32B-Instruct [2] 32B 75.5 61.3 72.1 65.3 76.4 68.2 79.8 49.6
+> Qwen3-VL-235B-A22B-Instruct [2] 235B 77.7 60.7 74.9 65.0 78.2 68.2 82.1 47.8
+> H-SPACE-GRPO 8B 83.6 67.9 82.4 70.4 84.0 68.9 84.6 63.9
+
+when available. For any candidate 𝑟 , we denote the center of its bounding box by c(𝑟 ) and measure geometric compatibility by the Euclidean distance 𝑑 (c(𝑟 ), 𝑝 ).The rule is intentionally conservative. When both side keypoints are available, we keep a candidate on its nominal side only if it is closer to the same-side keypoint than to the opposite-side one. If both candidates collapse toward the same side, we keep only the better-supported candidate for that side and mark the opposite side as unresolved. If the two candidates cross over, we discard both rather than swap them. When only one side keypoint is visible, we preserve the nominal candidate only when it is the closer one; oth-erwise both sides remain unresolved. If the corresponding keypoint is unavailable, the part is treated as unresolved and omitted from the final hint set. This rule follows a simple principle: a missing spatial hint is preferable to a confidently wrong left-right hint. Let L denote the predefined set of queried body-part labels, and let 𝑏 𝐿 denote the final retained bounding box for part label 𝐿 ∈ L 
+
+after verification, where 𝑏 𝐿 = ∅ indicates that the part is unresolved and therefore discarded. We then define the valid body-part set as 
+
+Lvalid = {𝐿 ∈ L | 𝑏 𝐿 ≠ ∅} , (4) and collect the verified boxes as 
+
+Bverified = {𝑏 𝐿 | 𝐿 ∈ L valid } . (5) For each retained body part, we draw the verified box directly onto the raw image to obtain a hint-annotated image Idraw . To make subject-centered spatial cues easier to parse, we use different colors to distinguish bounding boxes associated with different subject-centered side assignments (e.g., left versus right) and other spatial roles. In parallel, we serialize the corresponding part labels and coordinates as a textual hint list 
+
+C = {( 𝐿, 𝑏 𝐿 ) | 𝐿 ∈ L valid } . (6) Together, (I draw , C) constitute the structured spatial hints used in the subsequent data generation and training stages. 
+
+## 4.2 Two-Stage Caption Generation and Rewriting Pipeline 
+
+To construct high-quality, human-centric image-caption data that accurately reflects the subject-centered coordinate system, we de-sign a dedicated two-stage data generation workflow. Generating a fully correct human-centric caption in a single pass is intrinsically difficult because it requires both broad semantic coverage and pre-cise subject-centered spatial reasoning. We therefore decompose the problem into an initial description phase followed by a struc-tured refinement phase. This decomposition separates broad human description from spatially critical correction, which simplifies data construction while preserving semantic coverage. 
+
+1. Initial Caption Generation: To establish the data source for our rewriting pipeline, we first collect raw images from CapRL-5M and LAION-400M. We then apply a YOLO object detector for preliminary filtering to isolate images containing human subjects. The training corpus is constructed from a subset that is strictly disjoint from the images used in SPACE, so that no benchmark image is reused during model training. For each retained human-centric image I, we prompt Qwen3-VL-235B-A22B to generate a detailed human-centric caption, which serves as the initial caption for the subsequent rewriting stage. 
+
+2. Structured Prompt-Conditioned Rewriting: To rectify the spatial inaccuracies in the initial caption, we employ a proprietary MLLM, Gemini-3-Pro, as a rewriter. We provide the model with the Human-Centric Captioning MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil. 
+
+hint-annotated image Idraw , the textual hint list C, and the initial caption. Conditioned on these structured spatial hints, the rewriter revises the caption so that body parts are more explicitly grounded to their corresponding visual regions and directional expressions are more consistent with the subject-centered frame. 
+
+3. Distillation and Bootstrapped Data Expansion: Relying en-tirely on a proprietary model for large-scale data annotation is cost-prohibitive. To scale up the corpus, we use the rewritten cap-tions to fine-tune an open-source MLLM, distilling the rewriting behavior into a lower-cost model. Once trained, this model can use the same structured spatial hints to produce refined captions at scale. We then apply it for bootstrapped data expansion over a broader set of human-centric images, yielding a larger rewritten corpus for final training. For each rewriting instance, 𝑥 𝑖 denotes the raw-image captioning input, 𝑥 hint  
+
+> 𝑖
+
+denotes the auxiliary hint-augmented input used only by the rewriter, and 𝑦 ★ 
+
+> 𝑖
+
+denotes the rewritten target caption. The resulting deployment-training cor-pus therefore retains the rewritten pairs (𝑥 𝑖 , 𝑦 ★ 
+
+> 𝑖
+
+) rather than the intermediate hint-conditioned inputs. 
+
+## 4.3 Supervised Fine-Tuning and Preference Optimization 
+
+Given the rewritten tuples (𝑥 𝑖 , 𝑦 ★ 
+
+> 𝑖
+
+), we train a unified multimodal deployment model 𝜋 𝜃 with supervised fine-tuning followed by GRPO. 
+
+1. Supervised Fine-Tuning (SFT): We first optimize 𝜋 𝜃 on the rewritten corpus using teacher forcing: 
+
+LSFT = −
+
+> 𝑇
+
+∑︁ 
+
+> 𝑡 =1
+
+log 𝜋 𝜃 (𝑦 ★ 
+
+> 𝑖,𝑡
+
+| 𝑥 𝑖 , 𝑦 ★ 
+
+> 𝑖, <𝑡
+
+). (7) We then freeze the resulting model as the reference policy 𝜋 ref for the subsequent preference optimization stage. 
+
+2. Hierarchical Rubric-Based Judge Reward: Our main task-specific design lies in the reward. Given the rewritten target 𝑦 ★ 
+
+> 𝑖
+
+,a judge model extracts a set of expected facts 𝐸 𝑖 and compares them with a sampled caption, yielding three disjoint error sets: missed facts 𝑀 𝑖 , generic wrong facts 𝑊 𝑖 , and critical structural errors 𝑄 𝑖 [1, 18, 21, 64]. The last category captures the failures that matter most in our setting, especially left-right anatomical reversals and incorrect subject-object binding. We therefore assign hierarchical penalties 𝛼 < 𝛽 ≪ 𝛾 and define the reward as 
+
+𝑅 judge  
+
+> 𝑖
+
+= clip 
+
+
+
+1 − 𝛼 |𝑀 𝑖 | + 𝛽 |𝑊 𝑖 | + 𝛾 |𝑄 𝑖 |
+
+max (1, |𝐸 𝑖 |) , 𝑅 min , 1
+
+
+
+. (8) In GRPO, this score is used as the reward 𝑟 (𝑔 ) 
+
+> 𝑖
+
+for each sampled completion. 
+
+3. Group Relative Policy Optimization (GRPO): We use stan-dard GRPO to optimize 𝜋 𝜃 against the frozen reference policy 𝜋 ref .The objective is 
+
+ℓGRPO  
+
+> 𝑖,𝑔,𝑡
+
+= − min 
+
+
+
+𝜌 𝑖,𝑔,𝑡 𝐴 (𝑔 ) 
+
+> 𝑖
+
+, clip (𝜌 𝑖,𝑔,𝑡 , 1 − 𝜖, 1 + 𝜖 )𝐴 (𝑔 )
+
+> 𝑖
+
+
+
++ 𝜆 KL DKL (𝜋 𝜃 ∥ 𝜋 ref ) . (9) where 
+
+𝜌 𝑖,𝑔,𝑡 = 𝜋 𝜃 ( ˆ𝑦 (𝑔 ) 
+
+> 𝑖,𝑡
+
+| 𝑥 𝑖 )
+
+𝜋 old ( ˆ𝑦 (𝑔 ) 
+
+> 𝑖,𝑡
+
+| 𝑥 𝑖 ) .
+
+Here, 𝐴 (𝑔 ) 
+
+> 𝑖
+
+denotes the group-wise relative advantage. At infer-ence time, we discard all training-time hints and deploy the model directly on the raw-image input 𝑥 𝑖 .
+
+## 5 Experiments 5.1 Datasets and Implementation Details 
+
+We evaluate all models on SPACE under the protocol described in Section 3, using Qwen3-VL-235B-A22B-Instruct as the judge model. Unless otherwise specified, caption generation uses temperature 0. For data construction, we use YOLO11x-Pose and SAM3 for struc-tured hint extraction. We employ Gemini-3-Pro to annotate approx-imately 60K human-centric samples, distill the rewriting behavior into an open-source rewriter based on Qwen3-VL-32B , and further expand the rewritten corpus to approximately 237K samples. The final deployment model is built on Qwen3-VL-8B-Instruct .All training stages use AdamW with a cosine learning-rate sched-ule, warmup ratio 0.03 , and 1 epoch. For supervised fine-tuning, we use batch size 128 , learning rate 1 × 10 −5, and 187K rewritten samples. For GRPO, we use learning rate 1 × 10 −6, KL coefficient 
+
+𝜆 KL = 0.03 , 50K training samples, 8 sampled completions per prompt, and Qwen3-VL-32B-Instruct as the rubric-based reward judge. The reward coefficients are 𝛼 missed = 1.0 , 𝛽 wrong = 1.5 ,
+
+𝛾 critical = 2.5 , with 𝑅 min = -1.0 .
+
+## 5.2 Main Results 
+
+Table 2 presents the main results on SPACE, comparing representa-tive open-source and closed-source MLLMs under the same prompt and judge-based protocol, with Precision and Hit reported over the full benchmark and the three top-level dimensions. H-SPACE-GRPO achieves the highest overall performance among the com-pared models, reaching 83.6 Precision and 67.9 Hit. Relative to the base Qwen3-VL-8B-Instruct, it improves overall Precision and Hit by 13.0 and 11.2 points, respectively. It also performs better than substantially larger open-source models such as Qwen3-VL-32B-Instruct and Qwen3-VL-235B-A22B-Instruct, suggesting that task-specific data construction and post-training are effective for human-centric captioning under a subject-centered frame. H-SPACE-GRPO also compares favorably with strong closed-source systems. In particular, it slightly exceeds Gemini-3.1-Pro on the overall benchmark ( 83.6 vs. 82.5 Precision, 67.9 vs. 67.6 Hit), and attains the highest Precision in all three top-level dimensions. Notably, H-SPACE-GRPO achieves the best Precision on Spatial & Orientation (82.4 ), which is consistent with the goal of reduc-ing structurally critical subject-centered errors. At the same time, Gemini-3.1-Pro remains stronger in Hit on Spatial & Orientation 
+
+and Action & Pose , indicating that coverage of relevant semantic points is still not fully solved. 
+
+## 5.3 Fine-Grained Spatial Analysis 
+
+To better understand where models fail within the core Spatial & Orientation dimension, we examine a fine-grained breakdown of its representative subcategories, which reveals whether the observed weakness is broadly distributed or concentrated on a smaller set of subject-centered cases. Figure 3 visualizes the relative performance of different models on these categories. MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil. Bozhou Li et al. 
+
+Figure 3: Left: training dynamics of our model during post-training, including the response-length curve (top) and the reward curve (bottom), both of which show a steady upward trend over training steps. Right: fine-grained precision heatmap on Category 1 ( Spatial & Orientation ) of SPACE. 
+
+Across models, Category 1.1 emerges as one of the most chal-lenging cases, whereas Category 1.5 is generally handled much better. Compared with Category 1.5, Category 1.1 requires explicit subject-centered left-right discrimination of the arms and hands, making it particularly sensitive to failures in intrinsic frame con-version. Several open-source models achieve only slightly above 50% Precision on Category 1.1 while showing substantially stronger performance on Category 1.5. This contrast suggests that subject-centered spatial grounding, rather than generic human description, remains a major bottleneck in human-centric captioning. This trend holds across model families, so the difficulty is not tied to a specific architecture or model scale. Current MLLMs are therefore not uniformly weak on human-centric captioning; their failures concentrate on the cases that require reliable intrinsic frame conversion and precise body-part grounding, which reinforces the main finding of SPACE. 
+
+## 5.4 Controlled Rewriting Analysis 
+
+We further analyze the effect of caption rewriting in a controlled setting. We fix the source captions to those produced by a Qwen3-VL baseline on SPACE and only vary the rewriting stage. We consider three rewriting variants. First, we use Gemini-3.1-Pro as a rewriter without structured hints, conditioning only on the original image and the source caption. Second, we provide 
+
+Gemini-3.1-Pro with the full hint-conditioned input, including the hint-annotated image and the bbox-derived textual hints, to probe the direct effect of adding structured spatial guidance. Third, we evaluate our trained rewriter under the same hint-conditioned input, allowing us to assess both the effectiveness of the learned rewriter itself and whether hint-guided rewriting behavior can be realized in a lower-cost open-source model. Because the source captions are fixed across settings, the ob-served differences can be attributed to the rewriting stage itself rather than to variation in the base captioner. Concretely, on Cat-egory 1, Gemini-3.1-Pro without hints, Gemini-3.1-Pro with hints, and our trained rewriter obtain 73.3 , 80.7 , and 80.0 Precision, re-spectively. These results support two observations. First, structured hints are informative: supplying them to Gemini-3.1-Pro improves Category 1 Precision by 7.4 points, indicating that the bbox-derived spatial guidance carries subject-centered information that even a strong rewriter cannot reliably recover from the image and the source caption alone. Second, our trained rewriter is effective: de-spite being an open-source distilled model, it reaches 80.0 Precision under the same hint-conditioned input, essentially matching the proprietary rewriter at substantially lower cost. Overall, subject-centered spatial errors are not only a challenging evaluation target, but also a correctable one given effective rewriting and hint utiliza-tion. 
+
+## 6 Conclusion 
+
+We study subject-centered spatial understanding in human-centric image captioning. We introduce SPACE, a benchmark that evalu-ates whether models can convert camera-centered observations into correct subject-centered descriptions, on which current MLLMs still struggle despite strong performance on broader visual tasks. To address this gap, we propose a scalable data construction and training pipeline combining structured spatial hints, caption rewrit-ing, and rubric-based preference optimization. The resulting model substantially improves caption quality on SPACE, particularly in reducing subject-centered spatial errors, and remains competitive with strong closed-source systems. Human-Centric Captioning MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil. 
+
+## Acknowledgments 
+
+This work was supported by the Beijing Major Science and Tech-nology Project (No. Z251100008425023). 
+
+## References 
+
+[1] David Anugraha, Zilu Tang, Lester James Validad Miranda, Hanyang Zhao, MohammadRifqi Farhansyah, Garry Kuwanto, Derry Wijaya, and Genta Indra Winata. 2025. R3: Robust Rubric-Agnostic Reward Models. ArXiv abs/2505.13388 (2025). https://api.semanticscholar.org/CorpusID:278768432 [2] Shuai Bai, Yuxuan Cai, Ruizhe Chen, Keqin Chen, Xionghui Chen, Zesen Cheng, Lianghao Deng, Wei Ding, Chang Gao, Chunjiang Ge, et al. 2025. Qwen3-vl technical report. arXiv preprint arXiv:2511.21631 (2025). [3] Tianyi Bai, Hao Liang, Binwang Wan, Yanran Xu, Xi Li, Shiyu Li, Ling Yang, Bozhou Li, Yifan Wang, Bin Cui, et al. 2024. A survey of multimodal large language model from a data-centric perspective. arXiv preprint arXiv:2405.16640 
+
+(2024). [4] Michele Cafagna, Kees van Deemter, and Albert Gatt. 2023. HL dataset: visually-grounded description of scenes, actions and rationales. In Proceedings of the 16th International Natural Language Generation Conference . 293–312. [5] Nicolas Carion, Laura Gustafson, Yuan-Ting Hu, Shoubhik Debnath, Ronghang Hu, Didac Suris, Chaitanya Ryali, Kalyan Vasudev Alwala, Haitham Khedr, An-drew Huang, et al. 2025. Sam 3: Segment anything with concepts. arXiv preprint arXiv:2511.16719 (2025). [6] Xinlong Chen, Yue Ding, Weihong Lin, Jingyun Hua, Linli Yao, Yang Shi, Bozhou Li, Yuanxing Zhang, Qiang Liu, Pengfei Wan, et al. 2025. Avocado: An audiovisual video captioner driven by temporal orchestration. arXiv preprint arXiv:2510.10395 
+
+(2025). [7] Xinlong Chen, Weihong Lin, Jingyun Hua, Linli Yao, Yue Ding, Bozhou Li, Bohan Zeng, Yang Shi, Qiang Liu, Yuanxing Zhang, et al. 2026. DiaDem: Advancing Dialogue Descriptions in Audiovisual Video Captioning for Multimodal Large Language Models. arXiv preprint arXiv:2601.19267 (2026). [8] Zhangquan Chen, Manyuan Zhang, Xinlei Yu, Xufang Luo, Mingze Sun, Zihao Pan, Yan Feng, Peng Pei, Xunliang Cai, and Ruqi Huang. 2025. Think with 3d: Geometric imagination grounded spatial reasoning from limited views. arXiv preprint arXiv:2510.18632 (2025). [9] Kanzhi Cheng, Wenpo Song, Jiaxin Fan, Zheng Ma, Qiushi Sun, Fangzhi Xu, Chenyang Yan, Nuo Chen, Jianbing Zhang, and Jiajun Chen. 2025. Caparena: Benchmarking and analyzing detailed image captioning in the llm era. In Findings of the Association for Computational Linguistics: ACL 2025 . 14077–14094. [10] Gheorghe Comanici, Eric Bieber, Mike Schaekermann, Ice Pasupat, Noveen Sachdeva, Inderjit Dhillon, Marcel Blistein, Ori Ram, Dan Zhang, Evan Rosen, et al. 2025. Gemini 2.5: Pushing the frontier with advanced reasoning, multi-modality, long context, and next generation agentic capabilities. arXiv preprint arXiv:2507.06261 (2025). [11] Zhiwen Fan, Jian Zhang, Renjie Li, Junge Zhang, Runjin Chen, Hezhen Hu, Kevin Wang, Huaizhi Qu, Dilin Wang, Zhicheng Yan, et al. 2025. Vlm-3r: Vision-language models augmented with instruction-aligned 3d reconstruction. arXiv preprint arXiv:2505.20279 (2025). [12] Yu Gao, Lixue Gong, Qiushan Guo, Xiaoxia Hou, Zhichao Lai, Fanshi Li, Liang Li, Xiaochen Lian, Chao Liao, Liyang Liu, Wei Liu, Yichun Shi, Shiqi Sun, Yu-Chen Tian, Zhi Tian, Peng Wang, Rui Wang, Xuanda Wang, Xun Wang, Ye Wang, Guofeng Wu, Jie Wu, Xin Xia, Xuefeng Xiao, Zhonghua Zhai, Xinyu Zhang, Qi Zhang, Yuwei Zhang, Shijia Zhao, Jianchao Yang, and Weilin Huang. 2025. Seedream 3.0 Technical Report. ArXiv abs/2504.11346 (2025). https: //api.semanticscholar.org/CorpusID:277787095 [13] Roopal Garg, Andrea Burns, Burcu Karagol-Ayan, Yonatan Bitton, Ceslee Mont-gomery, Yasumasa Onoe, Andrew Bunner, Ranjay Krishna, Jason Michael Baldridge, and Radu Soricut. 2024. Imageinwords: Unlocking hyper-detailed image descriptions. In Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing . 93–127. [14] Daya Guo, Dejian Yang, Haowei Zhang, Junxiao Song, Peiyi Wang, Qihao Zhu, Runxin Xu, Ruoyu Zhang, Shirong Ma, Xiao Bi, et al. 2025. Deepseek-r1: Incen-tivizing reasoning capability in llms via reinforcement learning. arXiv preprint arXiv:2501.12948 (2025). [15] Wenyi Hong, Wenmeng Yu, Xiaotao Gu, Guo Wang, Guobing Gan, Haomiao Tang, Jiale Cheng, Ji Qi, Junhui Ji, Lihang Pan, et al. 2025. Glm-4.5 v and glm-4.1 v-thinking: Towards versatile multimodal reasoning with scalable reinforcement learning. arXiv preprint arXiv:2507.01006 (2025). [16] Zihan Huang, Junda Wu, Rohan Surana, Tong Yu, David Arbour, Ritwik Sinha, and Julian McAuley. 2025. Image Difference Captioning via Adversarial Preference Optimization. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing , Christos Christodoulopoulos, Tanmoy Chakraborty, Carolyn Rose, and Violet Peng (Eds.). Association for Computational Linguistics, Suzhou, China, 33758–33770. doi:10.18653/v1/2025.emnlp-main.1713 [17] Aaron Hurst, Adam Lerer, Adam P Goucher, Adam Perelman, Aditya Ramesh, Aidan Clark, AJ Ostrow, Akila Welihinda, Alan Hayes, Alec Radford, et al. 2024. Gpt-4o system card. arXiv preprint arXiv:2410.21276 (2024). [18] Ruipeng Jia, Yunyi Yang, Yuxin Wu, Yongbo Gai, Siyuan Tao, Mengyu Zhou, Jian-Ren Lin, Xiaoxi Jiang, and Guanjun Jiang. 2026. Open Rubric System: Scaling Reinforcement Learning with Pairwise Adaptive Rubric. ArXiv abs/2602.14069 (2026). https://api.semanticscholar.org/CorpusID:285615651 [19] Jiayu Jiang, Changxing Ding, Wentao Tan, Junhong Wang, Jin Tao, and Xiangmin Xu. 2025. Modeling Thousands of Human Annotators for Generalizable Text-to-Image Person Re-identification. 2025 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) (2025), 9220–9230. https://api.semanticscholar. org/CorpusID:276961622 [20] Rahima Khanam and Muhammad Hussain. 2024. Yolov11: An overview of the key architectural enhancements. arXiv preprint arXiv:2410.17725 (2024). [21] Seongyun Lee, Seungone Kim, Sue Hyun Park, Geewook Kim, and Minjoon Seo. 2024. Prometheus-Vision: Vision-Language Model as a Judge for Fine-Grained Evaluation. In Annual Meeting of the Association for Computational Linguistics .https://api.semanticscholar.org/CorpusID:266977481 [22] Bozhou Li, Yushuo Guan, Haolin Li, Bohan Zeng, Yiyan Ji, Yue Ding, Pengfei Wan, Kun Gai, Yuanxing Zhang, and Wentao Zhang. 2026. Semantic Routing: Exploring Multi-Layer LLM Feature Weighting for Diffusion Transformers. arXiv preprint arXiv:2602.03510 (2026). [23] Bozhou Li, Hao Liang, Zimo Meng, and Wentao Zhang. 2024. Are bigger encoders always better in vision large models? arXiv preprint arXiv:2408.00620 (2024). [24] Bozhou Li, Xinda Xue, Sihan Yang, Yang Shi, Xinlong Chen, Yushuo Guan, Yuanx-ing Zhang, and Wentao Zhang. 2026. The unseen bias: How norm discrepancy in pre-norm mllms leads to visual information loss. In International Conference on Learning Representations , Vol. 2026. 1687–1709. [25] Bozhou Li, Sihan Yang, Yushuo Guan, Ruichuan An, Xinlong Chen, Yang Shi, Pengfei Wan, Wentao Zhang, et al. 2025. GRAN-TED: Generating Robust, Aligned, and Nuanced Text Embedding for Diffusion Models. arXiv preprint arXiv:2512.15560 (2025). [26] Bozhou Li and Wentao Zhang. 2025. Id-align: Rope-conscious position remapping for dynamic high-resolution adaptation in vision-language models. arXiv preprint arXiv:2505.21465 (2025). [27] Hongxing Li, Dingming Li, Zixuan Wang, Yuchen Yan, Hang Wu, Wenqi Zhang, Yongliang Shen, Weiming Lu, Jun Xiao, and Yueting Zhuang. 2025. Spatialladder: Progressive training for spatial reasoning in vision-language models. arXiv preprint arXiv:2510.08531 (2025). [28] Lei Li, Yuancheng Wei, Zhihui Xie, Xuqing Yang, Yifan Song, Peiyi Wang, Chenxin An, Tianyu Liu, Sujian Li, Bill Yuchen Lin, et al. 2025. VL-RewardBench: a chal-lenging benchmark for vision-language generative reward models. In Proceedings of the Computer Vision and Pattern Recognition Conference . 24657–24668. [29] Mingxin Li, Yanzhao Zhang, Dingkun Long, Keqin Chen, Sibo Song, Shuai Bai, Zhibo Yang, Pengjun Xie, An Yang, Dayiheng Liu, et al. 2026. Qwen3-VL-Embedding and Qwen3-VL-Reranker: A Unified Framework for State-of-the-Art Multimodal Retrieval and Ranking. arXiv preprint arXiv:2601.04720 (2026). [30] Yuan Liu, Haodong Duan, Yuanhan Zhang, Bo Li, Songyang Zhang, Wangbo Zhao, Yike Yuan, Jiaqi Wang, Conghui He, Ziwei Liu, et al. 2024. Mmbench: Is your multi-modal model an all-around player?. In European conference on computer vision . Springer, 216–233. [31] Yuansen Liu, Haiming Tang, Jinlong Peng, Jiangning Zhang, Xiaozhong Ji, Qing-dong He, Wenbin Wu, Donghao Luo, Zhenye Gan, Junwei Zhu, et al. 2025. Human-MME: A Holistic Evaluation Benchmark for Human-Centric Multimodal Large Language Models. arXiv preprint arXiv:2509.26165 (2025). [32] Zhihang Liu, Chen-Wei Xie, Bin Wen, Feiwu Yu, Jixuan Chen, Pandeng Li, Bo-qiang Zhang, Nianzu Yang, Yinglu Li, Zuan Gao, et al. 2025. CAPability: A Comprehensive Visual Caption Benchmark for Evaluating Both Correctness and Thoroughness. arXiv preprint arXiv:2502.14914 (2025). [33] Shiyin Lu, Yang Li, Yu Xia, Yuwei Hu, Shanshan Zhao, Yanqing Ma, Zhichao Wei, Yinglun Li, Lunhao Duan, Jianshan Zhao, et al. 2025. Ovis2. 5 technical report. 
+
+arXiv preprint arXiv:2508.11737 (2025). [34] Wufei Ma, Yu-Cheng Chou, Qihao Liu, Xingrui Wang, Celso de Melo, Jianwen Xie, and Alan Yuille. 2025. Spatialreasoner: Towards explicit and generalizable 3d spatial reasoning. arXiv preprint arXiv:2504.20024 (2025). [35] Kun Ouyang, Yuanxin Liu, Haoning Wu, Yi Liu, Hao Zhou, Jie Zhou, Fandong Meng, and Xu Sun. 2025. Spacer: Reinforcing mllms in video spatial reasoning. 
+
+arXiv preprint arXiv:2504.01805 (2025). [36] Tanawan Premsri and Parisa Kordjamshidi. 2025. FoREST: Frame of Reference Evaluation in Spatial Reasoning Tasks. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing . Association for Computational Linguistics, 34965–34991. doi:10.18653/v1/2025.emnlp-main.1772 [37] Yang Qin, Chao Chen, Zhihang Fu, Dezhong Peng, Xi Peng, and Peng Hu. 2025. Human-centered interactive learning via mllms for text-to-image person re-identification. In Proceedings of the Computer Vision and Pattern Recognition Conference . 14390–14399. [38] Pooyan Rahmanzadehgervi, Logan Bolton, Mohammad Reza Taesiri, and Anh Totti Nguyen. 2024. Vision language models are blind. In Proceedings of the MM ’26, November 10–14, 2026, Rio de Janeiro, Brazil. Bozhou Li et al. 
+
+Asian Conference on Computer Vision . 18–34. [39] Arijit Ray, Jiafei Duan, Ellis Brown, Reuben Tan, Dina Bashkirova, Rose Hendrix, Kiana Ehsani, Aniruddha Kembhavi, Bryan A Plummer, Ranjay Krishna, et al. 2024. Sat: Dynamic spatial aptitude training for multimodal language models. 
+
+arXiv preprint arXiv:2412.07755 (2024). [40] Shaina Raza, Aravind Narayanan, Vahid Reza Khazaie, Ashmal Vayani, Ahmed Y Radwan, Mukund S Chettiar, Amandeep Singh, Mubarak Shah, and Deval Pandya. 2025. Humanibench: A human-centric framework for large multimodal models evaluation. arXiv preprint arXiv:2505.11454 (2025). [41] Christoph Schuhmann, Richard Vencu, Romain Beaumont, Robert Kaczmarczyk, Clayton Mullis, Aarush Katta, Theo Coombes, Jenia Jitsev, and Aran Komatsuzaki. 2021. Laion-400m: Open dataset of clip-filtered 400 million image-text pairs. arXiv preprint arXiv:2111.02114 (2021). [42] Takumi Takada, Yuma Suzuki, Hiroki Takushima, Hayato Tanoue, Haruki Sato, Aiswariya Kumar, Hiroki Nishihara, Takayuki Hori, and Kazuya Ueki. 2024. Direct Metric Optimization for Image Captioning through Reward-Weighted Augmented Data Utilization. In Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) , Lun-Wei Ku, Andre Martins, and Vivek Srikumar (Eds.). Association for Computational Linguistics, Bangkok, Thailand, 8333–8346. doi:10.18653/v1/2024.acl-long.453 [43] Wentan Tan, Changxing Ding, Jiayu Jiang, Fei Wang, Yibing Zhan, and Dapeng Tao. 2024. Harnessing the power of mllms for transferable text-to-image person reid. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition . 17127–17137. [44] Kimi Team, Tongtong Bai, Yifan Bai, Yiping Bao, SH Cai, Yuan Cao, Y Charles, HS Che, Cheng Chen, Guanduo Chen, et al. 2026. Kimi K2. 5: Visual Agentic Intelligence. arXiv preprint arXiv:2602.02276 (2026). [45] Z-Image Team, Huanqia Cai, Sihan Cao, Ruoyi Du, Peng Gao, Steven Hoi, Zhaohui Hou, Shijie Huang, Dengyang Jiang, Xin Jin, Liangchen Li, Zhen Li, Zhong-Yu Li, David Liu, Dongyang Liu, Junhan Shi, Qilong Wu, Fengyi Yu, Chi Zhang, Shifeng Zhang, and Shilin Zhou. 2025. Z-Image: An Efficient Image Generation Foun-dation Model with Single-Stream Diffusion Transformer. ArXiv abs/2511.22699 (2025). https://api.semanticscholar.org/CorpusID:283438115 [46] Shengbang Tong, Zhuang Liu, Yuexiang Zhai, Yi Ma, Yann LeCun, and Saining Xie. 2024. Eyes wide shut? exploring the visual shortcomings of multimodal llms. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition . 9568–9578. [47] Weiyun Wang, Zhangwei Gao, Lixin Gu, Hengjun Pu, Long Cui, Xingguang Wei, Zhaoyang Liu, Linglin Jing, Shenglong Ye, Jie Shao, et al. 2025. Internvl3. 5: Ad-vancing open-source multimodal models in versatility, reasoning, and efficiency. 
+
+arXiv preprint arXiv:2508.18265 (2025). [48] Fangyun Wei, Jinjing Zhao, Kun Yan, Hongyang Zhang, and Chang Xu. 2024. A large-scale human-centric benchmark for referring expression comprehension in the LMM era. Advances in Neural Information Processing Systems 37 (2024), 69566–69587. [49] Chenfei Wu, Jiahao Li, Jingren Zhou, Junyang Lin, Kaiyuan Gao, Kun Yan, Sheng-ming Yin, Shuai Bai, Xiao Xu, Yilei Chen, Yuxiang Chen, Zecheng Tang, Zekai Zhang, Zhengyi Wang, An Yang, Bowen Yu, Chen Cheng, Da-Wei Liu, De mei Li, Hang Zhang, Hao Meng, Hu Wei, Ji-Li Ni, Kai Chen, Kuang Cao, Liang Peng, Lin Qu, Min Wu, Peng Wang, Shuting Yu, Tingkun Wen, Wensen Feng, Xiao-Xue Xu, Yi Wang, Yichang Zhang, Yong-An Zhu, Yujian Wu, Yu-Jiao Cai, and Ze-Yang Liu. 2025. Qwen-Image Technical Report. ArXiv abs/2508.02324 (2025). https://api.semanticscholar.org/CorpusID:280422608 [50] Diankun Wu, Fangfu Liu, Yi-Hsin Hung, and Yueqi Duan. 2025. Spatial-mllm: Boosting mllm capabilities in visual-based spatial intelligence. arXiv preprint arXiv:2505.23747 (2025). [51] Tianbao Xie, Danyang Zhang, Jixuan Chen, Xiaochuan Li, Siheng Zhao, Ruisheng Cao, Toh J Hua, Zhoujun Cheng, Dongchan Shin, Fangyu Lei, et al. 2024. Os-world: Benchmarking multimodal agents for open-ended tasks in real computer environments. Advances in Neural Information Processing Systems 37 (2024), 52040–52094. [52] Long Xing, Xiaoyi Dong, Yuhang Zang, Yuhang Cao, Jianze Liang, Qidong Huang, Jiaqi Wang, Feng Wu, and Dahua Lin. 2025. Caprl: Stimulating dense image caption capabilities via reinforcement learning. arXiv preprint arXiv:2509.22647 
+
+(2025). [53] Ziang Yan, Zhilin Li, Yinan He, Chenting Wang, Kunchang Li, Xinhao Li, Xi-angyun Zeng, Zilei Wang, Yali Wang, Yu Qiao, Limin Wang, and Yi Wang. 2024. Task Preference Optimization: Improving Multimodal Large Language Models with Vision Task Alignment. 2025 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) (2024), 29880–29892. https://api.semanticscholar.org/ CorpusID:275119548 [54] Shusheng Yang, Jihan Yang, Pinzhi Huang, Ellis Brown, Zihao Yang, Yue Yu, Shengbang Tong, Zihan Zheng, Yifan Xu, Muhan Wang, et al. 2025. Cambrian-s: Towards spatial supersensing in video. arXiv preprint arXiv:2511.04670 (2025). [55] Zhihe Yang, Xufang Luo, Dongqi Han, Yunjian Xu, and Dongsheng Li. 2025. Miti-gating Hallucinations in Large Vision-Language Models via DPO: On-Policy Data Hold the Key. 2025 IEEE/CVF Conference on Computer Vision and Pattern Recog-nition (CVPR) (2025), 10610–10620. https://api.semanticscholar.org/CorpusID: 275570496 [56] Zuopeng Yang, Pengbo Wang, Tianshu Chu, and Jie Yang. 2022. Human-centric image captioning. Pattern Recognition 126 (2022), 108545. [57] Baiqiao Yin, Qineng Wang, Pingyue Zhang, Jianshu Zhang, Kangrui Wang, Zihan Wang, Jieyu Zhang, Keshigeyan Chandrasegaran, Han Liu, Ranjay Krishna, et al. 2025. Spatial mental modeling from limited views. In Structural Priors for Vision Workshop at ICCV’25 .[58] Tianyu Yu, Zefan Wang, Chongyi Wang, Fuwei Huang, Wenshuo Ma, Zhihui He, Tianchi Cai, Weize Chen, Yuxiang Huang, Yuanqian Zhao, et al. 2025. Minicpm-v 4.5: Cooking efficient mllms via architecture, data, and training recipe. arXiv preprint arXiv:2509.18154 (2025). [59] Xiang Yue, Yuansheng Ni, Kai Zhang, Tianyu Zheng, Ruoqi Liu, Ge Zhang, Samuel Stevens, Dongfu Jiang, Weiming Ren, Yuxuan Sun, et al. 2024. Mmmu: A massive multi-discipline multimodal understanding and reasoning benchmark for expert agi. In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition . 9556–9567. [60] Xiaomi LLM-Core Team Zihao Yue, Zhenrui Lin, Yi-Hao Song, Weikun Wang, Shu-Qin Ren, Shuhao Gu, Shicheng Li, Peidian Li, Liang Zhao, Lei Li, Kainan Bao, Hao Tian, Hailin Zhang, Gang Wang, Dawei Zhu, Cici, Chenhong He, Bowen Ye, Bowen Shen, Zihan Zhang, Zi-Ang Jiang, Zhixian Zheng, Zhichao Song, Zhen Luo, Yue Yu, Yudong Wang, Yu Tian, Yu Tu, Yihan Yan, Yi Huang, Xu Wang, Xin dan Xu, Xin Ran Song, Xing Zhang, Xing Yong, Xin Zhang, Xia Deng, Wenyu Yang, Wenhan Ma, Weiwei Lv, Weiji Zhuang, Wei Liu, Sirui Deng, Shuo Liu, Shimao Chen, Shi liang Yu, Shao yang Liu, Shan yong Wang, Rui Ma, Qiantong Wang, Peng Wang, Nuo Chen, Menghang Zhu, Kang Zhou, Kang Zhou, Kai Fang, Jun-Miao Shi, Jinhao Dong, Jiebao Xiao, Jiaming Xu, Huaqiu Liu, Hongsheng Xu, Hengxu Qu, Hao-Song Zhao, Hanglong Lv, Guoan Wang, Duo Zhang, Dong Zhang, Di Zhang, Chong-Yi Ma, Chang Liu, Can Cai, and Bing Xia. 2025. MiMo-VL Technical Report. ArXiv abs/2506.03569 (2025). https: //api.semanticscholar.org/CorpusID:279155294 [61] Fatemeh Pesaran Zadeh, Yoojin Oh, and Gunhee Kim. 2025. LPOI: Listwise Preference Optimization for Vision Language Models. ArXiv abs/2505.21061 (2025). https://api.semanticscholar.org/CorpusID:278911233 [62] Yu Zeng, Yukun Qi, Yiming Zhao, Xikun Bao, Lin Chen, Zehui Chen, Shiting Huang, Jie Zhao, and Feng Zhao. 2025. Enhancing Large Vision-Language Models with Ultra-Detailed Image Caption Generation. In Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing , Chris-tos Christodoulopoulos, Tanmoy Chakraborty, Carolyn Rose, and Violet Peng (Eds.). Association for Computational Linguistics, Suzhou, China, 26715–26741. doi:10.18653/v1/2025.emnlp-main.1357 [63] Biao Zhang, Paul Suganthan, Gaël Liu, Ilya Philippov, Sahil Dua, Ben Hora, Kat Black, Gus Martins, Omar Sanseviero, Shreya Pathak, et al. 2025. T5Gemma 2: Seeing, Reading, and Understanding Longer. arXiv preprint arXiv:2512.14856 
+
+(2025). [64] Junkai Zhang, Zihao Wang, Lin Gui, Swarnashree Mysore Sathyendra, Jaehwan Jeong, Victor Veitch, Wei Wang, Yunzhong He, Bing Liu, and Lifeng Jin. 2025. Chasing the Tail: Effective Rubric-based Reward Modeling for Large Language Model Post-Training. ArXiv abs/2509.21500 (2025). https://api.semanticscholar. org/CorpusID:281659317 [65] Ji Zhang, Shihan Wu, Xu Luo, Hao Wu, Lianli Gao, Hengtao Shen, and Jingkuan Song. 2025. InSpire: Vision-Language-Action Models with Intrinsic Spatial Rea-soning. ArXiv abs/2505.13888 (2025). https://api.semanticscholar.org/CorpusID: 278768943 [66] Zheyuan Zhang, Fengyuan Hu, Jayjun Lee, Freda Shi, Parisa Kordjamshidi, Joyce Chai, and Ziqiao Ma. 2024. Do Vision-Language Models Represent Space and How? Evaluating Spatial Frame of Reference Under Ambiguities. ArXiv 
+
+abs/2410.17385 (2024). https://api.semanticscholar.org/CorpusID:273532344 [67] Deyao Zhu, Jun Chen, Kilichbek Haydarov, Xiaoqian Shen, Wenxuan Zhang, and Mohamed Elhoseiny. 2023. Chatgpt asks, blip-2 answers: Automatic questioning towards enriched visual descriptions. arXiv preprint arXiv:2303.06594 (2023).

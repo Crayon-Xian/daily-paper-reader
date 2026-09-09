@@ -1,0 +1,168 @@
+Title: GOLF: Global Observation with Local Focus for Calibration-Aware Stereo Interaction Field Estimation
+
+URL Source: https://arxiv.org/pdf/2609.08607v1
+
+Published Time: Wed, 09 Sep 2026 03:35:41 GMT
+
+Number of Pages: 3
+
+Markdown Content:
+# GOLF: Global Observation with Local Focus for Calibration-Aware Stereo Interaction Field Estimation 
+
+First-Place Solution for the HANDS@ECCV 2026 SHOW3D Challenge 
+
+Minqiang Zou *, Riqiang Jin *, Zhi Lv, Dong Luo, Lianghai Tian, Zhenyu Zhao, Qi Xu, Tong Wu, Mochen Yu †, and Yao Tang †
+
+JIIOV Technology 
+
+{minqiang.zou,riqiang.jin,zhi.lv,dong.luo,lianghai.tian}@jiiov.com {zhenyu.zhao,qi.xu,tong.wu,mochen.yu,yao.tang}@jiiov.com 
+
+Abstract 
+
+We present GOLF, the first-place solution to the SHOW3D Interaction Field Estimation Challenge at HANDS@ECCV 2026. Given synchronized egocentric stereo views, the task is to predict a 3D vector from each of 21 hand joints to the clos-est point on the manipulated object. GOLF combines dense global context, locally sampled hand/object evidence, and common-frame Pl¨ ucker-ray geometry. We adapt DINOv3 ViT-H+/16 with LoRA and trainable LayerNorm parameters, then jointly decode both interaction fields. Our primary model achieves an official score of 27.61 and a mean ADE of 27.96 mm on the hidden test set. An equal-weight ensemble with a complementary directly fine-tuned variant improves these results to an official score of 27.47 and a mean ADE of 27.82 mm, securing first place. 
+
+1. Introduction 
+
+Interaction fields encode hand–object geometry by a vector from each hand joint to its closest object-surface point [3, 5], remaining meaningful even before contact. ARCTIC and HOT3D cover related controlled and egocentric hand–object settings [2, 3]. SHOW3D evaluates interaction fields from two synchronized headset views with subjects held out at test time. Full-image features preserve scene context but provide limited resolution for small, occluded hands and objects; crop-only processing restores detail but can lose hand–object context. Stereo views improve visibility, yet naive feature concatenation requires the network to infer camera geometry implicitly. This tension motivates retaining global context, densely sampling spatially focused local evidence, and en-coding calibrated rays for every visual token. GOLF combines three ideas (Fig. 1). First, densely sam- 
+
+> *Equal contribution. †Corresponding authors.
+
+pled square hand/object RoIs emphasize local detail without discarding dense context. Second, reference-frame Pl¨ ucker embeddings expose calibrated stereo geometry. Third, DI-NOv3 ViT-H+/16 [6] is efficiently adapted with LoRA [4] and LayerNorm affine parameters. A query decoder jointly predicts both interaction fields. 
+
+2. Method 
+
+2.1. Interaction Field 
+
+For hand h ∈ { L, R } and joint j, let ph,j denote the 3D joint position and p∗ 
+
+> h,j
+
+its closest point on the manipulated object surface. The interaction-field target is 
+
+vh,j = p∗ 
+
+> h,j
+
+− ph,j ∈ R3. (1) Given stereo images and calibration, the network predicts 
+
+ˆV ∈ R2×21 ×3 in the reference-camera frame and minimizes masked mean ADE over valid hands. Before evaluation or submission, each prediction is rotated by the per-frame calibration Rworld ←ref into the required world frame; all vectors remain in millimeters. 
+
+2.2. Global–Local Representation 
+
+Both views share a DINOv3 ViT-H+/16 encoder [6]. Orig-inal backbone weights are frozen except for LayerNorm affine parameters, while LoRA adapters are trained. For a pretrained projection W0, LoRA applies 
+
+y = W0x + αr BAx. (2) Rank-128 LoRA with α = 256 adapts attention QKV/output and all three SwiGLU projections in every block. For each view v, the field branch fuses blocks 
+
+{10 , 20 , 26 , 31 } with learned softmax weights into feature map F v ; the locator consumes block 31 directly. Its eight-layer, three-query decoder predicts center cvt , square half-size svt , and presence for each hand and the object. The arXiv:2609.08607v1 [cs.CV] 8 Sep 2026 1 Feature extraction 2 Locator 3 FieldTransformer    
+
+> left view right view
+> synchronized egocentric images
+> DINOv3
+> ViT-H+/16
+> shared weights
+> LoRA
+> attention + MLP
+> 35 × 28
+> Locator
+> 3 region queries
+> center + half-size
+> (u, v, r) × 3
+> left right object
+> Global tokens
+> full feature grid
+> Local tokens
+> 3 ROI grids / view Plücker rays
+> geometry encoding
+> FieldTransformer
+> 20-layer decoder
+> 42 joint queries global + local memory
+> left field right field
+> interaction field
+> 2 × 21 × 3 vectors
+
+Figure 1. Overview of GOLF. A shared LoRA-adapted DINOv3 encoder processes synchronized headset views. The locator predicts square hand/object regions, and the FieldTransformer decodes 42 joint vectors from global tokens, RoI tokens, and calibrated Pl¨ ucker-ray embeddings. input + square ROIs 
+
+> feature map
+> 35 × 28 (H × W)
+> ROI GridSample
+> left hand
+> right hand
+> object
+> 16 × 16 tokens
+> 16 × 16 tokens
+> 16 × 16 tokens
+
+Figure 2. Local-token construction. The portrait 35 × 28 (H × W )feature map is sampled at the locator grids to form three 16 × 16 
+
+RoI token maps. 
+
+object-region query is additionally conditioned on a learned embedding of the provided object category. Center and log-size use Smooth L1 loss, presence uses binary cross-entropy, and coverage measures the target extent left outside the pre-dicted square, normalized by 64 pixels. Their weights are 
+
+1, 1, 1, and 0.1, respectively; missing hands are masked from the regression terms. For each predicted region, a regular 16 × 16 grid G bilin-early samples spatially aligned local RoI tokens: 
+
+Rvt = GridSample ( F v , cvt + svt G) , t ∈ { L, R, O }.
+
+(3) Role embeddings distinguish the three regions, while the full 35 × 28 feature map is retained as dense global context (Fig. 2). 
+
+2.3. Calibration-Aware Stereo Decoder 
+
+We back-project token pixel u in camera k with 
+
+(Kk)−1[u, v, 1] ⊤ and transform ray direction d and origin o
+
+to the reference frame. We normalize d to unit length and express o in meters before forming the moment. The ray is encoded using origin-aware Pl¨ ucker coordinates [7] 
+
+π(u, k ) = [ d, o × d] ∈ R6. (4) A two-layer MLP maps rays to decoder width; ray and view embeddings are added to all tokens. Global rays use patch centers and local rays use actual GridSample locations. Reference-view swapping discourages camera-role shortcuts, and memory concatenates global and three local RoI token sets from both views. We adopt Joint Transformer’s joint-indexed query formulation [1]: 42 learned queries—one per hand–joint pair—attend to our global–local stereo memory through a 20-layer Transformer with width 512 and eight heads. A shared linear head outputs each query’s 3D vector. 
+
+2.4. Training 
+
+All stages use AdamW with cosine decay. We train the monocular locator and LoRA for 20 epochs with total batch 32 and learning rate 10 −4, treating both cameras indepen-dently and using photometric/noise augmentation, HFlip, partial crop, and ±20 ◦ rotation. Weight decay is 5×10 −4 for the locator and zero for LoRA and LayerNorm parameters. The 40-epoch stereo stage uses total batch 96, learning rates of 5 × 10 −5 for the FieldTransformer and 10 −4 for LoRA, and weight decay 5 × 10 −4 only on the FieldTransformer, with shared ±10 ◦ rotation, photometric jitter, HFlip, and reference swapping. The locator decoder and heads remain frozen; its auxiliary loss still updates the shared backbone adapters, whereas field gradients stop at the predicted RoI coordinates. We then enable LayerNorm affine parameters and jointly fine-tune them, LoRA, and the FieldTransformer for 20 epochs at 10 −4. After fixing all choices, we return the two development subjects to the official training set, keep the locator frozen, and fine-tune the FieldTransformer, LoRA adapters, and LayerNorm affine parameters for two epochs at 2 × 10 −5. For horizontal-flip test-time augmentation (HFlip TTA), both views and their intrinsics are mirrored together. We restore the prediction by swapping left/right slots and negating the camera-frame x component, rotate both branches to the world frame, and average them. Table 1. Development-set resolution tuning under a matched monocular DINOv3 ViT-L/16 setting. Lower is better.                 
+
+> Resolution ( H×W)Val mean ADE (mm)
+> 400 ×320 44.22
+> 480 ×384 41.38
+> 560 ×448 40.23
+> 640 ×512 40.51
+
+3. Experiments 
+
+Setup. The SHOW3D training set contains 468 recordings from 10 subjects and 21 objects, sampled at 10 FPS. The hidden test set contains 20,042 frames sampled at 5 FPS from 139 recordings, covering three unseen subjects and 16 objects. For development, we hold out subjects XYZ109 
+
+and LYA722 as a clean validation split. Inputs are resized to 560 × 448 (H × W ). The server reports left/right ADE, mean ADE, recall, and an official ranking score. The official score is a hidden server-side metric that jointly accounts for prediction accuracy and coverage; its exact formula is not public. All error metrics and the official score are lower-is-better. 
+
+Input resolution. During development, we use a matched monocular DINOv3 ViT-L/16 setup to tune the input resolu-tion (Tab. 1). These runs are used only for hyperparameter selection and differ from the final model evaluated on Cod-abench, so we report validation results only. 
+
+Feature-space versus image-space crops. Under amatched configuration, RGB-crop re-encoding and feature-space RoI sampling achieve comparable validation mean ADE (37.93 versus 37.77 mm). This setting differs from other experiments and supports only this paired comparison. We choose feature-space sampling for its single backbone pass and lower cost. 
+
+Backbone adaptation. We compare staged adapters on the clean split (Tab. 2). Larger attention/MLP ranks correlate with lower errors; LayerNorm affine adaptation gives the best run at 10.04 pixels and 28.31/28.04 mm raw/HFlip-TTA mean ADE. As the rows come from successive stages, they indicate capacity effects rather than a strict one-variable ablation. 
+
+Challenge results. Table 3 traces submissions rather than controlled ablations. Stereo fusion improves performance, and reference-frame Pl¨ ucker encoding further lowers mean ADE from 36.17 to 35.57 mm; broader ViT-H+ adaptation closes most of the remaining gap. The primary model reaches 27.61 official score and 27.96 mm mean ADE; equal-weight averaging with a last-
+
+Table 2. Backbone adaptation on the development split. Raw uses the original stereo pair; HFlip TTA averages the raw and coordinate-restored flipped predictions. Both ADE columns report validation mean ADE in millimeters; lower is better.              
+
+> Backbone adaptation Center err. (px) Raw ADE HFlip-TTA ADE Attn 64 + MLP 16 10.46 29.11 28.84 Attn 128 + MLP 128 10.12 28.82 28.41
+> +LayerNorm affine 10.04 28.31 28.04
+
+Table 3. Submission progression on the hidden SHOW3D test set. Lower is better.                                   
+
+> System Official Mean ADE (mm) InterField, ResNet-50 58.98 59.38 DINOv3 ViT-L/16, one view, 400 ×320 43.12 43.50
+> +both-view training/HFlip, 560 ×448 38.74 39.10
+> +local RoI tokens 36.01 36.36
+> +stereo fusion 35.83 36.17
+> +reference-frame Pl¨ ucker encoding 35.21 35.57 ViT-H+, LoRA 64/16 29.51 29.86 ViT-H+, LoRA 128/128 + LN 28.55 28.91
+> +full-training-set fine-tuning 27.61 27.96
+> +direct-FT last-24-block ensemble 27.47 27.82
+
+24-block fine-tuned variant reaches 27.47 and 27.82 mm, respectively, ranking first. 
+
+4. Conclusion 
+
+Combining global–local features, stereo geometry, and efficient backbone adaptation, GOLF’s final ensemble scores 27.47 and places first in the HANDS@ECCV 2026 SHOW3D Challenge. 
+
+References 
+
+[1] Karim Abou Zeid. Joint Transformer. HANDS@ICCVW, 2023. GitHub repository. [2] Prithviraj Banerjee, Sindi Shkodrani, Pierre Moulon, et al. HOT3D: Hand and object tracking in 3D from egocentric multi-view videos. In CVPR , pages 7061–7071, 2025. [3] Zicong Fan, Omid Taheri, Dimitrios Tzionas, et al. ARCTIC: A dataset for dexterous bimanual hand-object manipulation. In 
+
+CVPR , pages 12943–12954, 2023. [4] Edward J. Hu, Yelong Shen, Phillip Wallis, et al. LoRA: Low-rank adaptation of large language models. In ICLR , 2022. [5] Patrick Rim, Kevin Harris, Braden Copple, et al. SHOW3D: Capturing scenes of 3D hands and objects in the wild. In CVPR ,pages 7111–7120, 2026. [6] Oriane Sim´ eoni, Huy V. Vo, Maximilian Seitzer, et al. DINOv3. 
+
+Transactions on Machine Learning Research , 2026. [7] Vincent Sitzmann, Semon Rezchikov, William T. Freeman, et al. Light field networks: Neural scene representations with single-evaluation rendering. In NeurIPS , pages 19313–19325, 2021.

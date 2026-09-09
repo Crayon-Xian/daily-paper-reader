@@ -1,0 +1,189 @@
+Title: Benchmarking Regularization Methods For 3D Radio Tomographic Imaging
+
+URL Source: https://arxiv.org/pdf/2609.08207v1
+
+Published Time: Wed, 09 Sep 2026 03:16:13 GMT
+
+Number of Pages: 5
+
+Markdown Content:
+# BENCHMARKING REGULARIZATION METHODS FOR 3D RADIO TOMOGRAPHIC IMAGING 
+
+# Wanqin Ma, Yijun Chen, Alikhan Umirbayev, Jichen Zhang, Ross Murch 
+
+# The Hong Kong University of Science and Technology 
+
+ABSTRACT 
+
+Integrated Sensing and Communication (ISAC) is an im-portant technology for 6G, enabling wireless systems to perceive their physical environment. Radio Tomographic Imaging (RTI) is a potential technique for device-free sens-ing in ISAC, reconstructing object locations and shapes from Received Signal Strength (RSS) measurements. It can com-plement other techniques, such as radar and LiDAR, by pro-viding a narrowband modality with wavelength resolution. Recently, an extended version of RTI, known as the extended phaseless Rytov approximation (x3DPRA), has been devel-oped to enhance RTI reconstruction quality, estimate material parameters, and extend RTI from two to three dimensions (3D). However, the 3D formulation is even more ill-posed than the 2D form, as the number of measurements is far fewer than the number of unknown voxels. In this work, we systematically evaluate and compare three distinct regulariza-tion approaches (Ridge, Total Variation, and Tensor Nuclear) within the x3DPRA framework. We provide a detailed per-formance analysis by evaluating both reconstruction quality and computational runtime across the three methods. Our findings show that Total Variation regularization provides the best reconstruction quality but not the fastest runtime, provid-ing guidance for developing high-resolution 3D RTI systems for future ISAC applications. 
+
+Index Terms — 3D Radio Tomography Imaging, Regu-larization, Integrated Sensing and Communication. 
+
+1. INTRODUCTION 
+
+Integrated Sensing and Communication (ISAC) is a key tech-nology that is proposed for 6G wireless networks. Its goal is to jointly design communication and sensing functionalities for 6G to enable sensing of the physical environment [1, 2, 3, 4]. Device-free sensing plays an essential role in realiz-ing ISAC by enabling networks to perceive the environment without requiring targets to carry active sensors. Its appli-cation includes traffic management, human tracking, smart buildings, and environmental monitoring [5, 6]. Radio To-mographic Imaging (RTI) is one potential device-free sens-ing technique for reconstructing attenuation profiles within a 
+
+> Corresponding author: Wanqin Ma, e-mail:wmaag@connect.ust.hk
+
+monitored region [7]. It can complement other techniques, such as radar and LiDAR, by providing a narrowband modal-ity with wavelength resolution. Fused or hybrid ISAC tech-niques that include RTI may therefore be very useful. Traditional RTI employs transceivers around the sensing region boundary. These transceivers measure Received Sig-nal Strength (RSS), and when objects or humans enter the region, the resulting signal attenuation across multiple links provides spatial information. By collecting and processing these RSS variations, RTI generates a map that reveals the locations and approximate shapes of objects inside the region. Recent research has reconciled RTI with formal electromag-netic approaches, yielding enhanced methods that improve RTI reconstruction accuracy and functionality. Among these approaches, the extended phaseless Rytov approximation (xPRA) has been shown to provide accurate reconstructions of the shape, location, and attenuation of target objects [8, 9]. This represents a significant improvement to RTI, as material classification based on attenuation and permittivity enables the sensing system to distinguish among common indoor objects such as water containers, plastic items, and human tissues, thereby providing richer environmental information. Despite these important developments, both RTI and xPRA have been limited to two dimensions (2D). 2D re-construction provides accurate results on planes, but loses critical information about object height and vertical structure. This limitation prevents these methods from being applied to three-dimensional (3D) real-world use cases. Moreover, 3D reconstructions are physically more meaningful because it relates to the real world. In our recent work, we have devel-oped a 3D xPRA framework, denoted x3DPRA, to address this issue by extending previous approaches to volumetric re-construction to recover complete 3D attenuation distributions within the target region [10]. One of the key issues with 3D formulations of RTI is that the number of available measurements is far smaller than the number of voxels to be reconstructed due to the addi-tional spatial dimension, as compared to 2D. In 3D, the num-ber of unknown voxels scales cubically, while the number of RSS measurements increases only linearly, increasing the ill-posedness of the inverse problem as compared to 2D. Regu-larization methods offer a possible solution to such ill-posed challenges by introducing prior information and constraints, arXiv:2609.08207v1 [eess.IV] 8 Sep 2026 enabling the problem to be solved via optimization [11, 12]. Although various optimization methods with different regu-larization strategies have been proposed in the literature [13, 14, 15, 16, 17, 18] and [19] have compared different regular-ization methods for 2D RTI, no comprehensive study system-atically evaluates these approaches in the specific context of 3D RTI. In this work, we benchmark three approaches to regu-larizing 3D RTI using the x3DPRA formulation. The three approaches are Ridge regularization ( ℓ2 norm) [13], Total Variation regularization [14], and Tensor Nuclear regulariza-tion [15]. The contributions of our work are: • We systematically evaluate and compare three regu-larization approaches for solving the inverse scattering problem within the x3DPRA framework. • We provide a detailed performance analysis by evaluat-ing both reconstruction quality and computational run-time across the three methods. • Our findings identify the most effective regularization strategy for 3D RTI, guiding the development of sens-ing systems suitable for ISAC applications. In the following, Section 2 introduces the 3D RTI prob-lem, Section 3 the regularization methods, and Section 4 pro-vides experimental results. Conclusions follow in Section 5. 
+
+2. FORMULATION 
+
+Consider the indoor scenario in Fig 1 with an example Do-main of Interest (DOI) D ⊂ R3 of size dx × dy × dz . Identi-cal 2.4 GHz Wi-Fi transceivers are deployed around the DOI boundary B ⊂ R3 to collect measurement data. A total of 
+
+L transceivers are used, creating M = L(L − 1) /2 commu-nication links (excluding reciprocal links). The DOI is dis-cretized into N = N1 × N2 × N3 voxels, with size ∆v =∆dx × ∆dy × ∆dz . For nth voxel (where n = 1 , 2, . . . , N ), its relative permittivity is ϵr (rn) = ϵR(rn) + jϵ I (rn). Given that most common objects are low-loss indoor [8], we intro-duce the attenuation parameter as [20, 21] 
+
+αn = 2πϵ I (rn)
+
+λ0
+
+pϵR(rn) = 2πδ pϵR(rn)
+
+λ0
+
+(1) where the wavelength λ0 = 0 .125 m is for 2.4 GHz Wi-Fi signals, δ = ϵI (rn) 
+
+> ϵR(rn)
+
+represents the loss-tangent. The formula-tion, x3DPRA, that we developed [10] provides a straightfor-ward linear model for reconstructing objects in 3D, including shape, location, and attenuation. It is given as 
+
+y = Wα + n (2) where the received signal strength (RSS) (in dB) for M links is written as y = [ y1, y 2, . . . , y M ] ∈ RM ×1, while α denotes ��
+
+> ��
+> ��
+> boundary
+> transceiver
+
+Fig. 1 . An example indoor scenario with DOI size dx×dy ×dz
+
+and transceivers distributed around the boundary. the attenuation vector α = [ α1, α 2, . . . , α N ] ∈ RN ×1, and 
+
+n ∈ RN ×1 is the system noise. W ∈ RM ×N is the x3DPRA model matrix based on electromagnetic theory. For brevity, we omit the explicit form of W; its details can be found in Section III of [10]. 
+
+3. 3D REGULARIZATION 
+
+For inverse scattering problems, such as (2), the number of measurements M is typically much smaller than the number of unknowns N (M ≪ N ), making the problem ill-posed. To obtain a stable solution, we can formulate it as a regularized least-squares optimization as 
+
+ˆα = argmin 
+
+> α
+
+12 ∥y − Wα∥22 + γR (α) (3) where γ is the regularization parameter and R(α) is the regu-larization term. In this work, we consider three regularization functions for solving (3). 
+
+3.0.1. 3D Ridge Regularization 
+
+Ridge regularization (also known as ℓ2 norm) defines the reg-ularization term as RRidge (α) = || α|| 22. The solution of ˆα can be rewritten as [13] 
+
+ˆα =  WT W + γI−1 WT y (4) where I is the identity matrix. With prior knowledge of the 
+
+ℓ2-norm, we expect it to produce an overly smooth recon-struction, which cannot preserve sharp edges. 
+
+3.0.2. 3D Total Variation Regularization 
+
+Total variation (TV) is commonly used in inverse scattering problems. We follow a recent 3D regularization approach TVReg [14]. Its regularization term is defined as 
+
+RTV (α) = 
+
+> N
+
+X
+
+> n=1
+
+Φτ (Dnα) (5) where Dn ∈ R3×N is the discrete difference operator for the differences between voxel n and its neighbors. The Huber function Φτ is introduced to smooth the problem and is stan-dard in such formulations. The term Dnα is given by 
+
+Dnα =
+
+ ∇xαn
+
+∇y αn
+
+∇z αn
+
+ (6) where ∇xαn = αn+1 − αn is the difference along the x di-mension and similarly for, ∆y αn, and ∇z αn. TV has demon-strated strong performance in prior RTI studies [9, 19], and we expect it to produce clean reconstructions for our test objects. 
+
+3.0.3. 3D Tensor Nuclear Regularization 
+
+The tensor-based nuclear (TN) regularization for multi-dimensional RTI is described in [15]. To adapt TN for our application, we provide 3D tensor nuclear regularization. The attenuation map α ∈ RN ×1, it is reshaped into a tensor 
+
+A ∈ RN1×N2×N3 as N = N1 × N2 × N3. [15] defines mode-n unfolding for tensor A as A(n) ∈ RNn×In , where 
+
+In = Q3 
+
+> i=1 ,i ̸=n
+
+Ni. By the mode-n matricization, the tensor element (k1, k 2, k 3) of A is mapped to the matrix element 
+
+(kn, l n) of mode-n unfolding A(n) by 
+
+ln =
+
+> 3
+
+X
+
+> i=1
+> i̸=n
+
+(ki − 1) 
+
+
+
+> 4
+
+Y 
+
+> j=i+1
+> j̸=n
+
+Nj
+
+ , N4 = 1 (7) The regularization penalizes the sum of the nuclear norms of the tensor’s mode-n unfoldings. 
+
+RNuc (α) = 
+
+> 3
+
+X
+
+> n=1
+
+∥A (n)∥∗ (8) This approach encourages a low-rank structure in the data, which can effectively denoise the reconstruction but may also oversmooth the reconstruction. 
+
+4. EXPERIMENTS 4.1. Setup 
+
+We configure a 3D DOI with dimensions 0.9 × 0.9 × 0.3
+
+m3 in CST Studio Suite to simulate RSS measurements. For clarity, we use Cartesian coordinates with the DOI centered at (0 , 0, 0) , ranging x, y ∈ [−0.45 , 0.45] m and 
+
+z ∈ [−0.15 , 0.15] m. The DOI is employed with L = 48 
+
+dipole antennas, each 6 cm long, placed at z = 0 , ±0.15 m(16 per height, evenly spaced along the boundary). The space between antennas exceeds one wavelength in all simulations to minimize coupling. In the first column of Fig 2, there are three different ob-jects designed for testing the accuracy and time efficiency of the methods. First, it’s a cylinder with a diameter of 0.3 mand vertical height 0.8 m. The cylinder is centered within the DOI and extends beyond its vertical boundaries to minimize reflections and scattering from the top and bottom surfaces. Its permittivity is 10 + 1 j, giving an attenuation parameter 
+
+α = 15 .8. The second object is a cuboid with a side length of 
+
+0.36 m, height 0.8 m, permittivity 8 + 0 .8j, and attenuation 
+
+α = 14 .2. The third object consists of two cylinders, each with a diameter of 0.4 m and a height of 0.25 m, centered at 
+
+(0 , 0, 0.2) m and (0 , 0, −0.2) m, leaving a 0.15 m vertical gap to reduce scattering. The object’s permittivity is 15 + 1 .5j,corresponding to α = 19 .5.For metrics, we use the Peak Signal-to-Noise Ratio (PSNR) to evaluate reconstruction accuracy and computa-tion time (in seconds) to assess efficiency. 
+
+4.2. Results 
+
+Figure 2 shows the reconstructions generated by three meth-ods, and Table 1 lists the metrics. In terms of accuracy, TV achieves the best results among all methods, with an average PSNR of 15 .4 dB. It not only reconstructs the shape close to the ground truth, but also gives accurate attenuation values. However, the results generated by both Ridge and TN are in-accurate. The average PSNR of Ridge is 10 .9 dB, whereas this method mistakenly produces a cylindrical shape in differ-ent ground-truth cases and yields incorrect attenuation across all results. Similar results are obtained with TN, which recon-structs the cylinder shape across all settings and yields attenu-ation values closer to the true value, with an average PSNR of 
+
+11 .5 dB. For time efficiency, TN is the fastest method, with an average running time of 8.2 seconds. Among all meth-ods, Ridge has the highest computational cost, taking around 
+
+293 .6 seconds, whereas TV completes in around 18 .8 sec-onds. The three methods perform differently on this task. TV succeeds in balancing accuracy and efficiency because its reg-ularization term RTV (α) aligns with the ground-truth 3D ge-ometries, preserving edges and enabling accurate attenuation reconstruction. It can finish computation relatively quickly because it enforces constancy only within neighboring voxels, saving time on irrelevant variations across voxels. However, it still requires solving 3D subproblems at each iteration by computing the norms of the discrete difference operator ( Dn), making it slower than TN. Ridge fails because its ℓ2 penalty globally shrinks values and blurs boundaries, collapsing dis-tinct shapes into a cylinder. The Hessian  WT W + γI re-mains ill-conditioned in unsolved 3D settings and consumes a Ground Truth Ridge Tensor Nuclear Total Variantion Fig. 2 . The figure shows the visualization comparison of different optimization methods. The first column is the ground truth. The second, third, and fourth columns show the results from Ridge, TV, and TN, respectively. 
+
+Table 1 . Numerical comparison of regularization methods.                           
+
+> Object Ridge Total Variation Tensor Nuclear PSNR (dB) Time (s) PSNR (dB) Time (s) PSNR (dB) Time (s) Cylinder 10.8 414.3 19.8 15.2 11.1 8.3 Cuboid 11.0 236.2 16.3 19.3 13.8 8.2 2 Cylinders 10.9 230.4 10.0 21.8 9.58 8.1
+
+lot of computing time. TN fails similarly: Nuclear norms cap-ture the dominant components, so they estimate attenuation levels correctly. However, mode-n unfolding blends distinct features into smooth patterns, failing to preserve 3D bound-aries. It helps reduce computational complexity by converting the tensor into matrices, making TN the fastest overall. In summary, TV is the best approach for reconstructing 3D RTI as it is accurate and fast. Although TN failed on the reconstruction task, it has advantages over TV and Ridge in machine learning (ML) tasks. ML-based RTI first uses sim-ple regularization to produce a blurred reconstruction, then refines it using a network to achieve higher accuracy [22]. In this context, TV yields reconstructions that are overly accu-rate and preserve loss, making them less suitable as inputs for ML networks. Ridge, on the other hand, is computationally too expensive for generating the large datasets typically re-quired by ML tasks. TN offers blurred results with the lowest computational cost, which suits ML tasks best. Though Ridge is widely used in 2D RTI, it is not suitable for 3D RTI, as it incurs excessive runtime and yields incorrect results. 
+
+5. CONCLUSION 
+
+This work investigated Ridge, TV, and TN regularization methods for solving the 3D RTI problem using our x3DPRA model. TV proves most effective, achieving the highest PSNR in a short runtime. Ridge produces overly smooth reconstructions, while TN also generates over-smooth re-sults, but with the shortest runtime and a good attenuation reconstruction. While TN has computational efficiency, its low-rank constraints blur boundaries, whereas TV preserves correct shapes at a moderate computational cost. Our findings support TV-regularized x3DPRA as an efficient and accurate solution for 3D RTI, while TN has potential for ML-based 3D RTI. Future work will explore integrating machine learning and beamforming with 3D RTI for future ISAC applications. 6. REFERENCES 
+
+[1] Hankun Ma, “Integrated sensing and communication -the isac technology,” in 2024 IEEE 2nd International Conference on Sensors, Electronics and Computer En-gineering (ICSECE) , 2024, pp. 225–229. [2] Kai Wu, Zhongqin Wang, Shu-Lin Chen, J. Andrew Zhang, and Y. Jay Guo, “Isac: From human to envi-ronmental sensing,” IEEE Journal of Selected Topics in Electromagnetics, Antennas and Propagation , vol. 1, no. 1, pp. 84–98, 2025. [3] De Mi, Zhengyu Zhou, Fan Liu, Zesong Fei, Bo Ai, Der-rick Wing Kwn Ng, and Yajun Zhao, “Special issue on integrated sensing and communications (isac),” Journal of Communications and Networks , vol. 26, no. 5, pp. 472–476, 2024. [4] Ahmad Bazzi, Mingjun Ying, Ojas Kanhere, Theodore S. Rappaport, and Marwa Chafii, “Isac imaging by channel state information using ray tracing for next generation 6g,” IEEE Journal of Selected Topics in Electromagnetics, Antennas and Propagation ,vol. 1, no. 1, pp. 135–149, 2025. [5] Jie Wang, Qinhua Gao, Miao Pan, and Yuguang Fang, “Device-free wireless sensing: Challenges, opportuni-ties, and applications,” IEEE Network , vol. 32, no. 2, pp. 132–137, 2018. [6] Qin Shi, Liang Liu, Shuowen Zhang, and Shuguang Cui, “Device-free sensing in ofdm cellular network,” IEEE Journal on Selected Areas in Communications , vol. 40, no. 6, pp. 1838–1853, 2022. [7] Joey Wilson and Neal Patwari, “Radio Tomographic Imaging with Wireless Networks,” IEEE Transactions on Mobile Computing , vol. 9, no. 5, pp. 621–632, 2010. [8] Amartansh Dubey, Samruddhi Deshmukh, Li Pan, Xudong Chen, and Ross Murch, “A Phaseless Extended Rytov Approximation for Strongly Scattering Low-Loss Media and Its Application to Indoor Imaging,” IEEE Transactions on Geoscience and Remote Sensing , vol. 60, pp. 1–17, 2022. [9] Amartansh Dubey, Zan Li, and Ross Murch, “Reconcil-ing Radio Tomographic Imaging With Phaseless Inverse Scattering,” IEEE Transactions on Antennas and Prop-agation , vol. 72, no. 2, pp. 1837–1849, 2024. [10] Wanqin Ma, Zan Li, Amartansh Dubey, Alikhan Umir-bayev, Yijun Chen, Junhui Rao, and Ross Murch, “A 3D Formulation of the Extended Phaseless Rytov Approxi-mation,” arXiv e-prints , 2026. [11] A.R. Davies and R. Anderssen, “Optimization in the regularization of ill-posed problems,” The Journal of the Australian Mathematical Society. Series B. Applied Mathematics , vol. 28, pp. 114 – 133, 07 1986. [12] V.P. Tanana, “Optimization of methods for solving in-verse problems,” in 2018 International Russian Automa-tion Conference (RusAutoCon) , 2018, pp. 1–7. [13] Wikipedia contributors, “Ridge regression,” 2025. [14] T. L. Jensen, J. H. Jørgensen, P. C. Hansen, and et al., “Implementation of an Optimal First-Order Method for Strongly Convex Total Variation Regularization,” BIT Numerical Mathematics , vol. 52, no. 2, pp. 329–356, Jun. 2012. [15] T. Matsuda, K. Yokota, K. Takemoto, and et al., “Multi-dimensional wireless tomography using tensor-based compressed sensing,” Wireless Personal Communica-tions , vol. 96, no. 12, pp. 3361–3384, Oct. 2017, Pub-lished online: 4 March 2017. [16] Chengbo Li, Wotao Yin, and Yin Zhang, “User’s guide for tval3: Tv minimization by augmented lagrangian and alternating direction algorithms,” 2010. [17] Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, and Jonathan Eckstein, “Distributed optimization and statistical learning via the alternating direction method of multipliers,” Foundations and Trends in Machine Learning , vol. 3, pp. 1–122, 07 2011. [18] Stanley Chan, Xiran Wang, and Omar Elgendy, “Plug-and-play admm for image restoration: Fixed point con-vergence and applications,” IEEE Transactions on Com-putational Imaging , vol. PP, 05 2016. [19] Brian Beck, Robert Baxley, and Xiaoli Ma, “Regular-ization techniques for floor plan estimation in radio to-mographic imaging,” in 2013 IEEE Global Conference on Signal and Information Processing , 2013, pp. 177– 180. [20] E. Hecht, Optics , Pearson, London, U.K., 5th edition, 2012. [21] M. Born and E. Wolf, Principles of Optics: Electromag-netic Theory of Propagation, Interference and Diffrac-tion of Light , Elsevier, Amsterdam, The Netherlands, 7th edition, 2013. [22] Samruddhi Deshmukh, Amartansh Dubey, Dingfei Ma, Qifeng Chen, and Ross Murch, “Physics assisted deep learning for indoor imaging using phaseless wi-fi mea-surements,” IEEE Transactions on Antennas and Prop-agation , vol. 70, no. 10, pp. 9716–9731, 2022.

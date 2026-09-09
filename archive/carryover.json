@@ -1,17 +1,104 @@
 {
-  "generated_at": "2026-09-08T22:18:41.019668+00:00",
-  "updated_date": "20260908",
+  "generated_at": "2026-09-09T21:52:52.221402+00:00",
+  "updated_date": "20260909",
   "carryover_days": 9,
   "tag_states": {
     "mp": {
-      "updated_date": "20260908",
+      "updated_date": "20260909",
       "carryover_days": 9,
       "items": []
     },
     "egocentric": {
-      "updated_date": "20260908",
+      "updated_date": "20260909",
       "carryover_days": 9,
-      "items": []
+      "items": [
+        {
+          "id": "2609.09023v1",
+          "source": "arxiv",
+          "title": "DYAD: A Multimodal Dataset of Co-Located Human Assistance",
+          "abstract": "An embodied assistant working beside a person must track task state, recognize help seeking, choose how to intervene, and produce an appropriate response. Existing procedural datasets richly describe individual execution, while interactive datasets capture remote verbal instruction or undifferentiated co-working. They do not jointly link a co-located helper's verbal and physical interventions to performer requests, task state, assistance triggers, and outcomes. We introduce DYAD (DYadic Assistance Dataset), a synchronized multimodal record of human-human assistance during gearbox assembly. Across 20 sessions, one trained helper follows a guidance-first policy while assisting HoloLens 2 wearers. DYAD links 528 task-step intervals and 611 performer requests with 851 valid assistance records spanning verbal and physical help. DYAD's annotations span the assistance process; three reference tasks evaluate selected components rather than an end-to-end system: causal step understanding, pre-onset mode anticipation, and instructor response generation. On 829 eligible mode events, the strongest four-seed RGB mean is 0.548 +/- 0.007 macro-F1; causal metadata reaches 0.624 and a privileged trigger mapping 0.915, revealing information not recovered from pre-onset RGB. DYAD's contribution is not scale, but a linked interaction structure spanning help seeking, intervention choice, execution, and outcome under egocentric and workspace sensing.",
+          "authors": [
+            "Akhil Ajikumar",
+            "Mahya Qorbani",
+            "Sakib Reza",
+            "Sean Andrist",
+            "Mohsen Moghaddam"
+          ],
+          "primary_category": "cs.RO",
+          "categories": [
+            "cs.RO"
+          ],
+          "published": "2026-09-08T16:53:15+00:00",
+          "link": "https://arxiv.org/pdf/2609.09023v1",
+          "tags": [
+            "keyword:egocentric",
+            "keyword:mp",
+            "query:egocentric",
+            "query:mp"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "HoloLens 2 first-person multimodal dataset of co-located human assembly assistance, supporting egocentric understanding of actions and requests.",
+          "llm_evidence_cn": "利用HoloLens 2采集共处装配辅助的第一视角多模态数据, 为理解动作与请求提供资源。",
+          "llm_evidence": "利用HoloLens 2采集共处装配辅助的第一视角多模态数据, 为理解动作与请求提供资源。",
+          "canonical_evidence": "利用HoloLens 2采集共处装配辅助的第一视角多模态数据, 为理解动作与请求提供资源。",
+          "llm_tldr_en": "Presents DYAD, a multimodal co-located assistance dataset with HoloLens 2 wearers in gearbox assembly, linking task steps, performer requests, helper interventions, and outcomes for first-person understanding.",
+          "llm_tldr_cn": "该文提出DYAD多模态数据集, 记录20次变速器装配任务中训练有素的助手与佩戴HoloLens 2的执行者的共处互动。数据同步关联528个任务步间隔、611条执行者请求和851条助手干预, 提供了从第一视角理解求助触发、任务状态与干预结果的基础。该数据集可支持针对共同在场的人类辅助场景开展具身视觉理解与活动识别研究, 弥补了现有过程性数据与远程交互数据之间的空白。",
+          "llm_tldr": "该文提出DYAD多模态数据集, 记录20次变速器装配任务中训练有素的助手与佩戴HoloLens 2的执行者的共处互动。数据同步关联528个任务步间隔、611条执行者请求和851条助手干预, 提供了从第一视角理解求助触发、任务状态与干预结果的基础。该数据集可支持针对共同在场的人类辅助场景开展具身视觉理解与活动识别研究, 弥补了现有过程性数据与远程交互数据之间的空白。",
+          "llm_tags": [
+            "query:egocentric"
+          ],
+          "matched_query_tag": "query:egocentric",
+          "matched_query_text": "Egocentric vision understanding methods and applications",
+          "matched_requirement_id": "req-6",
+          "selection_source": "carryover_cache",
+          "paper_id": "2609.09023v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2609.09158v1",
+          "source": "arxiv",
+          "title": "TANGO: Humanoid Navigation in Cluttered Environments with a Whole-Body Vision-Language-Action Model",
+          "abstract": "We study the problem of navigating cluttered indoor environments with a humanoid robot. Unlike conventional methods that model navigation as a 2D path planning problem, humanoid traversal in cluttered environments requires continuous geometry-aware whole-body adaptation, including coordinated arm placement, torso adjustment, and gait modulation for collision-free movement through complex 3D spaces. We introduce TANGO, the first whole-body vision-language navigation framework for language-conditioned humanoid traversal in cluttered environments. Given a natural-language instruction and egocentric RGB observations, TANGO directly predicts 29-DoF joint-space actions for downstream whole-body control. We train TANGO entirely in simulation by synthesizing diverse collision-free traversal behaviors via global path planning, kinematic whole-body motion generation, obstacle-aware motion editing, and RL-based tracking. This pipeline provides dynamically feasible action supervision for learning language-conditioned whole-body policies. In extensive simulation experiments, TANGO demonstrates state-of-the-art performance in vision-language navigation, while outperforming strong modular baselines in navigating challenging scenes requiring obstacle negotiation. Lastly, we deploy TANGO zero-shot on a Unitree G1 humanoid robot, and observe robust language-guided traversal in cluttered real-world scenes without training on any real-world navigation data.",
+          "authors": [
+            "Anqi Li",
+            "Yuxin Chen",
+            "Zhaobo Li",
+            "Zhuo Cao",
+            "Junli Ren",
+            "Masayoshi Tomizuka",
+            "Dhruv Shah"
+          ],
+          "primary_category": "cs.RO",
+          "categories": [
+            "cs.RO",
+            "cs.AI"
+          ],
+          "published": "2026-09-08T17:59:55+00:00",
+          "link": "https://arxiv.org/pdf/2609.09158v1",
+          "tags": [
+            "keyword:egocentric",
+            "keyword:mp",
+            "query:egocentric"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "takes natural-language instructions and egocentric RGB observations to predict whole-body actions for humanoid navigation",
+          "llm_evidence_cn": "结合自然语言指令与自我中心RGB观测，预测人形机器人全身动作以实现导航",
+          "llm_evidence": "结合自然语言指令与自我中心RGB观测，预测人形机器人全身动作以实现导航",
+          "canonical_evidence": "结合自然语言指令与自我中心RGB观测，预测人形机器人全身动作以实现导航",
+          "llm_tldr_en": "TANGO is the first whole-body vision-language-action framework for humanoid traversal; from egocentric RGB observations and language instructions it directly predicts 29-DoF joint-space actions, enabling collision-free navigation in cluttered 3D scenes instead of conventional 2D path planning.",
+          "llm_tldr_cn": "人形机器人在杂乱室内环境穿行需要全身几何感知与动作调节，而非传统的2D路径规划。本文提出TANGO，首个基于语言指令和第一视角RGB观测直接预测29自由度关节空间动作的全身视觉-语言-动作模型。该模型能够协调手臂、躯干与步态以生成无碰撞运动，并在训练与评估中验证了三维修行场景中的导航能力，为人形机器人语言引导导航提供新范式。",
+          "llm_tldr": "人形机器人在杂乱室内环境穿行需要全身几何感知与动作调节，而非传统的2D路径规划。本文提出TANGO，首个基于语言指令和第一视角RGB观测直接预测29自由度关节空间动作的全身视觉-语言-动作模型。该模型能够协调手臂、躯干与步态以生成无碰撞运动，并在训练与评估中验证了三维修行场景中的导航能力，为人形机器人语言引导导航提供新范式。",
+          "llm_tags": [
+            "query:egocentric"
+          ],
+          "matched_query_tag": "query:egocentric",
+          "matched_query_text": "Egocentric vision understanding methods and applications",
+          "matched_requirement_id": "req-6",
+          "selection_source": "carryover_cache",
+          "paper_id": "2609.09158v1",
+          "carry_days": 1
+        }
+      ]
     }
   }
 }

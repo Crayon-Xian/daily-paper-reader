@@ -1,0 +1,785 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-09-09T21:52:52.219926+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 2,
+    "deep_divecandidates": 14,
+    "deep_cap": 7,
+    "deep_selected": 7,
+    "quick_candidates": 14,
+    "quick_skim_target": 12,
+    "quick_selected": 12
+  },
+  "deep_dive": [
+    {
+      "id": "2609.06721v1",
+      "source": "arxiv",
+      "title": "Companion-style QA Assistance in Ego-Vision",
+      "abstract": "AI companions are envisioned as always-on assistants that support users in daily life. With this regard, we introduce BuddyVQA, a benchmark for companion-style question answering (QA) on egocentric streaming video. BuddyVQA contains 21.6K questions linked to 6K highlight moments across 1,012 long, egocentric videos. It features two key characteristics that are common in daily first-person QA assistance but are largely overlooked in existing VideoQA benchmarks: ego-deictic expressions and interactively chained questions (e.g., \"Where is it?\", \"How to get there?\"). These require models to infer a user's in-situation intent by resolving visual pronouns in the context of egocentric visual and QA contents, with both grounded in a long-form streaming setting. To tackle the challenges, we propose MyBuddy, a companion-style QA assistant that highlights a multimodal chain-of-thought reasoning mechanism to infer the final answer based on the historical QA and visual content. An additional question filter and multi-level memory are designed to facilitate efficient QA and visual information retrieval under streaming QA settings. Experiments show that MyBuddy significantly enhances the performance of foundation models on BuddyVQA. Moreover, these gains generalize to other streaming and common video QA benchmarks, demonstrating the applicability and effectiveness of our approach. Our code and dataset are available at https://github.com/QHUni/BuddyVQA",
+      "authors": [
+        "Hangyu Qin",
+        "Junbin Xiao",
+        "Shenglang Zhang",
+        "Angela Yao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-09-06T16:49:45+00:00",
+      "link": "https://arxiv.org/pdf/2609.06721v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Companion-style QA benchmark in egocentric streaming video; requires resolving ego-deictic expressions and chained questions from first-person visual context",
+      "llm_evidence_cn": "构建第一视角视频伴侶式问答基准BuddyVQA，要求解析自我指代表达和链式追问，属于第一视角视频理解",
+      "llm_evidence": "构建第一视角视频伴侶式问答基准BuddyVQA，要求解析自我指代表达和链式追问，属于第一视角视频理解",
+      "canonical_evidence": "构建第一视角视频伴侶式问答基准BuddyVQA，要求解析自我指代表达和链式追问，属于第一视角视频理解",
+      "llm_tldr_en": "BuddyVQA provides 21.6K questions over 6K moments in 1,012 egocentric videos for companion-style QA, adding ego-deictic expressions and interactive follow-up questions that force models to infer user intent from first-person visual and QA context.",
+      "llm_tldr_cn": "现有视频问答基准较少针对日常第一视角伴侶式提问中常见的自我指代与连续追问。本文构建BuddyVQA，包含1012个长视频上6000个高亮时刻与2.16万个问题，利用自我中心指代表达和交互式链式问题，要求模型结合第一视角视频和问答历史理解用户即时意图。该基准为第一视角视频的伴侶问答研究提供了新测试平台和任务定义。",
+      "llm_tldr": "现有视频问答基准较少针对日常第一视角伴侶式提问中常见的自我指代与连续追问。本文构建BuddyVQA，包含1012个长视频上6000个高亮时刻与2.16万个问题，利用自我中心指代表达和交互式链式问题，要求模型结合第一视角视频和问答历史理解用户即时意图。该基准为第一视角视频的伴侶问答研究提供了新测试平台和任务定义。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision understanding methods and applications",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.07099v1",
+      "source": "arxiv",
+      "title": "Ambient @ EgoProactive 2026 : Proactive Egocentric Assistance with Visually Grounded Supervision",
+      "abstract": "We present our submission to the EgoProactive track of the ECCV 2026 Wearable AI Challenge, which ranked first in the large-model division and second in the <=2B division. The task requires a wearable assistant to decide after each eight-second segment of egocentric video whether to intervene or remain silent.   Our approach has two main components. First, we reformulate intervention timing as single-token classification. Rather than generating either $interrupt$<utterance> or $silent$, the model predicts yes or no, and we derive the decision from the renormalised probabilities of these two tokens. This formulation improved macro-F1 by 0.249 and G-mean by 0.30 over free-form generation. Second, because labelled data were limited to the released validation set, we generated additional supervision using a tool-calling video agent that inspects each clip and assigns intervention timestamps. A narration-only alternative was four times larger and ten times cheaper, but transferred worse than supervision from an unrelated real corpus, suggesting that visual grounding is more important than annotation volume for this task.",
+      "authors": [
+        "Logesh Kumar Umapathi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-09-07T06:43:33+00:00",
+      "link": "https://arxiv.org/pdf/2609.07099v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proactive egocentric assistance from first-person video, an application of ego vision understanding",
+      "llm_evidence_cn": "基于第一视角视频的主动辅助决策，属于自我中心视觉应用的直接匹配",
+      "llm_evidence": "基于第一视角视频的主动辅助决策，属于自我中心视觉应用的直接匹配",
+      "canonical_evidence": "基于第一视角视频的主动辅助决策，属于自我中心视觉应用的直接匹配",
+      "llm_tldr_en": "A top-performing EgoProactive method decides whether to interrupt from each egocentric video segment by turning the decision into single-token classification with visually grounded supervision, improving macro-F1 and G-mean over generation.",
+      "llm_tldr_cn": "论文针对可穿戴AI在第一视角视频中决定何时主动干预的任务，指出现有自由文本生成方法难以稳定判断时机，且标注数据有限。作者提出将干预决策转换为单token分类，并基于重归一化的概率进行是与否的选择，配合视觉落地监督扩充训练。在ECCV 2026 EgoProactive挑战中大模型组获第一、轻量组获第二，显著超过自由生成基线，说明该策略能有效提升主动辅助的决策质量与实时性。",
+      "llm_tldr": "论文针对可穿戴AI在第一视角视频中决定何时主动干预的任务，指出现有自由文本生成方法难以稳定判断时机，且标注数据有限。作者提出将干预决策转换为单token分类，并基于重归一化的概率进行是与否的选择，配合视觉落地监督扩充训练。在ECCV 2026 EgoProactive挑战中大模型组获第一、轻量组获第二，显著超过自由生成基线，说明该策略能有效提升主动辅助的决策质量与实时性。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision understanding methods and applications",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.07154v1",
+      "source": "arxiv",
+      "title": "Ambient @ EgoLongQA 2026: Distilling Long-Video perception into a Sub-2B Model",
+      "abstract": "We describe our entry to the EgoLongQA track of the Wearable-AI Challenge in ECCV 2026, which placed first in the <=2B parameter division with 0.8279 on the held-out test set. Our system is a single 2B vision-language model that answers multiple-choice questions about ten-minute egocentric videos in one greedy forward pass; It is obtained by distilling the junior perception module of a tool-using agentic pipeline, not the agent itself into a small student, using teacher traces filtered to those that answered correctly. it reaches 89% of the accuracy of the large agentic pipeline using 1.1% of its parameters. This raises a 27.1% base model to 81.4% on our held-out questions. The 2B backbone has 2.2132B parameters and therefore over the divisional limit, to make the entry admissable we prune the multilingual embedding table from 248,320 to 143,469 rows, reaching 1.9985B with provably identical logits on retained rows.",
+      "authors": [
+        "Logesh Kumar Umapathi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-07T07:50:30+00:00",
+      "link": "https://arxiv.org/pdf/2609.07154v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Egocentric long-video QA and first-person perception distillation for wearable AI",
+      "llm_evidence_cn": "第一视角长视频问答与感知模型蒸馏",
+      "llm_evidence": "第一视角长视频问答与感知模型蒸馏",
+      "canonical_evidence": "第一视角长视频问答与感知模型蒸馏",
+      "llm_tldr_en": "Distills a large agentic pipeline's perception module into a 2B vision-language model that answers questions on ten-minute egocentric videos in one forward; wins EgoLongQA under-2B division, reaching 89 percent accuracy of the large agent with only 1.1 percent parameters.",
+      "llm_tldr_cn": "EgoLongQA评测要求在十分钟第一视角长视频上回答选择题，通常依赖大型智能体管线，参数量大且成本高。本文不直接蒸馏整个智能体，而是将工具型智能体中的感知教师模块蒸馏到单一2B视觉语言学生模型，使其用一次前向完成作答；在ECCV 2026 Wearable-AI挑战EgoLongQA赛道不超过2B参数组中位列第一，达到大型管线89%的准确率和1.1%的参数规模。",
+      "llm_tldr": "EgoLongQA评测要求在十分钟第一视角长视频上回答选择题，通常依赖大型智能体管线，参数量大且成本高。本文不直接蒸馏整个智能体，而是将工具型智能体中的感知教师模块蒸馏到单一2B视觉语言学生模型，使其用一次前向完成作答；在ECCV 2026 Wearable-AI挑战EgoLongQA赛道不超过2B参数组中位列第一，达到大型管线89%的准确率和1.1%的参数规模。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision first-person perception in computer vision",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.07394v1",
+      "source": "arxiv",
+      "title": "Social Intuition vs. Machine Reasoning: Anticipating Human-Robot Interaction from multiple modalities",
+      "abstract": "Anticipating whether a person will interact from one's own perspective is a highly intuitive task for humans, that relies on a combination of cues. We investigate how humans perform at predicting a person's intention to interact from a service robot's point of view, using pose-only or full video input, then benchmark different lightweight pose-based models and state-of-the-art vision-language models. We conducted our benchmark on the HUI360 dataset on a fixed pilot subset of 100 test tracks (25 positive, 75 negative). We found that with pose-only input, human annotators outperform lightweight trained pose models but not by large margins (+0.08 in F1-Score). But when given full egocentric video with a target bounding box, human annotators perform substantially better and largely outperform the Vision-Language Models (+0.2 in F1-Score). We also compared VLMs of different size and under different input conditions, and found that the best results do not correlate with model size. Our result confirms that predicting interactions is a challenging task for social robots and that reasoning-capable models are necessary but their actual reasoning capabilities alone do not suffice to match the social intuition of humans.",
+      "authors": [
+        "Raphael Lorenzo-Louis",
+        "Bertrand Luvison",
+        "Serena Ivaldi"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-07T12:06:48+00:00",
+      "link": "https://arxiv.org/pdf/2609.07394v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "uses full egocentric video from a service robot's first-person viewpoint to predict human interaction intention",
+      "llm_evidence_cn": "利用服务机器人自身视角的完整自我中心视频预测人类交互意图",
+      "llm_evidence": "利用服务机器人自身视角的完整自我中心视频预测人类交互意图",
+      "canonical_evidence": "利用服务机器人自身视角的完整自我中心视频预测人类交互意图",
+      "llm_tldr_en": "Benchmarks humans vs machine models on anticipating interaction intention from a service robot's egocentric view using pose or video, finding modest human advantage in pose-only and different model behavior in full egocentric video.",
+      "llm_tldr_cn": "论文针对服务机器人自身视角下预测行人是否即将交互的任务，系统对比人类与多种机器模型。研究者使用人体姿态或完整自我中心视频输入，在HUI360数据集上测试轻量级姿态模型与视觉语言模型。结果表明，在仅姿态输入下人类标注者比轻量模型高0.08 F1值，且完整自我中心视频会带来不同表现。该工作为第一人称交互预测和人机交互研究提供了比较基准与启示。",
+      "llm_tldr": "论文针对服务机器人自身视角下预测行人是否即将交互的任务，系统对比人类与多种机器模型。研究者使用人体姿态或完整自我中心视频输入，在HUI360数据集上测试轻量级姿态模型与视觉语言模型。结果表明，在仅姿态输入下人类标注者比轻量模型高0.08 F1值，且完整自我中心视频会带来不同表现。该工作为第一人称交互预测和人机交互研究提供了比较基准与启示。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision first-person perception in computer vision",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.08607v1",
+      "source": "arxiv",
+      "title": "GOLF: Global Observation with Local Focus for Calibration-Aware Stereo Interaction Field Estimation",
+      "abstract": "We present GOLF, the first-place solution to the SHOW3D Interaction Field Estimation Challenge at HANDS@ECCV 2026. Given synchronized egocentric stereo views, the task is to predict a 3D vector from each of 21 hand joints to the closest point on the manipulated object. GOLF combines dense global context, locally sampled hand/object evidence, and common-frame Plücker-ray geometry. We adapt DINOv3 ViT-H+/16 with LoRA and trainable LayerNorm parameters, then jointly decode both interaction fields. Our primary model achieves an official score of 27.61 and a mean ADE of 27.96 mm on the hidden test set. An equal-weight ensemble with a complementary directly fine-tuned variant improves these results to an official score of 27.47 and a mean ADE of 27.82 mm, securing first place.",
+      "authors": [
+        "Minqiang Zou",
+        "Riqiang Jin",
+        "Zhi Lv",
+        "Dong Luo",
+        "Lianghai Tian",
+        "Zhenyu Zhao",
+        "Qi Xu",
+        "Tong Wu",
+        "Mochen Yu",
+        "Yao Tang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-08T11:42:44+00:00",
+      "link": "https://arxiv.org/pdf/2609.08607v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Egocentric stereo hand-object interaction field estimation; uses 21 hand joints to manipulated object in first-person views",
+      "llm_evidence_cn": "基于第一视角立体视觉估计手部21关键点到被操作物体的3D交互场，属于第一视角手物交互研究",
+      "llm_evidence": "基于第一视角立体视觉估计手部21关键点到被操作物体的3D交互场，属于第一视角手物交互研究",
+      "canonical_evidence": "基于第一视角立体视觉估计手部21关键点到被操作物体的3D交互场，属于第一视角手物交互研究",
+      "llm_tldr_en": "To infer egocentric hand-object interactions, GOLF fuses dense global context with local sampled hand/object evidence and Plücker-ray geometry over stereo views, achieving official score 27.61 and mean ADE 27.96mm in the SHOW3D challenge.",
+      "llm_tldr_cn": "针对第一视角立体图像中的手物交互估计问题，本文提出GOLF，综合利用全局上下文、局部分采样证据与公共坐标系下的Plücker射线几何，基于DINOv3 ViT-H+与LoRA联合解码两个交互场。在HANDS@ECCV 2026的SHOW3D挑战赛隐藏测试集上，主模型取得官方分数27.61、平均ADE 27.96mm，与直接微调变体集成后提升至27.47，验证了该方案对第一视角手物交互理解的普适性与有效性。",
+      "llm_tldr": "针对第一视角立体图像中的手物交互估计问题，本文提出GOLF，综合利用全局上下文、局部分采样证据与公共坐标系下的Plücker射线几何，基于DINOv3 ViT-H+与LoRA联合解码两个交互场。在HANDS@ECCV 2026的SHOW3D挑战赛隐藏测试集上，主模型取得官方分数27.61、平均ADE 27.96mm，与直接微调变体集成后提升至27.47，验证了该方案对第一视角手物交互理解的普适性与有效性。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric object interaction analysis",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.08636v1",
+      "source": "arxiv",
+      "title": "From Where to How: Continuous 4D Interaction Forecasting from Egocentric Video",
+      "abstract": "Egocentric 4D interaction forecasting aims to anticipate both where future interactions will occur in 3D and how the human body will move to realize them, providing an important capability for assistive robotics and human-computer interaction. Existing methods struggle to translate semantic understanding into precise continuous 3D localization and to balance motion diversity with structural consistency in pose forecasting. More fundamentally, these tasks are often modeled separately, leaving the continuous geometric and temporal correspondence between interaction locations and body motion insufficiently captured. To address these challenges, we introduce Coherent4D, a large-scale egocentric dataset for continuous 4D interaction forecasting, comprising approximately 233K samples across three domains. Each sample pairs a sequence of future 3D interaction locations with corresponding full-body poses, aligned in time and expressed in a shared coordinate system. We also provide evaluation metrics in continuous space. Building on this formulation, we propose HIGFlow, a Hand Interaction Guided Residual Flow framework that models forecasting as a cascaded where-to-how process. HIGFlow first forecasts continuous future interaction locations by combining semantic grounding with short-horizon visual dynamics, and then uses the predicted location sequence to condition a deterministic motion anchor and residual Flow Matching for diverse yet structurally consistent full-body motion forecasting. Extensive experiments across all three domains demonstrate consistent improvements over representative baselines on both location and pose forecasting, while ablations validate the contributions of the proposed components. The project page is available at https://corrineqiu.github.io/from-where-to-how/.",
+      "authors": [
+        "Qiaohui Chu",
+        "Haoyu Zhang",
+        "Meng Liu",
+        "Haoxiang Shi",
+        "Dongmei Jiang",
+        "Liqiang Nie"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-09-08T12:06:23+00:00",
+      "link": "https://arxiv.org/pdf/2609.08636v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "First-person video continuous 4D interaction forecasting, central to egocentric vision understanding",
+      "llm_evidence_cn": "基于第一视角视频的连续4D交互预测，属于自我中心视觉理解核心方向",
+      "llm_evidence": "基于第一视角视频的连续4D交互预测，属于自我中心视觉理解核心方向",
+      "canonical_evidence": "基于第一视角视频的连续4D交互预测，属于自我中心视觉理解核心方向",
+      "llm_tldr_en": "Coherent4D, a large-scale egocentric dataset and model, jointly forecasts continuous 3D interaction locations and future human body motion from first-person video, capturing geometric-temporal correspondence between them.",
+      "llm_tldr_cn": "论文针对自我中心视频中的4D交互预测问题，指出现有方法在连续三维定位与姿态预测上分离建模，无法充分捕捉交互位置与运动之间的对应。为此作者发布了大规模自我中心数据集Coherent4D，并提出统一框架来联合预测未来交互的三维位置和人体姿态。基准实验表明该方法可同时输出较可信的交互位置与连续运动，为辅助机器人和人机交互研究提供了新数据与建模范式。",
+      "llm_tldr": "论文针对自我中心视频中的4D交互预测问题，指出现有方法在连续三维定位与姿态预测上分离建模，无法充分捕捉交互位置与运动之间的对应。为此作者发布了大规模自我中心数据集Coherent4D，并提出统一框架来联合预测未来交互的三维位置和人体姿态。基准实验表明该方法可同时输出较可信的交互位置与连续运动，为辅助机器人和人机交互研究提供了新数据与建模范式。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision understanding methods and applications",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2609.08818v1",
+      "source": "arxiv",
+      "title": "Beyond Gait: Person Identification from Millimeter-Wave Point Clouds Across Activities of Daily Living",
+      "abstract": "Person identification from millimeter-wave (mmWave) point clouds has mainly relied on gait. Indoor walking, however, is often brief and interrupted, while other activities of daily living (ADLs) may provide complementary identity information. We investigate identification across seven ADLs using mm-ADL, a new point-cloud dataset collected from 11 subjects under a controlled protocol. This extension introduces heterogeneous states and transitions whose spatial and temporal characteristics vary with activity. We therefore study whether activity can provide useful context for learning identity representations. We propose an activity-conditioned framework in which a human activity recognition router dispatches each clip to an activity-specific identity expert. The framework is implemented as a supervised mixture of experts, using a dual-stream static-dynamic PointNet (DS-SDPNet) to combine time-aggregated spatial structure with frame-to-frame information. We evaluate closed-set identification (ID) and subject-disjoint re-identification (ReID). With learned hard routing, ID accuracy increases from 62.1% to 68.0%. In a two-occupant ReID setting, hard routing increases mAP from 57.2% to 75.4% and Rank-1 accuracy from 59.1% to 82.1%. Under a matched gallery partition, activity-specific experts also outperform a shared embedding, showing that the gain extends beyond restricting the gallery. These results support the feasibility of using ADLs beyond gait for identification and the value of activity conditioning under controlled indoor conditions.",
+      "authors": [
+        "Xilai Wang",
+        "Zixiong Han",
+        "Saad Rhanmouni",
+        "Chenzhe Zhao",
+        "Yunze Lu",
+        "Miodrag Bolic"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-08T14:41:54+00:00",
+      "link": "https://arxiv.org/pdf/2609.08818v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Uses millimeter-wave point clouds for person identification across activities of daily living",
+      "llm_evidence_cn": "毫米波点云用于跨日常活动的人体身份识别",
+      "llm_evidence": "毫米波点云用于跨日常活动的人体身份识别",
+      "canonical_evidence": "毫米波点云用于跨日常活动的人体身份识别",
+      "llm_tldr_en": "Proposes mm-ADL point-cloud dataset and activity-conditioned framework for person identification from mmWave radar across seven daily living activities, exploiting activity context to improve identity learning.",
+      "llm_tldr_cn": "毫米波点云的身份识别目前主要依赖步态，但室内行走短暂且常被打断；论文引入覆盖7类日常活动的mm-ADL点云数据集，并提出活动条件化识别框架，通过活动识别路由器为各片段提供时空上下文，进而学习更稳健的身份表示。该工作将毫米波感知扩展到非行走的日常生活场景，为无线非视觉人体分析提供新的数据与方法。",
+      "llm_tldr": "毫米波点云的身份识别目前主要依赖步态，但室内行走短暂且常被打断；论文引入覆盖7类日常活动的mm-ADL点云数据集，并提出活动条件化识别框架，通过活动识别路由器为各片段提供时空上下文，进而学习更稳健的身份表示。该工作将毫米波感知扩展到非行走的日常生活场景，为无线非视觉人体分析提供新的数据与方法。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "millimeter wave radar sensing",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2609.02971v1",
+      "source": "arxiv",
+      "title": "Privacy Leakage in Federated Learning: Gradient-Based Client Identity Inference and Defenses for Inertial Sensing in Vehicular Edge Networks",
+      "abstract": "As vehicular networks move toward 5G/6G edge intelligence, federated learning (FL) is widely promoted as a privacy-preserving way for vehicles and infrastructure to train shared models without exposing raw sensor data. Yet the updates clients transmit still leak enough information to identify who sent them, which threatens the anonymity that safety-critical V2X applications assume and adds to existing concerns over adversarial ML, model poisoning, and backdoor attacks. We study server-side client identity inference from transmitted weight deltas using inertial (IMU) measurements, evaluated on the UCI Human Activity Recognition (HAR) benchmark as an accessible proxy for the IMU streams produced onboard connected vehicles. Across five attack classifiers and five non-IID partitions, an honest-but-curious server recovers client identity with near-perfect accuracy (approximately 1.000) from undefended updates, confirming a concrete identifiability risk. We then quantify the privacy-utility trade-off of a lightweight clip-then-noise defense by sweeping Gaussian noise (sigma in {0.00, 0.05, 0.10, 0.20, 0.50, 1.00}) at fixed clipping (C=1.0), and report formal (epsilon, delta)-DP budgets through Renyi accounting. A practical region (sigma in [0.1, 0.2]) drives attack accuracy to near-random while costing under 5% relative FL accuracy. Ensemble FL supplies complementary structural privacy with a 1/K anonymity-set bound and no noise penalty. Results are supported by cryptographic (SHA-256) train/evaluation gradient disjointness, three seeds, and a count-normalized attacker-advantage metric. We position HAR explicitly as a proxy and discuss what validation on true vehicular telemetry would require.",
+      "authors": [
+        "Ali Akarma",
+        "Toqeer Ali Syed",
+        "Muhammad Khan",
+        "Qurat-ul-ain Mastoi",
+        "Adeel Ahmad"
+      ],
+      "primary_category": "cs.CR",
+      "categories": [
+        "cs.CR",
+        "cs.LG",
+        "cs.NI"
+      ],
+      "published": "2026-09-02T09:49:39+00:00",
+      "link": "https://arxiv.org/pdf/2609.02971v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Shows and defends against client identity leakage from inertial human activity data in federated learning, relevant to privacy-preserving non-camera human monitoring.",
+      "llm_evidence_cn": "在联邦学习中针对惯性人体活动数据泄露客户端身份提出推断与防御, 贴合无摄像头隐私保护人体监控需求。",
+      "llm_evidence": "在联邦学习中针对惯性人体活动数据泄露客户端身份提出推断与防御, 贴合无摄像头隐私保护人体监控需求。",
+      "canonical_evidence": "在联邦学习中针对惯性人体活动数据泄露客户端身份提出推断与防御, 贴合无摄像头隐私保护人体监控需求。",
+      "llm_tldr_en": "Shows that federated learning weight updates leak client identities in IMU-based human activity recognition, and proposes defenses; supports privacy-preserving non-camera human monitoring.",
+      "llm_tldr_cn": "联邦学习常被视为无需暴露原始惯性传感数据的隐私保护训练方式, 但客户端上行的模型更新仍可能泄露发送者身份, 威胁车载V2X等安全应用。作者利用梯度更新进行服务端客户端身份推断, 并在UCI人体活动识别基准上验证了这一隐私风险。随后文章针对此类梯度泄露提出防御方法, 以增强匿名性。研究提醒我们, 在不使用摄像头的人类活动感知中同样需要警惕联邦学习的隐私漏洞, 为设计隐私安全的人体监控系统提供了推断与防御工具。",
+      "llm_tldr": "联邦学习常被视为无需暴露原始惯性传感数据的隐私保护训练方式, 但客户端上行的模型更新仍可能泄露发送者身份, 威胁车载V2X等安全应用。作者利用梯度更新进行服务端客户端身份推断, 并在UCI人体活动识别基准上验证了这一隐私风险。随后文章针对此类梯度泄露提出防御方法, 以增强匿名性。研究提醒我们, 在不使用摄像头的人类活动感知中同样需要警惕联邦学习的隐私漏洞, 为设计隐私安全的人体监控系统提供了推断与防御工具。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "privacy preserving human monitoring without cameras",
+      "matched_requirement_id": "req-12",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2609.01055v1",
+      "source": "arxiv",
+      "title": "Active Visual Semantics: A large-scale MEG and eye-tracking dataset for understanding visual intelligence in action",
+      "abstract": "Here we present the Active Visual Semantics (AVS) dataset, a large-scale collection of magnetoencephalography (MEG) and eye-tracking data recorded while five participants freely explored 4,080 natural scenes over 10 sessions each, yielding more than 200,000 fixation epochs in total. Unlike existing neuroimaging datasets that rely on passive viewing with enforced central fixation, AVS captures brain activity during active scene exploration, including self-generated saccades and fixations. A semantic captioning task on 25% of the trials provides behavioural measures linking gaze to scene understanding and memory. In addition to neural and behavioural data, AVS includes per-fixation object category labels, human-rated annotations of the appearance of fixation targets in the scene captioning task and pupil dynamics. Individual head stabilisation casts were used during MEG data collection, which alongside with structural MRI scans, enabled precise cross-session source reconstruction. Using artificial neural network (ANN) encoding models we demonstrate that individual fixation-aligned MEG epochs hold visual content-specific signal, despite the challenges that active scene viewing poses for MEG signal quality. Further, we use fixation-aligned representation similarity analysis (RSA) and demonstrate that we can derive fixation object category averages that yield representational geometries which are highly reliable across participants. Both in MEG sensor and source space this structure is validated by its robust alignment with ANN object-level representational geometry. Taken together, AVS provides a rich resource for investigating a large variety of questions regarding the neural mechanisms of active vision, object recognition and scene captioning during natural viewing, and the relationship between gaze behaviour and memory encoding.",
+      "authors": [
+        "Philip Sulewski",
+        "Carmen Amme",
+        "Peter König",
+        "Martin N. Hebart",
+        "Tim C. Kietzmann"
+      ],
+      "primary_category": "q-bio.NC",
+      "categories": [
+        "q-bio.NC"
+      ],
+      "published": "2026-09-01T10:51:05+00:00",
+      "link": "https://arxiv.org/pdf/2609.01055v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Large-scale MEG and eye-tracking dataset of active scene exploration supports egocentric or self-centered perception and cognitive processing",
+      "llm_evidence_cn": "大规模主动场景探索MEG与眼动数据集支持自我中心感知与认知处理研究",
+      "llm_evidence": "大规模主动场景探索MEG与眼动数据集支持自我中心感知与认知处理研究",
+      "canonical_evidence": "大规模主动场景探索MEG与眼动数据集支持自我中心感知与认知处理研究",
+      "llm_tldr_en": "AVS is a large-scale MEG and eye-tracking dataset recording five participants freely exploring 4,080 natural scenes, with over 200,000 fixation epochs, semantic captioning, and per-fixation object labels. It captures self-generated saccades and fixations, enabling studies linking active visual intelligence, memory, and self-centered cognitive processing.",
+      "llm_tldr_cn": "该文发布大规模主动视觉语义学（AVS）数据集，记录5名被试自由浏览4080张自然场景时的脑磁图和眼动信号，总注视时段超过20万个，并对部分试次附加语义描述任务和逐注视点物体类别标签。与要求强制中心注视的被动观看范式不同，该数据包含自我生成的扫视与注视行为，为理解主动视觉探索中的视觉智能、注视与场景理解记忆之间的关系提供了独特资源，也适合支撑自我中心感知和认知加工的研究。",
+      "llm_tldr": "该文发布大规模主动视觉语义学（AVS）数据集，记录5名被试自由浏览4080张自然场景时的脑磁图和眼动信号，总注视时段超过20万个，并对部分试次附加语义描述任务和逐注视点物体类别标签。与要求强制中心注视的被动观看范式不同，该数据包含自我生成的扫视与注视行为，为理解主动视觉探索中的视觉智能、注视与场景理解记忆之间的关系提供了独特资源，也适合支撑自我中心感知和认知加工的研究。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "self-centered perception and cognitive processing",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.06208v1",
+      "source": "arxiv",
+      "title": "From Gaze to Meaning: A Training-Free AI Agent for Unified Grounding and Explanation",
+      "abstract": "Understanding human attention is fundamental for scene interpretation, yet existing approaches often rely on heavily trained models that lack interpretability. Prior methods struggle to jointly reason about gaze targets, attended objects, and visual grounding without extensive supervision. To the best of our knowledge, this work introduces the first training-free Gaze Target Agent (GTA) for gaze-guided reasoning across tasks such as gaze target prediction, attention localization, and object identification. This is achieved by leveraging pretrained vision-language models, augmenting them with visually guided prompts, and employing a memory-based retrieval strategy for high-uncertainty samples to improve performance without additional training. We evaluate our approach using both quantitative metrics and qualitative results. Quantitatively, our method achieves state of the art performance on the GazeFollow and GazeHOI benchmarks. Qualitatively, our agent provides detailed semantic predictions, predicts the correct targets even when ground truth labels are wrong, and remains flexible without vocabulary constraints.",
+      "authors": [
+        "Shayan Nasiriboukani",
+        "Sara Atito",
+        "Mohammad Nezamipour",
+        "Muhammad Awais"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-05T17:54:58+00:00",
+      "link": "https://arxiv.org/pdf/2609.06208v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Gaze-guided visual grounding and object identification are central cues for first-person perception in computer vision.",
+      "llm_evidence_cn": "凝视引导的视觉定位与目标识别是第一人称视觉感知中的关键线索。",
+      "llm_evidence": "凝视引导的视觉定位与目标识别是第一人称视觉感知中的关键线索。",
+      "canonical_evidence": "凝视引导的视觉定位与目标识别是第一人称视觉感知中的关键线索。",
+      "llm_tldr_en": "Introduces GTA, a training-free agent unifying gaze grounding and explanation. Leveraging pretrained VLMs, visual prompts, and memory retrieval, it predicts gaze targets, localizes attention, and identifies objects without additional supervision.",
+      "llm_tldr_cn": "注视目标预测与视觉定位往往需要大量标注训练，且缺乏可解释性。该文提出首个无需训练的Gaze Target Agent，利用预训练视觉语言模型配合视觉引导提示，对高不确定样本采用记忆检索增强，统一完成注视目标预测、注意力定位和物体识别。该方法在多个相关任务上无需新增训练即可推理，为第一人称感知中的可解释注视理解提供了轻量级方案。",
+      "llm_tldr": "注视目标预测与视觉定位往往需要大量标注训练，且缺乏可解释性。该文提出首个无需训练的Gaze Target Agent，利用预训练视觉语言模型配合视觉引导提示，对高不确定样本采用记忆检索增强，统一完成注视目标预测、注意力定位和物体识别。该方法在多个相关任务上无需新增训练即可推理，为第一人称感知中的可解释注视理解提供了轻量级方案。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision first-person perception in computer vision",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.05596v1",
+      "source": "arxiv",
+      "title": "Time-Aware Assistive Navigation",
+      "abstract": "Can interactive vision-and-language agents learn not just what to say but also \\textbf{\\textit{when}} to say it? Current language models rarely plan over whether and when to realize a real-time response to a user. However, providing accurate and timely support for human decision-making, such as when guiding visually impaired individuals through urban environments, requires careful real-time responsiveness--poorly timed responses can distract users or add unnecessary cognitive load. As a machine intelligence challenge for Multimodal Large Language Model (MLLM)-based agents, we introduce a large-scale multimodal benchmark for an egocentric, assistive navigation task in complex outdoor environments. Using this benchmark, we uncover a fundamental limitation of off-the-shelf MLLMs in delivering safe and time-sensitive navigation instructions, even with model fine-tuning on substantial amounts of data. We then demonstrate that a simple yet effective modification of the model, including direct supervision to predict the underlying reason for each instruction, yields significant performance gains across open-loop, closed-loop, and sim-to-real generalization settings. However, our analysis highlights persistent challenges in temporal reasoning, safety-critical object awareness, and relational and distance understanding. To advance the development of scalable assistive agents, we will release our simulation, benchmark, and code (available at the project website: https://timeli-icra.github.io/).",
+      "authors": [
+        "Masaki Kuribayashi",
+        "Zhongkai Shangguan",
+        "Eshed Ohn-Bar"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-09-04T17:59:47+00:00",
+      "link": "https://arxiv.org/pdf/2609.05596v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Large-scale egocentric assistive navigation benchmark for multimodal LLM agents, measuring real-time response timing in first-person outdoor scenes",
+      "llm_evidence_cn": "面向户外辅助导航的自我中心多模态基准，评测多模态大模型实时响应时机的能力",
+      "llm_evidence": "面向户外辅助导航的自我中心多模态基准，评测多模态大模型实时响应时机的能力",
+      "canonical_evidence": "面向户外辅助导航的自我中心多模态基准，评测多模态大模型实时响应时机的能力",
+      "llm_tldr_en": "Introduces a large-scale, egocentric assistive navigation benchmark that probes whether MLLM agents can decide when to give real-time guidance; results reveal off-the-shelf models are fundamentally weak at response timing.",
+      "llm_tldr_cn": "当前交互式视觉语言模型很少预先规划是否以及何时向用户发出实时响应，而引导视障人士等场景对响应时机非常敏感。论文建立大规模多模态基准，定义室外环境中的自我中心辅助导航任务，要求智能体在正确的时刻提供引导并避免增加认知负担。使用该基准发现现成多模态大模型在实时响应判断上存在根本局限。该工作为交互式辅助导航中的时间感知能力提供了新的评测基础和挑战。",
+      "llm_tldr": "当前交互式视觉语言模型很少预先规划是否以及何时向用户发出实时响应，而引导视障人士等场景对响应时机非常敏感。论文建立大规模多模态基准，定义室外环境中的自我中心辅助导航任务，要求智能体在正确的时刻提供引导并避免增加认知负担。使用该基准发现现成多模态大模型在实时响应判断上存在根本局限。该工作为交互式辅助导航中的时间感知能力提供了新的评测基础和挑战。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision understanding methods and applications",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2609.08041v1",
+      "source": "arxiv",
+      "title": "MamMA: A Mamba-Based Pedestrian Trajectory Prediction Algorithm Considering Occupancy Map and Pedestrian Awareness States",
+      "abstract": "Many pedestrian trajectory prediction algorithms have been proposed to improve the safety of navigation for mobile robots working in human-robot coexistence environments. Some pedestrian trajectory prediction algorithms extract information about obstacles near pedestrians from top-down view images to improve the accuracy of trajectory prediction. However, mobile robots typically create local occupancy maps using LiDAR, rather than top-down view images. Meanwhile, the vision sensors on board robots provide egocentric view images, which contain fine-grained behavioral information about the pedestrians near the robot. To better use the information collected by LiDAR and on-board vision sensors, we propose MamMA, a Mamba-based pedestrian trajectory prediction algorithm considering occupancy maps and pedestrian awareness states. MamMA divides the occupancy map by patches and extracts obstacle features from each patch to create map features. Pedestrian awareness states are divided and considered, as some studies show that awareness states affect the perception and speed of pedestrians. Furthermore, a Mamba-based model is proposed to predict the future trajectories of pedestrians based on different types of features. Experiments on the STCrowd, SiT, JRDB, ETH, and UCY datasets show that MamMA achieves better average displacement error and final displacement error than the state-of-the-art algorithms.",
+      "authors": [
+        "Juncen Long",
+        "Xiaofeng Jin",
+        "Gianluca Bardaro",
+        "Simone Mentasti",
+        "Matteo Matteucci"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-09-07T22:56:48+00:00",
+      "link": "https://arxiv.org/pdf/2609.08041v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Robot egocentric view images are fused with LiDAR occupancy maps for pedestrian behavior perception and trajectory prediction, illustrating first-person visual perception",
+      "llm_evidence_cn": "论文利用车载机器人第一视角图像并结合LiDAR占据图感知行人行为并预测轨迹，属于第一视角感知在视觉中的应用",
+      "llm_evidence": "论文利用车载机器人第一视角图像并结合LiDAR占据图感知行人行为并预测轨迹，属于第一视角感知在视觉中的应用",
+      "canonical_evidence": "论文利用车载机器人第一视角图像并结合LiDAR占据图感知行人行为并预测轨迹，属于第一视角感知在视觉中的应用",
+      "llm_tldr_en": "To improve pedestrian trajectory prediction, MamMA fuses LiDAR-based occupancy maps with egocentric view images and pedestrian awareness states using a Mamba architecture, allowing mobile robots to exploit fine-grained behavioral cues from their own first-person view.",
+      "llm_tldr_cn": "行人轨迹预测对移动机器人在人机共存环境中的安全导航十分重要，但已有方法常依赖自上而下图像，未与机器人自带的基于LiDAR占据图及第一视角图像结合。本文提出Mamba架构的MamMA算法，融合占据图、第一视角视觉特征和行人感知状态模型，以利用第一视角图像中细粒度的行为信息生成行人轨迹。该方法为移动机器人安全导航提供了更完整的上下文感知方案。",
+      "llm_tldr": "行人轨迹预测对移动机器人在人机共存环境中的安全导航十分重要，但已有方法常依赖自上而下图像，未与机器人自带的基于LiDAR占据图及第一视角图像结合。本文提出Mamba架构的MamMA算法，融合占据图、第一视角视觉特征和行人感知状态模型，以利用第一视角图像中细粒度的行为信息生成行人轨迹。该方法为移动机器人安全导航提供了更完整的上下文感知方案。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision first-person perception in computer vision",
+      "matched_requirement_id": "req-2",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.06955v1",
+      "source": "arxiv",
+      "title": "Joint-Conditioned Stereo Surface Reasoning for Interaction Field Estimation",
+      "abstract": "Predicting hand--object interaction fields requires locating the nearest object-surface point for each hand joint, often from small and partially occluded image regions. We view this task as joint-conditioned surface-endpoint estimation: each joint has its own nearest endpoint, while endpoints from the same hand can draw on shared local surface evidence. This structure motivates Joint-Conditioned Stereo Surface Reasoning (JSSR). A temporal-stereo network jointly predicts 3D joints, a direct interaction field, and per-view endpoint evidence. Calibrated candidate search evaluates endpoint hypotheses using joint-specific image compatibility and cross-view correspondence. A hand-shared candidate support lets joints draw on common surface evidence, and a learned residual gate controls the geometric correction when observations are ambiguous. Our system built on this method ranked third on the SHOW3D Interaction Field Challenge leaderboard.",
+      "authors": [
+        "Yanlin Jin",
+        "Yifan Yang",
+        "Bowen Yang",
+        "Kai Zhu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-09-07T02:47:45+00:00",
+      "link": "https://arxiv.org/pdf/2609.06955v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Hand-object interaction field estimation, transferable to egocentric object interaction analysis",
+      "llm_evidence_cn": "手物交互场估计方法可迁移至自我中心物体交互分析",
+      "llm_evidence": "手物交互场估计方法可迁移至自我中心物体交互分析",
+      "canonical_evidence": "手物交互场估计方法可迁移至自我中心物体交互分析",
+      "llm_tldr_en": "Frames hand-object interaction field prediction as joint-conditioned surface endpoint estimation; a temporal-stereo network predicts 3D joints, interaction fields and per-view evidence, and calibrated shared-candidate search locates nearest object-surface points from occluded image parts.",
+      "llm_tldr_cn": "手物交互场的估计通常需要在局部遮挡的小图像区域中为每个手部关节点寻找最近的物体表面点。该文提出联合条件立体表面推理JSSR，使用时序立体网络联合预测3D关节点、直接交互场和逐视角端点证据，并通过手部共享候选支撑与跨视角对应完成候选搜索。该机制可借助同一只手的共享表面线索处理遮挡和部分可见情况，对手物交互以及自我中心物体交互分析具有较强的方法参考价值。",
+      "llm_tldr": "手物交互场的估计通常需要在局部遮挡的小图像区域中为每个手部关节点寻找最近的物体表面点。该文提出联合条件立体表面推理JSSR，使用时序立体网络联合预测3D关节点、直接交互场和逐视角端点证据，并通过手部共享候选支撑与跨视角对应完成候选搜索。该机制可借助同一只手的共享表面线索处理遮挡和部分可见情况，对手物交互以及自我中心物体交互分析具有较强的方法参考价值。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric object interaction analysis",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.06195v1",
+      "source": "arxiv",
+      "title": "EgoNeMo: Transferable Map of Pedestrian Dynamics via Egocentric LiDAR Scan",
+      "abstract": "This paper proposes a transferable Map of Dynamics (MoD) framework that generalizes to unknown environments using only egocentric 3D LiDAR point clouds to overcome the long-standing limitation of traditional MoD methods. While MoDs are essential for encoding human motion characteristics to enable accurate pedestrian trajectory prediction or safe robot navigation, traditional approaches suffer from site-specificity, requiring exhaustive trajectory accumulation at every new location. Extending recent advances in neural implicit modeling, our framework trains a continuous, LiDAR-based MoD estimator across diverse environments. To mitigate the inherent sparsity and temporal bias of real-world trajectory data, we introduce a position-balanced sampling strategy and a multi-task learning architecture that jointly predicts motion distributions and a spatial frequency score map. The latter is further augmented by visibility-aware losses to compensate for incomplete observation data. Comprehensive experiments demonstrate that our method effectively reconstructs underlying motion maps even in unknown locations from a single instantaneous LiDAR scan, despite highly sparse training data. Finally, we show that our improvements enhance the reliability of downstream trajectory prediction.",
+      "authors": [
+        "Azusa Sawada",
+        "Allan Wang",
+        "Hideo Saito",
+        "Aaron Steinfeld"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.RO"
+      ],
+      "published": "2026-09-05T17:35:21+00:00",
+      "link": "https://arxiv.org/pdf/2609.06195v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "uses egocentric LiDAR point clouds to build transferable maps of pedestrian dynamics with neural implicit modeling",
+      "llm_evidence_cn": "利用自我中心LiDAR点云以神经隐式建模构建可迁移的行人动态地图",
+      "llm_evidence": "利用自我中心LiDAR点云以神经隐式建模构建可迁移的行人动态地图",
+      "canonical_evidence": "利用自我中心LiDAR点云以神经隐式建模构建可迁移的行人动态地图",
+      "llm_tldr_en": "EgoNeMo trains a continuous neural implicit map of pedestrian dynamics purely from egocentric LiDAR scans; position-balanced sampling handles sparse real-world trajectories and yields transferable environment understanding for trajectory prediction and safe robot navigation.",
+      "llm_tldr_cn": "传统行人动力学地图依赖场景特异的轨迹积累，难以泛化到未知环境；本文提出EgoNeMo框架，仅使用自我中心的3D LiDAR点云，通过神经隐式建模在多样环境中训练连续动力学估计器。针对真实轨迹稀疏和时间偏置，引入位置均衡采样。结果显示该框架可迁移到未见环境，为行人轨迹预测与机器人安全导航提供了有效的地图表征。",
+      "llm_tldr": "传统行人动力学地图依赖场景特异的轨迹积累，难以泛化到未知环境；本文提出EgoNeMo框架，仅使用自我中心的3D LiDAR点云，通过神经隐式建模在多样环境中训练连续动力学估计器。针对真实轨迹稀疏和时间偏置，引入位置均衡采样。结果显示该框架可迁移到未见环境，为行人轨迹预测与机器人安全导航提供了有效的地图表征。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision understanding methods and applications",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2609.08207v1",
+      "source": "arxiv",
+      "title": "Benchmarking Regularization Methods For 3D Radio Tomographic Imaging",
+      "abstract": "Integrated Sensing and Communication (ISAC) is an important technology for 6G, enabling wireless systems to perceive their physical environment. Radio Tomographic Imaging (RTI) is a potential technique for device-free sensing in ISAC, reconstructing object locations and shapes from Received Signal Strength (RSS) measurements. It can complement other techniques, such as radar and LiDAR, by providing a narrowband modality with wavelength resolution. Recently, an extended version of RTI, known as the extended phaseless Rytov approximation (x3DPRA), has been developed to enhance RTI reconstruction quality, estimate material parameters, and extend RTI from two to three dimensions (3D). However, the 3D formulation is even more ill-posed than the 2D form, as the number of measurements is far fewer than the number of unknown voxels. In this work, we systematically evaluate and compare three distinct regularization approaches (Ridge, Total Variation, and Tensor Nuclear) within the x3DPRA framework. We provide a detailed performance analysis by evaluating both reconstruction quality and computational runtime across the three methods. Our findings show that Total Variation regularization provides the best reconstruction quality but not the fastest runtime, providing guidance for developing high-resolution 3D RTI systems for future ISAC applications.",
+      "authors": [
+        "Wanqin Ma",
+        "Yijun Chen",
+        "Alikhan Umirbayev",
+        "Jichen Zhang",
+        "Ross Murch"
+      ],
+      "primary_category": "eess.IV",
+      "categories": [
+        "eess.IV",
+        "eess.SP"
+      ],
+      "published": "2026-09-08T03:46:06+00:00",
+      "link": "https://arxiv.org/pdf/2609.08207v1",
+      "tags": [
+        "keyword:mp",
+        "query:mp"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "3D radio tomographic imaging reconstructs 3D object geometry from RSS radio measurements, directly relevant to RF-based human body reconstruction",
+      "llm_evidence_cn": "三维无线电层析成像从射频RSS信号重建目标三维几何，与基于射频的人体重建需求直接相关",
+      "llm_evidence": "三维无线电层析成像从射频RSS信号重建目标三维几何，与基于射频的人体重建需求直接相关",
+      "canonical_evidence": "三维无线电层析成像从射频RSS信号重建目标三维几何，与基于射频的人体重建需求直接相关",
+      "llm_tldr_en": "Benchmarks regularization methods for 3D radio tomographic imaging that reconstructs object location/shape from RSS measurements, extending Rytov approximation to 3D and addressing ill-posed RF geometry reconstruction use for human sensing.",
+      "llm_tldr_cn": "三维无线电层析成像是6G通感一体化中的重要无设备感知手段，可利用接收信号强度重建目标位置和形状。然而三维反问题比二维更病态，重建质量严重依赖正则化策略。该文针对扩展无相位Rytov近似的三维重建框架，系统评测多种正则化方法的稳定性和效果。结果为不同应用中的正则化选择提供了依据，从而推动无线电信号重建人体等目标几何的实用化。",
+      "llm_tldr": "三维无线电层析成像是6G通感一体化中的重要无设备感知手段，可利用接收信号强度重建目标位置和形状。然而三维反问题比二维更病态，重建质量严重依赖正则化策略。该文针对扩展无相位Rytov近似的三维重建框架，系统评测多种正则化方法的稳定性和效果。结果为不同应用中的正则化选择提供了依据，从而推动无线电信号重建人体等目标几何的实用化。",
+      "llm_tags": [
+        "query:mp"
+      ],
+      "matched_query_tag": "query:mp",
+      "matched_query_text": "reconstruct human body geometry from radio signals",
+      "matched_requirement_id": "req-10",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2609.07125v1",
+      "source": "arxiv",
+      "title": "A Two-Stage Framework for Ego-Centric Key Object Identification via Object State Prediction",
+      "abstract": "This paper presents a novel framework designed to enhance key object identification in autonomous driving. Existing methods primarily focus on either detecting objects independently or leveraging visual relationships, but they do not explicitly consider the ego vehicle's perspective in determining object importance. To address this gap, we propose a structured approach that integrates a virtual ego-vehicle representation and a modular object state predictor, enabling a more accurate estimation of object behaviors relative to the ego-vehicle. Subsequently, our framework employs spatial-temporal reasoning to refine key object identification, prioritizing objects based on their states and relative spatial information rather than relying solely on visual relationships. Experimental results on real-world driving datasets demonstrate the effectiveness of our approach in accurately detecting critical objects in complex traffic environments.",
+      "authors": [
+        "Shihong Ling",
+        "Yue Wan",
+        "Xiaowei Jia",
+        "Na Du"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-07T07:19:01+00:00",
+      "link": "https://arxiv.org/pdf/2609.07125v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Ego-vehicle-centric key object identification with virtual ego representation and object state prediction, an egocentric perception and understanding application in autonomous driving",
+      "llm_evidence_cn": "面向自动驾驶的以自我车辆为中心的交通关键物体识别，通过虚拟自我表示和物体状态预测理解自车周围场景",
+      "llm_evidence": "面向自动驾驶的以自我车辆为中心的交通关键物体识别，通过虚拟自我表示和物体状态预测理解自车周围场景",
+      "canonical_evidence": "面向自动驾驶的以自我车辆为中心的交通关键物体识别，通过虚拟自我表示和物体状态预测理解自车周围场景",
+      "llm_tldr_en": "Existing key-object detection ignores ego-vehicle perspective. This work builds a two-stage framework with virtual ego-vehicle representation and object-state prediction, followed by spatial-temporal reasoning, to prioritize important objects and improve key-object identification in autonomous driving.",
+      "llm_tldr_cn": "自动驾驶中现有方法常忽略车辆自身视角对物体重要性的判断。本文提出两阶段框架：先通过虚拟自车表示和模块化目标状态预测器估计目标相对自车的行为状态，再利用时空推理对关键物体进行优先级排序，使目标重要性判断更贴近自车视角。与仅检测目标或仅使用视觉关系的基线相比，该方法能更准确地突出驾驶场景中的关键物体。",
+      "llm_tldr": "自动驾驶中现有方法常忽略车辆自身视角对物体重要性的判断。本文提出两阶段框架：先通过虚拟自车表示和模块化目标状态预测器估计目标相对自车的行为状态，再利用时空推理对关键物体进行优先级排序，使目标重要性判断更贴近自车视角。与仅检测目标或仅使用视觉关系的基线相比，该方法能更准确地突出驾驶场景中的关键物体。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision understanding methods and applications",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.07930v1",
+      "source": "arxiv",
+      "title": "A Multimodal Label Forecasting Method for Aperiodic Visuo-Motor Time Series",
+      "abstract": "Deep learning models have been increasingly applied to Time Series Forecasting (TSF) in recent years. Transformer-based and MLP-based models have both been used effectively on many real-world TSF regression benchmarks, and there is ongoing debate as to which family of methods is best. While these benchmarks have drawn much attention, it is also worth noting that many current datasets and methods assume approximate periodicity in the time series. In this work, we focus on a new TSF task without periodicity: anticipating falls during humanoid locomotion, on the basis of egocentric vision and proprioception. When the locomotion trajectories are sufficiently diverse, periodicity is violated. We contribute two new benchmark datasets (one from simulation, one from real hardware), showing that periodicity is violated and recent deep TSF methods struggle on these benchmarks. We also propose a novel deep learning architecture that exploits both endogenous and exogenous variables and a training process that rigorously enforces i.i.d sampling of training examples. Our results show statistically significant improvement over prior art in multiple experimental conditions, by 12.73% or more on the real data and 10.40% or more on the simulation data. Code and datasets will be available upon acceptance.",
+      "authors": [
+        "Borui He",
+        "Garrett E Katz"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-09-07T19:45:14+00:00",
+      "link": "https://arxiv.org/pdf/2609.07930v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "performs fall anticipation from egocentric vision and proprioception during humanoid locomotion, a first-person action prediction task",
+      "llm_evidence_cn": "从第一视角视觉与本体感觉预测人形机器人行走时的摔倒，属于第一视角动作预测任务",
+      "llm_evidence": "从第一视角视觉与本体感觉预测人形机器人行走时的摔倒，属于第一视角动作预测任务",
+      "canonical_evidence": "从第一视角视觉与本体感觉预测人形机器人行走时的摔倒，属于第一视角动作预测任务",
+      "llm_tldr_en": "This paper addresses non-periodic time-series forecasting for anticipating falls during humanoid locomotion from egocentric vision and proprioception; it contributes simulated and real benchmark datasets and a multimodal label forecasting method that goes beyond periodic assumptions.",
+      "llm_tldr_cn": "以往时间序列预测多在周期假设下发展，而人形机器人行走动作多样，摔倒预测依赖于视觉与本体感觉的非周期信号。本文面向无周期的视觉-运动时间序列，提出多模态标签预测方法，基于第一视角视觉与本体感觉预测摔倒，并提供来自仿真与实物机器的两组基准数据集。研究工作绕开周期性假设，验证了基于第一视角观测的非周期动作预测能力，对人形机器人主动安全与护理监护具有价值。",
+      "llm_tldr": "以往时间序列预测多在周期假设下发展，而人形机器人行走动作多样，摔倒预测依赖于视觉与本体感觉的非周期信号。本文面向无周期的视觉-运动时间序列，提出多模态标签预测方法，基于第一视角视觉与本体感觉预测摔倒，并提供来自仿真与实物机器的两组基准数据集。研究工作绕开周期性假设，验证了基于第一视角观测的非周期动作预测能力，对人形机器人主动安全与护理监护具有价值。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric action recognition from first-person perspective",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2609.08938v1",
+      "source": "arxiv",
+      "title": "EgoSIS: From Factorized Visual Ego-Transitions to Motion-Canonical Spatial Evidence for UAV Reasoning",
+      "abstract": "UAV video question answering requires separating camera motion from changes in the scene, but RGB-only multimodal models receive no explicit, stable reference for that separation. We present EgoSIS, a pose-free adapter that converts RGB-derived bidirectional flow into motion-canonical visual evidence in three stages. Factorized Visual Ego-Transitions (FVET) fits a robust image-plane transition and exposes motion, residual-support, and reliability factors. Reliability-Gated Ego-Transition Memory (ReTEM) uses reliability-weighted updates for a bounded history and re-anchors it at cuts or sustained uncertainty. Ego-Aligned Spatial Evidence (EASE) warps supported visual features into each segment's local anchor and injects four spatial evidence tokens per visual slice through zero-initialized residuals, without changing Qwen's visual-token count. On SIS-Bench, EgoSIS-8B obtains 89.9\\% perception, 82.5\\% perception-plus-memory, and 76.2\\% overall accuracy, with the largest gains concentrated in self-awareness perception and memory. The adapter thus provides an interpretable interface between optical flow and spatial reasoning.",
+      "authors": [
+        "Jingpu Yang",
+        "Fengxian Ji",
+        "Mingxuan Cui",
+        "Yilin Sun",
+        "Hang Zhang",
+        "Jianhua Zhu",
+        "Yufeng Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-08T16:00:39+00:00",
+      "link": "https://arxiv.org/pdf/2609.08938v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric",
+        "query:mp"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "EgoSIS factorizes visual ego-transitions and produces motion-canonical evidence for moving-camera video reasoning, methodologically useful for egocentric video understanding",
+      "llm_evidence_cn": "分离相机自我运动并构建运动规范证据以支持移动相机视频推理，可迁移到自我中心视频理解",
+      "llm_evidence": "分离相机自我运动并构建运动规范证据以支持移动相机视频推理，可迁移到自我中心视频理解",
+      "canonical_evidence": "分离相机自我运动并构建运动规范证据以支持移动相机视频推理，可迁移到自我中心视频理解",
+      "llm_tldr_en": "EgoSIS is a pose-free adapter that factorizes RGB flow into visual ego-transitions and builds motion-canonical spatial evidence, helping UAV video QA disentangle camera motion from scene changes without external pose.",
+      "llm_tldr_cn": "无人机视频问答需要把相机自身运动与场景变化区分开，而纯RGB多模态模型缺少稳定的分离参考。论文提出EgoSIS无姿态适配器，分三个阶段将双向光流分解为视觉自我转移并生成运动规范化证据：用分解模型输出运动、残差与可靠性因子，用门控记忆长期更新并重定位，再用对齐模块将视觉特征注入片段锚点。该方法可为移动相机视频推理提供稳定的运动分离能力。",
+      "llm_tldr": "无人机视频问答需要把相机自身运动与场景变化区分开，而纯RGB多模态模型缺少稳定的分离参考。论文提出EgoSIS无姿态适配器，分三个阶段将双向光流分解为视觉自我转移并生成运动规范化证据：用分解模型输出运动、残差与可靠性因子，用门控记忆长期更新并重定位，再用对齐模块将视觉特征注入片段锚点。该方法可为移动相机视频推理提供稳定的运动分离能力。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "Egocentric vision understanding methods and applications",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2609.08300v1",
+      "source": "arxiv",
+      "title": "Human-Centric Image Captioning with Subject-Centered Spatial Understanding",
+      "abstract": "While multimodal large language models (MLLMs) achieve remarkable performance on generic image captioning, they frequently suffer from structural hallucinations in human-centric scenarios. Accurately modeling human subjects is foundational for critical downstream applications, such as accurate avatar/video/image generation and fine-grained human action understanding. However, these tasks require highly precise subject-centered spatial grounding, such as distinguishing egocentric left/right laterality and maintaining correct anatomical-object bindings. Although catastrophic for structural integrity, these localized spatial inversions are often overshadowed by overall descriptive metrics in existing benchmarks. To systematically expose and quantify this bottleneck, we introduce SPACE (Subject-centric Poses, Appearance, and Characteristics Evaluation), a benchmark designed to evaluate subject-centered spatial understanding. On SPACE, we reveal that despite strong generic perception, current MLLMs consistently fail to ground descriptions in the subject's intrinsic frame of reference. To bridge this gap, we propose a specialized data construction and alignment pipeline. We first extract structured spatial hints from fine-grained body-part localization to guide a two-stage caption rewriting process, yielding highly spatially-faithful training data. Furthermore, we design a rubric-based reward for Group Relative Policy Optimization (GRPO) that explicitly penalizes structurally critical spatial errors during alignment. Extensive experiments on SPACE demonstrate our framework significantly improves human-centric caption quality, particularly in subject-centered spatial reasoning, achieving performance competitive with strong closed-source models. Our benchmark and code are available at https://github.com/JHang2020/SPACE-Eval.",
+      "authors": [
+        "Bozhou Li",
+        "Jiahang Zhang",
+        "Yue Ding",
+        "Yushuo Guan",
+        "Bohan Zeng",
+        "Yiyan Ji",
+        "Xinlong Chen",
+        "Yang Shi",
+        "Yifan Dai",
+        "Yuran Wang",
+        "Chengzhuo Tong",
+        "Pengfei Wan",
+        "Yuanxing Zhang",
+        "Wentao Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-09-08T06:21:32+00:00",
+      "link": "https://arxiv.org/pdf/2609.08300v1",
+      "tags": [
+        "keyword:egocentric",
+        "keyword:mp",
+        "query:egocentric"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "studies subject-centered spatial understanding, specifically egocentric left/right laterality and anatomical-object binding, in human-centric image captioning",
+      "llm_evidence_cn": "研究人体描述中的主体中心空间理解，聚焦自我中心左右朝向与解剖-物体绑定",
+      "llm_evidence": "研究人体描述中的主体中心空间理解，聚焦自我中心左右朝向与解剖-物体绑定",
+      "canonical_evidence": "研究人体描述中的主体中心空间理解，聚焦自我中心左右朝向与解剖-物体绑定",
+      "llm_tldr_en": "Probes structural hallucinations in human-centric image captioning through subject-centered spatial understanding, targeting egocentric left-right laterality and anatomical-object bindings exposed despite strong generic metrics.",
+      "llm_tldr_cn": "多模态大模型在人体图像描述中常出现左右颠倒和肢体-物体绑定错误，这类主体中心空间反转对结构完整性破坏大却常被整体指标掩盖。本文围绕人体描述场景，评测模型对自我中心左右朝向与解剖结构关系的理解能力。结果显示当前模型在相关空间接地上出现大量结构幻觉，为人体感知提供了新评测基准。该能力对精确人体图像生成与动作理解等下游任务具有重要基础作用。",
+      "llm_tldr": "多模态大模型在人体图像描述中常出现左右颠倒和肢体-物体绑定错误，这类主体中心空间反转对结构完整性破坏大却常被整体指标掩盖。本文围绕人体描述场景，评测模型对自我中心左右朝向与解剖结构关系的理解能力。结果显示当前模型在相关空间接地上出现大量结构幻觉，为人体感知提供了新评测基准。该能力对精确人体图像生成与动作理解等下游任务具有重要基础作用。",
+      "llm_tags": [
+        "query:egocentric"
+      ],
+      "matched_query_tag": "query:egocentric",
+      "matched_query_text": "self-centered perception and cognitive processing",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    }
+  ]
+}

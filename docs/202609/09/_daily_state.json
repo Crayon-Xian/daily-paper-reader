@@ -1,0 +1,313 @@
+{
+  "date": "20260909",
+  "date_label": "",
+  "generated_at": "2026-09-09 22:02:00 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.06721v1",
+      "route": "202609/09/2609.06721v1-companion-style-qa-assistance-in-ego-vision",
+      "title": "Companion-style QA Assistance in Ego-Vision",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "构建第一视角视频伴侶式问答基准BuddyVQA，要求解析自我指代表达和链式追问，属于第一视角视频理解",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.07099v1",
+      "route": "202609/09/2609.07099v1-ambient--egoproactive-2026--proactive-egocentric-assistance-with-visually-grounded-supervision",
+      "title": "Ambient @ EgoProactive 2026 : Proactive Egocentric Assistance with Visually Grounded Supervision",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于第一视角视频的主动辅助决策，属于自我中心视觉应用的直接匹配",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.07154v1",
+      "route": "202609/09/2609.07154v1-ambient--egolongqa-2026-distilling-long-video-perception-into-a-sub-2b-model",
+      "title": "Ambient @ EgoLongQA 2026: Distilling Long-Video perception into a Sub-2B Model",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "第一视角长视频问答与感知模型蒸馏",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.07394v1",
+      "route": "202609/09/2609.07394v1-social-intuition-vs-machine-reasoning-anticipating-human-robot-interaction-from-multiple-modalities",
+      "title": "Social Intuition vs. Machine Reasoning: Anticipating Human-Robot Interaction from multiple modalities",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "利用服务机器人自身视角的完整自我中心视频预测人类交互意图",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.08607v1",
+      "route": "202609/09/2609.08607v1-golf-global-observation-with-local-focus-for-calibration-aware-stereo-interaction-field-estimation",
+      "title": "GOLF: Global Observation with Local Focus for Calibration-Aware Stereo Interaction Field Estimation",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于第一视角立体视觉估计手部21关键点到被操作物体的3D交互场，属于第一视角手物交互研究",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.08636v1",
+      "route": "202609/09/2609.08636v1-from-where-to-how-continuous-4d-interaction-forecasting-from-egocentric-video",
+      "title": "From Where to How: Continuous 4D Interaction Forecasting from Egocentric Video",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "基于第一视角视频的连续4D交互预测，属于自我中心视觉理解核心方向",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.08818v1",
+      "route": "202609/09/2609.08818v1-beyond-gait-person-identification-from-millimeter-wave-point-clouds-across-activities-of-daily-living",
+      "title": "Beyond Gait: Person Identification from Millimeter-Wave Point Clouds Across Activities of Daily Living",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 9.0,
+      "evidence": "毫米波点云用于跨日常活动的人体身份识别",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.02971v1",
+      "route": "202609/09/2609.02971v1-privacy-leakage-in-federated-learning-gradient-based-client-identity-inference-and-defenses-for-inertial-sensing-in-vehicular-edge-networks",
+      "title": "Privacy Leakage in Federated Learning: Gradient-Based Client Identity Inference and Defenses for Inertial Sensing in Vehicular Edge Networks",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "在联邦学习中针对惯性人体活动数据泄露客户端身份提出推断与防御, 贴合无摄像头隐私保护人体监控需求。",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.05596v1",
+      "route": "202609/09/2609.05596v1-time-aware-assistive-navigation",
+      "title": "Time-Aware Assistive Navigation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向户外辅助导航的自我中心多模态基准，评测多模态大模型实时响应时机的能力",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.06195v1",
+      "route": "202609/09/2609.06195v1-egonemo-transferable-map-of-pedestrian-dynamics-via-egocentric-lidar-scan",
+      "title": "EgoNeMo: Transferable Map of Pedestrian Dynamics via Egocentric LiDAR Scan",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "利用自我中心LiDAR点云以神经隐式建模构建可迁移的行人动态地图",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.07930v1",
+      "route": "202609/09/2609.07930v1-a-multimodal-label-forecasting-method-for-aperiodic-visuo-motor-time-series",
+      "title": "A Multimodal Label Forecasting Method for Aperiodic Visuo-Motor Time Series",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "从第一视角视觉与本体感觉预测人形机器人行走时的摔倒，属于第一视角动作预测任务",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.08300v1",
+      "route": "202609/09/2609.08300v1-human-centric-image-captioning-with-subject-centered-spatial-understanding",
+      "title": "Human-Centric Image Captioning with Subject-Centered Spatial Understanding",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "研究人体描述中的主体中心空间理解，聚焦自我中心左右朝向与解剖-物体绑定",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.01055v1",
+      "route": "202609/09/2609.01055v1-active-visual-semantics-a-large-scale-meg-and-eye-tracking-dataset-for-understanding-visual-intelligence-in-action",
+      "title": "Active Visual Semantics: A large-scale MEG and eye-tracking dataset for understanding visual intelligence in action",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "大规模主动场景探索MEG与眼动数据集支持自我中心感知与认知处理研究",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.08041v1",
+      "route": "202609/09/2609.08041v1-mamma-a-mamba-based-pedestrian-trajectory-prediction-algorithm-considering-occupancy-map-and-pedestrian-awareness-states",
+      "title": "MamMA: A Mamba-Based Pedestrian Trajectory Prediction Algorithm Considering Occupancy Map and Pedestrian Awareness States",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "论文利用车载机器人第一视角图像并结合LiDAR占据图感知行人行为并预测轨迹，属于第一视角感知在视觉中的应用",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.08207v1",
+      "route": "202609/09/2609.08207v1-benchmarking-regularization-methods-for-3d-radio-tomographic-imaging",
+      "title": "Benchmarking Regularization Methods For 3D Radio Tomographic Imaging",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "三维无线电层析成像从射频RSS信号重建目标三维几何，与基于射频的人体重建需求直接相关",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.06208v1",
+      "route": "202609/09/2609.06208v1-from-gaze-to-meaning-a-training-free-ai-agent-for-unified-grounding-and-explanation",
+      "title": "From Gaze to Meaning: A Training-Free AI Agent for Unified Grounding and Explanation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "凝视引导的视觉定位与目标识别是第一人称视觉感知中的关键线索。",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.06955v1",
+      "route": "202609/09/2609.06955v1-joint-conditioned-stereo-surface-reasoning-for-interaction-field-estimation",
+      "title": "Joint-Conditioned Stereo Surface Reasoning for Interaction Field Estimation",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "手物交互场估计方法可迁移至自我中心物体交互分析",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.07125v1",
+      "route": "202609/09/2609.07125v1-a-two-stage-framework-for-ego-centric-key-object-identification-via-object-state-prediction",
+      "title": "A Two-Stage Framework for Ego-Centric Key Object Identification via Object State Prediction",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "面向自动驾驶的以自我车辆为中心的交通关键物体识别，通过虚拟自我表示和物体状态预测理解自车周围场景",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    },
+    {
+      "paper_id": "2609.08938v1",
+      "route": "202609/09/2609.08938v1-egosis-from-factorized-visual-ego-transitions-to-motion-canonical-spatial-evidence-for-uav-reasoning",
+      "title": "EgoSIS: From Factorized Visual Ego-Transitions to Motion-Canonical Spatial Evidence for UAV Reasoning",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "分离相机自我运动并构建运动规范证据以支持移动相机视频推理，可迁移到自我中心视频理解",
+      "first_seen_at": "2026-09-09 22:02:00 UTC",
+      "updated_at": "2026-09-09 22:02:00 UTC"
+    }
+  ]
+}
