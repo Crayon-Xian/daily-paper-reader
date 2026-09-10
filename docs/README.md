@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-09</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-10</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 19 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 2 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>7</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>12</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>1</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-09 22:02:00 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-10 21:31:55 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,10 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>今日共生成 19 篇推荐（精读 7 篇，速读 12 篇）</p>
-<p>精读：《Companion-style QA Assistance in Ego-Vision》（9.0/10）, 《Ambient @ EgoProactive 2026 : Proactive Egocentric Assistance with Visually Grounded Supervision》（9.0/10）</p>
-<p>速读：《Privacy Leakage in Federated Learning: Gradient-Based Client Identity Inference and Defenses for Inertial Sensing in Vehicular Edge Networks》（8.0/10）, 《Time-Aware Assistive Navigation》（8.0/10）, 《EgoNeMo: Transferable Map of Pedestrian Dynamics via Egocentric LiDAR Scan》（8.0/10）</p>
-<p>这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。</p>
+<p>今日精读1篇、速读1篇，聚焦雷达传感与深度学习在人体活动识别和运动分割追踪上的新进展。最值得看的是8.0分的《Robust Continuous Human Activity Recognition Using Deep Learning and Distributed Radar Sensors》，展示了分布式雷达做连续人体活动识别的稳健方案。普通读者可先读这篇精读，再浏览6.0分的雷达多模态运动分割与追踪速读，了解雷达感知的另一条应用线。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -74,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">7 篇</strong>
+    <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Companion-style QA Assistance in Ego-Vision">Companion-style QA Assistance in Ego-Vision</span></li><li><span class="dpr-home-dashboard-paper-title" title="Ambient @ EgoProactive 2026 : Proactive Egocentric Assistance with Visually Grounded Supervision">Ambient @ EgoProactive 2026 : Proactive Egocentric Assistance with Visually Grounded Supervision</span></li><li><span class="dpr-home-dashboard-paper-title" title="Ambient @ EgoLongQA 2026: Distilling Long-Video perception into a Sub-2B Model">Ambient @ EgoLongQA 2026: Distilling Long-Video perception into a Sub-2B Model</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Robust Continuous Human Activity Recognition Using Deep Learning and Distributed Radar Sensors">Robust Continuous Human Activity Recognition Using Deep Learning and Distributed Radar Sensors</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">egocentric <strong>6</strong></span><span class="dpr-home-dashboard-tag">mp <strong>1</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">mp <strong>1</strong></span></div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -87,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">12 篇</strong>
+    <strong class="dpr-home-dashboard-count">1 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Privacy Leakage in Federated Learning: Gradient-Based Client Identity Inference and Defenses for Inertial Sensing in Vehicular Edge Networks">Privacy Leakage in Federated Learning: Gradient-Based Client Identity Inference and Defenses for Inertial Sensing in Vehicular Edge Networks</span></li><li><span class="dpr-home-dashboard-paper-title" title="Time-Aware Assistive Navigation">Time-Aware Assistive Navigation</span></li><li><span class="dpr-home-dashboard-paper-title" title="EgoNeMo: Transferable Map of Pedestrian Dynamics via Egocentric LiDAR Scan">EgoNeMo: Transferable Map of Pedestrian Dynamics via Egocentric LiDAR Scan</span></li></ul>
+<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="Segment Any Motion with Radar: Robust Multimodal Moving-Object Segmentation and Tracking">Segment Any Motion with Radar: Robust Multimodal Moving-Object Segmentation and Tracking</span></li></ul>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">egocentric <strong>10</strong></span><span class="dpr-home-dashboard-tag">mp <strong>2</strong></span></div>
+  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">mp <strong>1</strong></span></div>
 </section>
 </div>
 

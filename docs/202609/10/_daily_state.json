@@ -1,0 +1,41 @@
+{
+  "date": "20260910",
+  "date_label": "",
+  "generated_at": "2026-09-10 21:31:55 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.10419v1",
+      "route": "202609/10/2609.10419v1-robust-continuous-human-activity-recognition-using-deep-learning-and-distributed-radar-sensors",
+      "title": "Robust Continuous Human Activity Recognition Using Deep Learning and Distributed Radar Sensors",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "利用分布式雷达多普勒谱进行连续人体活动识别",
+      "first_seen_at": "2026-09-10 21:31:55 UTC",
+      "updated_at": "2026-09-10 21:31:55 UTC"
+    },
+    {
+      "paper_id": "2609.08346v1",
+      "route": "202609/10/2609.08346v1-segment-any-motion-with-radar-robust-multimodal-moving-object-segmentation-and-tracking",
+      "title": "Segment Any Motion with Radar: Robust Multimodal Moving-Object Segmentation and Tracking",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "雷达直接测量径向速度用于运动分割与跟踪",
+      "first_seen_at": "2026-09-10 21:31:55 UTC",
+      "updated_at": "2026-09-10 21:31:55 UTC"
+    }
+  ]
+}

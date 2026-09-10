@@ -1,0 +1,39 @@
+{
+  "label": "2026-09-10",
+  "date": "2026-09-10",
+  "generated_at": "2026-09-10T21:31:56",
+  "count": 2,
+  "papers": [
+    {
+      "paper_id": "202609/10/2609.10419v1-robust-continuous-human-activity-recognition-using-deep-learning-and-distributed-radar-sensors",
+      "section": "deep",
+      "title_en": "Robust Continuous Human Activity Recognition Using Deep Learning and Distributed Radar Sensors",
+      "authors": "Sohani Munteha Hiam, Mohammad Soleymani",
+      "date": "2026-09-09",
+      "pdf": "https://arxiv.org/pdf/2609.10419v1",
+      "score": "8.0",
+      "evidence": "利用分布式雷达多普勒谱进行连续人体活动识别",
+      "tldr": "分布式雷达连续人体活动识别受视角变化、运动方向和活动过渡模糊影响，各雷达视图信息量差异显著，导致逐帧识别困难。本文提出ConvNeXt-MHSA-BiGRU框架，用共享ConvNeXt编码器从五节点多普勒时频谱提取时频表征，并以雷达级多头自注意力自适应融合互补视图。方法引入RadarDropout与SpecAugment式时频掩蔽增强鲁棒性，再用堆叠BiGRU建模时序实现逐帧分类。在14人9类活动、留一受试者五折验证下取得平均87.56%准确率，优于CNN-RNN基线。",
+      "tags": "query:mp",
+      "abstract_en": "Continuous human activity recognition (HAR) with distributed radar sensor networks is challenging because Doppler signatures depend strongly on aspect angle, the informativeness of individual radar views varies with motion direction, and activity transitions in uninterrupted sequences are often ambiguous. This paper proposes a ConvNeXt-MHSA-BiGRU framework for frame-wise continuous HAR from Doppler-time spectrograms acquired by five spatially distributed radar nodes. A shared ConvNeXt-inspired encoder extracts time-frequency representations from each radar stream, while radar-wise multi-head self attention (MHSA) models inter-node dependencies and adaptively fuses complementary views. RadarDropout and SpecAugment-style time-frequency masking regularize the network against unreliable radar views and local spectrogram perturbations, whereas stacked bidirectional gated recurrent units (BiGRUs) exploit temporal context for frame-wise classification across activity transitions. The framework is evaluated on nine activities performed by 14 participants using leave-one-person-out (L1PO) subject-independent testing with fivefold cross-validation. It achieves a mean L1PO test accuracy of 87.56% across the 14 held-out subjects and improves recognition performance over the published CNN-RNN baseline. The results demonstrate that combining modern spectrogram encoding, adaptive radar view fusion, and bidirectional temporal modeling provides an effective framework for continuous and distributed radar-based HAR.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "paper_id": "202609/10/2609.08346v1-segment-any-motion-with-radar-robust-multimodal-moving-object-segmentation-and-tracking",
+      "section": "quick",
+      "title_en": "Segment Any Motion with Radar: Robust Multimodal Moving-Object Segmentation and Tracking",
+      "authors": "Jue Wang, Xuan Wang, Hao Zhou, Ruixiang Zhou, Yixuan Zhou, Tianshuo Yuan, Jieming Ma, Jie Zhang, Fei Luo",
+      "date": "2026-09-08",
+      "pdf": "https://arxiv.org/pdf/2609.08346v1",
+      "score": "6.0",
+      "evidence": "雷达直接测量径向速度用于运动分割与跟踪",
+      "tldr": "现有运动目标感知方法依赖外观、光流或轨迹推断运动，在弱光、恶劣天气、反射和遮挡下容易失效，而雷达可直接测量径向速度却缺乏配套基准。为此作者构建了同步标定的固定相机基准 RGBTR-Motion，包含 RGB、热成像与雷达流及稠密实例掩码和时序一致身份。并提出基于 SAM 3 的 SAM-Radar 框架，用雷达感知检测器融合 RGBT 特征与投影雷达回波，并以运动监督抑制杂波。结果显示 IoU 0.7027、F1-50 0.8090，MOTA、HOTA、IDF1 分别提升 0.2977、0.1603、0.2857。",
+      "tags": "query:mp",
+      "abstract_en": "Moving-object perception must decide which image regions correspond to real motion and keep every instance identified over time. Methods that read motion from appearance, optical flow, or estimated trajectories lose that evidence under poor illumination, adverse weather, reflections, and occlusion. Radar is a natural remedy because it measures radial velocity directly instead of inferring it from photometric correspondence. However, existing benchmarks do not jointly provide radar measurements, dense moving-instance masks, and temporally consistent identities for surveillance. We therefore introduce RGBTR-Motion, a synchronized and calibrated fixed-camera benchmark that pairs RGB, thermal, and radar streams with dense instance masks and temporally consistent identities across diverse surveillance scenes. We also develop SAM-Radar, an RGB, thermal, and radar-based segmentation and tracking framework built on SAM 3. SAM-Radar's radar-aware detector fuses calibrated RGBT features with radar returns that are grounded at their projected image locations, and motion supervision, implemented as foreground classification of those projected returns, teaches the detector to reject clutter without any text prompt. The tracker associates accepted radar returns with individual trajectories and uses them as physical evidence that a visually degraded target remains present. This allows it to bridge short periods of low visibility or occlusion and reconnect a reappearing target to its existing identity instead of starting a new track. SAM-Radar attains 0.7027 IoU and 0.8090 F1-50, and raises MOTA, HOTA, and IDF1 by 0.2977, 0.1603, and 0.2857 over the strongest competing values.",
+      "source": "arxiv",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "errors": []
+}
