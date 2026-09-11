@@ -1,0 +1,57 @@
+{
+  "date": "20260911",
+  "date_label": "",
+  "generated_at": "2026-09-11 21:25:02 UTC",
+  "recommend_exists": true,
+  "run_count": 1,
+  "papers": [
+    {
+      "paper_id": "2609.11894v1",
+      "route": "202609/11/2609.11894v1-3d-point-splatting-for-mmwave-radar-novel-view-synthesis",
+      "title": "3D Point Splatting for mmWave Radar Novel View Synthesis",
+      "section": "deep",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 8.0,
+      "evidence": "面向毫米波雷达新视角合成的可微渲染器",
+      "first_seen_at": "2026-09-11 21:25:02 UTC",
+      "updated_at": "2026-09-11 21:25:02 UTC"
+    },
+    {
+      "paper_id": "2609.11601v1",
+      "route": "202609/11/2609.11601v1-mmgait-benchmarking-and-unifying-gait-recognition-across-heterogeneous-modalities",
+      "title": "MMGait: Benchmarking and Unifying Gait Recognition across Heterogeneous Modalities",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "mp"
+        }
+      ],
+      "score": 7.0,
+      "evidence": "跨异构模态的雷达步态识别",
+      "first_seen_at": "2026-09-11 21:25:02 UTC",
+      "updated_at": "2026-09-11 21:25:02 UTC"
+    },
+    {
+      "paper_id": "2609.09158v1",
+      "route": "202609/11/2609.09158v1-tango-humanoid-navigation-in-cluttered-environments-with-a-whole-body-vision-language-action-model",
+      "title": "TANGO: Humanoid Navigation in Cluttered Environments with a Whole-Body Vision-Language-Action Model",
+      "section": "quick",
+      "tags": [
+        {
+          "kind": "query",
+          "label": "egocentric"
+        }
+      ],
+      "score": 6.0,
+      "evidence": "以第一人称RGB观测驱动机器人导航",
+      "first_seen_at": "2026-09-11 21:25:02 UTC",
+      "updated_at": "2026-09-11 21:25:02 UTC"
+    }
+  ]
+}
