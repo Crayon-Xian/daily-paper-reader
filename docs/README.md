@@ -41,17 +41,17 @@
 <section class="dpr-home-dashboard-card dpr-home-report-card">
   <div class="dpr-home-dashboard-header">
     <div>
-      <span class="dpr-home-dashboard-kicker">2026-09-11</span>
+      <span class="dpr-home-dashboard-kicker">2026-09-12</span>
       <h3 class="dpr-home-dashboard-title">今日汇总</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">共 3 篇</strong>
+    <strong class="dpr-home-dashboard-count">共 0 篇</strong>
   </div>
   <dl class="dpr-home-dashboard-stats">
     <div class="dpr-home-dashboard-stat"><dt>累计更新</dt><dd>1 次</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>1</dd></div>
-    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>2</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>精读</dt><dd>0</dd></div>
+    <div class="dpr-home-dashboard-stat"><dt>速读</dt><dd>0</dd></div>
   </dl>
-  <p class="dpr-home-dashboard-body">最近更新：2026-09-11 21:25:02 UTC<br>状态：成功</p>
+  <p class="dpr-home-dashboard-body">最近更新：2026-09-12 21:24:49 UTC<br>状态：成功</p>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-brief-card">
   <div class="dpr-home-dashboard-header">
@@ -62,9 +62,7 @@
     <strong class="dpr-home-dashboard-count">AI</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<p>2026-09-11 日报精选 3 篇：精读毫米波雷达 3D 点泼溅新视角合成，速读步态识别基准与双足机器人导航。</p>
-<p>最值得看的是 8.0 分的《3D Point Splatting for mmWave Radar Novel View Synthesis》，把泼溅渲染引入毫米波雷达新视角合成，以及 7.0 分的 MMGait 对异构模态步态识别的统一评测。</p>
-<p>普通读者可先读雷达点泼溅这篇，再看 MMGait 的基准结论，了解跨模态步态识别当前进展。</p>
+<p>今日无新推荐，系统未产出可展示论文。</p>
   </div>
 </section>
 <section class="dpr-home-dashboard-card dpr-home-deep-card">
@@ -73,12 +71,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">精读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">1 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="3D Point Splatting for mmWave Radar Novel View Synthesis">3D Point Splatting for mmWave Radar Novel View Synthesis</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">mp <strong>1</strong></span></div>
+
 </section>
 <section class="dpr-home-dashboard-card dpr-home-skim-card">
   <div class="dpr-home-dashboard-header">
@@ -86,12 +84,12 @@
       <span class="dpr-home-dashboard-kicker">今日累计</span>
       <h3 class="dpr-home-dashboard-title">速读推荐</h3>
     </div>
-    <strong class="dpr-home-dashboard-count">2 篇</strong>
+    <strong class="dpr-home-dashboard-count">0 篇</strong>
   </div>
   <div class="dpr-home-dashboard-body">
-<ul class="dpr-home-dashboard-paper-list"><li><span class="dpr-home-dashboard-paper-title" title="MMGait: Benchmarking and Unifying Gait Recognition across Heterogeneous Modalities">MMGait: Benchmarking and Unifying Gait Recognition across Heterogeneous Modalities</span></li><li><span class="dpr-home-dashboard-paper-title" title="TANGO: Humanoid Navigation in Cluttered Environments with a Whole-Body Vision-Language-Action Model">TANGO: Humanoid Navigation in Cluttered Environments with a Whole-Body Vision-Language-Action Model</span></li></ul>
+<p class="dpr-home-dashboard-empty">今日暂无推荐。</p>
   </div>
-  <div class="dpr-home-dashboard-tags"><span class="dpr-home-dashboard-tag">egocentric <strong>1</strong></span><span class="dpr-home-dashboard-tag">mp <strong>1</strong></span></div>
+
 </section>
 </div>
 
